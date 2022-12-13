@@ -1,0 +1,156 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "bnm-blocks/latest-posts",
+  "version": "0.1.0",
+  "title": "Bnm Blocks",
+  "category": "widgets",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "bnm-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "attributes": {
+    "queryId": {
+      "type": "number"
+    },
+    "query": {
+      "type": "object",
+      "default": {
+        "posts": [],
+        "perPage": 5,
+        "pages": 0,
+        "offset": 0,
+        "postType": "post",
+        "order": "desc",
+        "orderBy": "date",
+        "author": "",
+        "search": "",
+        "exclude": [],
+        "sticky": "",
+        "inherit": true,
+        "taxQuery": null
+      }
+    },
+    "specificMode": {
+      "type": "boolean",
+      "default": "false"
+    },
+    "specificPosts": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "integer"
+      }
+    },
+    "aspectRatio": {
+      "type": "number",
+      "default": 0.75
+    },
+    "imageFit": {
+      "type": "string",
+      "default": "cover"
+    },
+    "hidePagination": {
+      "type": "boolean",
+      "default": false
+    },
+    "hideNextPrevBtns": {
+      "type": "boolean",
+      "default": false
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": true
+    },
+    "delay": {
+      "type": "number",
+      "default": 5
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "titleHtmlTag": {
+      "type": "string",
+      "default": "h3"
+    },
+    "titleFontSize": {
+      "type": "number",
+      "default": 32
+    },
+    "titleLineHeight": {
+      "type": "number",
+      "default": 1.5
+    },
+    "titlePadding": {
+      "type": "array",
+      "default": []
+    },
+    "titleColor": {
+      "type": "string",
+      "default": ""
+    },
+    "titleHoverColor": {
+      "type": "string",
+      "default": ""
+    },
+    "showDate": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCategory": {
+      "type": "boolean",
+      "default": true
+    },
+    "showAuthor": {
+      "type": "boolean",
+      "default": true
+    },
+    "showAvatar": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCommentCount": {
+      "type": "boolean",
+      "default": true
+    },
+    "metaFontSize": {
+      "type": "number",
+      "default": 12
+    },
+    "metaColor": {
+      "type": "string",
+      "default": ""
+    },
+    "metaHoverColor": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryFontSize": {
+      "type": "number",
+      "default": 12
+    },
+    "categoryColor": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryHoverColor": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryBGColor": {
+      "type": "string",
+      "default": ""
+    },
+    "categoryBGHoverColor": {
+      "type": "string",
+      "default": ""
+    }
+  }
+}
