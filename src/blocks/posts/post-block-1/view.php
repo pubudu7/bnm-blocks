@@ -1,5 +1,7 @@
 <?php
 
+use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Block_1_CSS;
+
 function bnm_blocks_post_block_1_init() {
 
 	//$asset_file = include( plugin_dir_path( __FILE__ ) . 'build/blocks/slider/index.asset.php' );
@@ -25,34 +27,6 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 	$post_query_args = BNM_Blocks::build_articles_query( $attributes );
 
 	$article_query = new WP_Query( $post_query_args );
-
-	$styles = '';
-	// '--title-font-size': mightBeUnit( attributes.titleFontSize ),
-	// '--title-font-size-small': mightBeUnit( attributes.titleFontSizeSmall ),
-	// '--title-line-height': attributes.titleLineHeight,
-	// '--title-line-height-small': attributes.titleLineHeightSmall,
-	// '--title-letter-spacing': attributes.titleLetterSpacing,
-	// '--title-letter-spacing-small': attributes.titleLetterSpacingSmall,
-
-	
-	if ( '' !== $attributes['titleFontSize'] ) {
-		$styles .= '--title-font-size:' . $attributes['titleFontSize'] . 'px;';
-	}
-	if ( ! empty( $attributes['titleFontSizeSmall'] ) ) {
-		$styles .= '--title-font-size-small:' . $attributes['titleFontSizeSmall'] . 'px;';
-	}
-	if ( ! empty( $attributes['titleLineHeight'] ) ) {
-		$styles .= '--title-line-height:' . $attributes['titleLineHeight'].';';
-	}
-	if ( ! empty( $attributes['titleLineHeightSmall'] ) ) {
-		$styles .= '--title-line-height-small:' . $attributes['titleLineHeightSmall'].';';
-	}
-	if ( ! empty( $attributes['titleLetterSpacing'] ) ) {
-		$styles .= '--title-letter-spacing:' . $attributes['titleLetterSpacing'].';';
-	}
-	if ( ! empty( $attributes['titleLetterSpacingSmall'] ) ) {
-		$styles .= '--title-letter-spacing-small:' . $attributes['titleLetterSpacingSmall'].';';
-	}
 
 	ob_start();
 	?>
@@ -102,7 +76,18 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 
 									<?php if ( $attributes['displayPostExcerpt'] && ( isset( $attributes['excerptLength'] ) && $attributes['excerptLength']  > 0 ) ) { ?>
 										<div class="bnm-nb-post-excerpt">
+											
 											<?php echo wp_kses_post( BNM_Blocks::get_excerpt_by_id( get_the_id(), $attributes['excerptLength'] ) ); ?>
+											
+											<?php if ( $attributes['showReadMore'] && ! empty( $attributes['readMoreLabel'] ) ) { ?>
+												<span class="bnm-readmore">
+													<a href="<?php the_permalink(); ?>" class="bnm-readmore-link">
+														<?php the_title( '<span class="screen-reader-text">', '</span>' ); ?>
+														<?php echo esc_html( $attributes['readMoreLabel'] ); ?>
+													</a>
+												</span>
+											<?php } ?>
+
 										</div>
 									<?php } ?>
 
@@ -145,6 +130,15 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 								<?php if ( $attributes['displayPostExcerptSmall'] && ( isset( $attributes['excerptLengthSmall'] ) && $attributes['excerptLengthSmall']  > 0 ) ) { ?>
 									<div class="bnm-nb-post-excerpt">
 										<?php echo wp_kses_post( BNM_Blocks::get_excerpt_by_id( get_the_id(), $attributes['excerptLengthSmall'] ) ); ?>
+
+										<?php if ( $attributes['showReadMoreSmall'] && ! empty( $attributes['readMoreLabel'] ) ) { ?>
+											<span class="bnm-readmore">
+												<a href="<?php the_permalink(); ?>" class="bnm-readmore-link">
+													<?php the_title( '<span class="screen-reader-text">', '</span>' ); ?>
+													<?php echo esc_html( $attributes['readMoreLabel'] ); ?>
+												</a>
+											</span>
+										<?php } ?>
 									</div>
 								<?php } ?>
 							</div>
@@ -173,6 +167,9 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 
 	$wrapper_attributes = get_block_wrapper_attributes();
 	$block = ob_get_clean();
+	
+	$css = new Post_Block_1_CSS();
+	$styles = $css->render_css( $attributes );
 	
 	return sprintf( '<div %1$s style="%2$s">%3$s</div>', 
 		$wrapper_attributes, 

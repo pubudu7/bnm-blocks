@@ -212,6 +212,10 @@
 			"type": ["number", "object"],
 			"default": []
 		},
+		"excerptColor": {
+			"type": "string",
+			"default": ""
+		},
 		"showReadMore": {
 			"type": "boolean",
 			"default": false

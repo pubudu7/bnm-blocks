@@ -64,6 +64,11 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 		excerptLineHeightSmall,
 		excerptLetterSpacing,
 		excerptLetterSpacingSmall,
+		excerptColor,
+		excerptMargin,
+		excerptMarginSmall,
+		excerptPadding,
+		excerptPaddingSmall,
 		showReadMore,
 		showReadMoreSmall,
 		readMoreLabel,
@@ -169,16 +174,6 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 									label: __( 'Title Hover', 'bnm-blocks' )
 								}
 							] }
-						/>
-
-						<ColorPopupButton
-							color={ titleColor }
-							onChange={ ( value ) => {
-								setAttributes({
-									titleColor: value,
-								});
-							} }
-							label={ __( 'Title Color', 'bnm-blocks' ) }
 						/>
 
 						<ColorPopupButton
@@ -481,6 +476,18 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 										onChange={ value => setAttributes( { readMoreLabel: value } ) }
 									/>
 								) }
+
+								<BoxControl
+									label={ __( 'Margin', 'bnm-blocks' ) }
+									values={ excerptMargin }
+									onChange={ nextValues => setAttributes( { excerptMargin: nextValues } ) }
+								/>
+
+								<BoxControl
+									label={ __( 'Padding', 'bnm-blocks' ) }
+									values={ excerptPadding }
+									onChange={ nextValues => setAttributes( { excerptPadding: nextValues } ) }
+								/>
 							</>
 							);
 
@@ -530,11 +537,34 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 										onChange={ value => setAttributes( { readMoreLabel: value } ) }
 									/>
 								) }
+								<BoxControl
+									label={ __( 'Margin', 'bnm-blocks' ) }
+									values={ excerptMarginSmall }
+									onChange={ nextValues => setAttributes( { excerptMarginSmall: nextValues } ) }
+								/>
+
+								<BoxControl
+									label={ __( 'Padding', 'bnm-blocks' ) }
+									values={ excerptPaddingSmall }
+									onChange={ nextValues => setAttributes( { excerptPaddingSmall: nextValues } ) }
+								/>								
 							</>
 							);
 						}  
 					} }
 				</TabPanel>
+
+				<PanelColorSettings
+					title={ __( 'Color', 'bnm-blocks' ) }
+					initialOpen={ false }
+					colorSettings={ [
+						{
+							value: attributes.excerptColor,
+							onChange: excerptColor => setAttributes({ excerptColor }),
+							label: __( 'Excerpt Color', 'bnm-blocks' )
+						}
+					] }
+				/>
 			</PanelBody>
 		</InspectorControls>
     );

@@ -1,19 +1,26 @@
 <?php
 
-namespace ThemezHut\BNM_BLOCKS\CSS\Blocks;
+namespace ThemezHut\BNM_Blocks\CSS\Blocks;
 
-class Post_Block_1_CSS() {
+use ThemezHut\BNM_Blocks\CSS\CSS_Utility;
 
-    public function render_css() {
-        array(
-            'properties' => array(
+class Post_Block_1_CSS {
+
+    public function render_css( $attributes ) {
+
+        $utility = new CSS_Utility( $attributes );
+
+        $utility->generate_styles_array(
+            array(
                 array(
                     'property'  =>  '--title-font-size',
                     'value'     =>  'titleFontSize',
+                    'type'      =>  'font-size'
                 ),
                 array(
                     'property'  =>  '--title-font-size-small',
                     'value'     =>  'titleFontSizeSmall',
+                    'type'      =>  'font-size'
                 ),
                 array(
                     'property'  =>  '--title-line-height',
@@ -58,6 +65,7 @@ class Post_Block_1_CSS() {
                 array(
                     'property'  =>  '--category-font-size',
                     'value'     =>  'categoryFontSize',
+                    'type'      =>  'font-size',
                 ),
                 array(
                     'property'  =>  '--category-line-height',
@@ -94,10 +102,12 @@ class Post_Block_1_CSS() {
                 array(
                     'property'  =>  '--meta-font-size',
                     'value'     =>  'metaFontSize',
+                    'type'      =>  'font-size'
                 ),
                 array(
                     'property'  =>  '--meta-font-size-small',
                     'value'     =>  'metaFontSizeSmall',
+                    'type'      =>  'font-size'
                 ),
                 array(
                     'property'  =>  '--meta-line-height',
@@ -130,18 +140,22 @@ class Post_Block_1_CSS() {
                 array(
                     'property'  =>  '--meta-padding',
                     'value'     =>  'metaPadding',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--meta-margin',
                     'value'     =>  'metaMargin',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--excerpt-font-size',
                     'value'     =>  'excerptFontSize',
+                    'type'      =>  'font-size'
                 ),
                 array(
                     'property'  =>  '--excerpt-font-size-small',
                     'value'     =>  'excerptFontSizeSmall',
+                    'type'      =>  'font-size'
                 ),
                 array(
                     'property'  =>  '--excerpt-line-height',
@@ -166,21 +180,29 @@ class Post_Block_1_CSS() {
                 array(
                     'property'  =>  '--excerpt-padding',
                     'value'     =>  'excerptPadding',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--excerpt-padding-small',
                     'value'     =>  'excerptPaddingSmall',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--excerpt-margin',
                     'value'     =>  'excerptMargin',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--excerpt-margin-small',
                     'value'     =>  'excerptMarginSmall',
+                    'type'      =>  'box-control',
                 ),
             )
         );
+
+        $css = $utility->generate_css();
+
+        return $css;
     }
 
 }
