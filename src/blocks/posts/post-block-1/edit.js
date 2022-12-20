@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, isUndefined, pickBy, startCase, toLower, isNumber } from 'lodash';
+import { get, isUndefined, pickBy } from 'lodash';
 import classnames from 'classnames';
 
 /**
@@ -12,9 +12,7 @@ import { dateI18n, format, getSettings } from '@wordpress/date';
 import { 
 	useBlockProps,
 	store as blockEditorStore,
-	__experimentalImageSizeControl as ImageSizeControl,
 } from '@wordpress/block-editor';
-import { PanelBody, TabPanel, SelectControl, ToggleControl } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useInstanceId } from '@wordpress/compose';
 import { store as coreStore } from '@wordpress/core-data';
@@ -27,7 +25,10 @@ import { InspectorControls } from '@wordpress/block-editor';
  */
 import QueryInspectorControls from '../../../components/query-controls';
 import BlockExtraSettings from '../../../components/settings-controls/post-type-1';
-
+import {
+	mightBeUnit,
+	boxValues
+} from '../../../shared/js/utils.js'
 
 const DEFAULTS_POSTS_PER_PAGE = 5;
 const CATEGORIES_LIST_QUERY = {
@@ -47,13 +48,6 @@ export default function Edit( { attributes, setAttributes } ) {
 		query,
         showTitle,
         titleHtmlTag,
-        titleFontSize,
-		titleFontSizeSmall,
-        titleLineHeight,
-        titleLineHeightSmall,
-        titlePadding,
-        titleColor,
-        titleHoverColor,
 		showFeaturedImage,
 		showFeaturedImageSmall,
         showDate,
@@ -73,15 +67,7 @@ export default function Edit( { attributes, setAttributes } ) {
         showCommentCountSmall,
 		displayPostExcerptSmall,
 		excerptLengthSmall,
-        metaFontSize,
-        metaFontSizeSmall,
-        metaColor,
-        metaHoverColor,
-        categoryFontSize,
-        categoryColor,
-        categoryHoverColor,
         categoryBGColor,
-        categoryBGHoverColor,
 		featuredImageAlign,
 		featuredImageSizeSlug,
 		featuredImageSizeSlugSmall,
@@ -224,25 +210,6 @@ export default function Edit( { attributes, setAttributes } ) {
 		};
 	}
 
-	const px = value => value ? `${ value }px` : value;
-
-	const mightBeUnit = value => isNumber( value ) ? px( value ) : value;
-
-	const mightBeBoxed = value => {
-		if ( isObject( value ) ) {
-			return boxValues( value );
-		}
-
-		return mightBeUnit( value );
-	};
-
-	const boxValues = values => {
-		if ( Object.keys(values).length !== 0 && values.constructor !== Object ) {
-			return `${values['top']} ${values['right']} ${values['bottom']} ${values['left']}`;
-		}
-		return;
-	}
-
 	const dateFormat = getSettings().formats.date;
 	
 	// What to do for undefined values?
@@ -305,87 +272,17 @@ export default function Edit( { attributes, setAttributes } ) {
 				attributes={ attributes }
 				setQuery={ updateQuery }
 			/>
-
 			<BlockExtraSettings
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 			/>
-
-			<PanelBody title={ __( 'Featured Image Settings', 'bnm-blocks') } initialOpen={ false }>
-
-				<TabPanel
-					className="thbnm-featured-image-settings-tab-panel thbnm-tab-panel"
-					activeclassName="thbnm-active-tab"
-					//onSelect={ onSelect }
-					initialTabName="big-post"
-					tabs={ [
-						{
-							name: 'big-post',
-							title: 'Big Post',
-							className: 'tab-big-post',
-						},
-						{
-							name: 'small-post',
-							title: 'Small Posts',
-							className: 'tab-small-post',
-						},
-					] }
-				>
-					{ ( tab ) => {
-						if ( tab.name === 'big-post' ) { 
-							return (
-								<>
-									<ToggleControl
-										label={ __( 'Display Featured Image', 'bnm-blocks' ) }
-										checked={ showFeaturedImage }
-										onChange={ () => setAttributes( { showFeaturedImage: ! showFeaturedImage } ) }
-									/>
-									{ showFeaturedImage && (
-										<SelectControl
-											label={ __( 'Image Size', 'bnm-blocks' ) }
-											value={ attributes.featuredImageSizeSlug }
-											options={ window.themezHutGutenberg.imageSizes.map( size => ({
-												label: startCase( toLower( size ) ),
-												value: size
-											}) ) }
-											onChange={ imageSize => setAttributes({ featuredImageSizeSlug: imageSize }) }
-										/> 
-									) }
-								</>
-							);
-						} else if ( tab.name === 'small-post' ) { 
-							return (
-								<>
-									<ToggleControl
-										label={ __( 'Display Featured Image', 'bnm-blocks' ) }
-										checked={ showFeaturedImageSmall }
-										onChange={ () => setAttributes( { showFeaturedImageSmall: ! showFeaturedImageSmall } ) }
-									/>
-									{ showFeaturedImageSmall && (
-										<SelectControl
-											label={ __( 'Image Size(Small)', 'bnm-blocks' ) }
-											value={ attributes.featuredImageSizeSlugSmall }
-											options={ window.themezHutGutenberg.imageSizes.map( size => ({
-												label: startCase( toLower( size ) ),
-												value: size
-											}) ) }
-											onChange={ imageSize => setAttributes( { featuredImageSizeSlugSmall: imageSize } ) }
-										/>
-									) }
-								</>
-							); 
-						}  
-					} }
-				</TabPanel>
-				
-			</PanelBody>
 		</InspectorControls>
 	);
 
 	return (
 		<div>
 			{ inspectorControls }
-			<div { ...blockProps } style={inlineStyles}>
+			<div { ...blockProps } style={ inlineStyles }>
 				{ ! posts && 'Loading' }
 				{ posts && posts.length === 0 && 'No Posts' }
 				<div>
