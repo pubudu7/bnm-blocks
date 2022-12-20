@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, isUndefined, pickBy } from 'lodash';
+import { isUndefined, pickBy } from 'lodash';
 import classnames from 'classnames';
 
 /**
@@ -19,6 +19,11 @@ import { store as coreStore } from '@wordpress/core-data';
 import { store as noticeStore } from '@wordpress/notices';
 import { useEffect } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
+import {
+	Disabled,
+	Placeholder,
+	Spinner
+} from '@wordpress/components';
 
 /**
  * Internal Dependencies.
@@ -28,7 +33,10 @@ import BlockExtraSettings from '../../../components/settings-controls/post-type-
 import {
 	mightBeUnit,
 	boxValues
-} from '../../../shared/js/utils.js'
+} from '../../../shared/js/utils.js';
+import {
+	getFeaturedImageDetails,
+} from '../shared/template-functions.js';
 
 const DEFAULTS_POSTS_PER_PAGE = 5;
 const CATEGORIES_LIST_QUERY = {
@@ -46,28 +54,28 @@ export default function Edit( { attributes, setAttributes } ) {
     const {
 		queryId,
 		query,
-        showTitle,
-        titleHtmlTag,
+		showTitle,
+		titleHtmlTag,
 		showFeaturedImage,
 		showFeaturedImageSmall,
-        showDate,
-        showCategory,
-        showAuthor,
-        showAvatar,
-        showCommentCount,
+		showDate,
+		showCategory,
+		showAuthor,
+		showAvatar,
+		showCommentCount,
 		displayPostExcerpt,
 		excerptLength,
 		showReadMore,
 		showReadMoreSmall,
 		readMoreLabel,
-        showDateSmall,
-        showCategorySmall,
-        showAuthorSmall,
-        showAvatarSmall,
-        showCommentCountSmall,
+		showDateSmall,
+		showCategorySmall,
+		showAuthorSmall,
+		showAvatarSmall,
+		showCommentCountSmall,
 		displayPostExcerptSmall,
 		excerptLengthSmall,
-        categoryBGColor,
+		categoryBGColor,
 		featuredImageAlign,
 		featuredImageSizeSlug,
 		featuredImageSizeSlugSmall,
@@ -111,7 +119,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const { 
 		posts,
 		categoriesList,
-		authorList
+		authorsList
 	} = useSelect( ( select ) => {
 		const { getEntityRecords, getUsers } = select( coreStore );
 
@@ -131,7 +139,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				'category',
 				CATEGORIES_LIST_QUERY
 			),
-			authorList: getUsers( USERS_LIST_QUERY ),
+			authorsList: getUsers( USERS_LIST_QUERY ),
 		}
 
 	}, [ 
@@ -198,17 +206,6 @@ export default function Edit( { attributes, setAttributes } ) {
 			type: 'snackbar',
 		} );
 	};
-
-	function getFeaturedImageDetails( post, size ) {
-		const image = get( post, [ '_embedded', 'wp:featuredmedia', '0' ] );
-	
-		return {
-			url:
-				image?.media_details?.sizes?.[ size ]?.source_url ??
-				image?.source_url,
-			alt: image?.alt_text,
-		};
-	}
 
 	const dateFormat = getSettings().formats.date;
 	
@@ -279,314 +276,343 @@ export default function Edit( { attributes, setAttributes } ) {
 		</InspectorControls>
 	);
 
-	return (
-		<div>
-			{ inspectorControls }
+	const PostExcerpt = ({
+		post,
+		excerptLength,
+		showReadMore
+	}) => {
+		let excerpt = post.excerpt.rendered;
+
+		const excerptElement = document.createElement( 'div' );
+		excerptElement.innerHTML = excerpt;
+
+		excerpt = excerptElement.textContent || excerptElement.innerText || '';
+
+		const postExcerpt = showReadMore ? (
+			<>
+				{ excerpt
+					.trim()
+					.split( ' ', excerptLength )
+					.join( ' ' ) }
+				{ /* translators: excerpt truncation character, default .. */ }
+				{ __( '… ' ) }
+				<a
+					href={ post.link }
+					rel="noopenner noreferrer"
+					onClick={ showRedirectionPreventedNotice }
+					>
+						{ readMoreLabel }
+					</a>
+			</>
+		) : (
+			<>
+				{ excerpt
+					.trim()
+					.split( ' ', excerptLength )
+					.join( ' ' ) }
+				{ /* translators: excerpt truncation character, default .. */ }
+				{ __( '… ' ) }
+			</>
+		);
+
+		return postExcerpt;
+	};
+
+	const PostTitle = ({ attributes, post }) => {
+		const Tag = attributes.titleHtmlTag || 'h3';
+		return (
+			<Tag className="entry-title">
+				<a 
+					href={ post.link }
+					rel="noreferrer noopener"
+					onClick={ showRedirectionPreventedNotice }
+				>
+					{ post.title.rendered ? post.title.rendered : __( 'Default title', 'bnm-blocks' ) }
+				</a>
+			</Tag>
+		);
+	};
+
+	const PostCategories = ({ categoriesList, post }) => {
+		const list = categoriesList;
+		const cat = post.categories;
+		const categoryNames = [];
+
+		if ( list != undefined && cat != undefined ) {
+			for ( let j = 0; j < list.length; j++ ) {
+				for ( let i = 0; i < cat.length; i++ ) {
+					if ( list[ j ].id === cat[ i ] ) {
+						categoryNames.push( list[ j ].name );
+					}
+				}
+			}
+		}
+
+		return (
+			categoryNames.map( ( category ) => {
+				return (
+					<a href="#">
+						{ category }
+					</a>
+				);
+			} )
+		);
+	};
+
+	const FeaturedImage = ({ post, featuredImageSizeSlug }) => {
+		const {
+			url: imageSourceUrl,
+			alt: featuredImageAlt,
+		} = getFeaturedImageDetails( post, featuredImageSizeSlug );
+
+		const featuredImage = imageSourceUrl && (
+			<figure className="post-thumbnail">
+				<img
+					src={ imageSourceUrl }
+					alt={ featuredImageAlt }
+				/>
+			</figure>
+		);
+
+		if ( ! featuredImage ) {
+			return null;
+		}
+
+		return featuredImage;
+	}
+
+	const Preview = ({
+		posts,
+		authorsList,
+		categoriesList,
+		blockProps,
+		inlineStyles,
+		attributes
+	}) => {
+		if ( ! posts || ! categoriesList || ! authorsList ) {
+			return (
+				<div { ...blockProps }>
+					<Placeholder>
+						<Spinner />
+						{ __( 'Loading Posts', 'bnm-blocks') }
+					</Placeholder>
+				</div>
+			);
+		}
+
+		if ( 0 === posts.length ) {
+			return (
+				<div { ...blockProps }>
+					<Placeholder>
+						{ __( 'No Posts', 'bnm-blocks' ) }
+					</Placeholder>
+				</div>
+			);
+		}
+
+		return (
 			<div { ...blockProps } style={ inlineStyles }>
-				{ ! posts && 'Loading' }
-				{ posts && posts.length === 0 && 'No Posts' }
-				<div>
-					<div className="posts-block-1-container">
-						<div className="bnm-left-block">
-							{ posts && posts.length > 0 && posts.map( ( post, index ) => {
+				<div className="posts-block-1-container">
+					<div className="bnm-left-block">
+						{ posts && posts.length > 0 && posts.map( ( post, index ) => {
 
-								const currentAuthor = authorList?.find(
-									( author ) => author.id === post.author
-								);
+							const currentAuthor = authorsList?.find(
+								( author ) => author.id === post.author
+							);
 
-								const authorAvatarUrl = currentAuthor?.avatar_urls?.[48];
-								
-								const avatarMarkup = authorAvatarUrl && (
-									<span className="bnm-avatar">
-										<img src={authorAvatarUrl} />
-									</span>
-								);
-						
-								const {
-									url: imageSourceUrl,
-									alt: featuredImageAlt,
-								} = getFeaturedImageDetails( post, featuredImageSizeSlug );
+							const authorAvatarUrl = currentAuthor?.avatar_urls?.[48];
+							
+							const avatarMarkup = authorAvatarUrl && (
+								<span className="bnm-avatar">
+									<img src={authorAvatarUrl} />
+								</span>
+							);
 
-								const imageClasses = classnames( {
-									'wp-block-bnm-pb1-image-big': true,
-									[ `align${ featuredImageAlign }` ]: !! featuredImageAlign,
-								} );
+							return(
+								index === 0 && (
+									<div className="bnm-pb1-large-post">
+										
+										{ showFeaturedImage && (
+											<FeaturedImage 
+												post={post}
+												featuredImageSizeSlug={featuredImageSizeSlug}
+											/>
+										) }
 
-								const renderFeaturedImage =
-									showFeaturedImage && imageSourceUrl; 
-								const featuredImage = renderFeaturedImage && (
-									<figure className={ imageClasses }>
-										<img
-											src={ imageSourceUrl }
-											alt={ featuredImageAlt }
-										/>
-									</figure>
-								);
-
-								const list = categoriesList;
-								const cat = post.categories;
-								const categoriesName = [];
-
-								if ( list != undefined && cat != undefined ) {
-									for ( let j = 0; j < list.length; j++ ) {
-										for ( let i = 0; i < cat.length; i++ ) {
-											if ( list[ j ].id === cat[ i ] ) {
-												categoriesName.push( list[ j ].name );
-											}
-										}
-									}
-								}
-
-								let excerpt = post.excerpt.rendered;
-
-								const excerptElement = document.createElement( 'div' );
-								excerptElement.innerHTML = excerpt;
-
-								excerpt = excerptElement.textContent || excerptElement.innerText || '';
-
-								const needsReadMore = excerptLength < excerpt.trim().split( ' ' ).length && post.excerpt.raw === '' && showReadMore;
-
-								const postExcerpt = needsReadMore ? (
-									<>
-										{ excerpt
-											.trim()
-											.split( ' ', excerptLength )
-											.join( ' ' ) }
-										{ /* translators: excerpt truncation character, default .. */ }
-										{ __( ' … ' ) }
-										<a
-											href={ post.link }
-											rel="noopenner noreferrer"
-											onClick={ showRedirectionPreventedNotice }
-											>
-												{ readMoreLabel }
-											</a>
-									</>
-								) : (
-									<>
-										{ excerpt
-											.trim()
-											.split( ' ', excerptLength )
-											.join( ' ' ) }
-										{ /* translators: excerpt truncation character, default .. */ }
-										{ __( ' … ' ) }
-									</>
-								);
-
-								return(
-									index === 0 && (
-										<div className="bnm-pb1-large-post">
-											
-											{ featuredImage }
-
-											<div className="bnm-pb1-large-post-content">
-											
+										<div className="bnm-pb1-large-post-content">
+											{ showCategory && (
 												<div className="bnm-nb-category-list">
-													{ categoriesName.map( ( category ) => {
-														return (
-															<a href="#">
-																{ category }
-															</a>
-														);
-													} ) }
+													<PostCategories
+														categoriesList={categoriesList}
+														post={post}
+													/>
 												</div>
-												<h3 className="entry-title">
-													<a 
-														href={ post.link }
-														rel="noreferrer noopener"
-														onClick={ showRedirectionPreventedNotice }
-													>
-														{ post.title.rendered ? post.title.rendered : __( 'Default title', 'bnm-blocks' ) }
-													</a>
-												</h3>
-												<div className="entry-meta">
-													{ showAuthor && currentAuthor && (
-														<span className="bnm-nb-post-author">
-															<a href="#">
-																{ showAvatar && avatarMarkup }
-															
-																{ sprintf(
-																	/* translators: byline. %s: current author. */
-																	__( 'by %s' ),
-																	currentAuthor.name
-																) }
-															</a>
-														</span>
-													) }
-
-													{ showDate && post.date_gmt && (
-														<span className="bnm-nb-post-date">
-															<time
-																dateTime={ format( 'c', post.date_gmt ) }
-															>
-																<a href="#">
-																	{ dateI18n( dateFormat, post.date_gmt ) }
-																</a>
-															</time>
-														</span>
-													) }
-
-													{ showCommentCount && post.comment_count && (
-														<span className="bnm-nb-comment-count">
-															<a href="#">
-																{ post.comment_count }
-															</a>
-														</span>
-													) }
-												</div>
-												{ displayPostExcerpt && (
-													<div className="bnm-nb-post-excerpt">
-														{ postExcerpt }
-													</div>
-												) }
-											</div>
-										</div>
-									) 
-								);
-							} ) }
-						</div>
-						<div className="bnm-right-block">
-							{ posts && posts.length > 0 && posts.map( ( post, index ) => { 
-								
-								const currentAuthor = authorList?.find(
-									( author ) => author.id === post.author
-								);
-
-								const authorAvatarUrl = currentAuthor?.avatar_urls?.[48];
-								
-								const avatarMarkup = authorAvatarUrl && (
-									<span className="bnm-avatar">
-										<img src={authorAvatarUrl} />
-									</span>
-								);
-
-								const {
-									url: imageSourceUrl,
-									alt: featuredImageAlt,
-								} = getFeaturedImageDetails( post, featuredImageSizeSlugSmall );
-
-								const imageClasses = classnames( {
-									'wp-block-bnm-pb1-image-small': true,
-									[ `align${ featuredImageAlign }` ]: !! featuredImageAlign,
-								} );
-
-								const renderFeaturedImage =
-									showFeaturedImageSmall && imageSourceUrl;
-
-								const featuredImageSmall = renderFeaturedImage && (
-									<figure className={ imageClasses }>
-										<img
-											src={ imageSourceUrl }
-											alt={ featuredImageAlt }
-										/>
-									</figure>
-								);
-
-								const list = categoriesList;
-								const cat = post.categories;
-								const categoriesName = [];
-								
-								let excerpt = post.excerpt.rendered;
-
-								const excerptElement = document.createElement( 'div' );
-								excerptElement.innerHTML = excerpt;
-
-								excerpt = excerptElement.textContent || excerptElement.innerText || '';
-
-								const needsReadMore = excerptLengthSmall < excerpt.trim().split( ' ' ).length && post.excerpt.raw === '' && showReadMoreSmall;
-
-								const postExcerpt = needsReadMore ? (
-									<>
-										{ excerpt
-											.trim()
-											.split( ' ', excerptLengthSmall )
-											.join( ' ' ) }
-										{ /* translators: excerpt truncation character, default .. */ }
-										{ __( ' … ' ) }
-										<a
-											href={ post.link }
-											rel="noopenner noreferrer"
-											onClick={ showRedirectionPreventedNotice }
-											>
-												{ readMoreLabel }
-											</a>
-									</>
-								) : (
-									<>
-										{ excerpt
-											.trim()
-											.split( ' ', excerptLengthSmall )
-											.join( ' ' ) }
-										{ /* translators: excerpt truncation character, default .. */ }
-										{ __( ' … ' ) }
-									</>
-								);
-
-								return(
-									index > 0 && (
-										<div className="bnm-pb1-small-post">
+											) }
 											
-											{ featuredImageSmall }
-											
-											<div className="entry-details">
-												{ showTitle && (
-													<h3 className="entry-title">
-														<a 
-															href={ post.link }
-															rel="noreferrer noopener"
-															onClick={ showRedirectionPreventedNotice }
-														>
-															{ post.title.rendered ? post.title.rendered : __( 'Default title', 'bnm-blocks' ) }
+											{ showTitle && (
+												<PostTitle
+													post={post}
+													attributes={attributes}
+												/>
+											) }
+											<div className="entry-meta">
+												{ showAuthor && currentAuthor && (
+													<span className="bnm-nb-post-author">
+														<a href="#">
+															{ showAvatar && avatarMarkup }
+														
+															{ sprintf(
+																/* translators: byline. %s: current author. */
+																__( 'by %s' ),
+																currentAuthor.name
+															) }
 														</a>
-													</h3>
+													</span>
 												) }
-												<div className="entry-meta">
-													{ showAuthorSmall && currentAuthor && (
-														<span className="bnm-nb-post-author">
-															<a href="#">
 
-																{ showAvatarSmall && avatarMarkup }
-
-																{ sprintf(
-																	/* translators: byline. %s: current author. */
-																	__( 'by %s' ),
-																	currentAuthor.name
-																) }
-															</a>
-														</span>
-													) }
-													{ showDateSmall && post.date_gmt && (
+												{ showDate && post.date_gmt && (
+													<span className="bnm-nb-post-date">
 														<time
 															dateTime={ format( 'c', post.date_gmt ) }
-															className="bnm-nb-post-date"
 														>
 															<a href="#">
 																{ dateI18n( dateFormat, post.date_gmt ) }
 															</a>
 														</time>
-													) }
-													{ showCommentCountSmall && post.comment_count && (
-														<span className="bnm-nb-comment-count">
-															<a href="#">
-																{ post.comment_count }
-															</a>
-														</span>
-													) }
-												</div>
-												{ displayPostExcerptSmall && (
-													<div className="bnm-nb-post-excerpt">
-														{ postExcerpt }
-													</div>
+													</span>
+												) }
+
+												{ showCommentCount && post.comment_count && (
+													<span className="bnm-nb-comment-count">
+														<a href="#">
+															{ post.comment_count }
+														</a>
+													</span>
 												) }
 											</div>
+											{ displayPostExcerpt && (
+												<div className="bnm-nb-post-excerpt">
+													<PostExcerpt
+														post={post}
+														excerptLength={attributes.excerptLength}
+														showReadMore={attributes.showReadMore}
+													/>
+												</div>
+											) }
 										</div>
-									)
-								);
-							} ) }
-						</div>
+									</div>
+								) 
+							);
+						} ) }
+					</div>
+					<div className="bnm-right-block">
+						{ posts && posts.length > 0 && posts.map( ( post, index ) => { 
+							
+							const currentAuthor = authorsList?.find(
+								( author ) => author.id === post.author
+							);
+
+							const authorAvatarUrl = currentAuthor?.avatar_urls?.[48];
+							
+							const avatarMarkup = authorAvatarUrl && (
+								<span className="bnm-avatar">
+									<img src={authorAvatarUrl} />
+								</span>
+							);
+
+							return(
+								index > 0 && (
+									<div className="bnm-pb1-small-post">
+										
+										{ showFeaturedImage && (
+											<FeaturedImage 
+												post={post}
+												featuredImageSizeSlug={featuredImageSizeSlugSmall}
+											/>
+										) }
+										
+										<div className="entry-details">
+
+											{ showCategorySmall && (
+												<div className="bnm-nb-category-list">
+													<PostCategories
+														categoriesList={categoriesList}
+														post={post}
+													/>
+												</div>
+											) }
+
+											{ showTitle && (
+												<PostTitle
+													post={post}
+													attributes={attributes}
+												/>
+											) }
+											<div className="entry-meta">
+												{ showAuthorSmall && currentAuthor && (
+													<span className="bnm-nb-post-author">
+														<a href="#">
+
+															{ showAvatarSmall && avatarMarkup }
+
+															{ sprintf(
+																/* translators: byline. %s: current author. */
+																__( 'by %s' ),
+																currentAuthor.name
+															) }
+														</a>
+													</span>
+												) }
+												{ showDateSmall && post.date_gmt && (
+													<time
+														dateTime={ format( 'c', post.date_gmt ) }
+														className="bnm-nb-post-date"
+													>
+														<a href="#">
+															{ dateI18n( dateFormat, post.date_gmt ) }
+														</a>
+													</time>
+												) }
+												{ showCommentCountSmall && post.comment_count && (
+													<span className="bnm-nb-comment-count">
+														<a href="#">
+															{ post.comment_count }
+														</a>
+													</span>
+												) }
+											</div>
+											{ displayPostExcerptSmall && (
+												<div className="bnm-nb-post-excerpt">
+													<PostExcerpt
+														post={post}
+														excerptLength={attributes.excerptLengthSmall}
+														showReadMore={attributes.showReadMoreSmall}
+													/>
+												</div>
+											) }
+										</div>
+									</div>
+								)
+							);
+						} ) }
 					</div>
 				</div>
 			</div>
-		</div>
+		);
+	};
+
+
+	return (
+		<Fragment>
+			{ inspectorControls }
+			<Preview 
+				posts={ posts }
+				categoriesList={ categoriesList }
+				authorsList={ authorsList }
+				blockProps={ blockProps }
+				inlineStyles={ inlineStyles }
+				attributes={ attributes }
+			/>
+		</Fragment>
 	);
 }

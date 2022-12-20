@@ -202,6 +202,13 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 							onChange={ () => setAttributes( { showCategory: ! showCategory } ) }
 						/>
 					</PanelRow>
+					<PanelRow>
+						<ToggleControl
+							label={ __( 'Show Category(Small Posts)', 'bnm-blocks' ) }
+							checked={ showCategorySmall }
+							onChange={ () => setAttributes( { showCategorySmall: ! showCategorySmall } ) }
+						/>
+					</PanelRow>
 
 					<TypographyControl
 						label = { __( 'Typography', 'bnm-blocks' ) }

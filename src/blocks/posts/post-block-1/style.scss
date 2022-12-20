@@ -84,6 +84,11 @@
             padding: var(--excerpt-padding-small);
             margin: var(--excerpt-margin-small);
         }
+        .post-thumbnail {
+            margin: 0 20px 0 0;
+            width: 40%;
+            float: left;
+        }
     }
 
     .bnm-nb-category-list {
@@ -146,12 +151,6 @@
 
 }
 
-.wp-block-bnm-pb1-image-small {
-    margin: 0 20px 0 0;
-    width: 40%;
-    float: left;
-}
-
 .bnm-nb-category-list {
     display: block;
 }
@@ -183,8 +182,7 @@
     overflow: hidden;
 }
 
-.wp-block-bnm-pb1-image-small,
-.wp-block-bnm-pb1-image-big {
+.post-thumbnail {
     overflow: hidden;
 
     img {
