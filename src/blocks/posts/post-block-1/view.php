@@ -55,7 +55,7 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 								<div class="bnm-pb1-large-post-content">
 
 									<?php if ( $attributes['showCategory'] ) { ?>
-										<div class="bnm-nb-category-list">
+										<div class="bnm-category-list">
 											<?php the_category( ' ' ); ?>
 										</div>
 									<?php } ?>
@@ -68,26 +68,26 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 
 									<div class="entry-meta">
 										<?php if ( $attributes['showAuthor'] ) { ?>
-											<span class="bnm-nb-post-author">
+											<span class="bnm-post-author">
 												<?php bnm_posted_by(); ?>
 											</span>
 										<?php } ?>
 
 										<?php if ( $attributes['showDate'] ) { ?>
-											<span class="bnm-nb-post-date">
+											<span class="bnm-post-date">
 												<?php bnm_posted_on(); ?>
 											</span>
 										<?php } ?>
 
 										<?php if ( $attributes['showCommentCount'] ) { ?>
-											<span class="bnm-nb-comment-count">
+											<span class="bnm-comment-count">
 												<?php bnm_comments_link(); ?>
 											</span>
 										<?php } ?>
 									</div><!-- .entry-meta-->
 
 									<?php if ( $attributes['displayPostExcerpt'] && ( isset( $attributes['excerptLength'] ) && $attributes['excerptLength']  > 0 ) ) { ?>
-										<div class="bnm-nb-post-excerpt">
+										<div class="bnm-post-excerpt">
 											
 											<?php echo wp_kses_post( BNM_Blocks::get_excerpt_by_id( get_the_id(), $attributes['excerptLength'] ) ); ?>
 											
@@ -119,7 +119,7 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 							<?php endif; ?>
 							<div class="entry-details">
 								<?php if ( $attributes['showCategorySmall'] ) { ?>
-									<div class="bnm-nb-category-list">
+									<div class="bnm-category-list">
 										<?php the_category( ' ' ); ?>
 									</div>
 								<?php } ?>
@@ -132,25 +132,25 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 							
 								<div class="entry-meta">
 									<?php if ( $attributes['showAuthorSmall'] ) { ?>
-										<span class="bnm-nb-post-author">
+										<span class="bnm-post-author">
 											<?php bnm_posted_by(); ?>
 										</span>
 									<?php } ?>
 
 									<?php if ( $attributes['showDateSmall'] ) { ?>
-										<span class="bnm-nb-post-date">
+										<span class="bnm-post-date">
 											<?php bnm_posted_on(); ?>
 										</span>
 									<?php } ?>
 
 									<?php if ( $attributes['showCommentCountSmall'] ) { ?>
-										<span class="bnm-nb-comment-count">
+										<span class="bnm-comment-count">
 											<?php bnm_comments_link(); ?>
 										</span>
 									<?php } ?>
 								</div><!-- .entry-meta -->
 								<?php if ( $attributes['displayPostExcerptSmall'] && ( isset( $attributes['excerptLengthSmall'] ) && $attributes['excerptLengthSmall']  > 0 ) ) { ?>
-									<div class="bnm-nb-post-excerpt">
+									<div class="bnm-post-excerpt">
 										<?php echo wp_kses_post( BNM_Blocks::get_excerpt_by_id( get_the_id(), $attributes['excerptLengthSmall'] ) ); ?>
 
 										<?php if ( $attributes['showReadMoreSmall'] && ! empty( $attributes['readMoreLabel'] ) ) { ?>
