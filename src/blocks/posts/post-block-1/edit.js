@@ -289,7 +289,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		excerpt = excerptElement.textContent || excerptElement.innerText || '';
 
 		const postExcerpt = showReadMore ? (
-			<>
+			<div className="bnm-nb-post-excerpt">
 				{ excerpt
 					.trim()
 					.split( ' ', excerptLength )
@@ -303,16 +303,16 @@ export default function Edit( { attributes, setAttributes } ) {
 					>
 						{ readMoreLabel }
 					</a>
-			</>
+			</div>
 		) : (
-			<>
+			<div className="bnm-nb-post-excerpt">
 				{ excerpt
 					.trim()
 					.split( ' ', excerptLength )
 					.join( ' ' ) }
 				{ /* translators: excerpt truncation character, default .. */ }
 				{ __( '… ' ) }
-			</>
+			</div>
 		);
 
 		return postExcerpt;
@@ -349,13 +349,15 @@ export default function Edit( { attributes, setAttributes } ) {
 		}
 
 		return (
-			categoryNames.map( ( category ) => {
-				return (
-					<a href="#">
-						{ category }
-					</a>
-				);
-			} )
+			<div className="bnm-nb-category-list">
+				{ categoryNames.map( ( category ) => {
+					return (
+						<a href="#">
+							{ category }
+						</a>
+					);
+				} ) }
+			</div>
 		);
 	};
 
@@ -380,6 +382,77 @@ export default function Edit( { attributes, setAttributes } ) {
 
 		return featuredImage;
 	}
+
+	const PostAuthorAvatar = ({ author }) => {
+		const authorAvatarUrl = author?.avatar_urls?.[48];			
+		const avatarMarkup = authorAvatarUrl && (
+			<span className="bnm-avatar">
+				<img src={authorAvatarUrl} />
+			</span>
+		);
+		if ( ! avatarMarkup ) {
+			return null;
+		}
+		return avatarMarkup;
+	}
+
+	const PostAuthor = ({ post, authorsList, showAvatar} ) => {
+		const currentAuthor = authorsList?.find(
+			( author ) => author.id === post.author
+		);
+
+		if ( currentAuthor ) {
+			return (
+				<span className="bnm-nb-post-author">
+					<a href="#">
+						{ showAvatar && (
+							<PostAuthorAvatar 
+								author={currentAuthor}
+							/>
+						) }
+					
+						{ sprintf(
+							/* translators: byline. %s: current author. */
+							__( 'by %s' ),
+							currentAuthor.name
+						) }
+					</a>
+				</span>
+			);
+		}
+
+		return null;
+	};
+
+	const PostDateTime = ({ post }) => {
+		if ( post.date_gmt ) {
+			return (
+				<span className="bnm-nb-post-date">
+					<time
+						dateTime={ format( 'c', post.date_gmt ) }
+					>
+						<a href="#">
+							{ dateI18n( dateFormat, post.date_gmt ) }
+						</a>
+					</time>
+				</span>
+			);
+		} 
+		return null;
+	};
+
+	const PostCommentCount = ({ post }) => {
+		if ( post.comment_count ) {
+			return (
+				<span className="bnm-nb-comment-count">
+					<a href="#">
+						{ post.comment_count }
+					</a>
+				</span>
+			);
+		}
+		return null;
+	};
 
 	const Preview = ({
 		posts,
@@ -416,18 +489,6 @@ export default function Edit( { attributes, setAttributes } ) {
 					<div className="bnm-left-block">
 						{ posts && posts.length > 0 && posts.map( ( post, index ) => {
 
-							const currentAuthor = authorsList?.find(
-								( author ) => author.id === post.author
-							);
-
-							const authorAvatarUrl = currentAuthor?.avatar_urls?.[48];
-							
-							const avatarMarkup = authorAvatarUrl && (
-								<span className="bnm-avatar">
-									<img src={authorAvatarUrl} />
-								</span>
-							);
-
 							return(
 								index === 0 && (
 									<div className="bnm-pb1-large-post">
@@ -441,14 +502,11 @@ export default function Edit( { attributes, setAttributes } ) {
 
 										<div className="bnm-pb1-large-post-content">
 											{ showCategory && (
-												<div className="bnm-nb-category-list">
-													<PostCategories
-														categoriesList={categoriesList}
-														post={post}
-													/>
-												</div>
+												<PostCategories
+													categoriesList={categoriesList}
+													post={post}
+												/>
 											) }
-											
 											{ showTitle && (
 												<PostTitle
 													post={post}
@@ -456,48 +514,32 @@ export default function Edit( { attributes, setAttributes } ) {
 												/>
 											) }
 											<div className="entry-meta">
-												{ showAuthor && currentAuthor && (
-													<span className="bnm-nb-post-author">
-														<a href="#">
-															{ showAvatar && avatarMarkup }
-														
-															{ sprintf(
-																/* translators: byline. %s: current author. */
-																__( 'by %s' ),
-																currentAuthor.name
-															) }
-														</a>
-													</span>
+												{ showAuthor && (
+													<PostAuthor
+														post={post}
+														authorsList={authorsList}
+														showAvatar={attributes.showAvatar}
+													/>
 												) }
 
-												{ showDate && post.date_gmt && (
-													<span className="bnm-nb-post-date">
-														<time
-															dateTime={ format( 'c', post.date_gmt ) }
-														>
-															<a href="#">
-																{ dateI18n( dateFormat, post.date_gmt ) }
-															</a>
-														</time>
-													</span>
+												{ showDate && (
+													<PostDateTime 
+														post={post}
+													/>
 												) }
 
-												{ showCommentCount && post.comment_count && (
-													<span className="bnm-nb-comment-count">
-														<a href="#">
-															{ post.comment_count }
-														</a>
-													</span>
+												{ showCommentCount && (
+													<PostCommentCount
+														post={post}
+													/>
 												) }
 											</div>
 											{ displayPostExcerpt && (
-												<div className="bnm-nb-post-excerpt">
-													<PostExcerpt
-														post={post}
-														excerptLength={attributes.excerptLength}
-														showReadMore={attributes.showReadMore}
-													/>
-												</div>
+												<PostExcerpt
+													post={post}
+													excerptLength={attributes.excerptLength}
+													showReadMore={attributes.showReadMore}
+												/>
 											) }
 										</div>
 									</div>
@@ -508,18 +550,6 @@ export default function Edit( { attributes, setAttributes } ) {
 					<div className="bnm-right-block">
 						{ posts && posts.length > 0 && posts.map( ( post, index ) => { 
 							
-							const currentAuthor = authorsList?.find(
-								( author ) => author.id === post.author
-							);
-
-							const authorAvatarUrl = currentAuthor?.avatar_urls?.[48];
-							
-							const avatarMarkup = authorAvatarUrl && (
-								<span className="bnm-avatar">
-									<img src={authorAvatarUrl} />
-								</span>
-							);
-
 							return(
 								index > 0 && (
 									<div className="bnm-pb1-small-post">
@@ -534,12 +564,10 @@ export default function Edit( { attributes, setAttributes } ) {
 										<div className="entry-details">
 
 											{ showCategorySmall && (
-												<div className="bnm-nb-category-list">
-													<PostCategories
-														categoriesList={categoriesList}
-														post={post}
-													/>
-												</div>
+												<PostCategories
+													categoriesList={categoriesList}
+													post={post}
+												/>
 											) }
 
 											{ showTitle && (
@@ -549,46 +577,30 @@ export default function Edit( { attributes, setAttributes } ) {
 												/>
 											) }
 											<div className="entry-meta">
-												{ showAuthorSmall && currentAuthor && (
-													<span className="bnm-nb-post-author">
-														<a href="#">
-
-															{ showAvatarSmall && avatarMarkup }
-
-															{ sprintf(
-																/* translators: byline. %s: current author. */
-																__( 'by %s' ),
-																currentAuthor.name
-															) }
-														</a>
-													</span>
+												{ showAuthorSmall && (
+													<PostAuthor
+														post={post}
+														authorsList={authorsList}
+														showAvatar={attributes.showAvatarSmall}
+													/>
 												) }
-												{ showDateSmall && post.date_gmt && (
-													<time
-														dateTime={ format( 'c', post.date_gmt ) }
-														className="bnm-nb-post-date"
-													>
-														<a href="#">
-															{ dateI18n( dateFormat, post.date_gmt ) }
-														</a>
-													</time>
+												{ showDateSmall && (
+													<PostDateTime 
+														post={post}
+													/>
 												) }
-												{ showCommentCountSmall && post.comment_count && (
-													<span className="bnm-nb-comment-count">
-														<a href="#">
-															{ post.comment_count }
-														</a>
-													</span>
+												{ showCommentCountSmall && (
+													<PostCommentCount
+														post={post}
+													/>
 												) }
 											</div>
 											{ displayPostExcerptSmall && (
-												<div className="bnm-nb-post-excerpt">
-													<PostExcerpt
-														post={post}
-														excerptLength={attributes.excerptLengthSmall}
-														showReadMore={attributes.showReadMoreSmall}
-													/>
-												</div>
+												<PostExcerpt
+													post={post}
+													excerptLength={attributes.excerptLengthSmall}
+													showReadMore={attributes.showReadMoreSmall}
+												/>
 											) }
 										</div>
 									</div>

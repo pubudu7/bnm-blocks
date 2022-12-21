@@ -300,11 +300,15 @@ function Edit(_ref) {
     const excerptElement = document.createElement('div');
     excerptElement.innerHTML = excerpt;
     excerpt = excerptElement.textContent || excerptElement.innerText || '';
-    const postExcerpt = showReadMore ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, excerpt.trim().split(' ', excerptLength).join(' '), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('… '), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
+    const postExcerpt = showReadMore ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: "bnm-nb-post-excerpt"
+    }, excerpt.trim().split(' ', excerptLength).join(' '), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('… '), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
       href: post.link,
       rel: "noopenner noreferrer",
       onClick: showRedirectionPreventedNotice
-    }, readMoreLabel)) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, excerpt.trim().split(' ', excerptLength).join(' '), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('… '));
+    }, readMoreLabel)) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: "bnm-nb-post-excerpt"
+    }, excerpt.trim().split(' ', excerptLength).join(' '), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('… '));
     return postExcerpt;
   };
 
@@ -342,11 +346,13 @@ function Edit(_ref) {
       }
     }
 
-    return categoryNames.map(category => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: "bnm-nb-category-list"
+    }, categoryNames.map(category => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
         href: "#"
       }, category);
-    });
+    }));
   };
 
   const FeaturedImage = _ref5 => {
@@ -372,7 +378,84 @@ function Edit(_ref) {
     return featuredImage;
   };
 
-  const Preview = _ref6 => {
+  const PostAuthorAvatar = _ref6 => {
+    var _author$avatar_urls;
+
+    let {
+      author
+    } = _ref6;
+    const authorAvatarUrl = author === null || author === void 0 ? void 0 : (_author$avatar_urls = author.avatar_urls) === null || _author$avatar_urls === void 0 ? void 0 : _author$avatar_urls[48];
+    const avatarMarkup = authorAvatarUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: "bnm-avatar"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+      src: authorAvatarUrl
+    }));
+
+    if (!avatarMarkup) {
+      return null;
+    }
+
+    return avatarMarkup;
+  };
+
+  const PostAuthor = _ref7 => {
+    let {
+      post,
+      authorsList,
+      showAvatar
+    } = _ref7;
+    const currentAuthor = authorsList === null || authorsList === void 0 ? void 0 : authorsList.find(author => author.id === post.author);
+
+    if (currentAuthor) {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+        className: "bnm-nb-post-author"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
+        href: "#"
+      }, showAvatar && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostAuthorAvatar, {
+        author: currentAuthor
+      }), sprintf(
+      /* translators: byline. %s: current author. */
+      (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('by %s'), currentAuthor.name)));
+    }
+
+    return null;
+  };
+
+  const PostDateTime = _ref8 => {
+    let {
+      post
+    } = _ref8;
+
+    if (post.date_gmt) {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+        className: "bnm-nb-post-date"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("time", {
+        dateTime: (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_5__.format)('c', post.date_gmt)
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
+        href: "#"
+      }, (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_5__.dateI18n)(dateFormat, post.date_gmt))));
+    }
+
+    return null;
+  };
+
+  const PostCommentCount = _ref9 => {
+    let {
+      post
+    } = _ref9;
+
+    if (post.comment_count) {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+        className: "bnm-nb-comment-count"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
+        href: "#"
+      }, post.comment_count));
+    }
+
+    return null;
+  };
+
+  const Preview = _ref10 => {
     let {
       posts,
       authorsList,
@@ -380,7 +463,7 @@ function Edit(_ref) {
       blockProps,
       inlineStyles,
       attributes
-    } = _ref6;
+    } = _ref10;
 
     if (!posts || !categoriesList || !authorsList) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__.Placeholder, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__.Spinner, null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Loading Posts', 'bnm-blocks')));
@@ -397,15 +480,6 @@ function Edit(_ref) {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "bnm-left-block"
     }, posts && posts.length > 0 && posts.map((post, index) => {
-      var _currentAuthor$avatar;
-
-      const currentAuthor = authorsList === null || authorsList === void 0 ? void 0 : authorsList.find(author => author.id === post.author);
-      const authorAvatarUrl = currentAuthor === null || currentAuthor === void 0 ? void 0 : (_currentAuthor$avatar = currentAuthor.avatar_urls) === null || _currentAuthor$avatar === void 0 ? void 0 : _currentAuthor$avatar[48];
-      const avatarMarkup = authorAvatarUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "bnm-avatar"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
-        src: authorAvatarUrl
-      }));
       return index === 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "bnm-pb1-large-post"
       }, showFeaturedImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(FeaturedImage, {
@@ -413,51 +487,30 @@ function Edit(_ref) {
         featuredImageSizeSlug: featuredImageSizeSlug
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "bnm-pb1-large-post-content"
-      }, showCategory && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-        className: "bnm-nb-category-list"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostCategories, {
+      }, showCategory && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostCategories, {
         categoriesList: categoriesList,
         post: post
-      })), showTitle && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostTitle, {
+      }), showTitle && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostTitle, {
         post: post,
         attributes: attributes
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "entry-meta"
-      }, showAuthor && currentAuthor && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "bnm-nb-post-author"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
-        href: "#"
-      }, showAvatar && avatarMarkup, sprintf(
-      /* translators: byline. %s: current author. */
-      (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('by %s'), currentAuthor.name))), showDate && post.date_gmt && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "bnm-nb-post-date"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("time", {
-        dateTime: (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_5__.format)('c', post.date_gmt)
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
-        href: "#"
-      }, (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_5__.dateI18n)(dateFormat, post.date_gmt)))), showCommentCount && post.comment_count && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "bnm-nb-comment-count"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
-        href: "#"
-      }, post.comment_count))), displayPostExcerpt && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-        className: "bnm-nb-post-excerpt"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostExcerpt, {
+      }, showAuthor && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostAuthor, {
+        post: post,
+        authorsList: authorsList,
+        showAvatar: attributes.showAvatar
+      }), showDate && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostDateTime, {
+        post: post
+      }), showCommentCount && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostCommentCount, {
+        post: post
+      })), displayPostExcerpt && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostExcerpt, {
         post: post,
         excerptLength: attributes.excerptLength,
         showReadMore: attributes.showReadMore
-      }))));
+      })));
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "bnm-right-block"
     }, posts && posts.length > 0 && posts.map((post, index) => {
-      var _currentAuthor$avatar2;
-
-      const currentAuthor = authorsList === null || authorsList === void 0 ? void 0 : authorsList.find(author => author.id === post.author);
-      const authorAvatarUrl = currentAuthor === null || currentAuthor === void 0 ? void 0 : (_currentAuthor$avatar2 = currentAuthor.avatar_urls) === null || _currentAuthor$avatar2 === void 0 ? void 0 : _currentAuthor$avatar2[48];
-      const avatarMarkup = authorAvatarUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "bnm-avatar"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
-        src: authorAvatarUrl
-      }));
       return index > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "bnm-pb1-small-post"
       }, showFeaturedImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(FeaturedImage, {
@@ -465,42 +518,31 @@ function Edit(_ref) {
         featuredImageSizeSlug: featuredImageSizeSlugSmall
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "entry-details"
-      }, showCategorySmall && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-        className: "bnm-nb-category-list"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostCategories, {
+      }, showCategorySmall && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostCategories, {
         categoriesList: categoriesList,
         post: post
-      })), showTitle && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostTitle, {
+      }), showTitle && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostTitle, {
         post: post,
         attributes: attributes
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "entry-meta"
-      }, showAuthorSmall && currentAuthor && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "bnm-nb-post-author"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
-        href: "#"
-      }, showAvatarSmall && avatarMarkup, sprintf(
-      /* translators: byline. %s: current author. */
-      (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('by %s'), currentAuthor.name))), showDateSmall && post.date_gmt && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("time", {
-        dateTime: (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_5__.format)('c', post.date_gmt),
-        className: "bnm-nb-post-date"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
-        href: "#"
-      }, (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_5__.dateI18n)(dateFormat, post.date_gmt))), showCommentCountSmall && post.comment_count && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "bnm-nb-comment-count"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
-        href: "#"
-      }, post.comment_count))), displayPostExcerptSmall && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-        className: "bnm-nb-post-excerpt"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostExcerpt, {
+      }, showAuthorSmall && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostAuthor, {
+        post: post,
+        authorsList: authorsList,
+        showAvatar: attributes.showAvatarSmall
+      }), showDateSmall && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostDateTime, {
+        post: post
+      }), showCommentCountSmall && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostCommentCount, {
+        post: post
+      })), displayPostExcerptSmall && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PostExcerpt, {
         post: post,
         excerptLength: attributes.excerptLengthSmall,
         showReadMore: attributes.showReadMoreSmall
-      }))));
+      })));
     }))));
   };
 
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, inspectorControls, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Preview, {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Fragment, null, inspectorControls, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Preview, {
     posts: posts,
     categoriesList: categoriesList,
     authorsList: authorsList,
