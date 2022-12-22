@@ -34,14 +34,8 @@ import {
 	boxValues
 } from '../../../shared/js/utils.js';
 import {
-	PostExcerpt,
-	PostTitle,
-	PostCategories,
-	FeaturedImage,
-	PostAuthor,
-	PostDateTime,
-	PostCommentCount
-} from '../components/layout.js'
+	Layout
+} from './layout.js';
 
 const DEFAULTS_POSTS_PER_PAGE = 5;
 const CATEGORIES_LIST_QUERY = {
@@ -59,25 +53,8 @@ export default function Edit( { attributes, setAttributes } ) {
     const {
 		queryId,
 		query,
-		showTitle,
-		titleHtmlTag,
-		showFeaturedImage,
-		showFeaturedImageSmall,
-		showDate,
-		showCategory,
-		showAuthor,
-		showCommentCount,
-		displayPostExcerpt,
-		showDateSmall,
-		showCategorySmall,
-		showAuthorSmall,
-		showCommentCountSmall,
-		displayPostExcerptSmall,
 		categoryBGColor,
-		featuredImageAlign,
 		featuredImageSizeSlug,
-		featuredImageSizeSlugSmall,
-		addLinkToFeaturedImage,
     } = attributes;
 
 	const {
@@ -302,132 +279,14 @@ export default function Edit( { attributes, setAttributes } ) {
 		}
 
 		return (
-			<div { ...blockProps } style={ inlineStyles }>
-				<div className="posts-block-1-container">
-					<div className="bnm-left-block">
-						{ posts && posts.length > 0 && posts.map( ( post, index ) => {
-
-							return(
-								index === 0 && (
-									<div className="bnm-pb1-large-post">
-										
-										{ showFeaturedImage && (
-											<FeaturedImage 
-												post={post}
-												featuredImageSizeSlug={featuredImageSizeSlug}
-											/>
-										) }
-
-										<div className="bnm-pb1-large-post-content">
-											{ showCategory && (
-												<PostCategories
-													categoriesList={categoriesList}
-													post={post}
-												/>
-											) }
-											{ showTitle && (
-												<PostTitle
-													post={post}
-													attributes={attributes}
-												/>
-											) }
-											<div className="entry-meta">
-												{ showAuthor && (
-													<PostAuthor
-														post={post}
-														authorsList={authorsList}
-														showAvatar={attributes.showAvatar}
-													/>
-												) }
-
-												{ showDate && (
-													<PostDateTime 
-														post={post}
-													/>
-												) }
-
-												{ showCommentCount && (
-													<PostCommentCount
-														post={post}
-													/>
-												) }
-											</div>
-											{ displayPostExcerpt && (
-												<PostExcerpt
-													post={post}
-													excerptLength={attributes.excerptLength}
-													showReadMore={attributes.showReadMore}
-												/>
-											) }
-										</div>
-									</div>
-								) 
-							);
-						} ) }
-					</div>
-					<div className="bnm-right-block">
-						{ posts && posts.length > 0 && posts.map( ( post, index ) => { 
-							
-							return(
-								index > 0 && (
-									<div className="bnm-pb1-small-post">
-										
-										{ showFeaturedImage && (
-											<FeaturedImage 
-												post={post}
-												featuredImageSizeSlug={featuredImageSizeSlugSmall}
-											/>
-										) }
-										
-										<div className="entry-details">
-
-											{ showCategorySmall && (
-												<PostCategories
-													categoriesList={categoriesList}
-													post={post}
-												/>
-											) }
-
-											{ showTitle && (
-												<PostTitle
-													post={post}
-													attributes={attributes}
-												/>
-											) }
-											<div className="entry-meta">
-												{ showAuthorSmall && (
-													<PostAuthor
-														post={post}
-														authorsList={authorsList}
-														showAvatar={attributes.showAvatarSmall}
-													/>
-												) }
-												{ showDateSmall && (
-													<PostDateTime 
-														post={post}
-													/>
-												) }
-												{ showCommentCountSmall && (
-													<PostCommentCount
-														post={post}
-													/>
-												) }
-											</div>
-											{ displayPostExcerptSmall && (
-												<PostExcerpt
-													post={post}
-													excerptLength={attributes.excerptLengthSmall}
-													showReadMore={attributes.showReadMoreSmall}
-												/>
-											) }
-										</div>
-									</div>
-								)
-							);
-						} ) }
-					</div>
-				</div>
-			</div>
+			<Layout
+				posts={ posts }
+				categoriesList={ categoriesList }
+				authorsList={ authorsList }
+				blockProps={ blockProps }
+				inlineStyles={ inlineStyles }
+				attributes={ attributes }
+			/>
 		);
 	};
 

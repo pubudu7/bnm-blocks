@@ -187,3 +187,29 @@ export const PostCommentCount = ({ post }) => {
     }
     return null;
 };
+
+export const PostMeta = ({ post, authorsList, attributes }) => {
+    return (
+        <div className="entry-meta">
+            { attributes.showAuthor && (
+                <PostAuthor
+                    post={post}
+                    authorsList={authorsList}
+                    showAvatar={attributes.showAvatar}
+                />
+            ) }
+
+            { attributes.showDate && (
+                <PostDateTime 
+                    post={post}
+                />
+            ) }
+
+            { attributes.showCommentCount && (
+                <PostCommentCount
+                    post={post}
+                />
+            ) }
+        </div>
+    );
+};
