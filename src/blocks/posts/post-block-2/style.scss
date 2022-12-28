@@ -1,7 +1,6 @@
-.wp-block-bnm-blocks-post-block-1 {
+.wp-block-bnm-blocks-post-block-2 {
 
     --title-font-size: 24px;
-    --title-font-size-small: 16px;
     --title-line-height: 1.2;
     --title-margin: 5px 0 10px 0;
     --meta-font-size: 12px;
@@ -19,7 +18,7 @@
     --excerpt-margin: 0 0 20px;
     --excerpt-margin-small: 0 0 20px;
 
-    .bnm-pb1-large-post {
+    .bnm-pb2-large-post {
         .entry-title {
             font-size: var(--title-font-size);
             line-height: var(--title-line-height);
@@ -55,7 +54,7 @@
         }
     }
 
-    .bnm-pb1-small-post { 
+    .bnm-pb2-small-post {         
         .entry-title {
             font-size: var(--title-font-size-small); 
             line-height: var(--title-line-height-small);
@@ -167,21 +166,25 @@
     
 }
 
-.posts-block-1-container {
+.bnm-row {
     display: flex;
-    flex-direction: row;
     gap: 40px;
-
-    .bnm-left-block,
-    .bnm-right-block {
-        width: 50%;
-    }
 }
 
-.bnm-pb1-small-post {
+.bnm-pb2-posts-grid {
+    display: grid;
+    column-gap: 40px;
+    row-gap: 25px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.bnm-pb2-large-post,
+.bnm-pb2-small-post {
     display: block;
     overflow: hidden;
+    width: 100%;
 }
+
 
 .post-thumbnail {
     overflow: hidden;

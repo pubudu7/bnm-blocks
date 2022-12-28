@@ -9,8 +9,7 @@ import {
 	PostAuthor,
 	PostDateTime,
 	PostCommentCount,
-} from '../components/meta.js'
-
+} from '../components/meta.js';
 
 export const Layout = ({
     posts,
@@ -22,14 +21,12 @@ export const Layout = ({
 }) => {
     return(
         <div { ...blockProps } style={ inlineStyles }>
-            <div className="posts-block-1-container">
-                <div className="bnm-left-block">
+            <div className="posts-block-2-container">
+                <div class="bnm-pb2-posts-grid">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => {
-
                         return(
-                            index === 0 && (
-                                <div className="bnm-pb1-large-post">
-                                    
+                            ( index === 0 || index === 1 ) && (
+                                <div className="bnm-pb2-large-post">
                                     { attributes.showFeaturedImage && (
                                         <FeaturedImage 
                                             post={post}
@@ -37,7 +34,7 @@ export const Layout = ({
                                         />
                                     ) }
 
-                                    <div className="bnm-pb1-large-post-content">
+                                    <div className="bnm-pb2-large-post-content">
                                         { attributes.showCategory && (
                                             <PostCategories
                                                 categoriesList={categoriesList}
@@ -80,16 +77,14 @@ export const Layout = ({
                                         ) }
                                     </div>
                                 </div>
-                            ) 
+                            )
                         );
                     } ) }
-                </div>
-                <div className="bnm-right-block">
+                
                     { posts && posts.length > 0 && posts.map( ( post, index ) => { 
-                        
                         return(
-                            index > 0 && (
-                                <div className="bnm-pb1-small-post">
+                            index > 1 && (
+                                <div className="bnm-pb2-small-post">
                                     
                                     { attributes.showFeaturedImage && (
                                         <FeaturedImage 

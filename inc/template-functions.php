@@ -1,6 +1,6 @@
 <?php
 /**
- * Helper functions.
+ * Template functions.
  */
 
 /**
