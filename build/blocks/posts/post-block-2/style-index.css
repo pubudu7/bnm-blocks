@@ -149,7 +149,7 @@
   display: grid;
   -moz-column-gap: 40px;
        column-gap: 40px;
-  row-gap: 25px;
+  row-gap: 15px;
   grid-template-columns: 1fr 1fr;
 }
 
