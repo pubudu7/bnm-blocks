@@ -3,6 +3,7 @@
     --title-font-size: 24px;
     --title-font-size-small: 16px;
     --title-line-height: 1.2;
+    --title-line-height-small: 1.2;
     --title-margin: 5px 0 10px 0;
     --meta-font-size: 12px;
     --meta-font-size-small: 12px;
@@ -90,11 +91,13 @@
             width: 35%;
             float: left;
         }
+        .entry-details {
+            word-wrap: break-word;
+        }
     }
 
     .bnm-category-list {
         a {
-            background-color: var(--category-bg-color);
             color: var(--category-color);
             font-size: var(--category-font-size);
             line-height: var(--category-line-height);

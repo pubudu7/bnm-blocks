@@ -4,6 +4,7 @@
 .wp-block-bnm-blocks-post-block-2 {
   --title-font-size: 24px;
   --title-line-height: 1.2;
+  --title-line-height-small: 1.2;
   --title-margin: 5px 0 10px 0;
   --meta-font-size: 12px;
   --meta-font-size-small: 12px;
@@ -11,7 +12,7 @@
   --meta-margin: 0 0 15px;
   --category-font-size: 11px;
   --category-bg-hover-color: #eee;
-  --category-margin: 0 1em 0 0;
+  --category-margin: 0 .5em 0 0;
   --excerpt-font-size: 16px;
   --excerpt-line-height: 1.5;
   --excerpt-font-size-small: 14px;
@@ -80,8 +81,10 @@
   width: 35%;
   float: left;
 }
+.wp-block-bnm-blocks-post-block-2 .bnm-pb2-small-post .entry-details {
+  word-wrap: break-word;
+}
 .wp-block-bnm-blocks-post-block-2 .bnm-category-list a {
-  background-color: var(--category-bg-color);
   color: var(--category-color);
   font-size: var(--category-font-size);
   line-height: var(--category-line-height);

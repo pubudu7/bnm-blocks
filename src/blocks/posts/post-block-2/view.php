@@ -1,17 +1,8 @@
 <?php
 
-use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Block_1_CSS;
+use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Block_2_CSS;
 
 function bnm_blocks_post_block_2_init() {
-
-	//$asset_file = include( plugin_dir_path( __FILE__ ) . 'build/blocks/slider/index.asset.php' );
-
-	// wp_register_script(
-	// 	'bnm-blocks-post-block-1',
-	// 	plugins_url( 'build/index.js', __FILE__ ),
-	// 	$asset_file[ 'dependencies' ],
-	// 	$asset_file[ 'version' ]
-	// );
 
 	register_block_type( BNM_BLOCKS__PLUGIN_DIR . 'build/blocks/posts/post-block-2', array(
 		'api_version'		=> 2,
@@ -182,7 +173,7 @@ function bnm_blocks_post_block_2_render_callback( $attributes ) {
 	
 	$block = ob_get_clean();
 	
-	$css = new Post_Block_1_CSS();
+	$css = new Post_Block_2_CSS();
 	$styles = $css->render_css( $attributes );
 
 	$classes = '';

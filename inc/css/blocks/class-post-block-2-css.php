@@ -4,7 +4,7 @@ namespace ThemezHut\BNM_Blocks\CSS\Blocks;
 
 use ThemezHut\BNM_Blocks\CSS\CSS_Utility;
 
-class Post_Block_1_CSS {
+class Post_Block_2_CSS {
 
     public function render_css( $attributes ) {
 

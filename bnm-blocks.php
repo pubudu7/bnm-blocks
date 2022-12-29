@@ -26,6 +26,7 @@ $inc_directory = BNM_BLOCKS__PLUGIN_DIR . 'inc/';
 require_once $inc_directory . 'class-bnm-blocks.php';
 require_once $inc_directory . 'css/class-css-utility.php';
 require_once $inc_directory . 'css/blocks/class-post-block-1-css.php';
+require_once $inc_directory . 'css/blocks/class-post-block-2-css.php';
 
 include_once $inc_directory . 'template-functions.php';
 include_once $src_directory . 'slider/view.php';
