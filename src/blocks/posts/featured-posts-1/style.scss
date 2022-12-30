@@ -1,18 +1,20 @@
-.wp-block-bnm-blocks-post-block-1 {
+.wp-block-bnm-blocks-featured-posts-1 {
 
-    --title-font-size: 24px;
-    --title-font-size-small: 16px;
+    --title-font-size: 18px;
     --title-line-height: 1.2;
     --title-line-height-small: 1.2;
     --title-margin: 5px 0 10px 0;
+    --title-color: #ffffff;
+    --category-color: #cccccc;
     --meta-font-size: 12px;
     --meta-font-size-small: 12px;
     --meta-spacing: 10px;
     --meta-margin: 0 0 15px;
+    --meta-color: #cccccc;
+    --category-color: #cccccc;
     --category-font-size: 11px;
     --category-bg-hover-color: #eee;
-    --category-margin: 0 1em 0 0;
-    //--category-padding: 1px 5px;
+    --category-margin: 0 .5em 0 0;
     --excerpt-font-size: 16px;
     --excerpt-line-height: 1.5;
     --excerpt-font-size-small: 14px;
@@ -20,7 +22,7 @@
     --excerpt-margin: 0 0 20px;
     --excerpt-margin-small: 0 0 20px;
 
-    .bnm-pb1-large-post {
+    .bnm-fp1-large-post {
         .entry-title {
             font-size: var(--title-font-size);
             line-height: var(--title-line-height);
@@ -56,7 +58,7 @@
         }
     }
 
-    .bnm-pb1-small-post { 
+    .bnm-fp1-small-post { 
         .entry-title {
             font-size: var(--title-font-size-small); 
             line-height: var(--title-line-height-small);
@@ -159,7 +161,7 @@
     display: block;
 }
 
-.bnm-avatar{
+.bnm-avatar {
     margin-right: 5px;
     img {
         width: 25px;
@@ -170,116 +172,72 @@
     
 }
 
-.posts-block-1-container {
-    display: flex;
-    flex-direction: row;
-    gap: 40px;
-
-    .bnm-left-block,
-    .bnm-right-block {
-        width: 50%;
-    }
-}
-
-.bnm-pb1-small-post {
-    display: block;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
 .post-thumbnail {
     overflow: hidden;
+    margin: 0 0 10px;
 
     img {
+        vertical-align: top;
         max-width: 100%;
         height: auto;
     }
 }
 
-
-
-/********************************************************************************************/
-/**
-Following CSS must go in a common CSS file.
-*/
-.thbnm-color-picker-container {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+.bnm-fp1-small-post,
+.bnm-fp1-large-post {
     width: 100%;
-    justify-content: space-between;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
 
-    .thbnm-color-indicator {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        display: inline-block;
+.bnm-fp1-small-post,
+.bnm-fp1-large-post {
+    &:before {
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: 58.956916099773243%;
+    }
+
+    img.bnm-fp-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
         padding: 0;
-        background: linear-gradient(-45deg,transparent 48%,#ddd 0,#ddd 52%,transparent 0);
-        box-shadow: inset 0 0 0 1px rgb(0 0 0 / 20%);
-    }
-
-    .thbnm-color-control-click-side {
-        display: flex;
-        align-items: center;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+        object-fit: cover;
+        outline: none;
+        border: none;
+        box-shadow: none;
     }
 }
 
-.thbnm-typograpy-control-button {
-    margin: 0;
-    height: 28px;
-    width: 28px;
-    padding: 5px;
-    border: 1px solid #E6E7E9;
-    border-radius: 14px;
-    color: #50575E;
+.bnm-fp1-post-content {
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 10px 25px;
 }
 
-.thbnm-typography-control-container {
+.bnm-fp1-container {
     display: flex;
-    align-items: center;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
 }
 
-.thbnm-typography-controls-wrapper {
-    width: 260px;
-    padding: 10px;
+.bnm-fp1-left-side {
+    width: 66.8181818182%;
 }
-
-.thbnm-settings-panel .block-editor-panel-color-gradient-settings.block-editor-panel-color-gradient-settings {
-    padding-left: 0;
-    padding-right: 0;
-    border-top: none;
-}
-
-.thbnm-tab-panel {
-
-    .components-tab-panel__tabs-item {
-        &:focus:not(:disabled) {
-            box-shadow: inset 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
-        }
-        
-        &.thbnm-active-tab {
-            box-shadow: inset 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
-        }
-    }
-
-    .components-tab-panel__tab-content {
-        padding: 8px;
-        border: 1px solid #ccc;
-    }
-
-    padding-bottom: 8px;
-    border-bottom: 1px solid #ddd;
-}
-
-.block-editor-block-inspector .thbnm-panel .components-base-control.components-toggle-control {
-    margin: 0;
-}
-
-.block-editor-block-inspector .thbnm-panel .components-base-control.components-toggle-control:last-child {
-    margin-bottom: 8px;
+.bnm-fp1-right-side {
+    width: 33.181818181818182%;
+    display: flex;
+    flex-direction: column;
 }
 

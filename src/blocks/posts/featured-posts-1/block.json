@@ -1,12 +1,12 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "bnm-blocks/post-block-3",
+	"name": "bnm-blocks/featured-posts-1",
 	"version": "0.1.0",
-	"title": "Post Block: #3",
+	"title": "Featured Posts: #1",
 	"category": "widgets",
 	"icon": "smiley",
-	"description": "Post block style #3.",
+	"description": "Featured Posts Block style #1.",
 	"supports": {
 		"html": false
 	},
@@ -23,7 +23,7 @@
 			"type": "object",
 			"default": {
 				"posts": [],
-				"perPage": 6,
+				"perPage": 5,
 				"pages": 0,
 				"offset": 0,
 				"postType": "post",
@@ -57,12 +57,21 @@
 			"default": "h3"
 		},
 		"titleFontSize": {
-			"type": ["string", "number"]
+			"type": [ "string", "number" ]
+		},
+		"titleFontSizeSmall": {
+			"type": [ "string", "number" ]
 		},
 		"titleLineHeight": {
 			"type": ["number", "string"]
 		},
+		"titleLineHeightSmall": {
+			"type": ["number", "string"]
+		},
 		"titleLetterSpacing": {
+			"type": ["number", "string"]
+		},
+		"titleLetterSpacingSmall": {
 			"type": ["number", "string"]
 		},
 		"titlePadding": {
@@ -85,6 +94,10 @@
 			"type": "boolean",
 			"default": true
 		},
+		"showFeaturedImageSmall": {
+			"type": "boolean",
+			"default": true
+		},
 		"featuredImageAlign": {
 			"type": "string",
 			"enum": [ "left", "center", "right" ]
@@ -92,6 +105,10 @@
 		"featuredImageSizeSlug": {
 			"type": "string",
 			"default": "bnm-featured"
+		},
+		"featuredImageSizeSlugSmall": {
+			"type": "string",
+			"default": "bnm-featured-thumb"
 		},
 		"addLinkToFeaturedImage": {
 			"type": "boolean",
@@ -121,6 +138,14 @@
 			"type": "boolean",
 			"default": false
 		},
+		"showDateSmall": {
+			"type": "boolean",
+			"default": true
+		},
+		"showCategorySmall": {
+			"type": "boolean",
+			"default": false
+		},
 		"categoryPadding": {
 			"type": ["number", "object"],
 			"default": []
@@ -129,11 +154,34 @@
 			"type": ["number", "object"],
 			"default": []
 		},
+		"showAuthorSmall": {
+			"type": "boolean",
+			"default": false
+		},
+		"showAvatarSmall": {
+			"type": "boolean",
+			"default": false
+		},
+		"showCommentCountSmall": {
+			"type": "boolean",
+			"default": false
+		},
+		"displayPostExcerptSmall": {
+			"type": "boolean",
+			"default": false
+		},
 		"excerptLength": {
 			"type": "number",
 			"default": 20
 		},
+		"excerptLengthSmall": {
+			"type": "number",
+			"default": 10
+		},
 		"excerptFontSize": {
+			"type": [ "string", "number" ]
+		},
+		"excerptFontSizeSmall": {
 			"type": [ "string", "number" ]
 		},
 		"excerptLineHeight": {
@@ -142,11 +190,25 @@
 		"excerptLetterSpacing": {
 			"type": ["number", "string"]
 		},
+		"excerptLineHeightSmall": {
+			"type": ["number", "string"]
+		},
+		"excerptLetterSpacingSmall": {
+			"type": ["number", "string"]
+		},
 		"excerptPadding": {
 			"type": ["number", "object"],
 			"default": []
 		},
+		"excerptPaddingSmall": {
+			"type": ["number", "object"],
+			"default": []
+		},
 		"excerptMargin": {
+			"type": ["number", "object"],
+			"default": []
+		},
+		"excerptMarginSmall": {
 			"type": ["number", "object"],
 			"default": []
 		},
@@ -158,6 +220,10 @@
 			"type": "boolean",
 			"default": false
 		},
+		"showReadMoreSmall": {
+			"type": "boolean",
+			"default": false
+		},
 		"readMoreLabel": {
 			"type": "string",
 			"default": "Keep reading"
@@ -165,10 +231,19 @@
 		"metaFontSize": {
 			"type": [ "string", "number" ]
 		},
+		"metaFontSizeSmall": {
+			"type": [ "string", "number" ]
+		},
 		"metaLineHeight": {
 			"type": ["number", "string"]
 		},
 		"metaLetterSpacing": {
+			"type": ["number", "string"]
+		},
+		"metaLineHeightSmall": {
+			"type": ["number", "string"]
+		},
+		"metaLetterSpacingSmall": {
 			"type": ["number", "string"]
 		},
 		"metaSpacing": {

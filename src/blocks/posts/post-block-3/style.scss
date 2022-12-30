@@ -137,14 +137,16 @@
 .bnm-pb3-posts-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 40px;
+    column-gap: 25px;
     row-gap: 25px;
 }
 
 .post-thumbnail {
     overflow: hidden;
+    margin: 0 0 10px;
 
     img {
+        vertical-align: top;
         max-width: 100%;
         height: auto;
     }

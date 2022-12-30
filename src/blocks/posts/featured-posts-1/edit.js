@@ -28,7 +28,7 @@ import {
  * Internal Dependencies.
  */
 import QueryInspectorControls from '../../../components/query-controls';
-import BlockExtraSettings from '../../../components/settings-controls/post-type-2';
+import BlockExtraSettings from '../../../components/settings-controls/post-type-1';
 import {
 	mightBeUnit,
 	boxValues
@@ -185,8 +185,11 @@ export default function Edit( { attributes, setAttributes } ) {
 	// What to do for undefined values?
 	const inlineStyles = {
 		'--title-font-size': mightBeUnit(attributes.titleFontSize),
+		'--title-font-size-small': mightBeUnit(attributes.titleFontSizeSmall),
 		'--title-line-height': attributes.titleLineHeight,
+		'--title-line-height-small': attributes.titleLineHeightSmall,
 		'--title-letter-spacing': attributes.titleLetterSpacing,
+		'--title-letter-spacing-small': attributes.titleLetterSpacingSmall,
 		'--title-padding': boxValues(attributes.titlePadding),
 		'--title-margin': boxValues(attributes.titleMargin),
 		'--title-color': attributes.titleColor,
@@ -201,18 +204,26 @@ export default function Edit( { attributes, setAttributes } ) {
 		'--category-padding': boxValues(attributes.categoryPadding),
 		'--category-margin': boxValues(attributes.categoryMargin),
 		'--meta-font-size': mightBeUnit(attributes.metaFontSize),
+		'--meta-font-size-small': mightBeUnit(attributes.metaFontSizeSmall),
 		'--meta-line-height': attributes.metaLineHeight,
+		'--meta-line-height-small': attributes.metaLineHeightSmall,
 		'--meta-letter-spacing': attributes.metaLetterSpacing,
+		'--meta-letter-spacing-small': attributes.metaLetterSpacingSmall,
 		'--meta-spacing': attributes.metaSpacing,
 		'--meta-padding': boxValues(attributes.metaPadding),
 		'--meta-margin': boxValues(attributes.metaMargin),
 		'--meta-color': attributes.metaColor,
 		'--meta-hover-color': attributes.metaHoverColor,
 		'--excerpt-font-size': mightBeUnit(attributes.excerptFontSize),
+		'--excerpt-font-size-small': mightBeUnit(attributes.excerptFontSizeSmall),
 		'--excerpt-line-height': attributes.excerptLineHeight,
+		'--excerpt-line-height-small': attributes.excerptLineHeightSmall,
 		'--excerpt-letter-spacing': attributes.excerptLetterSpacing,
+		'--excerpt-letter-spacing-small': attributes.excerptLetterSpacingSmall,
 		'--excerpt-padding': boxValues(attributes.excerptPadding),
 		'--excerpt-margin': boxValues(attributes.excerptMargin),
+		'--excerpt-padding-small': boxValues(attributes.excerptPaddingSmall),
+		'--excerpt-margin-small': boxValues(attributes.excerptMarginSmall),
 		'--excerpt-color': attributes.excerptColor,
 	};
 
