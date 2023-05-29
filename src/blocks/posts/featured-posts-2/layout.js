@@ -9,10 +9,10 @@ import {
 	PostAuthor,
 	PostDateTime,
 	PostCommentCount,
-} from '../components/meta.js';
+} from '../../../components/meta/meta.js';
 import {
 	getFeaturedImageDetails,
-} from '../shared/template-functions.js';
+} from '../../../components/meta/meta-helper.js';
 
 
 
