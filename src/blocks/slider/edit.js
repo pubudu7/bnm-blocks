@@ -1,14 +1,13 @@
 /**
  * External dependencies
  */
-import { get, isUndefined, pickBy, isEqual } from 'lodash';
+import { isUndefined, pickBy } from 'lodash';
 import classnames from 'classnames';
 
 /**
  * WordPress Dependencies.
  */
 import { __ } from '@wordpress/i18n';
-import { dateI18n, format, getSettings } from '@wordpress/date';
 import { 
 	useBlockProps,
 	store as blockEditorStore
@@ -16,8 +15,12 @@ import {
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useInstanceId } from '@wordpress/compose';
 import { store as coreStore } from '@wordpress/core-data';
-import { store as noticeStore } from '@wordpress/notices';
-import { useState, useRef, useEffect } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
+import { InspectorControls } from '@wordpress/block-editor';
+import {
+	Placeholder,
+	Spinner
+} from '@wordpress/components';
 
 /**
  * Internal Dependencies.
@@ -26,6 +29,21 @@ import './editor.scss';
 import QueryInspectorControls from '../../components/query-controls';
 import createSwiper from './create-swiper';
 import { SliderSettings } from './slider-controls'; 
+import {
+	PostTitle,
+	PostCategories,
+	PostAuthor,
+	PostDateTime,
+	PostCommentCount,
+} from '../../components/meta/meta.js';
+import {
+	getFeaturedImageDetails,
+} from '../../components/meta/meta-helper.js';
+import {
+	mightBeUnit,
+	boxValues,
+	hasValueOnBox
+} from '../../shared/js/utils.js';
 
 /**
  * Module Constants.
@@ -41,7 +59,7 @@ const USERS_LIST_QUERY = {
 	context: 'view',
 };
 
-export function QueryContent( {
+export default function PostsSliderEdit( {
 	attributes,
 	setAttributes,
 } ) {
@@ -52,23 +70,12 @@ export function QueryContent( {
 		hidePagination,
         hideNextPrevBtns,
 		showTitle,
-		titleFontSize,
-		titleColor,
-		titleHoverColor,
-		titleLineHeight,
         showDate,
         showCategory,
         showAuthor,
         showAvatar,
 		showCommentCount,
-		metaFontSize,
-        metaColor,
-        metaHoverColor,
-        categoryFontSize,
-        categoryColor,
-        categoryHoverColor,
-        categoryBGColor,
-        categoryBGHoverColor
+		categoryPadding
 	} = attributes;
 
 	const {
@@ -78,8 +85,6 @@ export function QueryContent( {
 		perPage,
 		taxQuery
 	} = query;
-
-	const [ swiperInstance, setSwiperInstance ] = useState(null);
 
 	const postQueryArgs = {
 		author: author,
@@ -99,7 +104,7 @@ export function QueryContent( {
 	const { 
 		posts,
 		categoriesList,
-		authorList
+		authorsList
 	} = useSelect( ( select ) => {
 		
 		const postQuery = pickBy(
@@ -120,7 +125,7 @@ export function QueryContent( {
 				'category',
 				CATEGORIES_LIST_QUERY
 			),
-			authorList: getUsers( USERS_LIST_QUERY ),
+			authorsList: getUsers( USERS_LIST_QUERY ),
 		}
 
 	}, [ 
@@ -131,19 +136,10 @@ export function QueryContent( {
 		taxQuery 
 	] );
 
-	const classes = classnames(
-		'swiper', 
-		'thbnm-swiper',
-		{
-			'hide-pagination': hidePagination,
-			'hide-next-prev-btns': hideNextPrevBtns
-		}
-	);
-
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch(
 		blockEditorStore
 	);
-	const instanceId = useInstanceId( QueryContent );
+	const instanceId = useInstanceId( PostsSliderEdit );
 
 	const { postsPerPage } = useSelect( ( select ) => {
 		const { getSettings } = select( blockEditorStore );
@@ -181,31 +177,6 @@ export function QueryContent( {
 		}
 	}, [ queryId, instanceId ] );
 
-	// If a user clicks to a link prevent redirection and show a warning.
-	const { createWarningNotice, removeNotice } = useDispatch( noticeStore );
-	let noticeId;
-	const showRedirectionPreventedNotice = ( event ) => {
-		event.preventDefault();
-		// Remove previous warning if any, to show one at a time per block.
-		removeNotice( noticeId );
-		noticeId = `bnm-blocks/posts-slider/${ instanceId }`;
-		createWarningNotice( __( 'Links are disabled in the editor.' ), {
-			id: noticeId,
-			type: 'snackbar',
-		} );
-	};
-
-	function getFeaturedImageDetails( post, size ) {
-		const image = get( post, [ '_embedded', 'wp:featuredmedia', '0' ] );
-	
-		return {
-			url:
-				image?.media_details?.sizes?.[ size ]?.source_url ??
-				image?.source_url,
-			alt: image?.alt_text,
-		};
-	}
-
 	const updateQuery = ( newQuery ) =>
 		setAttributes( { query: { ...query, ...newQuery } } );
 
@@ -216,26 +187,15 @@ export function QueryContent( {
 	const btnPrevRef = useRef(null);
 	const paginationRef = useRef(null);
 
+	const { aspectRatio, autoplay, delay } = attributes;
+
 	useEffect( () => {
-
-		let initialSlide = 0;
-
-		if ( swiperInstance ) {
-			if ( posts && swiperInstance.realIndex < posts.length ) {
-				initialSlide = swiperInstance.realIndex;
-			}
-			swiperInstance.destroy( true, true );
-		}
 		
-		initializeSwiper( initialSlide );
+		//const swiperInstance = initializeSwiper( 0 );
 
-	}, [ attributes ] );
+		const initialSlide = 0;
 
-	const initializeSwiper = ( initialSlide ) => {
-
-		const { aspectRatio, autoplay, delay } = attributes;
-
-		const newSwiper = createSwiper( 
+		const swiperInstance = createSwiper( 
 			{ 
 				block: carouselRef.current,
 				container: carouselRef.current,
@@ -251,16 +211,65 @@ export function QueryContent( {
 			} 
 		);
 
-		if( newSwiper ) {
-			setSwiperInstance( newSwiper );
+		return () => {
+			swiperInstance.destroy();
 		}
 		
+	}, [aspectRatio, autoplay, delay] );
+
+	let hasCategoryClass = false;
+
+	if ( Object.keys(categoryPadding).length !== 0 && categoryPadding.constructor === Object ) {
+		if ( hasValueOnBox(categoryPadding) ) {
+			hasCategoryClass = true;
+		}
+	} 
+	
+	if ( attributes.categoryBGColor || attributes.categoryBGHoverColor ) {
+		hasCategoryClass = true;
 	}
 
-	const dateFormat = getSettings().formats.date;
+	const blockProps = useBlockProps( {
+		className: classnames( 
+			'wpbnmposw',
+			{
+				'hide-pagination': hidePagination,
+				'hide-next-prev-btns': hideNextPrevBtns,
+				'bnm-box-cat': hasCategoryClass
+			}	
+		)
+	} );
 
-	return ( 
-		<>
+	//const hasPosts = !! posts?.length;
+	const inlineStyles = {
+		'--title-font-size': mightBeUnit(attributes.titleFontSize),
+		'--title-line-height': attributes.titleLineHeight,
+		'--title-letter-spacing': attributes.titleLetterSpacing,
+		'--title-margin': boxValues(attributes.titleMargin),
+		'--title-padding': boxValues(attributes.titlePadding),
+		'--title-color': attributes.titleColor,
+		'--title-hover-color': attributes.titleHoverColor,
+		'--category-font-size': mightBeUnit(attributes.categoryFontSize),
+		'--category-line-height': attributes.categoryLineHeight,
+		'--category-letter-spacing': attributes.categoryLetterSpacing,
+		'--category-color': attributes.categoryColor,
+		'--category-hover-color': attributes.categoryHoverColor,
+		'--category-bg-color': attributes.categoryBGColor,
+		'--category-bg-hover-color': attributes.categoryBGHoverColor,
+		'--category-padding': boxValues(categoryPadding),
+		'--category-margin': boxValues(attributes.categoryMargin),
+		'--meta-font-size': mightBeUnit(attributes.metaFontSize),
+		'--meta-line-height': attributes.metaLineHeight,
+		'--meta-letter-spacing': attributes.metaLetterSpacing,
+		'--meta-spacing': attributes.metaSpacing,
+		'--meta-padding': boxValues(attributes.metaPadding),
+		'--meta-margin': boxValues(attributes.metaMargin),
+		'--meta-color': attributes.metaColor,
+		'--meta-hover-color': attributes.metaHoverColor,
+	}
+
+	const inspectorControls = (
+		<InspectorControls>
 			<QueryInspectorControls
 				attributes={ attributes }
 				setQuery={ updateQuery }
@@ -270,176 +279,116 @@ export function QueryContent( {
 				setAttributes={ setAttributes }
 			>
 			</SliderSettings>
-			<h1>BNM BLOCKS</h1>
-			<Fragment>
-			{ ! posts && 'Loading' }
-			{ posts && posts.length === 0 && 'No Posts' }
-			<div className={ classes } ref={ carouselRef }>
-				<div className="swiper-wrapper">
+		</InspectorControls>
+	);
 
-					{ posts && posts.map( ( post ) => {
-						
-						const currentAuthor = authorList?.find(
-							( author ) => author.id === post.author
-						);
-						
-						const {
-							url: imageSourceUrl,
-							alt: featuredImageAlt,
-						} = getFeaturedImageDetails( post, 'large' );
+	return ( 
+		<>
+			{ inspectorControls }
 
-						const list = categoriesList;
-						const cat = post.categories;
-						const categoriesName = [];
+			<div { ...blockProps } style={ inlineStyles }>
 
-						if ( list != undefined && cat != undefined ) {
-							for ( let j = 0; j < list.length; j++ ) {
-								for ( let i = 0; i < cat.length; i++ ) {
-									if ( list[ j ].id === cat[ i ] ) {
-										categoriesName.push( list[ j ].name );
-									}
-								}
-							}
-						}
+				{ ! posts && (
+					<Placeholder>
+						<Spinner />
+					</Placeholder>
+				) }
 
-						return (
-							<div className="swiper-slide" key={ post.id }>
+				{ posts && posts.length === 0 && (
+					<Placeholder>
+						{ __( 'No Posts Found For Slider' ) }
+					</Placeholder>
+				) }
+			
+				<div className="thbnm-swiper swiper" ref={ carouselRef }>
 
-								<figure className="post-thumbnail">
-									{ imageSourceUrl ? (
-										<img
-											className={ `image-fit-${ imageFit }` }
-											src={ imageSourceUrl }
-											alt={ featuredImageAlt }
-										/>
-									) : (
-										<div className="thbnm-carousel-img-placeholder"></div>
-									)
-									}
-								</figure>
+					<div className="swiper-wrapper">
 
-								{ ( showCategory || showTitle || showAuthor || showDate || showCommentCount ) && (
-									
-									<div className="entry-wrapper">
+						{ posts && posts.map( ( post ) => {
+							
+							const {
+								url: imageSourceUrl,
+								alt: featuredImageAlt,
+							} = getFeaturedImageDetails( post, 'large' );
 
-										{ showCategory && 0 !== categoriesName.length && (
-											<div class="bnm-oi-category-list">
-												{ categoriesName.map( ( category ) => {
-													return (
-														<a
-														style={{
-															fontSize: categoryFontSize,
-															color: categoryColor,
-															backgroundColor: categoryBGColor
-														}}	
-														href="#">
-															{ category }
-														</a>
-													);
-												} ) }
-											</div>
+							return (
+								<div className="swiper-slide" key={ post.id }>
+
+									<figure className="post-thumbnail">
+										{ imageSourceUrl ? (
+											<img
+												className={ `image-fit-${ imageFit }` }
+												src={ imageSourceUrl }
+												alt={ featuredImageAlt }
+											/>
+										) : (
+											<div className="bnm-img-placeholder"></div>
 										) }
+									</figure>
+
+									<div className="bnmslovrlay inside-gut-editor">
+										<a className="bnmlnkovrlay-ge" href="#"></a>
+									</div>
+
+									{ ( showCategory || showTitle || showAuthor || showDate || showCommentCount ) && (
 										
-										{ showTitle && (
-											<h3 className="entry-title"
-												style={ {
-													fontSize: titleFontSize,
-													lineHeight: titleLineHeight,
-												} }
-											>
-												<a 
-													href={ post.link }
-													rel="noreferrer noopener"
-													onClick={ showRedirectionPreventedNotice }
-													style={ {
-														color: titleColor
-													} }
-												>
-													{ post.title.rendered ? post.title.rendered : __( 'Default title', 'bnm-blocks' ) }
-												</a>
-											</h3>
-										) }
+										<div className="bnm-slider-content">
 
-										<div className="entry-meta">
-
-											{ showAuthor && currentAuthor && (
-												<span className="bnm-oi-post-author">
-													<a 
-														href="#"
-														style={{
-															fontSize: metaFontSize,
-															color: metaColor
-														}}>
-														{ sprintf(
-															/* translators: byline. %s: current author. */
-															__( 'by %s' ),
-															currentAuthor.name
-														) }
-													</a>
-												</span>
+											{ showCategory && (
+												<PostCategories
+													categoriesList={categoriesList}
+													post={post}
+												/>
+											) }
+											
+											{ attributes.showTitle && (
+												<PostTitle
+													post={post}
+													attributes={attributes}
+												/>
 											) }
 
-											{ showDate && post.date_gmt && (
-												<time
-													dateTime={ format( 'c', post.date_gmt ) }
-													className="bnm-oi-post-date"
-												>
-													<a 
-														href="#"
-														style={{
-															fontSize: metaFontSize,
-															color: metaColor
-														}}>
-														{ dateI18n( dateFormat, post.date_gmt ) }
-													</a>
-												</time>
-											) }
+											<div className="entry-meta">
 
-											{ showCommentCount && post.comment_count && (
-												<span class="bnm-oi-comment-count">
-													<a 
-														href="#"
-														style={{
-															fontSize: metaFontSize,
-															color: metaColor
-														}}>
-														{ post.comment_count }
-													</a>
-												</span>
-											) }
+												{ attributes.showAuthor && (
+													<PostAuthor
+														post={post}
+														authorsList={authorsList}
+														showAvatar={showAvatar}
+													/>
+												) }
+
+												{ attributes.showDate && (
+													<PostDateTime 
+														post={post}
+													/>
+												) }
+
+												{ attributes.showCommentCount && (
+													<PostCommentCount
+														post={post}
+													/>
+												) }
+
+											</div>
 
 										</div>
 
-									</div>
+									) }
+								</div>
+							);
+						} ) }
+					</div>
 
-								) }
-							</div>
-						);
-					} ) }
-				</div>
+					<div className="swiper-pagination thbnm-swiper-pagination" ref={paginationRef}></div>
 								
-				<div className="swiper-pagination thbnm-swiper-pagination" ref={paginationRef}></div>
-
-				<div className="swiper-button-prev thbnm-swiper-btn-prev" ref={btnPrevRef}></div>
-				<div className="swiper-button-next thbnm-swiper-btn-next" ref={btnNextRef}></div>
+					<div className="swiper-button-prev thbnm-swiper-btn-prev" ref={btnPrevRef}></div>
+					<div className="swiper-button-next thbnm-swiper-btn-next" ref={btnNextRef}></div>
+					
+				</div>
+			
 			</div>
-			</Fragment>
 		</>
 		
-	);
-}
-
-export default function Edit( props ) {
-
-	const Component = QueryContent;
-	const blockProps = useBlockProps();
-
-	return (
-		<div { ...blockProps } >
-			<QueryContent 
-				{ ...props }
-			/>
-			
-		</div>
 	);
 }

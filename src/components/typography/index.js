@@ -44,7 +44,7 @@ export default function TypographyControl( props ) {
                 { props.label }   
             </div>
 
-            <div class="thbnm-color-control-click-side">
+            <div className="thbnm-color-control-click-side">
 
                 { isVisible && (
                     <Button className="thbnm-typograpy-control-button" onClick={toggleVisible}>
@@ -77,8 +77,6 @@ export default function TypographyControl( props ) {
                                 value={ props.lineHeight }
                                 onChange={ props.onLineHeightChange }
                                 step={ 0.1 }
-                                min={ 0 }
-                                max={ 3 }
                                 units={[
                                     {
                                         a11yLabel: 'Unitless (-)',

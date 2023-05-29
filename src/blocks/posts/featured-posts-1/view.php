@@ -35,11 +35,13 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 
 				<div class="bnm-fp1-left-side">
 					<div class="bnm-fp1-large-post">
-						<?php 
-							if ( has_post_thumbnail() ) {
-								the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
-							} 
-						?>
+						<a href="<?php the_permalink() ?>">
+							<?php 
+								if ( has_post_thumbnail() ) {
+									the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
+								} 
+							?>
+						</a>
 
 						<div class="bnm-fp1-post-content">
 
@@ -93,7 +95,6 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 							<?php } ?>
 
 						</div><!-- ."bnm-pb1-large-post-content -->
-
 					</div><!-- .bnm-fp1-large-post -->
 				</div><!-- .bnm-fp1-left-side -->
 
@@ -102,11 +103,13 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 				<?php } elseif ( $bnmp_count === 2 || $bnmp_count === 3 ) { ?>
 					<div class="bnm-fp1-small-post">
 
-						<?php 
-							if ( has_post_thumbnail() ) {
-								the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
-							} 
-						?>
+						<a href="<?php the_permalink() ?>">
+							<?php 
+								if ( has_post_thumbnail() ) {
+									the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
+								} 
+							?>
+						</a>
 
 						<div class="bnm-fp1-post-content">
 
@@ -159,9 +162,9 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 								</div>
 							<?php } ?>
 
-						</div><!-- ."bnm-pb1-large-post-content -->
+						</div><!-- ."bnm-fp1-post-content -->
 
-					</div><!-- .bnm-fp1-large-post -->
+					</div><!-- .bnm-fp1-small-post -->
 				<?php } ?>
 		<?php
 

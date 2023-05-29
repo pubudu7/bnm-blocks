@@ -217,13 +217,15 @@ export default function Edit( { attributes, setAttributes } ) {
 	};
 
 	const blockProps = useBlockProps({
-		className: classnames( 'thbnm-post-block-1', {
+		className: classnames( 'thbnm-post-block-3', {
 			'has-category-background': categoryBGColor,
 		})
 	});
 
 	const updateQuery = ( newQuery ) =>
 		setAttributes( { query: { ...query, ...newQuery } } );
+
+	const hasPosts = !! posts?.length;
 
 	const inspectorControls = (
 		<InspectorControls>
@@ -238,52 +240,25 @@ export default function Edit( { attributes, setAttributes } ) {
 		</InspectorControls>
 	);
 
-	const Preview = ({
-		posts,
-		authorsList,
-		categoriesList,
-		blockProps,
-		inlineStyles,
-		attributes
-	}) => {
-		if ( ! posts || ! categoriesList || ! authorsList ) {
-			return (
-				<div { ...blockProps }>
-					<Placeholder>
-						<Spinner />
-						{ __( 'Loading Posts', 'bnm-blocks') }
-					</Placeholder>
-				</div>
-			);
-		}
-
-		if ( 0 === posts.length ) {
-			return (
-				<div { ...blockProps }>
-					<Placeholder>
-						{ __( 'No Posts', 'bnm-blocks' ) }
-					</Placeholder>
-				</div>
-			);
-		}
-
+	if ( ! hasPosts ) {
 		return (
-			<Layout
-				posts={ posts }
-				categoriesList={ categoriesList }
-				authorsList={ authorsList }
-				blockProps={ blockProps }
-				inlineStyles={ inlineStyles }
-				attributes={ attributes }
-			/>
+			<div { ...blockProps }>
+				{ inspectorControls }
+				<Placeholder>
+					{ ! Array.isArray( posts ) ? (
+						<Spinner />
+					) : (
+						__( 'No posts found' )
+					) }
+				</Placeholder>
+			</div>
 		);
-	};
-
+	}
 
 	return (
-		<Fragment>
+		<>
 			{ inspectorControls }
-			<Preview 
+			<Layout 
 				posts={ posts }
 				categoriesList={ categoriesList }
 				authorsList={ authorsList }
@@ -291,6 +266,6 @@ export default function Edit( { attributes, setAttributes } ) {
 				inlineStyles={ inlineStyles }
 				attributes={ attributes }
 			/>
-		</Fragment>
+		</>
 	);
 }

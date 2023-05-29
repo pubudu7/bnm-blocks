@@ -35,6 +35,7 @@ include_once $src_directory . 'posts/post-block-1/view.php';
 include_once $src_directory . 'posts/post-block-2/view.php';
 include_once $src_directory . 'posts/post-block-3/view.php';
 include_once $src_directory . 'posts/featured-posts-1/view.php';
+include_once $src_directory . 'posts/featured-posts-2/view.php';
 
 function bnm_add_image_sizes() {
     add_image_size( 'bnm-featured', 610, 344, true );

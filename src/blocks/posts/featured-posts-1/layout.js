@@ -9,10 +9,10 @@ import {
 	PostAuthor,
 	PostDateTime,
 	PostCommentCount,
-} from '../components/meta.js';
+} from '../../../components/meta/meta.js';
 import {
 	getFeaturedImageDetails,
-} from '../shared/template-functions.js';
+} from '../../../components/meta/meta-helper.js';
 
 
 
@@ -26,7 +26,7 @@ export const Layout = ({
 }) => {
     return(
         <div { ...blockProps } style={ inlineStyles }>
-            <div class="bnm-fp1-container">
+            <div className="bnm-fp1-container">
                 <div className="bnm-fp1-left-side">
                 { posts && posts.length > 0 && posts.map( ( post, index ) => {
 
@@ -37,12 +37,12 @@ export const Layout = ({
 
                     return(
                         index === 0 && (
-                            <div class="bnm-fp1-large-post">
+                            <div className="bnm-fp1-large-post">
                             { imageSourceUrl && (
                                 <img
                                     src={ imageSourceUrl }
                                     alt={ featuredImageAlt }
-                                    class="bnm-fp-img"
+                                    className="bnm-fp-img"
                                 />
                             ) }
 
@@ -105,12 +105,12 @@ export const Layout = ({
 
                         return(
                             ( index === 1 || index === 2 ) && (
-                                <div class="bnm-fp1-small-post">
+                                <div className="bnm-fp1-small-post">
                                 { imageSourceUrl && (
                                     <img
                                         src={ imageSourceUrl }
                                         alt={ featuredImageAlt }
-                                        class="bnm-fp-img"
+                                        className="bnm-fp-img"
                                     />
                                 ) }
 

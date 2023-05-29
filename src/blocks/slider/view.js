@@ -12,14 +12,14 @@ import './style.scss';
 if ( typeof window !== 'undefined' ) {
     domReady( () => {
         const blocksArray = Array.from(
-            document.querySelectorAll( '.thbnm-swiper-block' )
+            document.querySelectorAll( '.wp-block-bnm-blocks-posts-slider' )
         );
 
         blocksArray.forEach( block => {
             //const slidesPerView = parseInt( block.dataset.slidesPerView );
             //const slideCount = parseInt( block.dataset.slideCount );
 
-            console.log( block.querySelector( '.swiper' ) );
+            console.log( block.dataset.aspectRatio );
             
             createSwiper(
                 {
@@ -32,10 +32,10 @@ if ( typeof window !== 'undefined' ) {
                     play: block.querySelector( '.swiper-button-play' ,)
                 },
                 {
-                    aspectRatio: 0.75,
-					autoplay: true,
-					delay: 5 * 1000,
-                    initialSlide: 1
+                    aspectRatio: parseFloat( block.dataset.aspectRatio ),
+					autoplay: !! parseInt( block.dataset.autoplay ),
+					delay: parseInt( block.dataset.autoplay_delay ) * 1000,
+                    initialSlide: 1 
                 }
             );
         } );

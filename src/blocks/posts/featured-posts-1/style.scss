@@ -194,11 +194,20 @@
 
 .bnm-fp1-small-post,
 .bnm-fp1-large-post {
+
+    overflow: hidden;
+
     &:before {
         display: block;
         content: "";
         width: 100%;
-        padding-top: 58.956916099773243%;
+        
+    }
+
+    &:hover {
+        img.bnm-fp-img {
+            transform: scale(1.1);
+        }
     }
 
     img.bnm-fp-img {
@@ -217,6 +226,19 @@
         outline: none;
         border: none;
         box-shadow: none;
+        transition: transform .3s;
+    }
+}
+
+.bnm-fp1-large-post {
+    &:before {
+        padding-top: 58.956916099773243%;
+    }
+}
+
+.bnm-fp1-small-post {
+    &:before {
+        padding-top: 59.360730593607306%;
     }
 }
 
@@ -241,3 +263,6 @@
     flex-direction: column;
 }
 
+.posted-on time.updated {
+    display: none;
+}

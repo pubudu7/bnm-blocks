@@ -141,7 +141,7 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 						<br />
 						
 						<TypographyControl
-							label = { __( 'Typography (Small Posts Title)', 'bnm-blocks' ) }
+							label = { __( 'Typography (Small Post Titles)', 'bnm-blocks' ) }
 							fontSize={ titleFontSizeSmall }
 							onFontSizeChange={ ( newFontSize ) => setAttributes( { titleFontSizeSmall: newFontSize } ) }
 							lineHeight = { titleLineHeightSmall }

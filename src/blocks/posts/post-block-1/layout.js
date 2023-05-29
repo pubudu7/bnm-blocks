@@ -9,7 +9,7 @@ import {
 	PostAuthor,
 	PostDateTime,
 	PostCommentCount,
-} from '../components/meta.js'
+} from '../../../components/meta/meta.js'
 
 
 export const Layout = ({

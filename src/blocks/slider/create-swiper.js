@@ -47,6 +47,8 @@ function deactivateSlide( slide ) {
 export default function createSwiper( element, config={} ) {
 
   const swiper = new Swiper( element.container, {
+	observer: true,
+	observeParents: true, 
     a11y: false,
     init: false,
     speed: 400,
@@ -70,6 +72,9 @@ export default function createSwiper( element, config={} ) {
       prevEl: element.prev,
     },
     preventClicksPropagation: false, // Necessary for normal block interactions.
+	touchStartPreventDefault: false, // Necessary for normal block interactions.
+	releaseFormElements: false,
+	setWrapperSize: true,
 
     on: {
 			init() {
@@ -128,23 +133,19 @@ export default function createSwiper( element, config={} ) {
    */
   function setAspectRatio() {
 
-    console.log("Set aspect ratio");
     const { aspectRatio } = config;
     const slides = Array.from( this.slides );
-
-    console.log(aspectRatio);
 
     slides.forEach( slide => {
       slide.style.height = `${ slide.clientWidth * aspectRatio }px`;
     } );
     
   } 
-
-  swiper.on( 'imagesReady', setAspectRatio );
+  
+  swiper.on( 'beforeSlideChangeStart', setAspectRatio );
   swiper.on( 'reszie', setAspectRatio );
 
   swiper.init();
 
   return swiper;
 }
-

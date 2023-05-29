@@ -9,7 +9,7 @@ import { dateI18n, format, getSettings } from '@wordpress/date';
  */
 import {
 	getFeaturedImageDetails,
-} from '../shared/template-functions.js';
+} from './meta-helper.js';
 
 export const PostExcerpt = ({
     post,
@@ -69,7 +69,7 @@ export const PostCategories = ({ categoriesList, post }) => {
     const cat = post.categories;
     const categoryNames = [];
 
-    if ( list != undefined && cat != undefined ) {
+    if ( list !== undefined && cat !== undefined ) {
         for ( let j = 0; j < list.length; j++ ) {
             for ( let i = 0; i < cat.length; i++ ) {
                 if ( list[ j ].id === cat[ i ] ) {

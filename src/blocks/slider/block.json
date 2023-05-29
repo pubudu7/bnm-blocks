@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "bnm-blocks/latest-posts",
+	"name": "bnm-blocks/posts-slider",
 	"version": "0.1.0",
-	"title": "Bnm Blocks",
+	"title": "Posts Slider",
 	"category": "widgets",
 	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
@@ -81,15 +81,20 @@
 			"default": "h3"
 		},
 		"titleFontSize": {
-			"type": "number",
-			"default": 32
+			"type": "number"
 		},
 		"titleLineHeight": {
-			"type": "number",
-			"default": 1.5
+			"type": "number"
+		},
+		"titleLetterSpacing": {
+			"type": ["number", "string"]
+		},
+		"titleMargin": {
+			"type": ["number", "object"],
+			"default": []
 		},
 		"titlePadding": {
-			"type": "array",
+			"type": ["number", "object"],
 			"default": []
 		},
 		"titleColor": {
@@ -124,6 +129,12 @@
 			"type": "number",
 			"default": 12
 		},
+		"metaLineHeight": {
+			"type": "number"
+		},
+		"metaLetterSpacing": {
+			"type": ["number", "string"]
+		},
 		"metaColor": {
 			"type": "string",
 			"default": ""
@@ -132,9 +143,22 @@
 			"type": "string",
 			"default": ""
 		},
+		"metaMargin": {
+			"type": ["number", "object"],
+			"default": []
+		},
+		"metaPadding": {
+			"type": ["number", "object"],
+			"default": []
+		},
 		"categoryFontSize": {
-			"type": "number",
-			"default": 12
+			"type": "number"
+		},
+		"categoryLineHeight": {
+			"type": "number"
+		},
+		"categoryLetterSpacing": {
+			"type": ["number", "string"]
 		},
 		"categoryColor": {
 			"type": "string",
@@ -151,6 +175,14 @@
 		"categoryBGHoverColor": {
 			"type": "string",
 			"default": ""
+		},
+		"categoryMargin": {
+			"type": ["number", "object"],
+			"default": []
+		},
+		"categoryPadding": {
+			"type": ["number", "object"],
+			"default": []
 		}
 	}
 }

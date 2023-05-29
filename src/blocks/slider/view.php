@@ -30,19 +30,22 @@ add_action( 'init', 'create_block_bnm_blocks_block_init' );
 
 function bnm_blocks_slider_posts_block_1_render_callback( $attributes ) {
 	// Naming convention: '{namespace}-{blockname}-view-script
-	wp_enqueue_script( 'bnm-blocks-latest-posts-view-script' );
+	wp_enqueue_script( 'bnm-blocks-posts-slider-view-script' );
 
 	$post_query_args = BNM_Blocks::build_articles_query( $attributes );
 
 	$article_query = new WP_Query( $post_query_args );
 
+	$autoplay = isset( $attributes['autoplay'] ) ? $attributes['autoplay'] : false;
+	$delay    = isset( $attributes['delay'] ) ? absint( $attributes['delay'] ) : 5;
+
 	// CSS styles
 	$title_color = $attributes[ 'titleColor' ];
-	$title_font_size = $attributes[ 'titleFontSize' ];
+	$title_font_size = isset( $attributes[ 'titleFontSize' ] ) ? $attributes[ 'titleFontSize' ] : '';
 	$meta_color = $attributes[ 'metaColor' ];
-	$meta_font_size = $attributes[ 'metaFontSize' ];
+	$meta_font_size = isset( $attributes[ 'metaFontSize' ] ) ? $attributes[ 'metaFontSize' ]: '';
 	$category_color = $attributes[ 'categoryColor' ];
-	$category_font_size = $attributes[ 'categoryFontSize' ];
+	$category_font_size = isset( $attributes[ 'categoryFontSize' ] ) ? $attributes[ 'categoryFontSize' ]: '';
 
 	$title_style = "";
 	$title_classes = "bnm-entry-title entry-title";
@@ -93,92 +96,127 @@ function bnm_blocks_slider_posts_block_1_render_callback( $attributes ) {
 
 	<?php ob_start(); ?>
 
-	<div class="thbnm-swiper-block">
-		<div class="swiper thbnm-swiper">
-			<div class="swiper-wrapper">
-			
-				<?php
+	<div class="swiper thbnm-swiper">
+		<div class="swiper-wrapper">
+		
+			<?php
 
-				if ( $article_query -> have_posts() ) {
+			if ( $article_query -> have_posts() ) {
 
-					while ( $article_query -> have_posts() ) {
+				while ( $article_query -> have_posts() ) {
 
-						$article_query -> the_post();
+					$article_query -> the_post();
 
-						?>
+					?>
 
-							<div class="swiper-slide">
-								<figure class="post-thumbnail">
-									<?php 
-										if ( has_post_thumbnail() ) {
-											the_post_thumbnail();
-										} else {
-											echo '<div class="thbnm-carousel-img-placeholder"></div>';
+						<div class="swiper-slide">
+							<figure class="post-thumbnail">
+								<?php 
+									if ( has_post_thumbnail() ) {
+										the_post_thumbnail();
+									} else {
+										echo '<div class="thbnm-carousel-img-placeholder"></div>';
+									}
+								?>
+							</figure>
+
+							<div class="bnmslovrlay">
+								<a class="bnmlnkovrlay" href="<?php echo esc_url( get_permalink() ); ?>"></a>
+							</div>
+
+							<div class="bnm-slider-content">
+								<?php if ( $attributes['showCategory'] ) : ?>
+									<span class="<?php echo esc_attr( $category_classes ); ?>" style="<?php echo esc_attr( $category_style ); ?>">
+										<?php the_category( ' ' ); ?>
+									</span>
+								<?php endif; ?>
+								
+								<?php  if ( $attributes['showTitle'] ) { 
+									$tag = ( isset ( $attributes['titleHtmlTag'] ) && ! empty( $attributes['titleHtmlTag'] ) ) ? $attributes['titleHtmlTag'] : 'h3';									
+									echo "<". esc_attr($tag) ." class=\"". esc_attr( $title_classes ) . "\" style=\"". esc_attr( $title_style)."\">";
+									?>
+										<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+											<?php the_title(); ?>
+										</a>
+									
+								<?php 
+									echo "</".esc_attr($tag).">";
+								} 
+								?>
+
+								<div class="<?php echo esc_attr( $meta_classes ); ?>" style="<?php echo esc_attr( $meta_style ); ?>">
+									<?php
+										if ( $attributes['showAuthor'] ) {
+											bnm_posted_by();
+										}
+
+										if ( $attributes['showDate'] ) {
+											bnm_posted_on();
+										}
+
+										if ( $attributes['showCommentCount'] ) {
+											bnm_comments_link();
 										}
 									?>
-								</figure>
+								</div><!-- .entry-meta -->
+							</div><!-- .bnm-slider-content -->
+						</div><!-- .swiper-slide -->
 
-								<div class="entry-wrapper">
-									<?php if ( $attributes['showCategory'] ) : ?>
-										<span class="<?php echo esc_attr( $category_classes ); ?>" style="<?php echo esc_attr( $category_style ); ?>">
-											<?php the_category( ' ' ); ?>
-										</span>
-									<?php endif; ?>
-									
-									<?php  if ( $attributes['showTitle'] ) { ?>
-										<h3 class="<?php echo esc_attr( $title_classes ); ?>" style="<?php echo esc_attr( $title_style ); ?>">
-											<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
-												<?php the_title(); ?>
-											</a>
-										</h3>
-									<?php } ?>
+					<?php
 
-									<div class="<?php echo esc_attr( $meta_classes ); ?>" style="<?php echo esc_attr( $meta_style ); ?>">
-										<?php
-											if ( $attributes['showAuthor'] ) {
-												bnm_posted_by();
-											}
+				} // Endwhile
 
-											if ( $attributes['showDate'] ) {
-												bnm_posted_on();
-											}
+				wp_reset_postdata();
 
-											if ( $attributes['showCommentCount'] ) {
-												bnm_comments_link();
-											}
-										?>
-									</div><!-- .entry-meta -->
-								</div><!-- .entry-wrapper -->
-							</div><!-- .swiper-slide -->
+			} else {
+				// No posts found
+			}
 
-						<?php
+			?>
 
-					} // Endwhile
+		</div><!-- .swiper-wrapper -->
+		
+		<?php if ( $attributes['hidePagination'] === false ) : ?>
+			<div class="swiper-pagination"></div>
+		<?php endif; ?>
 
-					wp_reset_postdata();
+		<?php if ( $attributes['hideNextPrevBtns'] === false ) : ?>
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+		<?php endif; ?>	
 
-				} else {
-					// No posts found
-				}
+	</div><!-- .swiper -->
 
-				?>
-
-			</div><!-- .swiper-wrapper -->
-			
-			<?php if ( $attributes['hidePagination'] === false ) : ?>
-				<div class="swiper-pagination"></div>
-			<?php endif; ?>
-
-			<?php if ( $attributes['hideNextPrevBtns'] === false ) : ?>
-				<div class="swiper-button-prev"></div>
-				<div class="swiper-button-next"></div>
-			<?php endif; ?>	
-
-		</div><!-- .swiper -->
-	</div><!-- .thbnm-swiper-block -->
 	<?php 
 
-	$slider = ob_get_clean();
+	$slider_block = ob_get_clean();
 
-	return $slider;
+	$classes = array( 'wpbnmposw' );
+
+	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
+
+	// TO DO: Apply Styles. For now $style variable is empty.
+	$styles = "";
+
+	// aspectRatio: 0.5625,
+	// autoplay: true,
+	// delay: 5 * 1000,
+	// initialSlide: 1
+
+	$data_attributes = [
+		//'data-current-post-id=' . $post_id,
+		'data-aspect-ratio=' . $attributes['aspectRatio'],
+	];
+
+	if ( $autoplay ) {
+		$data_attributes[] = 'data-autoplay=1';
+		$data_attributes[] = sprintf( 'data-autoplay_delay=%s', esc_attr( $delay ) );
+	}
+
+	return sprintf( '<div %1$s style="%2$s" %3$s>%4$s</div>', 
+		$wrapper_attributes, 
+		esc_attr( $styles ), 
+		esc_attr( implode( ' ', $data_attributes ) ),
+		$slider_block
+	);
 }

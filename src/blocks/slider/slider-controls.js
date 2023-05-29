@@ -10,14 +10,12 @@
 	RangeControl,
     SelectControl,
 	ToggleControl,
-    FontSizePicker,
-    __experimentalNumberControl as NumberControl,
-    __experimentalBoxControl as BoxControl,
-    ColorPalette,
-    ColorPicker
+    __experimentalBoxControl as BoxControl
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
+import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
+
+import TypographyControl from '../../components/typography'; 
 
 export function SliderSettings( { attributes, setAttributes } ) {
 
@@ -32,22 +30,24 @@ export function SliderSettings( { attributes, setAttributes } ) {
         titleHtmlTag,
         titleFontSize,
         titleLineHeight,
+        titleLetterSpacing,
+        titleMargin,
         titlePadding,
-        titleColor,
-        titleHoverColor,
         showDate,
         showCategory,
         showAuthor,
         showAvatar,
         showCommentCount,
         metaFontSize,
-        metaColor,
-        metaHoverColor,
+        metaLineHeight,
+        metaLetterSpacing,
+        metaMargin,
+        metaPadding,
         categoryFontSize,
-        categoryColor,
-        categoryHoverColor,
-        categoryBGColor,
-        categoryBGHoverColor
+        categoryLineHeight,
+        categoryLetterSpacing,
+        categoryMargin,
+        categoryPadding
     } = attributes;
 
     const aspectRatioOptions = [
@@ -101,53 +101,6 @@ export function SliderSettings( { attributes, setAttributes } ) {
             ),
         },
     ];
-
-    const titlefontSizes = [
-        {
-            name: __( 'Small' ),
-            slug: 'small',
-            size: 16,
-        },
-        {
-            name: __( 'Medium' ),
-            slug: 'medium',
-            size: 24,
-        },
-        {
-            name: __( 'Large' ),
-            slug: 'large',
-            size: 32,
-        },
-        {
-            name: __( 'Extra Large' ),
-            slug: 'extra-large',
-            size: 42,
-        },
-    ];
-    const metafontSizes = [
-        {
-            name: __( 'Small' ),
-            slug: 'small',
-            size: 10,
-        },
-        {
-            name: __( 'Medium' ),
-            slug: 'medium',
-            size: 12,
-        },
-        {
-            name: __( 'Large' ),
-            slug: 'large',
-            size: 14,
-        },
-        {
-            name: __( 'Extra Large' ),
-            slug: 'extra-large',
-            size: 16,
-        },
-    ];
-    const fallbackTitleFontSize = 32;
-    const fallbackMetaFontSize = 14;
 
     return (
         <InspectorControls>
@@ -267,7 +220,7 @@ export function SliderSettings( { attributes, setAttributes } ) {
                 
 
                 { showTitle && (
-                    <>
+                    <div className="thbnm-settings-panel">
                     
                         <SelectControl
                             label={ __( 'Title HTML tag', 'bnm-blocks' ) }
@@ -287,57 +240,53 @@ export function SliderSettings( { attributes, setAttributes } ) {
                             __nextHasNoMarginBottom
                         />
                         
-                        <FontSizePicker
-                            __nextHasNoMarginBottom
-                            fontSizes={ titlefontSizes }
-                            value={ titleFontSize }
-                            fallbackFontSize={ fallbackTitleFontSize }
-                            onChange={ ( newFontSize ) => setAttributes( { titleFontSize: newFontSize } ) }
-                        />
-                    
-                        <NumberControl
-                            label={ __( 'Line Height', 'bnm-blocks' ) }
-                            isShiftStepEnabled={ true }
-                            onChange={ ( newLineHeight ) => setAttributes( { titleLineHeight: newLineHeight } ) }
-                            step={ 0.1 }
-                            shiftStep={ 10 }
-                            value={ titleLineHeight }
-                        />
+                        <TypographyControl
+							label = { __( 'Typography', 'bnm-blocks' ) }
+							fontSize={ titleFontSize }
+							onFontSizeChange={ ( newFontSize ) => setAttributes( { titleFontSize: newFontSize } ) }
+							lineHeight = { titleLineHeight }
+							onLineHeightChange = { ( newLineHeight ) => setAttributes( { titleLineHeight: newLineHeight } ) }
+							letterSpacing = { titleLetterSpacing }
+							onLetterSpacingChange = { ( newLetterSpacing ) => setAttributes( { titleLetterSpacing: newLetterSpacing } ) }
+						/>
+
+                        <br></br>
+
+                        <BoxControl
+							label={ __( 'Margin', 'bnm-blocks' ) }
+							values={ titleMargin }
+							onChange={ nextValues => setAttributes( { titleMargin: nextValues } ) }
+						/>
                     
                         <BoxControl
-                            label={ __( 'Padding', 'bnm-blocks' ) }
-                            values={ titlePadding }
-                            onChange={ nextValues => setAttributes( { titlePadding: nextValues } ) }
-                        />
+							label={ __( 'Padding', 'bnm-blocks' ) }
+							values={ titlePadding }
+							onChange={ nextValues => setAttributes( { titlePadding: nextValues } ) }
+						/>
                     
-                        <fieldset>
-                            <legend className="blocks-base-control__label">
-                                { __( 'Title Color', 'bnm-blocks' ) }
-                            </legend>
-                            <ColorPicker
-                                color={ titleColor }
-                                onChange={ newColor => setAttributes( { titleColor: newColor } ) }
-                                enableAlpha
-                                defaultValue=""
-                            />
-                        </fieldset>
-                        <fieldset>
-                            <legend className="blocks-base-control__label">
-                                { __( 'Title Hover Color', 'bnm-blocks' ) }
-                            </legend>
-                            <ColorPicker
-                                color={ titleHoverColor }
-                                onChange={ newColor => setAttributes( { titleHoverColor: newColor } ) }
-                                enableAlpha
-                                defaultValue=""
-                            />
-                        </fieldset>
+                        <PanelColorSettings
+							title={ __( 'Color', 'bnm-blocks' ) }
+							initialOpen={ false }
+							colorSettings={ [
+								{
+									value: attributes.titleColor,
+									onChange: titleColor => setAttributes({ titleColor }),
+									label: __( 'Title Color', 'bnm-blocks' )
+								},
+								{
+									value: attributes.titleHoverColor,
+									onChange: titleHoverColor => setAttributes({ titleHoverColor }),
+									label: __( 'Title Hover', 'bnm-blocks' )
+								}
+							] }
+						/>
                     
-                    </>
+                    </div>
                 ) }
             </PanelBody>
             
             <PanelBody title={ __( 'Category', 'bnm-blocks' ) } initialOpen={ false }>
+                <div className="thbnm-settings-panel">
                 <PanelRow>
                     <ToggleControl
                         label={ __( 'Show Category', 'bnm-blocks' ) }
@@ -345,60 +294,68 @@ export function SliderSettings( { attributes, setAttributes } ) {
                         onChange={ () => setAttributes( { showCategory: ! showCategory } ) }
                     />
                 </PanelRow>
-                <FontSizePicker
-                    __nextHasNoMarginBottom
-                    fontSizes={ metafontSizes }
-                    value={ categoryFontSize }
-                    fallbackFontSize={ fallbackMetaFontSize }
-                    onChange={ ( newFontSize ) => setAttributes( { categoryFontSize: newFontSize } ) }
-                />
-                <fieldset>
-                    <legend className="blocks-base-control__label">
-                        { __( 'Category Color', 'bnm-blocks' ) }
-                    </legend>
-                    <ColorPicker
-                        color={ categoryColor }
-                        onChange={ newColor => setAttributes( { categoryColor: newColor } ) }
-                        enableAlpha
-                        defaultValue=""
-                    />
-                </fieldset>
-                <fieldset>
-                    <legend className="blocks-base-control__label">
-                        { __( 'Category Hover Color', 'bnm-blocks' ) }
-                    </legend>
-                    <ColorPicker
-                        color={ categoryHoverColor }
-                        onChange={ newColor => setAttributes( { categoryHoverColor: newColor } ) }
-                        enableAlpha
-                        defaultValue=""
-                    />
-                </fieldset>
-                <fieldset>
-                    <legend className="blocks-base-control__label">
-                        { __( 'Category Background Color', 'bnm-blocks' ) }
-                    </legend>
-                    <ColorPicker
-                        color={ categoryBGColor }
-                        onChange={ newColor => setAttributes( { categoryBGColor: newColor } ) }
-                        enableAlpha
-                        defaultValue=""
-                    />
-                </fieldset>
-                <fieldset>
-                    <legend className="blocks-base-control__label">
-                        { __( 'Category Background Hover Color', 'bnm-blocks' ) }
-                    </legend>
-                    <ColorPicker
-                        color={ categoryBGHoverColor }
-                        onChange={ newColor => setAttributes( { categoryBGHoverColor: newColor } ) }
-                        enableAlpha
-                        defaultValue=""
-                    />
-                </fieldset>
+
+                { showCategory && (
+                    <>
+                        <TypographyControl
+                            label = { __( 'Typography', 'bnm-blocks' ) }
+                            fontSize={ categoryFontSize }
+                            onFontSizeChange={ ( newFontSize ) => setAttributes( { categoryFontSize: newFontSize } ) }
+                            lineHeight = { categoryLineHeight }
+                            onLineHeightChange = { ( newLineHeight ) => setAttributes( { categoryLineHeight: newLineHeight } ) }
+                            letterSpacing = { categoryLetterSpacing }
+                            onLetterSpacingChange = { ( newLetterSpacing ) => setAttributes( { categoryLetterSpacing: newLetterSpacing } ) }
+                        />
+
+                        <br></br>
+
+                        <BoxControl
+                            label={ __( 'Margin', 'bnm-blocks' ) }
+                            values={ categoryMargin }
+                            onChange={ nextValues => setAttributes( { categoryMargin: nextValues } ) }
+                        />
+
+                        <BoxControl
+                            label={ __( 'Padding', 'bnm-blocks' ) }
+                            values={ categoryPadding }
+                            onChange={ nextValues => setAttributes( { categoryPadding: nextValues } ) }
+                        />
+
+                        <PanelColorSettings
+                            title={ __( 'Color', 'bnm-blocks' ) }
+                            initialOpen={ false }
+                            colorSettings={ [
+                                {
+                                    value: attributes.categoryColor,
+                                    onChange: categoryColor => setAttributes({ categoryColor }),
+                                    label: __( 'Category Color', 'bnm-blocks' )
+                                },
+                                {
+                                    value: attributes.categoryHoverColor,
+                                    onChange: categoryHoverColor => setAttributes({ categoryHoverColor }),
+                                    label: __( 'Category Color: Hover', 'bnm-blocks' )
+                                },
+                                {
+                                    value: attributes.categoryBGColor,
+                                    onChange: categoryBGColor => setAttributes({ categoryBGColor }),
+                                    label: __( 'Category Background Color', 'bnm-blocks' )
+                                },
+                                {
+                                    value: attributes.categoryBGHoverColor,
+                                    onChange: categoryBGHoverColor => setAttributes({ categoryBGHoverColor }),
+                                    label: __( 'Category Background Color: Hover', 'bnm-blocks' )
+                                }
+                            ] }
+                        />
+                    </>
+                )}
+                
+                
+                </div>
             </PanelBody>
 
             <PanelBody title={ __( 'Post Meta', 'bnm-blocks' ) } initialOpen={ false }>
+                <div className="thbnm-settings-panel">
                 <PanelRow>
                     <ToggleControl
                         label={ __( 'Show Author', 'bnm-blocks' ) }
@@ -429,36 +386,44 @@ export function SliderSettings( { attributes, setAttributes } ) {
                         onChange={ () => setAttributes( { showCommentCount: ! showCommentCount } ) }
                     />
                 </PanelRow>
-                <FontSizePicker
-                    __nextHasNoMarginBottom
-                    fontSizes={ metafontSizes }
-                    value={ metaFontSize }
-                    fallbackFontSize={ fallbackMetaFontSize }
-                    onChange={ ( newFontSize ) => setAttributes( { metaFontSize: newFontSize } ) }
+                <TypographyControl
+                    label = { __( 'Typography', 'bnm-blocks' ) }
+                    fontSize={ metaFontSize }
+                    onFontSizeChange={ ( newFontSize ) => setAttributes( { metaFontSize: newFontSize } ) }
+                    lineHeight = { metaLineHeight }
+                    onLineHeightChange = { ( newLineHeight ) => setAttributes( { metaLineHeight: newLineHeight } ) }
+                    letterSpacing = { metaLetterSpacing }
+                    onLetterSpacingChange = { ( newLetterSpacing ) => setAttributes( { metaLetterSpacing: newLetterSpacing } ) }
                 />
-                <fieldset>
-                    <legend className="blocks-base-control__label">
-                        { __( 'Post Meta Color', 'bnm-blocks' ) }
-                    </legend>
-                    <ColorPicker
-                        color={ metaColor }
-                        onChange={ newColor => setAttributes( { metaColor: newColor } ) }
-                        enableAlpha
-                        defaultValue=""
-                    />
-                </fieldset>
-                <fieldset>
-                    <legend className="blocks-base-control__label">
-                        { __( 'Post Meta Hover Color', 'bnm-blocks' ) }
-                    </legend>
-                    <ColorPicker
-                        color={ metaHoverColor }
-                        onChange={ newColor => setAttributes( { metaHoverColor: newColor } ) }
-                        enableAlpha
-                        defaultValue=""
-                    />
-                </fieldset>
-                
+                <br></br>
+                <BoxControl
+                    label={ __( 'Margin', 'bnm-blocks' ) }
+                    values={ metaMargin }
+                    onChange={ nextValues => setAttributes( { metaMargin: nextValues } ) }
+                />
+
+                <BoxControl
+                    label={ __( 'Padding', 'bnm-blocks' ) }
+                    values={ metaPadding }
+                    onChange={ nextValues => setAttributes( { metaPadding: nextValues } ) }
+                />
+                <PanelColorSettings
+                    title={ __( 'Color', 'bnm-blocks' ) }
+                    initialOpen={ false }
+                    colorSettings={ [
+                        {
+                            value: attributes.metaColor,
+                            onChange: metaColor => setAttributes({ metaColor }),
+                            label: __( 'Meta Color', 'bnm-blocks' )
+                        },
+                        {
+                            value: attributes.metaHoverColor,
+                            onChange: metaHoverColor => setAttributes({ metaHoverColor }),
+                            label: __( 'Meta Color: Hover', 'bnm-blocks' )
+                        }
+                    ] }
+                />
+                </div>
             </PanelBody>
         </InspectorControls>
     );

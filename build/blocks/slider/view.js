@@ -70,6 +70,8 @@ function deactivateSlide(slide) {
 function createSwiper(element) {
   let config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   const swiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_3__["default"](element.container, {
+    observer: true,
+    observeParents: true,
     a11y: false,
     init: false,
     speed: 400,
@@ -92,6 +94,10 @@ function createSwiper(element) {
     },
     preventClicksPropagation: false,
     // Necessary for normal block interactions.
+    touchStartPreventDefault: false,
+    // Necessary for normal block interactions.
+    releaseFormElements: false,
+    setWrapperSize: true,
     on: {
       init() {
         forEachNode(this.wrapperEl.querySelectorAll('.swiper-slide'), slide => deactivateSlide(slide));
@@ -133,18 +139,16 @@ function createSwiper(element) {
    */
 
   function setAspectRatio() {
-    console.log("Set aspect ratio");
     const {
       aspectRatio
     } = config;
     const slides = Array.from(this.slides);
-    console.log(aspectRatio);
     slides.forEach(slide => {
       slide.style.height = `${slide.clientWidth * aspectRatio}px`;
     });
   }
 
-  swiper.on('imagesReady', setAspectRatio);
+  swiper.on('beforeSlideChangeStart', setAspectRatio);
   swiper.on('reszie', setAspectRatio);
   swiper.init();
   return swiper;
@@ -176,11 +180,11 @@ __webpack_require__.r(__webpack_exports__);
 
 if (typeof window !== 'undefined') {
   _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(() => {
-    const blocksArray = Array.from(document.querySelectorAll('.thbnm-swiper-block'));
+    const blocksArray = Array.from(document.querySelectorAll('.wp-block-bnm-blocks-posts-slider'));
     blocksArray.forEach(block => {
       //const slidesPerView = parseInt( block.dataset.slidesPerView );
       //const slideCount = parseInt( block.dataset.slideCount );
-      console.log(block.querySelector('.swiper'));
+      console.log(block.dataset.aspectRatio);
       (0,_create_swiper__WEBPACK_IMPORTED_MODULE_1__["default"])({
         block,
         container: block.querySelector('.swiper'),
@@ -190,9 +194,9 @@ if (typeof window !== 'undefined') {
         pause: block.querySelector('.swiper-button-pause'),
         play: block.querySelector('.swiper-button-play')
       }, {
-        aspectRatio: 0.75,
-        autoplay: true,
-        delay: 5 * 1000,
+        aspectRatio: parseFloat(block.dataset.aspectRatio),
+        autoplay: !!parseInt(block.dataset.autoplay),
+        delay: parseInt(block.dataset.autoplay_delay) * 1000,
         initialSlide: 1
       });
     });
@@ -13134,9 +13138,7 @@ _core_core_js__WEBPACK_IMPORTED_MODULE_0__["default"].use(modules);
 /******/ 			}
 /******/ 			var notFulfilled = Infinity;
 /******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var chunkIds = deferred[i][0];
-/******/ 				var fn = deferred[i][1];
-/******/ 				var priority = deferred[i][2];
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
 /******/ 				var fulfilled = true;
 /******/ 				for (var j = 0; j < chunkIds.length; j++) {
 /******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
@@ -13222,9 +13224,7 @@ _core_core_js__WEBPACK_IMPORTED_MODULE_0__["default"].use(modules);
 /******/ 		
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var chunkIds = data[0];
-/******/ 			var moreModules = data[1];
-/******/ 			var runtime = data[2];
+/******/ 			var [chunkIds, moreModules, runtime] = data;
 /******/ 			// add "moreModules" to the modules object,
 /******/ 			// then flag all "chunkIds" as loaded and fire callback
 /******/ 			var moduleId, chunkId, i = 0;
@@ -13247,7 +13247,7 @@ _core_core_js__WEBPACK_IMPORTED_MODULE_0__["default"].use(modules);
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkbnm_blocks"] = self["webpackChunkbnm_blocks"] || [];
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkbnm_blocks"] = globalThis["webpackChunkbnm_blocks"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
