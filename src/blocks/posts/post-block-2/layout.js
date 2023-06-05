@@ -22,7 +22,7 @@ export const Layout = ({
     return(
         <div { ...blockProps } style={ inlineStyles }>
             <div className="posts-block-2-container">
-                <div class="bnm-pb2-posts-grid">
+                <div className="bnm-pb2-posts-grid">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => {
                         return(
                             ( index === 0 || index === 1 ) && (
@@ -35,7 +35,7 @@ export const Layout = ({
                                     ) }
 
                                     <div className="bnm-pb2-large-post-content">
-                                        { attributes.showCategory && (
+                                        { attributes.showCategory && categoriesList && (
                                             <PostCategories
                                                 categoriesList={categoriesList}
                                                 post={post}
@@ -48,7 +48,7 @@ export const Layout = ({
                                             />
                                         ) }
                                         <div className="entry-meta">
-                                            { attributes.showAuthor && (
+                                            { attributes.showAuthor && authorsList && (
                                                 <PostAuthor
                                                     post={post}
                                                     authorsList={authorsList}
@@ -95,7 +95,7 @@ export const Layout = ({
                                     
                                     <div className="entry-details">
 
-                                        { attributes.showCategorySmall && (
+                                        { attributes.showCategorySmall && categoriesList && (
                                             <PostCategories
                                                 categoriesList={categoriesList}
                                                 post={post}
@@ -109,7 +109,7 @@ export const Layout = ({
                                             />
                                         ) }
                                         <div className="entry-meta">
-                                            { attributes.showAuthorSmall && (
+                                            { attributes.showAuthorSmall && authorsList && (
                                                 <PostAuthor
                                                     post={post}
                                                     authorsList={authorsList}

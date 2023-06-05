@@ -22,10 +22,10 @@ export const Layout = ({
     return(
         <div { ...blockProps } style={ inlineStyles }>
             <div className="posts-block-3-container">
-                <div class="bnm-pb3-posts-grid">
+                <div className="bnm-pb3-posts-grid">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => {
                         return(
-                            <div className="bnm-pb3-post">
+                            <div key={post.id} className="bnm-pb3-post">
                                 { attributes.showFeaturedImage && (
                                     <FeaturedImage 
                                         post={post}
@@ -34,7 +34,7 @@ export const Layout = ({
                                 ) }
 
                                 <div className="bnm-pb3-post-content">
-                                    { attributes.showCategory && (
+                                    { attributes.showCategory && categoriesList && (
                                         <PostCategories
                                             categoriesList={categoriesList}
                                             post={post}
@@ -47,7 +47,7 @@ export const Layout = ({
                                         />
                                     ) }
                                     <div className="entry-meta">
-                                        { attributes.showAuthor && (
+                                        { attributes.showAuthor && authorsList && (
                                             <PostAuthor
                                                 post={post}
                                                 authorsList={authorsList}

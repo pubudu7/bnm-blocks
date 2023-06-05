@@ -5,7 +5,6 @@ import {
 	PostExcerpt,
 	PostTitle,
 	PostCategories,
-	FeaturedImage,
 	PostAuthor,
 	PostDateTime,
 	PostCommentCount,
@@ -45,9 +44,12 @@ export const Layout = ({
                                     className="bnm-fp-img"
                                 />
                             ) }
+                            <div className="bnmfpovrlay inside-gut-editor">
+                                <a className="bnmlnkovrlay-ge" href="#"></a>
+                            </div>
 
                             <div className="bnm-fp1-post-content">
-                                { attributes.showCategory && (
+                                { attributes.showCategory && categoriesList && (
                                     <PostCategories
                                         categoriesList={categoriesList}
                                         post={post}
@@ -60,7 +62,7 @@ export const Layout = ({
                                     />
                                 ) }
                                 <div className="entry-meta">
-                                    { attributes.showAuthor && (
+                                    { attributes.showAuthor && authorsList && (
                                         <PostAuthor
                                             post={post}
                                             authorsList={authorsList}
@@ -85,6 +87,7 @@ export const Layout = ({
                                         post={post}
                                         excerptLength={attributes.excerptLength}
                                         showReadMore={attributes.showReadMore}
+                                        readMoreLabel={attributes.readMoreLabel}
                                     />
                                 ) }
                             </div>
@@ -114,8 +117,12 @@ export const Layout = ({
                                     />
                                 ) }
 
+                                <div className="bnmfpovrlay inside-gut-editor">
+                                    <a className="bnmlnkovrlay-ge" href="#"></a>
+                                </div>
+
                                 <div className="bnm-fp1-post-content">
-                                    { attributes.showCategory && (
+                                    { attributes.showCategory && categoriesList && (
                                         <PostCategories
                                             categoriesList={categoriesList}
                                             post={post}
@@ -128,7 +135,7 @@ export const Layout = ({
                                         />
                                     ) }
                                     <div className="entry-meta">
-                                        { attributes.showAuthor && (
+                                        { attributes.showAuthor && authorsList && (
                                             <PostAuthor
                                                 post={post}
                                                 authorsList={authorsList}
@@ -148,11 +155,12 @@ export const Layout = ({
                                             />
                                         ) }
                                     </div>
-                                    { attributes.displayPostExcerpt && (
+                                    { attributes.displayPostExcerptSmall && (
                                         <PostExcerpt
                                             post={post}
-                                            excerptLength={attributes.excerptLength}
-                                            showReadMore={attributes.showReadMore}
+                                            excerptLength={attributes.excerptLengthSmall}
+                                            showReadMore={attributes.showReadMoreSmall}
+                                            readMoreLabel={attributes.readMoreLabel}
                                         />
                                     ) }
                                 </div>

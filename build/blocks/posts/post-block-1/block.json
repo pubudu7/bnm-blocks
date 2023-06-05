@@ -328,13 +328,6 @@
         "string"
       ]
     },
-    "metaSpacing": {
-      "type": [
-        "number",
-        "object"
-      ],
-      "default": []
-    },
     "metaPadding": {
       "type": [
         "number",

@@ -52,6 +52,10 @@
 			"type": "number",
 			"default": 0.75
 		},
+		"featuredImageSizeSlug": {
+			"type": "string",
+			"default": "bnm-featured"
+		},
 		"imageFit": {
 			"type": "string",
 			"default": "cover"
@@ -81,7 +85,7 @@
 			"default": "h3"
 		},
 		"titleFontSize": {
-			"type": "number"
+			"type": [ "string", "number" ]
 		},
 		"titleLineHeight": {
 			"type": "number"
@@ -126,8 +130,7 @@
 			"default": true
 		},
 		"metaFontSize": {
-			"type": "number",
-			"default": 12
+			"type": [ "string", "number" ]
 		},
 		"metaLineHeight": {
 			"type": "number"
@@ -152,7 +155,7 @@
 			"default": []
 		},
 		"categoryFontSize": {
-			"type": "number"
+			"type": [ "string", "number" ]
 		},
 		"categoryLineHeight": {
 			"type": "number"

@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { startCase, toLower } from 'lodash';
+
+/**
  * WordPress dependencies
  */
  import {
@@ -133,6 +138,17 @@ export function SliderSettings( { attributes, setAttributes } ) {
                     </PanelRow>
 
                 </BaseControl>
+                
+                <SelectControl
+                    label={ __( 'Image Size', 'bnm-blocks' ) }
+                    value={ attributes.featuredImageSizeSlug }
+                    options={ window.themezHutGutenberg.imageSizes.map( size => ({
+                        label: startCase( toLower( size ) ),
+                        value: size
+                    }) ) }
+                    onChange={ imageSize => setAttributes({ featuredImageSizeSlug: imageSize }) }
+                /> 
+                    
                 <BaseControl
                     label={ __( 'Image Fit', 'bnm-blocks' ) }
                     help={

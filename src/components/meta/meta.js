@@ -14,7 +14,8 @@ import {
 export const PostExcerpt = ({
     post,
     excerptLength,
-    showReadMore
+    showReadMore,
+    readMoreLabel
 }) => {
     let excerpt = post.excerpt.rendered;
 
@@ -33,6 +34,7 @@ export const PostExcerpt = ({
             { __( '… ' ) }
             <a
                 href="#"
+                className="bnm-readmore"
                 >
                     { readMoreLabel }
                 </a>

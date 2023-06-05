@@ -38,7 +38,7 @@ export const Layout = ({
                                     ) }
 
                                     <div className="bnm-pb1-large-post-content">
-                                        { attributes.showCategory && (
+                                        { attributes.showCategory && categoriesList && (
                                             <PostCategories
                                                 categoriesList={categoriesList}
                                                 post={post}
@@ -51,7 +51,7 @@ export const Layout = ({
                                             />
                                         ) }
                                         <div className="entry-meta">
-                                            { attributes.showAuthor && (
+                                            { attributes.showAuthor && authorsList && (
                                                 <PostAuthor
                                                     post={post}
                                                     authorsList={authorsList}
@@ -100,7 +100,7 @@ export const Layout = ({
                                     
                                     <div className="entry-details">
 
-                                        { attributes.showCategorySmall && (
+                                        { attributes.showCategorySmall && categoriesList && (
                                             <PostCategories
                                                 categoriesList={categoriesList}
                                                 post={post}
@@ -114,7 +114,7 @@ export const Layout = ({
                                             />
                                         ) }
                                         <div className="entry-meta">
-                                            { attributes.showAuthorSmall && (
+                                            { attributes.showAuthorSmall && authorsList && (
                                                 <PostAuthor
                                                     post={post}
                                                     authorsList={authorsList}

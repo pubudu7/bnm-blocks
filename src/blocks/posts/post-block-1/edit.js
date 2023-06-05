@@ -15,7 +15,6 @@ import {
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useInstanceId } from '@wordpress/compose';
 import { store as coreStore } from '@wordpress/core-data';
-import { store as noticeStore } from '@wordpress/notices';
 import { useEffect, Fragment } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
 import {
@@ -30,7 +29,8 @@ import QueryInspectorControls from '../../../components/query-controls';
 import BlockExtraSettings from '../../../components/settings-controls/post-type-1';
 import {
 	mightBeUnit,
-	boxValues
+	boxValues,
+	hasValueOnBox
 } from '../../../shared/js/utils.js';
 import {
 	Layout
@@ -52,6 +52,7 @@ export default function Edit( { attributes, setAttributes } ) {
     const {
 		queryId,
 		query,
+		categoryPadding,
 		categoryBGColor,
 		featuredImageSizeSlug,
     } = attributes;
@@ -72,10 +73,6 @@ export default function Edit( { attributes, setAttributes } ) {
 		per_page: perPage,
 		_embed: 'wp:featuredmedia'
 	};
-
-	if ( ! sticky ) {
-		
-	}
 
 	if ( sticky === 'exclude' ) {
 		postQueryArgs.sticky = false;
@@ -166,20 +163,6 @@ export default function Edit( { attributes, setAttributes } ) {
 			setAttributes( { queryId: instanceId } );
 		}
 	}, [ queryId, instanceId ] );
-
-	// If a user clicks to a link prevent redirection and show a warning.
-	const { createWarningNotice, removeNotice } = useDispatch( noticeStore );
-	let noticeId;
-	const showRedirectionPreventedNotice = ( event ) => {
-		event.preventDefault();
-		// Remove previous warning if any, to show one at a time per block.
-		removeNotice( noticeId );
-		noticeId = `bnm-blocks/posts-slider/${ instanceId }`;
-		createWarningNotice( __( 'Links are disabled in the editor.' ), {
-			id: noticeId,
-			type: 'snackbar',
-		} );
-	};
 	
 	// What to do for undefined values?
 	const inlineStyles = {
@@ -244,9 +227,21 @@ export default function Edit( { attributes, setAttributes } ) {
 		</InspectorControls>
 	);
 
+	let hasCategoryClass = false;
+
+	if ( Object.keys(categoryPadding).length !== 0 && categoryPadding.constructor === Object ) {
+		if ( hasValueOnBox(categoryPadding) ) {
+			hasCategoryClass = true;
+		}
+	} 
+	
+	if ( attributes.categoryBGColor || attributes.categoryBGHoverColor ) {
+		hasCategoryClass = true;
+	}
+
 	const blockProps = useBlockProps({
-		className: classnames( 'thbnm-post-block-1', {
-			'has-category-background': categoryBGColor,
+		className: classnames( 'wpbnmpb1', {
+			'bnm-box-cat': hasCategoryClass
 		})
 	});
 

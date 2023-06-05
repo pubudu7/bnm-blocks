@@ -1,6 +1,6 @@
 <?php
 
-use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Block_3_CSS;
+use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Block_1_CSS;
 
 function bnm_blocks_featured_posts_block_1_init() {
 
@@ -35,13 +35,16 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 
 				<div class="bnm-fp1-left-side">
 					<div class="bnm-fp1-large-post">
-						<a href="<?php the_permalink() ?>">
-							<?php 
-								if ( has_post_thumbnail() ) {
-									the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
-								} 
-							?>
-						</a>
+						
+						<?php 
+							if ( has_post_thumbnail() ) {
+								the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
+							} 
+						?>
+
+						<div class="bnmfp1ovrlay">
+							<a class="bnmlnkovrlay" href="<?php echo esc_url( get_permalink() ); ?>"></a>
+						</div>
 
 						<div class="bnm-fp1-post-content">
 
@@ -103,13 +106,15 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 				<?php } elseif ( $bnmp_count === 2 || $bnmp_count === 3 ) { ?>
 					<div class="bnm-fp1-small-post">
 
-						<a href="<?php the_permalink() ?>">
-							<?php 
-								if ( has_post_thumbnail() ) {
-									the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
-								} 
-							?>
-						</a>
+						<?php 
+							if ( has_post_thumbnail() ) {
+								the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
+							} 
+						?>	
+						
+						<div class="bnmfp1ovrlay">
+							<a class="bnmlnkovrlay" href="<?php echo esc_url( get_permalink() ); ?>"></a>
+						</div>
 
 						<div class="bnm-fp1-post-content">
 
@@ -145,12 +150,12 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 								<?php } ?>
 							</div><!-- .entry-meta-->
 
-							<?php if ( $attributes['displayPostExcerpt'] && ( isset( $attributes['excerptLength'] ) && $attributes['excerptLength']  > 0 ) ) { ?>
+							<?php if ( $attributes['displayPostExcerptSmall'] && ( isset( $attributes['excerptLengthSmall'] ) && $attributes['excerptLengthSmall']  > 0 ) ) { ?>
 								<div class="bnm-post-excerpt">
 									
-									<?php echo wp_kses_post( BNM_Blocks::get_excerpt_by_id( get_the_id(), $attributes['excerptLength'] ) ); ?>
+									<?php echo wp_kses_post( BNM_Blocks::get_excerpt_by_id( get_the_id(), $attributes['excerptLengthSmall'] ) ); ?>
 									
-									<?php if ( $attributes['showReadMore'] && ! empty( $attributes['readMoreLabel'] ) ) { ?>
+									<?php if ( $attributes['showReadMoreSmall'] && ! empty( $attributes['readMoreLabel'] ) ) { ?>
 										<span class="bnm-readmore">
 											<a href="<?php the_permalink(); ?>" class="bnm-readmore-link">
 												<?php the_title( '<span class="screen-reader-text">', '</span>' ); ?>
@@ -187,16 +192,16 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 	
 	$block = ob_get_clean();
 	
-	$css = new Post_Block_3_CSS();
+	$css = new Post_Block_1_CSS();
 	$styles = $css->render_css( $attributes );
 
-	$classes = '';
+	$classes = array( 'wpbnmfpb1' );
 
-	if ( isset( $attributes['categoryBGColor'] ) ) {
-		$classes .= 'has-category-background';
+	if ( $attributes['categoryBGColor'] || $attributes['categoryBGHoverColor'] || ! empty($attributes['categoryPadding']) ) {
+		$classes[] = 'bnm-box-cat';
 	}
 
-	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => $classes ) );
+	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
 	
 	return sprintf( '<div %1$s style="%2$s">%3$s</div>', 
 		$wrapper_attributes, 

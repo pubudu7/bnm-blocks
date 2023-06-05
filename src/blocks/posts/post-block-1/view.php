@@ -25,8 +25,11 @@ add_action( 'init', 'bnm_blocks_post_block_1_init' );
 function bnm_blocks_post_block_1_render_callback( $attributes ) {
 
 	$post_query_args = BNM_Blocks::build_articles_query( $attributes );
-
+	
 	$article_query = new WP_Query( $post_query_args );
+
+	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : 'bnm-featured';
+	$featured_image_slug_small = ! empty( $attributes['featuredImageSizeSlugSmall'] ) ? $attributes['featuredImageSizeSlugSmall'] : 'bnm-featured-thumb';
 
 	ob_start();
 	?>
@@ -47,7 +50,9 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 						<div class="bnm-pb1-large-post">
 							<?php if ( has_post_thumbnail() ) : ?>
 								<figure class="post-thumbnail">
-									<?php the_post_thumbnail( 'bnm-featured' ); ?>
+									<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+										<?php the_post_thumbnail( $featured_image_slug ); ?>
+									</a>
 								</figure>
 							<?php endif; ?>
 
@@ -66,23 +71,23 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 								?>
 
 								<div class="entry-meta">
-									<?php if ( $attributes['showAuthor'] ) { ?>
-										<span class="bnm-post-author">
-											<?php bnm_posted_by(); ?>
-										</span>
-									<?php } ?>
+									<?php 
+										if ( $attributes['showAuthor'] ) { 
+											bnm_posted_by(); 
+										} 
+									?>
 
-									<?php if ( $attributes['showDate'] ) { ?>
-										<span class="bnm-post-date">
-											<?php bnm_posted_on(); ?>
-										</span>
-									<?php } ?>
+									<?php 
+										if ( $attributes['showDate'] ) {
+											bnm_posted_on();
+										} 
+									?>
 
-									<?php if ( $attributes['showCommentCount'] ) { ?>
-										<span class="bnm-comment-count">
-											<?php bnm_comments_link(); ?>
-										</span>
-									<?php } ?>
+									<?php 
+										if ( $attributes['showCommentCount'] ) {
+											bnm_comments_link(); 
+										} 
+									?>
 								</div><!-- .entry-meta-->
 
 								<?php if ( $attributes['displayPostExcerpt'] && ( isset( $attributes['excerptLength'] ) && $attributes['excerptLength']  > 0 ) ) { ?>
@@ -113,7 +118,9 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 					<div class="bnm-pb1-small-post">
 						<?php if ( has_post_thumbnail() ) : ?>
 							<figure class="post-thumbnail">
-								<?php the_post_thumbnail( 'bnm-featured-thumb' ); ?>
+								<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+									<?php the_post_thumbnail( $featured_image_slug_small ); ?>
+								</a>
 							</figure>
 						<?php endif; ?>
 						<div class="entry-details">
@@ -193,13 +200,13 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 	$css = new Post_Block_1_CSS();
 	$styles = $css->render_css( $attributes );
 
-	$classes = '';
+	$classes = array( 'wpbnmpb1' );
 
-	if ( isset( $attributes['categoryBGColor'] ) ) {
-		$classes .= 'has-category-background';
+	if ( $attributes['categoryBGColor'] || $attributes['categoryBGHoverColor'] || ! empty($attributes['categoryPadding']) ) {
+		$classes[] = 'bnm-box-cat';
 	}
 
-	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => $classes ) );
+	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
 	
 	return sprintf( '<div %1$s style="%2$s">%3$s</div>', 
 		$wrapper_attributes, 

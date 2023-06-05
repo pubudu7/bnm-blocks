@@ -4,7 +4,7 @@ namespace ThemezHut\BNM_Blocks\CSS\Blocks;
 
 use ThemezHut\BNM_Blocks\CSS\CSS_Utility;
 
-class Post_Block_2_CSS {
+class Post_Slider_1_CSS {
 
     public function render_css( $attributes ) {
 
@@ -18,25 +18,12 @@ class Post_Block_2_CSS {
                     'type'      =>  'font-size'
                 ),
                 array(
-                    'property'  =>  '--title-font-size-small',
-                    'value'     =>  'titleFontSizeSmall',
-                    'type'      =>  'font-size'
-                ),
-                array(
                     'property'  =>  '--title-line-height',
                     'value'     =>  'titleLineHeight',
                 ),
                 array(
-                    'property'  =>  '--title-line-height-small',
-                    'value'     =>  'titleLineHeightSmall',
-                ),
-                array(
                     'property'  =>  '--title-letter-spacing',
                     'value'     =>  'titleLetterSpacing',
-                ),
-                array(
-                    'property'  =>  '--title-letter-spacing-small',
-                    'value'     =>  'titleLetterSpacingSmall',
                 ),
                 array(
                     'property'  =>  '--title-padding',
@@ -44,18 +31,8 @@ class Post_Block_2_CSS {
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--title-padding-small',
-                    'value'     =>  'titlePaddingSmall',
-                    'type'      =>  'box-control',
-                ),
-                array(
                     'property'  =>  '--title-margin',
                     'value'     =>  'titleMargin',
-                    'type'      =>  'box-control',
-                ),
-                array(
-                    'property'  =>  '--title-margin-small',
-                    'value'     =>  'titleMarginSmall',
                     'type'      =>  'box-control',
                 ),
                 array(
@@ -111,25 +88,12 @@ class Post_Block_2_CSS {
                     'type'      =>  'font-size'
                 ),
                 array(
-                    'property'  =>  '--meta-font-size-small',
-                    'value'     =>  'metaFontSizeSmall',
-                    'type'      =>  'font-size'
-                ),
-                array(
                     'property'  =>  '--meta-line-height',
                     'value'     =>  'metaLineHeight',
                 ),
                 array(
-                    'property'  =>  '--meta-line-height-small',
-                    'value'     =>  'metaLineHeightSmall',
-                ),
-                array(
                     'property'  =>  '--meta-letter-spacing',
                     'value'     =>  'metaLetterSpacing',
-                ),
-                array(
-                    'property'  =>  '--meta-letter-spacing-small',
-                    'value'     =>  'metaLetterSpacingSmall',
                 ),
                 array(
                     'property'  =>  '--meta-spacing',
@@ -151,56 +115,6 @@ class Post_Block_2_CSS {
                 array(
                     'property'  =>  '--meta-margin',
                     'value'     =>  'metaMargin',
-                    'type'      =>  'box-control',
-                ),
-                array(
-                    'property'  =>  '--excerpt-font-size',
-                    'value'     =>  'excerptFontSize',
-                    'type'      =>  'font-size'
-                ),
-                array(
-                    'property'  =>  '--excerpt-font-size-small',
-                    'value'     =>  'excerptFontSizeSmall',
-                    'type'      =>  'font-size'
-                ),
-                array(
-                    'property'  =>  '--excerpt-line-height',
-                    'value'     =>  'excerptLineHeight',
-                ),
-                array(
-                    'property'  =>  '--excerpt-line-height-small',
-                    'value'     =>  'excerptLineHeightSmall',
-                ),
-                array(
-                    'property'  =>  '--excerpt-letter-spacing',
-                    'value'     =>  'excerptLetterSpacing',
-                ),
-                array(
-                    'property'  =>  '--excerpt-letter-spacing-small',
-                    'value'     =>  'excerptLetterSpacingSmall',
-                ),
-                array(
-                    'property'  =>  '--excerpt-color',
-                    'value'     =>  'excerptColor',
-                ),
-                array(
-                    'property'  =>  '--excerpt-padding',
-                    'value'     =>  'excerptPadding',
-                    'type'      =>  'box-control',
-                ),
-                array(
-                    'property'  =>  '--excerpt-padding-small',
-                    'value'     =>  'excerptPaddingSmall',
-                    'type'      =>  'box-control',
-                ),
-                array(
-                    'property'  =>  '--excerpt-margin',
-                    'value'     =>  'excerptMargin',
-                    'type'      =>  'box-control',
-                ),
-                array(
-                    'property'  =>  '--excerpt-margin-small',
-                    'value'     =>  'excerptMarginSmall',
                     'type'      =>  'box-control',
                 ),
             )

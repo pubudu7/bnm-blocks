@@ -35,7 +35,9 @@ function bnm_blocks_post_block_3_render_callback( $attributes ) {
 				<div class="bnm-pb3-post">
 					<?php if ( has_post_thumbnail() ) : ?>
 						<figure class="post-thumbnail">
-							<?php the_post_thumbnail( 'bnm-featured' ); ?>
+							<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+								<?php the_post_thumbnail( 'bnm-featured' ); ?>
+							</a>
 						</figure>
 					<?php endif; ?>
 
@@ -116,13 +118,13 @@ function bnm_blocks_post_block_3_render_callback( $attributes ) {
 	$css = new Post_Block_3_CSS();
 	$styles = $css->render_css( $attributes );
 
-	$classes = '';
+	$classes = array( 'wpbnmpb3' );
 
-	if ( isset( $attributes['categoryBGColor'] ) ) {
-		$classes .= 'has-category-background';
+	if ( $attributes['categoryBGColor'] || $attributes['categoryBGHoverColor'] || ! empty($attributes['categoryPadding']) ) {
+		$classes[] = 'bnm-box-cat';
 	}
 
-	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => $classes ) );
+	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
 	
 	return sprintf( '<div %1$s style="%2$s">%3$s</div>', 
 		$wrapper_attributes, 

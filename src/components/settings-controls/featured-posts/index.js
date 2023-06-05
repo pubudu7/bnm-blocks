@@ -28,8 +28,8 @@ import { __ } from '@wordpress/i18n';
 import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
 
 
-import ColorPopupButton from '../../../components/color-control';
-import TypographyControl from '../../../components/typography'; 
+import ColorPopupButton from '../../color-control';
+import TypographyControl from '../../typography'; 
 
 export default function BlockExtraSettings( { attributes, setAttributes } ) {
     const {
@@ -532,73 +532,6 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 						}
 					] }
 				/>
-			</PanelBody>
-			<PanelBody title={ __( 'Featured Image Settings', 'bnm-blocks') } initialOpen={ false }>
-
-				<TabPanel
-					className="thbnm-featured-image-settings-tab-panel thbnm-tab-panel"
-					activeclassName="thbnm-active-tab"
-					//onSelect={ onSelect }
-					initialTabName="big-post"
-					tabs={ [
-						{
-							name: 'big-post',
-							title: 'Big Post',
-							className: 'tab-big-post',
-						},
-						{
-							name: 'small-post',
-							title: 'Small Posts',
-							className: 'tab-small-post',
-						},
-					] }
-				>
-					{ ( tab ) => {
-						if ( tab.name === 'big-post' ) { 
-							return (
-								<>
-									<ToggleControl
-										label={ __( 'Display Featured Image', 'bnm-blocks' ) }
-										checked={ showFeaturedImage }
-										onChange={ () => setAttributes( { showFeaturedImage: ! showFeaturedImage } ) }
-									/>
-									{ showFeaturedImage && (
-										<SelectControl
-											label={ __( 'Image Size', 'bnm-blocks' ) }
-											value={ attributes.featuredImageSizeSlug }
-											options={ window.themezHutGutenberg.imageSizes.map( size => ({
-												label: startCase( toLower( size ) ),
-												value: size
-											}) ) }
-											onChange={ imageSize => setAttributes({ featuredImageSizeSlug: imageSize }) }
-										/> 
-									) }
-								</>
-							);
-						} else if ( tab.name === 'small-post' ) { 
-							return (
-								<>
-									<ToggleControl
-										label={ __( 'Display Featured Image', 'bnm-blocks' ) }
-										checked={ showFeaturedImageSmall }
-										onChange={ () => setAttributes( { showFeaturedImageSmall: ! showFeaturedImageSmall } ) }
-									/>
-									{ showFeaturedImageSmall && (
-										<SelectControl
-											label={ __( 'Image Size(Small)', 'bnm-blocks' ) }
-											value={ attributes.featuredImageSizeSlugSmall }
-											options={ window.themezHutGutenberg.imageSizes.map( size => ({
-												label: startCase( toLower( size ) ),
-												value: size
-											}) ) }
-											onChange={ imageSize => setAttributes( { featuredImageSizeSlugSmall: imageSize } ) }
-										/>
-									) }
-								</>
-							); 
-						}  
-					} }
-				</TabPanel>
 			</PanelBody>
 		</InspectorControls>
     );

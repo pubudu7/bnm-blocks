@@ -1,20 +1,24 @@
-.wp-block-bnm-blocks-post-block-3 {
+.wpbnmpb3 {
 
     --title-font-size: 18px;
     --title-line-height: 1.2;
-    --title-margin: 5px 0 10px 0;
+    --title-margin: 0 0 0.4em 0;
     --meta-font-size: 12px;
     --meta-spacing: 10px;
     --meta-margin: 0 0 15px;
-    --category-font-size: 11px;
+    --category-font-size: 13px;
+    --category-padding: 2px 5px;
     --category-bg-hover-color: #eee;
-    --category-margin: 0 .5em 0 0;
+    --category-margin: 0 5px 5px 0;
     --excerpt-font-size: 16px;
     --excerpt-line-height: 1.5;
     --excerpt-margin: 0 0 20px;
 
+    margin: 0 0 50px 0;
+
     .bnm-pb3-post {
         .entry-title {
+            clear: none;
             font-size: var(--title-font-size);
             line-height: var(--title-line-height);
             letter-spacing: var(--title-letter-spacing);
@@ -52,11 +56,11 @@
     .bnm-category-list {
         a {
             color: var(--category-color);
+            display: inline-block;
             font-size: var(--category-font-size);
             line-height: var(--category-line-height);
             letter-spacing: var(--category-letter-spacing);
             text-decoration: inherit;
-            padding: var(--category-padding);
             margin: var(--category-margin);
 
             &:hover {
@@ -65,18 +69,18 @@
         }
     }
 
-    &.has-category-background {
-        .bnm-category-list {
-            a {
-                background-color: var(--category-bg-color);
-                padding: var(--category-padding);
-    
-                &:hover {
-                    background-color: var(--category-bg-hover-color);
-                }
-            }
-        }
-    }
+    &.bnm-box-cat {
+		.bnm-category-list {
+			a {
+				background-color: var(--category-bg-color);
+				padding: var(--category-padding);
+
+				&:hover {
+					background-color: var(--category-bg-hover-color);
+				}
+			}
+		}
+	}
 
     .entry-meta {
         display: flex;
@@ -104,6 +108,17 @@
 
     .bnm-post-author {
         display: inline-block;
+    }
+
+    .post-thumbnail {
+        overflow: hidden;
+        margin: 0 0 10px;
+    
+        img {
+            vertical-align: top;
+            max-width: 100%;
+            height: auto;
+        }
     }
 
 }
@@ -136,18 +151,10 @@
 
 .bnm-pb3-posts-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     column-gap: 25px;
     row-gap: 25px;
-}
 
-.post-thumbnail {
-    overflow: hidden;
-    margin: 0 0 10px;
-
-    img {
-        vertical-align: top;
-        max-width: 100%;
-        height: auto;
+    @media( min-width: 480px ) {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

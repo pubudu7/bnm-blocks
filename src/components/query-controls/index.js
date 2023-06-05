@@ -38,7 +38,6 @@ export default function QueryInspectorControls( {
     return (
         <InspectorControls>
             <PanelBody title={ __( 'Content Settings' ) }>
-                <PostSelectControl></PostSelectControl>
                 <TaxonomyControls onChange={ setQuery } query={ query } />
                 <AuthorControl value={ authorIds } onChange={ setQuery } />
                 <OrderControl

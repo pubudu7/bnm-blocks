@@ -28,10 +28,12 @@ class Post_Block_3_CSS {
                 array(
                     'property'  =>  '--title-padding',
                     'value'     =>  'titlePadding',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--title-margin',
                     'value'     =>  'titleMargin',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--title-color',
@@ -73,10 +75,12 @@ class Post_Block_3_CSS {
                 array(
                     'property'  =>  '--category-padding',
                     'value'     =>  'categoryPadding',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--category-margin',
                     'value'     =>  'categoryMargin',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--meta-font-size',

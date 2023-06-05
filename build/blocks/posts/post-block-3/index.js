@@ -82,7 +82,7 @@ function Edit(_ref) {
   const {
     queryId,
     query,
-    categoryBGColor,
+    categoryPadding,
     featuredImageSizeSlug
   } = attributes;
   const {
@@ -229,9 +229,21 @@ function Edit(_ref) {
     '--excerpt-margin': (0,_shared_js_utils_js__WEBPACK_IMPORTED_MODULE_12__.boxValues)(attributes.excerptMargin),
     '--excerpt-color': attributes.excerptColor
   };
+  let hasCategoryClass = false;
+
+  if (Object.keys(categoryPadding).length !== 0 && categoryPadding.constructor === Object) {
+    if ((0,_shared_js_utils_js__WEBPACK_IMPORTED_MODULE_12__.hasValueOnBox)(categoryPadding)) {
+      hasCategoryClass = true;
+    }
+  }
+
+  if (attributes.categoryBGColor || attributes.categoryBGHoverColor) {
+    hasCategoryClass = true;
+  }
+
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)({
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('thbnm-post-block-3', {
-      'has-category-background': categoryBGColor
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wpbnmpb3', {
+      'bnm-box-cat': hasCategoryClass
     })
   });
 
@@ -358,16 +370,17 @@ const Layout = _ref => {
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
     className: "posts-block-3-container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-    class: "bnm-pb3-posts-grid"
+    className: "bnm-pb3-posts-grid"
   }, posts && posts.length > 0 && posts.map((post, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      key: post.id,
       className: "bnm-pb3-post"
     }, attributes.showFeaturedImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_2__.FeaturedImage, {
       post: post,
       featuredImageSizeSlug: attributes.featuredImageSizeSlug
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "bnm-pb3-post-content"
-    }, attributes.showCategory && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_2__.PostCategories, {
+    }, attributes.showCategory && categoriesList && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_2__.PostCategories, {
       categoriesList: categoriesList,
       post: post
     }), attributes.showTitle && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_2__.PostTitle, {
@@ -375,7 +388,7 @@ const Layout = _ref => {
       attributes: attributes
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "entry-meta"
-    }, attributes.showAuthor && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_2__.PostAuthor, {
+    }, attributes.showAuthor && authorsList && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_2__.PostAuthor, {
       post: post,
       authorsList: authorsList,
       showAvatar: attributes.showAvatar
@@ -580,7 +593,8 @@ const PostExcerpt = _ref => {
   let {
     post,
     excerptLength,
-    showReadMore
+    showReadMore,
+    readMoreLabel
   } = _ref;
   let excerpt = post.excerpt.rendered;
   const excerptElement = document.createElement('div');
@@ -589,7 +603,8 @@ const PostExcerpt = _ref => {
   const postExcerpt = showReadMore ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bnm-post-excerpt"
   }, excerpt.trim().split(' ', excerptLength).join(' '), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('… '), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "#"
+    href: "#",
+    className: "bnm-readmore"
   }, readMoreLabel)) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bnm-post-excerpt"
   }, excerpt.trim().split(' ', excerptLength).join(' '), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('… '));
@@ -929,7 +944,7 @@ function QueryInspectorControls(_ref) {
   } = query;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Content Settings')
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_post_control__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_taxonomy_controls__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_taxonomy_controls__WEBPACK_IMPORTED_MODULE_7__["default"], {
     onChange: setQuery,
     query: query
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_author_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -1051,8 +1066,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const MAX_FETCHED_TERMS = 10;
 
-const onPostsChange = newValue => {
-  console.log(newValue);
+const onPostsChange = newValue => {//console.log( newValue );
 };
 
 function PostSelectControl(value, onChange) {
@@ -2009,14 +2023,11 @@ const mightBeBoxed = value => {
   }
 
   return mightBeUnit(value);
-}; // export const boxValues = ( box = {}, defaultBox = {}) => {
-// 	return `${ box?.top ?? defaultBox?.top ?? '0px' } ${ box?.right ?? defaultBox?.right ?? '0px' } ${ box?.bottom ?? defaultBox?.bottom ?? '0px' } ${ box?.left ?? defaultBox?.left ?? '0px' }`;
-// };
-// eslint-disable-next-line jsdoc/check-line-alignment
-
+};
 /**
+ * Returns the values from a box type.
+ *
  * @param values
- * Return the values from a box type.
  */
 
 const boxValues = values => {

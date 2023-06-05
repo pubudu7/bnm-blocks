@@ -90,18 +90,6 @@
 			"type": "string",
 			"default": ""
 		},
-		"showFeaturedImage": {
-			"type": "boolean",
-			"default": true
-		},
-		"showFeaturedImageSmall": {
-			"type": "boolean",
-			"default": true
-		},
-		"featuredImageAlign": {
-			"type": "string",
-			"enum": [ "left", "center", "right" ]
-		},
 		"featuredImageSizeSlug": {
 			"type": "string",
 			"default": "bnm-featured"
@@ -116,7 +104,7 @@
 		},
 		"showDate": {
 			"type": "boolean",
-			"default": true
+			"default": false
 		},
 		"showCategory": {
 			"type": "boolean",
@@ -124,15 +112,15 @@
 		},
 		"showAuthor": {
 			"type": "boolean",
-			"default": true
+			"default": false
 		},
 		"showAvatar": {
 			"type": "boolean",
-			"default": true
+			"default": false
 		},
 		"showCommentCount": {
 			"type": "boolean",
-			"default": true
+			"default": false
 		},
 		"displayPostExcerpt": {
 			"type": "boolean",

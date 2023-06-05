@@ -18,8 +18,6 @@ if ( typeof window !== 'undefined' ) {
         blocksArray.forEach( block => {
             //const slidesPerView = parseInt( block.dataset.slidesPerView );
             //const slideCount = parseInt( block.dataset.slideCount );
-
-            console.log( block.dataset.aspectRatio );
             
             createSwiper(
                 {
@@ -35,7 +33,7 @@ if ( typeof window !== 'undefined' ) {
                     aspectRatio: parseFloat( block.dataset.aspectRatio ),
 					autoplay: !! parseInt( block.dataset.autoplay ),
 					delay: parseInt( block.dataset.autoplay_delay ) * 1000,
-                    initialSlide: 1 
+                    initialSlide: 0 
                 }
             );
         } );

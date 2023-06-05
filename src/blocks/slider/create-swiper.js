@@ -54,7 +54,7 @@ export default function createSwiper( element, config={} ) {
     speed: 400,
     autoplay: !! config.autoplay && {
 			delay: config.delay,
-			disableOnInteraction: false,
+			disableOnInteraction: true,
 		},
     // Optional parameters
     direction: 'horizontal',
@@ -64,6 +64,7 @@ export default function createSwiper( element, config={} ) {
     // If we need pagination
     pagination: {
       el: element.pagination,
+	  clickable: true
     },
   
     // Navigation arrows
@@ -143,7 +144,7 @@ export default function createSwiper( element, config={} ) {
   } 
   
   swiper.on( 'beforeSlideChangeStart', setAspectRatio );
-  swiper.on( 'reszie', setAspectRatio );
+  swiper.on( 'resize', setAspectRatio );
 
   swiper.init();
 

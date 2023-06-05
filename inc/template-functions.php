@@ -16,7 +16,7 @@ function bnm_posted_by( $show_avatar = true ) {
 	$byline = sprintf(
 		/* translators: %s: post author. */
 		esc_html_x( 'by %s', 'post author', 'bnm-blocks' ),
-		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+		'<span class="author vcard bnm-post-author"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
 
 	$markup = '<span class="byline"> ';
@@ -38,7 +38,7 @@ function bnm_posted_by( $show_avatar = true ) {
 function bnm_comments_link() {
 
 	if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-		echo '<span class="comments-link">';
+		echo '<span class="comments-link bnm-comment-count">';
 			comments_popup_link( '0', '1', '%' );
 		echo '</span>';
 	}
@@ -61,9 +61,8 @@ function bnm_posted_on() {
 	);
 
 	printf(
-		'<span class="posted-on"><a href="%1$s" rel="bookmark">%2$s</a></span>',
+		'<span class="posted-on bnm-post-date"><a href="%1$s" rel="bookmark">%2$s</a></span>',
 		esc_url( get_permalink() ),
 		$time_string
 	); // WPCS: XSS OK.
-
 }

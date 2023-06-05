@@ -31,7 +31,8 @@ import QueryInspectorControls from '../../../components/query-controls';
 import BlockExtraSettings from '../../../components/settings-controls/post-type-2';
 import {
 	mightBeUnit,
-	boxValues
+	boxValues,
+	hasValueOnBox
 } from '../../../shared/js/utils.js';
 import {
 	Layout
@@ -53,7 +54,7 @@ export default function Edit( { attributes, setAttributes } ) {
     const {
 		queryId,
 		query,
-		categoryBGColor,
+		categoryPadding,
 		featuredImageSizeSlug,
     } = attributes;
 
@@ -216,9 +217,21 @@ export default function Edit( { attributes, setAttributes } ) {
 		'--excerpt-color': attributes.excerptColor,
 	};
 
+	let hasCategoryClass = false;
+
+	if ( Object.keys(categoryPadding).length !== 0 && categoryPadding.constructor === Object ) {
+		if ( hasValueOnBox(categoryPadding) ) {
+			hasCategoryClass = true;
+		}
+	} 
+	
+	if ( attributes.categoryBGColor || attributes.categoryBGHoverColor ) {
+		hasCategoryClass = true;
+	}
+
 	const blockProps = useBlockProps({
-		className: classnames( 'thbnm-post-block-3', {
-			'has-category-background': categoryBGColor,
+		className: classnames( 'wpbnmpb3', {
+			'bnm-box-cat': hasCategoryClass
 		})
 	});
 

@@ -77,7 +77,7 @@ function createSwiper(element) {
     speed: 400,
     autoplay: !!config.autoplay && {
       delay: config.delay,
-      disableOnInteraction: false
+      disableOnInteraction: true
     },
     // Optional parameters
     direction: 'horizontal',
@@ -85,7 +85,8 @@ function createSwiper(element) {
     initialSlide: config.initialSlide,
     // If we need pagination
     pagination: {
-      el: element.pagination
+      el: element.pagination,
+      clickable: true
     },
     // Navigation arrows
     navigation: {
@@ -149,7 +150,7 @@ function createSwiper(element) {
   }
 
   swiper.on('beforeSlideChangeStart', setAspectRatio);
-  swiper.on('reszie', setAspectRatio);
+  swiper.on('resize', setAspectRatio);
   swiper.init();
   return swiper;
 }
@@ -184,7 +185,6 @@ if (typeof window !== 'undefined') {
     blocksArray.forEach(block => {
       //const slidesPerView = parseInt( block.dataset.slidesPerView );
       //const slideCount = parseInt( block.dataset.slideCount );
-      console.log(block.dataset.aspectRatio);
       (0,_create_swiper__WEBPACK_IMPORTED_MODULE_1__["default"])({
         block,
         container: block.querySelector('.swiper'),
@@ -197,7 +197,7 @@ if (typeof window !== 'undefined') {
         aspectRatio: parseFloat(block.dataset.aspectRatio),
         autoplay: !!parseInt(block.dataset.autoplay),
         delay: parseInt(block.dataset.autoplay_delay) * 1000,
-        initialSlide: 1
+        initialSlide: 0
       });
     });
   });

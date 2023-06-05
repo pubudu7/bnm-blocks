@@ -5,7 +5,6 @@ import {
 	PostExcerpt,
 	PostTitle,
 	PostCategories,
-	FeaturedImage,
 	PostAuthor,
 	PostDateTime,
 	PostCommentCount,
@@ -39,21 +38,24 @@ export const Layout = ({
                             ( index === 0 || index === 1 ) && (
                                 
                                 <div className="bnm-fp2-large-post">
-                                <a href={ post.link }>
-                                    <div class="bnm-fp2-inner-container">
+                                
+                                    <div className="bnm-fp2-inner-container">
                                     
                                     { imageSourceUrl && (
                                         <img 
                                             src={ imageSourceUrl }
                                             alt={ featuredImageAlt }
-                                            class="bnm-fp-image"
+                                            className="bnm-fp-image"
                                         />
                                     ) }
-                                    
+
+                                    <div className="bnmfpovrlay inside-gut-editor">
+                                        <a className="bnmlnkovrlay-ge" href="#"></a>
+                                    </div>
 
                                     <div className="bnm-fp2-post-content">
                                         <div className="bnm-fp2-content-inner">
-                                            { attributes.showCategory && (
+                                            { attributes.showCategory && categoriesList && (
                                                 <PostCategories
                                                     categoriesList={categoriesList}
                                                     post={post}
@@ -66,7 +68,7 @@ export const Layout = ({
                                                 />
                                             ) }
                                             <div className="entry-meta">
-                                                { attributes.showAuthor && (
+                                                { attributes.showAuthor && authorsList && (
                                                     <PostAuthor
                                                         post={post}
                                                         authorsList={authorsList}
@@ -91,12 +93,13 @@ export const Layout = ({
                                                     post={post}
                                                     excerptLength={attributes.excerptLength}
                                                     showReadMore={attributes.showReadMore}
+                                                    readMoreLabel={attributes.readMoreLabel}
                                                 />
                                             ) }
                                         </div>
                                     </div>
                                 </div>
-                                </a>
+                                
                                 </div>
                                 
 
@@ -116,32 +119,37 @@ export const Layout = ({
                         return(
                             ( index === 2 || index === 3 || index === 4 ) && (
                                 <div className="bnm-fp2-small-post">
-                                <a href={ post.link }>
-                                    <div class="bnm-fp2-inner-container">
+                                
+                                    <div className="bnm-fp2-inner-container">
                                     { imageSourceUrl && (
                                         <img 
                                             src={ imageSourceUrl }
                                             alt={ featuredImageAlt }
-                                            class="bnm-fp-image"
+                                            className="bnm-fp-image"
                                         />
                                     ) }
 
+                                    <div className="bnmfpovrlay inside-gut-editor">
+                                        <a className="bnmlnkovrlay-ge" href="#"></a>
+                                    </div>
+
                                     <div className="bnm-fp2-post-content">
-                                        <div className="bnm-fp2-content-inner">
-                                            { attributes.showCategory && (
-                                                <PostCategories
-                                                    categoriesList={categoriesList}
-                                                    post={post}
-                                                />
-                                            ) }
-                                            { attributes.showTitle && (
-                                                <PostTitle
-                                                    post={post}
-                                                    attributes={attributes}
-                                                />
-                                            ) }
+                                        
+                                        { attributes.showCategory && categoriesList && (
+                                            <PostCategories
+                                                categoriesList={categoriesList}
+                                                post={post}
+                                            />
+                                        ) }
+                                        { attributes.showTitle && (
+                                            <PostTitle
+                                                post={post}
+                                                attributes={attributes}
+                                            />
+                                        ) }
+                                        
                                             <div className="entry-meta">
-                                                { attributes.showAuthor && (
+                                                { attributes.showAuthor && authorsList && (
                                                     <PostAuthor
                                                         post={post}
                                                         authorsList={authorsList}
@@ -161,17 +169,16 @@ export const Layout = ({
                                                     />
                                                 ) }
                                             </div>
-                                            { attributes.displayPostExcerpt && (
+                                            { attributes.displayPostExcerptSmall && (
                                                 <PostExcerpt
                                                     post={post}
-                                                    excerptLength={attributes.excerptLength}
-                                                    showReadMore={attributes.showReadMore}
+                                                    excerptLength={attributes.excerptLengthSmall}
+                                                    showReadMore={attributes.showReadMoreSmall}
+                                                    readMoreLabel={attributes.readMoreLabel}
                                                 />
                                             ) }
                                         </div>
                                     </div>
-                                    </div>
-                                    </a>
                                 </div>
                             )
                         );

@@ -7,7 +7,7 @@ import { useState } from '@wordpress/element';
 const MAX_FETCHED_TERMS = 10;
 
 const onPostsChange = ( newValue ) => {
-    console.log( newValue );
+    //console.log( newValue );
 };
 
 export default function PostSelectControl( value, onChange ) {

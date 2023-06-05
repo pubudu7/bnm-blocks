@@ -1,4 +1,4 @@
-.wp-block-bnm-blocks-featured-posts-2 {
+.wpbnmfpb2 {
 
     --title-font-size: 21px;
     --title-font-size-small: 18px;
@@ -6,22 +6,26 @@
     --title-line-height-small: 1.2;
     --title-margin: 5px 0 10px 0;
     --title-color: #ffffff;
-    --category-color: #cccccc;
+    --title-hover-color: #dddddd;
+    --category-color: #eeeeee;
+    --category-hover-color: #dddddd;
     --meta-font-size: 12px;
     --meta-font-size-small: 12px;
     --meta-spacing: 10px;
-    --meta-margin: 0 0 15px;
-    --meta-color: #cccccc;
-    --category-color: #cccccc;
-    --category-font-size: 11px;
-    --category-bg-hover-color: #eee;
+    --meta-margin: 0;
+    --meta-color: #eeeeee;
+    --meta-hover-color: #dddddd;
+    --category-font-size: 13px;
     --category-margin: 0 .5em 0 0;
     --excerpt-font-size: 16px;
+    --excerpt-color: #dddddd;
     --excerpt-line-height: 1.5;
     --excerpt-font-size-small: 14px;
     --excerpt-line-height-small: 1.5;
     --excerpt-margin: 0 0 20px;
     --excerpt-margin-small: 0 0 20px;
+
+    margin: 0 0 50px 0;
 
     .bnm-fp2-large-post {
         .entry-title {
@@ -30,10 +34,13 @@
             letter-spacing: var(--title-letter-spacing);
             padding: var(--title-padding);
             margin: var(--title-margin);
-
+            
             a {
                 text-decoration: inherit;
                 color: var(--title-color);
+                position: relative;
+                z-index: 2;
+
                 
                 &:hover {
                     color:  var(--title-hover-color);
@@ -69,6 +76,8 @@
             a {
                 text-decoration: inherit;
                 color: var(--title-color);
+                position: relative;
+                z-index: 2;
                 
                 &:hover {
                     color:  var(--title-hover-color);
@@ -102,12 +111,14 @@
     .bnm-category-list {
         a {
             color: var(--category-color);
+            display: inline-block;
             font-size: var(--category-font-size);
             line-height: var(--category-line-height);
             letter-spacing: var(--category-letter-spacing);
             text-decoration: inherit;
-            padding: var(--category-padding);
             margin: var(--category-margin);
+            position: relative;
+            z-index: 2;
 
             &:hover {
                 color: var(--category-hover-color);
@@ -115,7 +126,7 @@
         }
     }
 
-    &.has-category-background {
+    &.bnm-box-cat {
         .bnm-category-list {
             a {
                 background-color: var(--category-bg-color);
@@ -144,16 +155,37 @@
             a {
                 text-decoration: inherit;
                 color: var(--meta-color);
+                position: relative;
+                z-index: 2;
 
                 &:hover {
                     color: var(--meta-hover-color);
                 }
             }
         }
+
     }
 
     .bnm-post-author {
         display: inline-block;
+    }
+
+    .bnm-fp2-post-content {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 20px 25px;
+        width: 100%;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0));
+
+        a {
+            color: inherit;
+        }
+
+        a.bnm-readmore {
+            color: var(--excerpt-color);
+        }
     }
 
 }
@@ -218,26 +250,6 @@
     }
 }
 
-.bnm-fp2-post-content {
-    z-index: 1;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
-.bnm-fp2-content-inner {
-    padding: 10px 25px;
-    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, black 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, black));
-    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, black 100%);
-    background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, black 100%);
-    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, black 100%);
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 100%);
-}
-
 .bnm-fp2-bottom,
 .bnm-fp2-top {
     display: flex;
@@ -245,14 +257,14 @@
 
 .bnm-fp2-large-post {
     width: 100%;
-    @media (min-width: 600px) {
+    @media (min-width: 768px) {
         width: 50%;
     }
 }
 
 .bnm-fp2-small-post {
     width: 100%;
-    @media (min-width: 600px) {
+    @media (min-width: 768px) {
         width: 33.33%;
     }
 }
@@ -266,4 +278,18 @@
 .bnm-fp2-container {
     display: flex;
     flex-wrap: wrap;
+}
+
+.bnmfpovrlay,
+.bnmlnkovrlay {
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.bnmfpovrlay.inside-gut-editor {
+	cursor: pointer
 }

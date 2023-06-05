@@ -309,7 +309,7 @@ export default function PostsSliderEdit( {
 							const {
 								url: imageSourceUrl,
 								alt: featuredImageAlt,
-							} = getFeaturedImageDetails( post, 'large' );
+							} = getFeaturedImageDetails( post, attributes.featuredImageSizeSlug );
 
 							return (
 								<div className="swiper-slide" key={ post.id }>
@@ -334,7 +334,7 @@ export default function PostsSliderEdit( {
 										
 										<div className="bnm-slider-content">
 
-											{ showCategory && (
+											{ showCategory && categoriesList && (
 												<PostCategories
 													categoriesList={categoriesList}
 													post={post}
@@ -350,7 +350,7 @@ export default function PostsSliderEdit( {
 
 											<div className="entry-meta">
 
-												{ attributes.showAuthor && (
+												{ attributes.showAuthor && authorsList && (
 													<PostAuthor
 														post={post}
 														authorsList={authorsList}

@@ -41,18 +41,22 @@ class Post_Block_1_CSS {
                 array(
                     'property'  =>  '--title-padding',
                     'value'     =>  'titlePadding',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--title-padding-small',
                     'value'     =>  'titlePaddingSmall',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--title-margin',
                     'value'     =>  'titleMargin',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--title-margin-small',
                     'value'     =>  'titleMarginSmall',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--title-color',
@@ -94,10 +98,12 @@ class Post_Block_1_CSS {
                 array(
                     'property'  =>  '--category-padding',
                     'value'     =>  'categoryPadding',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--category-margin',
                     'value'     =>  'categoryMargin',
+                    'type'      =>  'box-control',
                 ),
                 array(
                     'property'  =>  '--meta-font-size',

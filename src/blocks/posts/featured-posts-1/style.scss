@@ -1,26 +1,30 @@
-.wp-block-bnm-blocks-featured-posts-1 {
+.wpbnmfpb1 {
 
     --title-font-size: 18px;
     --title-line-height: 1.2;
     --title-line-height-small: 1.2;
     --title-margin: 5px 0 10px 0;
     --title-color: #ffffff;
-    --category-color: #cccccc;
+    --title-hover-color: #dddddd;
+    --category-color: #eeeeee;
+    --category-hover-color: #dddddd;
     --meta-font-size: 12px;
     --meta-font-size-small: 12px;
     --meta-spacing: 10px;
-    --meta-margin: 0 0 15px;
+    --meta-margin: 0;
     --meta-color: #cccccc;
-    --category-color: #cccccc;
-    --category-font-size: 11px;
-    --category-bg-hover-color: #eee;
+    --meta-hover-color: #dddddd;
+    --category-font-size: 13px;
     --category-margin: 0 .5em 0 0;
     --excerpt-font-size: 16px;
+    --excerpt-color: #dddddd;
     --excerpt-line-height: 1.5;
     --excerpt-font-size-small: 14px;
     --excerpt-line-height-small: 1.5;
     --excerpt-margin: 0 0 20px;
     --excerpt-margin-small: 0 0 20px;
+
+    margin: 0 0 50px 0;
 
     .bnm-fp1-large-post {
         .entry-title {
@@ -33,6 +37,8 @@
             a {
                 text-decoration: inherit;
                 color: var(--title-color);
+                position: relative;
+                z-index: 2;
                 
                 &:hover {
                     color:  var(--title-hover-color);
@@ -40,12 +46,20 @@
             }
         }
 
-        .entry-meta,
-        .entry-meta a {
+        .entry-meta {
             text-decoration: inherit;
             font-size: var(--meta-font-size);
             line-height: var(--meta-line-height);
             letter-spacing: var(--meta-letter-spacing);
+
+            a {
+                text-decoration: inherit;
+                font-size: var(--meta-font-size);
+                line-height: var(--meta-line-height);
+                letter-spacing: var(--meta-letter-spacing);
+                position: relative;
+                z-index: 2;
+            }
         }
 
         .bnm-post-excerpt {
@@ -68,6 +82,8 @@
             a {
                 text-decoration: inherit;
                 color: var(--title-color);
+                position: relative;
+                z-index: 2;
                 
                 &:hover {
                     color:  var(--title-hover-color);
@@ -99,14 +115,17 @@
     }
 
     .bnm-category-list {
+        display: block;
         a {
             color: var(--category-color);
+            display: inline-block;
             font-size: var(--category-font-size);
             line-height: var(--category-line-height);
             letter-spacing: var(--category-letter-spacing);
             text-decoration: inherit;
-            padding: var(--category-padding);
             margin: var(--category-margin);
+            position: relative;
+            z-index: 2;
 
             &:hover {
                 color: var(--category-hover-color);
@@ -114,7 +133,7 @@
         }
     }
 
-    &.has-category-background {
+    &.bnm-box-cat {
         .bnm-category-list {
             a {
                 background-color: var(--category-bg-color);
@@ -155,10 +174,23 @@
         display: inline-block;
     }
 
-}
+    .bnm-fp1-post-content {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0));
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding: 15px 25px;
+        width: 100%;
 
-.bnm-category-list {
-    display: block;
+        a {
+            color: inherit;
+        }
+    
+        a.bnm-readmore {
+            color: var(--excerpt-color);
+        }
+    }
+
 }
 
 .bnm-avatar {
@@ -168,8 +200,7 @@
         height: 25px;
         border-radius: 50%;
         vertical-align: top;
-    } 
-    
+    }
 }
 
 .post-thumbnail {
@@ -242,27 +273,41 @@
     }
 }
 
-.bnm-fp1-post-content {
-    z-index: 1;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    padding: 10px 25px;
-}
 
-.bnm-fp1-container {
-    display: flex;
-}
 
-.bnm-fp1-left-side {
-    width: 66.8181818182%;
-}
+.bnm-fp1-left-side,
 .bnm-fp1-right-side {
-    width: 33.181818181818182%;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .bnm-fp1-container {
+        display: flex;
+    }
+    .bnm-fp1-left-side {
+        width: 66.8181818182%;
+    }
+    .bnm-fp1-right-side {
+        width: 33.181818181818182%;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .posted-on time.updated {
     display: none;
+}
+
+.bnmfpovrlay,
+.bnmlnkovrlay {
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.bnmfpovrlay.inside-gut-editor {
+	cursor: pointer
 }
