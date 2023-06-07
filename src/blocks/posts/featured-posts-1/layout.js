@@ -122,7 +122,7 @@ export const Layout = ({
                                 </div>
 
                                 <div className="bnm-fp1-post-content">
-                                    { attributes.showCategory && categoriesList && (
+                                    { attributes.showCategorySmall && categoriesList && (
                                         <PostCategories
                                             categoriesList={categoriesList}
                                             post={post}
@@ -135,7 +135,7 @@ export const Layout = ({
                                         />
                                     ) }
                                     <div className="entry-meta">
-                                        { attributes.showAuthor && authorsList && (
+                                        { attributes.showAuthorSmall && authorsList && (
                                             <PostAuthor
                                                 post={post}
                                                 authorsList={authorsList}
@@ -143,13 +143,13 @@ export const Layout = ({
                                             />
                                         ) }
 
-                                        { attributes.showDate && (
+                                        { attributes.showDateSmall && (
                                             <PostDateTime 
                                                 post={post}
                                             />
                                         ) }
 
-                                        { attributes.showCommentCount && (
+                                        { attributes.showCommentCountSmall && (
                                             <PostCommentCount
                                                 post={post}
                                             />

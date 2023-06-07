@@ -2,9 +2,8 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
 	"name": "bnm-blocks/featured-posts-1",
-	"version": "0.1.0",
 	"title": "Featured Posts: #1",
-	"category": "widgets",
+	"category": "bnm-blocks",
 	"icon": "smiley",
 	"description": "Featured Posts Block style #1.",
 	"supports": {

@@ -2,9 +2,8 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
 	"name": "bnm-blocks/post-block-3",
-	"version": "0.1.0",
 	"title": "Post Block: #3",
-	"category": "widgets",
+	"category": "bnm-blocks",
 	"icon": "smiley",
 	"description": "Post block style #3.",
 	"supports": {

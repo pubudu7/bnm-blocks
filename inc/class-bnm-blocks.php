@@ -6,6 +6,61 @@
 class BNM_Blocks {
 
     /**
+     * Initialize the class.
+     */
+    public static function init() {
+        add_action( 'after_setup_theme', array( __CLASS__, 'add_image_sizes' ) );
+        add_filter( 'block_categories_all', array( __CLASS__, 'register_block_categories' ), 11, 2 );
+    }
+
+    /**
+     * Register our custom block categories.
+     */
+    public static function register_block_categories( $categories, $block_editor_context ) {
+        return array_merge(
+            array(
+                array(
+                    'slug'  => 'bnm-blocks',
+                    'title' => __( 'BNM', 'bnm-blocks' )
+                )
+            ),
+            $categories
+        );
+    }
+
+    /**
+	 * Enqueue block scripts and styles for editor.
+	 */
+    public static function enqueue_block_editor_assets() {
+        wp_enqueue_script( 'bnm-blocks-assets-common', BNM_BLOCKS_URL . 'admin/js/blocks.js', array(), '', true );
+    
+        wp_localize_script(
+            'bnm-blocks-assets-common',
+            'themezHutGutenberg',
+            array(
+                'imageSizes'    => function_exists( 'is_wpcom_vip' ) ? array( 'thumbnail', 'medium', 'medium_large', 'large' ) : get_intermediate_image_sizes(), // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_intermediate_image_sizes_get_intermediate_image_sizes
+            )
+        );
+
+        $editor_style = plugins_url( BNM_BLOCKS__ADMIN_DIRECTORY . 'css/editor.css', BNM_BLOCKS__PLUGIN_FILE );
+
+		wp_enqueue_style(
+			'bnm-blocks-editor',
+			$editor_style,
+			array(),
+			BNM_BLOCKS__VERSION
+		);
+    }
+
+    /**
+     * Registers image sizes.
+     */
+    public static function add_image_sizes() {
+        add_image_size( 'bnm-featured', 610, 344, true );
+        add_image_size( 'bnm-featured-thumb', 250, 180, true );
+    }
+
+    /**
      * Setups the posts query for WP_Query.
      */
     public static function build_articles_query( $attributes ) {
@@ -91,3 +146,4 @@ class BNM_Blocks {
     }
 
 }
+BNM_Blocks::init();

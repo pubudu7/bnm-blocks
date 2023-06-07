@@ -2,9 +2,8 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
   "name": "bnm-blocks/posts-slider",
-  "version": "0.1.0",
   "title": "Posts Slider",
-  "category": "widgets",
+  "category": "bnm-blocks",
   "icon": "smiley",
   "description": "Example block scaffolded with Create Block tool.",
   "supports": {

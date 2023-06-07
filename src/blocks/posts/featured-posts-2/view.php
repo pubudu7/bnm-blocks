@@ -119,7 +119,7 @@ function bnm_blocks_featured_posts_block_2_render_callback( $attributes ) {
 						<div class="bnm-fp2-post-content">
 							<div class="bnm-fp2-content-inner">
 
-							<?php if ( $attributes['showCategory'] ) { ?>
+							<?php if ( $attributes['showCategorySmall'] ) { ?>
 								<div class="bnm-category-list">
 									<?php the_category( ' ' ); ?>
 								</div>
@@ -132,19 +132,19 @@ function bnm_blocks_featured_posts_block_2_render_callback( $attributes ) {
 							?>
 
 							<div class="entry-meta">
-								<?php if ( $attributes['showAuthor'] ) { ?>
+								<?php if ( $attributes['showAuthorSmall'] ) { ?>
 									<span class="bnm-post-author">
 										<?php bnm_posted_by(); ?>
 									</span>
 								<?php } ?>
 
-								<?php if ( $attributes['showDate'] ) { ?>
+								<?php if ( $attributes['showDateSmall'] ) { ?>
 									<span class="bnm-post-date">
 										<?php bnm_posted_on(); ?>
 									</span>
 								<?php } ?>
 
-								<?php if ( $attributes['showCommentCount'] ) { ?>
+								<?php if ( $attributes['showCommentCountSmall'] ) { ?>
 									<span class="bnm-comment-count">
 										<?php bnm_comments_link(); ?>
 									</span>

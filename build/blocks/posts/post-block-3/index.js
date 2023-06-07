@@ -292,6 +292,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/blocks/posts/post-block-3/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/blocks/posts/post-block-3/save.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/blocks/posts/post-block-3/block.json");
+/* harmony import */ var _shared_js_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../shared/js/icons */ "./src/shared/js/icons.js");
 /**
  * Registers a new block provided a unique name and an object defining its behavior.
  *
@@ -314,6 +315,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * Every block starts by registering a new block type definition.
  *
@@ -321,6 +323,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
+  icon: _shared_js_icons__WEBPACK_IMPORTED_MODULE_5__.PostBlock3Icon,
+
   /**
    * @see ./edit.js
    */
@@ -1985,6 +1989,539 @@ function TypographyControl(props) {
 
 /***/ }),
 
+/***/ "./src/shared/js/icons.js":
+/*!********************************!*\
+  !*** ./src/shared/js/icons.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FeaturedBlock1Icon": () => (/* binding */ FeaturedBlock1Icon),
+/* harmony export */   "FeaturedBlock2Icon": () => (/* binding */ FeaturedBlock2Icon),
+/* harmony export */   "PostBlock2Icon": () => (/* binding */ PostBlock2Icon),
+/* harmony export */   "PostBlock3Icon": () => (/* binding */ PostBlock3Icon),
+/* harmony export */   "Slider1Icon": () => (/* binding */ Slider1Icon),
+/* harmony export */   "postBlock1Icon": () => (/* binding */ postBlock1Icon)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+const postBlock1Icon = () => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "48",
+    height: "48",
+    version: "1.1",
+    viewBox: "0 0 12.7 12.7"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    fillRule: "evenodd"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.251",
+    d: "M0 .794h5.556v3.704H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.418",
+    d: "M6.88.794h2.645v1.852H6.879z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M0 5.82h5.556v1.06H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.187",
+    d: "M0 7.938h5.556v.529H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.247",
+    d: "M0 8.996h5.556v.529H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.247",
+    d: "M0 10.054h5.556v.53H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.195",
+    d: "M0 11.113h3.44v.529H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.279",
+    d: "M10.054.794H12.7v.529h-2.646z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.283",
+    d: "M10.054 1.852h2.117v.53h-2.117z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.418",
+    d: "M6.88 3.704h2.645v1.852H6.879z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.418",
+    d: "M6.88 6.615h2.645v1.852H6.879z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.418",
+    d: "M6.88 9.525h2.645v1.852H6.879z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.279",
+    d: "M10.054 3.704H12.7v.53h-2.646z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.279",
+    d: "M10.054 6.615H12.7v.529h-2.646z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.279",
+    d: "M10.054 9.525H12.7v.53h-2.646z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.283",
+    d: "M10.054 4.763h2.117v.529h-2.117z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.283",
+    d: "M10.054 7.673h2.117v.53h-2.117z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.283",
+    d: "M10.054 10.583h2.117v.53h-2.117z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  })));
+};
+const PostBlock2Icon = () => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "48",
+    height: "48",
+    version: "1.1",
+    viewBox: "0 0 12.7 12.7"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    fill: "#000",
+    fillOpacity: "1",
+    fillRule: "evenodd"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.251",
+    d: "M0 0h5.556v3.704H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.418",
+    d: "M7.144 7.144H9.79v1.852H7.144z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M0 4.498h5.556v1.058H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.418",
+    d: "M7.144 10.054H9.79v1.852H7.144z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.418",
+    d: "M0 10.054h2.646v1.852H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.418",
+    d: "M0 7.144h2.646v1.852H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.279",
+    d: "M3.175 10.054h2.646v.53H3.175z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M3.175 7.144h2.381v.529H3.175z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.283",
+    d: "M3.175 11.113h2.117v.529H3.175z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.283",
+    d: "M3.175 8.202h2.117v.53H3.175z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M10.319 7.144H12.7v.529h-2.381z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.283",
+    d: "M10.319 8.202h2.116v.53H10.32z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M10.319 10.054H12.7v.53h-2.381z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.283",
+    d: "M10.319 11.113h2.116v.529H10.32z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.251",
+    d: "M7.144 0H12.7v3.704H7.144z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M7.144 4.498H12.7v1.058H7.144z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  })));
+};
+const PostBlock3Icon = () => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "48",
+    height: "48",
+    version: "1.1",
+    viewBox: "0 0 12.7 12.7"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    fillRule: "evenodd"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#000",
+    fillOpacity: "1",
+    strokeWidth: "0.158",
+    d: "M0 1.323h3.44v2.381H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#000",
+    fillOpacity: "1",
+    strokeWidth: "0.158",
+    d: "M4.498 1.323h3.44v2.381h-3.44z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#000",
+    fillOpacity: "1",
+    strokeWidth: "0.158",
+    d: "M8.996 1.323h3.44v2.381h-3.44z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#000",
+    fillOpacity: "1",
+    strokeWidth: "0.158",
+    d: "M0 7.408h3.44V9.79H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#000",
+    fillOpacity: "1",
+    strokeWidth: "0.158",
+    d: "M4.498 7.408h3.44V9.79h-3.44z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#000",
+    fillOpacity: "1",
+    strokeWidth: "0.158",
+    d: "M8.996 7.408h3.44V9.79h-3.44z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M0 4.498h3.44v.794H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M4.498 4.498h3.44v.794h-3.44z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M8.996 4.498h3.44v.794h-3.44z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M0 10.583h3.44v.794H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M4.498 10.583h3.44v.794h-3.44z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.265",
+    d: "M8.996 10.583h3.44v.794h-3.44z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  })));
+};
+const FeaturedBlock1Icon = () => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "48",
+    height: "48",
+    version: "1.1",
+    viewBox: "0 0 12.7 12.7"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    fillRule: "evenodd"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.235",
+    d: "M0 3.704h7.408v5.027H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#333",
+    strokeWidth: "0.266",
+    d: "M8.202 3.704H12.7v2.117H8.202z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#333",
+    strokeWidth: "0.266",
+    d: "M8.202 6.615H12.7V8.73H8.202z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  })));
+};
+const FeaturedBlock2Icon = () => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "48",
+    height: "48",
+    version: "1.1",
+    viewBox: "0 0 12.7 12.7"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", {
+    fillRule: "evenodd"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.197",
+    d: "M0 2.381h5.82V6.88H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#333",
+    strokeWidth: "0.256",
+    d: "M0 7.673h3.704v2.381H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.197",
+    d: "M6.88 2.381h5.82V6.88H6.88z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#333",
+    strokeWidth: "0.256",
+    d: "M4.498 7.673h3.704v2.381H4.498z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#333",
+    strokeWidth: "0.256",
+    d: "M8.996 7.673H12.7v2.381H8.996z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  })));
+};
+const Slider1Icon = () => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "48",
+    height: "48",
+    version: "1.1",
+    viewBox: "0 0 12.7 12.7"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("g", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fillRule: "evenodd",
+    strokeWidth: "0.276",
+    d: "M0 1.587h12.7v9.526H0z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "#fff",
+    fillRule: "evenodd",
+    strokeWidth: "0.278",
+    d: "M.794 2.381h11.112v7.938H.794z",
+    opacity: "1",
+    stopColor: "#000",
+    stopOpacity: "1",
+    vectorEffect: "none"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "none",
+    stroke: "#000",
+    strokeLinecap: "butt",
+    strokeLinejoin: "miter",
+    strokeOpacity: "1",
+    strokeWidth: "0.265",
+    d: "M2.91 5.027L1.852 6.35 2.91 7.408v0"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "none",
+    stroke: "#000",
+    strokeLinecap: "butt",
+    strokeLinejoin: "miter",
+    strokeOpacity: "1",
+    strokeWidth: "0.265",
+    d: "M2.91 5.027L1.852 6.35 2.91 7.408v0"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fill: "none",
+    stroke: "#000",
+    strokeLinecap: "butt",
+    strokeLinejoin: "miter",
+    strokeOpacity: "1",
+    strokeWidth: "0.265",
+    d: "M9.608 7.47l.975-1.385-1.12-.991v0"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.172",
+    d: "M5.3 9.147a.456.39 0 01-.456.39.456.39 0 01-.457-.39.456.39 0 01.457-.39.456.39 0 01.456.39z"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.172",
+    d: "M6.804 9.147a.456.39 0 01-.457.39.456.39 0 01-.456-.39.456.39 0 01.456-.39.456.39 0 01.457.39z"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    strokeWidth: "0.172",
+    d: "M8.34 9.131a.456.39 0 01-.457.39.456.39 0 01-.457-.39.456.39 0 01.457-.39.456.39 0 01.456.39z"
+  })));
+};
+
+/***/ }),
+
 /***/ "./src/shared/js/utils.js":
 /*!********************************!*\
   !*** ./src/shared/js/utils.js ***!
@@ -2296,7 +2833,7 @@ function _extends() {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"bnm-blocks/post-block-3","version":"0.1.0","title":"Post Block: #3","category":"widgets","icon":"smiley","description":"Post block style #3.","supports":{"html":false},"textdomain":"bnm-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"queryId":{"type":"number"},"query":{"type":"object","default":{"posts":[],"perPage":6,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":null}},"specificMode":{"type":"boolean","default":"false"},"specificPosts":{"type":"array","default":[],"items":{"type":"integer"}},"showTitle":{"type":"boolean","default":true},"titleHtmlTag":{"type":"string","default":"h3"},"titleFontSize":{"type":["string","number"]},"titleLineHeight":{"type":["number","string"]},"titleLetterSpacing":{"type":["number","string"]},"titlePadding":{"type":["number","object"],"default":[]},"titleMargin":{"type":["number","object"],"default":[]},"titleColor":{"type":"string","default":""},"titleHoverColor":{"type":"string","default":""},"showFeaturedImage":{"type":"boolean","default":true},"featuredImageAlign":{"type":"string","enum":["left","center","right"]},"featuredImageSizeSlug":{"type":"string","default":"bnm-featured"},"addLinkToFeaturedImage":{"type":"boolean","default":false},"showDate":{"type":"boolean","default":true},"showCategory":{"type":"boolean","default":true},"showAuthor":{"type":"boolean","default":true},"showAvatar":{"type":"boolean","default":true},"showCommentCount":{"type":"boolean","default":true},"displayPostExcerpt":{"type":"boolean","default":false},"categoryPadding":{"type":["number","object"],"default":[]},"categoryMargin":{"type":["number","object"],"default":[]},"excerptLength":{"type":"number","default":20},"excerptFontSize":{"type":["string","number"]},"excerptLineHeight":{"type":["number","string"]},"excerptLetterSpacing":{"type":["number","string"]},"excerptPadding":{"type":["number","object"],"default":[]},"excerptMargin":{"type":["number","object"],"default":[]},"excerptColor":{"type":"string","default":""},"showReadMore":{"type":"boolean","default":false},"readMoreLabel":{"type":"string","default":"Keep reading"},"metaFontSize":{"type":["string","number"]},"metaLineHeight":{"type":["number","string"]},"metaLetterSpacing":{"type":["number","string"]},"metaSpacing":{"type":["number","object"],"default":[]},"metaPadding":{"type":["number","object"],"default":[]},"metaMargin":{"type":["number","object"],"default":[]},"metaColor":{"type":"string","default":""},"metaHoverColor":{"type":"string","default":""},"categoryFontSize":{"type":["string","number"]},"categoryLineHeight":{"type":["number","string"]},"categoryLetterSpacing":{"type":["number","string"]},"categoryColor":{"type":"string","default":""},"categoryHoverColor":{"type":"string","default":""},"categoryBGColor":{"type":"string","default":""},"categoryBGHoverColor":{"type":"string","default":""}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"bnm-blocks/post-block-3","title":"Post Block: #3","category":"bnm-blocks","icon":"smiley","description":"Post block style #3.","supports":{"html":false},"textdomain":"bnm-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"queryId":{"type":"number"},"query":{"type":"object","default":{"posts":[],"perPage":6,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":null}},"specificMode":{"type":"boolean","default":"false"},"specificPosts":{"type":"array","default":[],"items":{"type":"integer"}},"showTitle":{"type":"boolean","default":true},"titleHtmlTag":{"type":"string","default":"h3"},"titleFontSize":{"type":["string","number"]},"titleLineHeight":{"type":["number","string"]},"titleLetterSpacing":{"type":["number","string"]},"titlePadding":{"type":["number","object"],"default":[]},"titleMargin":{"type":["number","object"],"default":[]},"titleColor":{"type":"string","default":""},"titleHoverColor":{"type":"string","default":""},"showFeaturedImage":{"type":"boolean","default":true},"featuredImageAlign":{"type":"string","enum":["left","center","right"]},"featuredImageSizeSlug":{"type":"string","default":"bnm-featured"},"addLinkToFeaturedImage":{"type":"boolean","default":false},"showDate":{"type":"boolean","default":true},"showCategory":{"type":"boolean","default":true},"showAuthor":{"type":"boolean","default":true},"showAvatar":{"type":"boolean","default":true},"showCommentCount":{"type":"boolean","default":true},"displayPostExcerpt":{"type":"boolean","default":false},"categoryPadding":{"type":["number","object"],"default":[]},"categoryMargin":{"type":["number","object"],"default":[]},"excerptLength":{"type":"number","default":20},"excerptFontSize":{"type":["string","number"]},"excerptLineHeight":{"type":["number","string"]},"excerptLetterSpacing":{"type":["number","string"]},"excerptPadding":{"type":["number","object"],"default":[]},"excerptMargin":{"type":["number","object"],"default":[]},"excerptColor":{"type":"string","default":""},"showReadMore":{"type":"boolean","default":false},"readMoreLabel":{"type":"string","default":"Keep reading"},"metaFontSize":{"type":["string","number"]},"metaLineHeight":{"type":["number","string"]},"metaLetterSpacing":{"type":["number","string"]},"metaSpacing":{"type":["number","object"],"default":[]},"metaPadding":{"type":["number","object"],"default":[]},"metaMargin":{"type":["number","object"],"default":[]},"metaColor":{"type":"string","default":""},"metaHoverColor":{"type":"string","default":""},"categoryFontSize":{"type":["string","number"]},"categoryLineHeight":{"type":["number","string"]},"categoryLetterSpacing":{"type":["number","string"]},"categoryColor":{"type":"string","default":""},"categoryHoverColor":{"type":"string","default":""},"categoryBGColor":{"type":"string","default":""},"categoryBGHoverColor":{"type":"string","default":""}}}');
 
 /***/ })
 
