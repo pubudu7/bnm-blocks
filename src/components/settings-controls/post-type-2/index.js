@@ -9,9 +9,6 @@ import { startCase, toLower } from 'lodash';
  * WordPress dependencies
  */
  import {
-	BaseControl,
-	Button,
-	ButtonGroup,
 	PanelBody,
 	PanelRow,
 	RangeControl,
@@ -19,18 +16,12 @@ import { startCase, toLower } from 'lodash';
 	ToggleControl,
 	TextControl,
 	__experimentalUnitControl as UnitControl,
-    FontSizePicker,
-    __experimentalNumberControl as NumberControl,
     __experimentalBoxControl as BoxControl,
-	TabPanel,
-    ColorPalette,
-    ColorPicker
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
+import { PanelColorSettings } from '@wordpress/block-editor';
 
 
-import ColorPopupButton from '../../../components/color-control';
 import TypographyControl from '../../../components/typography'; 
 
 export default function BlockExtraSettings( { attributes, setAttributes } ) {
@@ -42,9 +33,12 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 		titleLetterSpacing,
 		titleMargin,
         titlePadding,
-        titleColor,
-        titleHoverColor,
 		showFeaturedImage,
+		imagePosition,
+		featuredImageWidth,
+		featuredImageMargin,
+		imageMinHeight,
+		entryContentWidth,
         showDate,
         showCategory,
         showAuthor,
@@ -57,7 +51,6 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 		excerptFontSize,
 		excerptLineHeight,
 		excerptLetterSpacing,
-		excerptColor,
 		excerptMargin,
 		excerptPadding,
 		showReadMore,
@@ -65,25 +58,103 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
         metaFontSize,
 		metaLineHeight,
 		metaLetterSpacing,
-        metaColor,
-        metaHoverColor,
 		metaSpacing,
 		metaMargin,
 		metaPadding,
         categoryFontSize,
 		categoryLineHeight,
-		categoryLetterSpacing,
-        categoryColor,
-        categoryHoverColor,
-        categoryBGColor,
-        categoryBGHoverColor
+		categoryLetterSpacing
     } = attributes;
 
-	const updateColor = ( newColor ) =>
-		setAttributes( { titleColor: newColor } );
+	const formatWidthValue = ( value, propertyToUpdate ) => {
+		if(!value) {
+			return;
+		}
+		const numericValue = parseFloat(value.match(/\d+/)[0]);
+
+		if ( numericValue >= 20 && numericValue <= 80 ) {
+			setAttributes( { [propertyToUpdate]: value } );
+		} else {
+			const defaultValue = propertyToUpdate === "entryContentWidth" ? "67%" : "33%";
+			setAttributes( { [propertyToUpdate]: defaultValue } );
+		}
+	};
 
     return (
-        <InspectorControls>
+        <>
+			<PanelBody title={ __( 'Featured Image Settings', 'bnm-blocks') } initialOpen={ false }>
+				<ToggleControl
+					label={ __( 'Display Featured Image', 'bnm-blocks' ) }
+					checked={ showFeaturedImage }
+					onChange={ () => setAttributes( { showFeaturedImage: ! showFeaturedImage } ) }
+				/>
+				{ showFeaturedImage && (
+					<SelectControl
+						label={ __( 'Image Size', 'bnm-blocks' ) }
+						value={ attributes.featuredImageSizeSlug }
+						options={ window.themezHutGutenberg.imageSizes.map( size => ({
+							label: startCase( toLower( size ) ),
+							value: size
+						}) ) }
+						onChange={ imageSize => setAttributes({ featuredImageSizeSlug: imageSize }) }
+					/> 
+				) }
+
+				{ showFeaturedImage && imagePosition !== 'top' && imagePosition !== 'behind' && (
+					<>
+					<UnitControl
+						label={ __( 'Featured Image Width (%)', 'bnm-blocks' ) }
+						value={ featuredImageWidth }
+						onChange={ value => formatWidthValue(value, "featuredImageWidth") }
+						step={ 5 }
+						units={[
+							{
+								a11yLabel: 'Percentage (%)',
+								label: '%',
+								step: 5,
+								value: '%'
+							}
+						]}
+					/>
+					<UnitControl
+						label={ __( 'Content Width (%)', 'bnm-blocks' ) }
+						value={ entryContentWidth }
+						onChange={ value => formatWidthValue(value, "entryContentWidth") }
+						step={ 5 }
+						units={[
+							{
+								a11yLabel: 'Percentage (%)',
+								label: '%',
+								step: 5,
+								value: '%'
+							}
+						]}
+					/>
+					</>
+				) }
+
+				{ showFeaturedImage && imagePosition === 'behind' && (
+					<RangeControl
+						label={ __( 'Minimum height', 'bnm-blocks' ) }
+						help={ __(
+							"Sets a minimum height for the block, using a percentage of the screen's current height.",
+							'bnm-blocks'
+						) }
+						value={ imageMinHeight }
+						onChange={ _imageMinHeight => setAttributes( { imageMinHeight: _imageMinHeight } ) }
+						min={ 0 }
+						max={ 100 }
+						required
+					/>
+				) }
+
+				<BoxControl
+					label={ __( 'Margin', 'bnm-blocks' ) }
+					values={ featuredImageMargin }
+					onChange={ nextValues => setAttributes( { featuredImageMargin: nextValues } ) }
+				/>
+			</PanelBody>
+
 			<PanelBody title={ __( 'Post Title', 'bnm-blocks' ) } initialOpen={ false }>
 				<ToggleControl
 					label={ __( 'Show Title', 'bnm-blocks' ) }
@@ -149,17 +220,7 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 									label: __( 'Title Hover', 'bnm-blocks' )
 								}
 							] }
-						/>
-
-						<ColorPopupButton
-							color={ titleHoverColor }
-							onChange={ ( value ) => {
-								setAttributes({
-									titleHoverColor: value,
-								});
-							} }
-							label={ __( 'Title Hover Color', 'bnm-blocks' ) }
-						/>					
+						/>				
 					</div>
 					) }
 				</PanelBody>
@@ -197,42 +258,32 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 						onChange={ nextValues => setAttributes( { categoryPadding: nextValues } ) }
 					/>
 
-					<ColorPopupButton
-						color={ categoryColor }
-						onChange={ ( value ) => {
-							setAttributes({
-								categoryColor: value,
-							});
-						} }
-						label={ __( 'Category Color', 'bnm-blocks' ) }
-					/>
-					<ColorPopupButton
-						color={ categoryHoverColor }
-						onChange={ ( value ) => {
-							setAttributes({
-								categoryHoverColor: value,
-							});
-						} }
-						label={ __( 'Category Hover Color', 'bnm-blocks' ) }
-					/>
-					<ColorPopupButton
-						color={ categoryBGColor }
-						onChange={ ( value ) => {
-							setAttributes({
-								categoryBGColor: value,
-							});
-						} }
-						label={ __( 'Category Background Color', 'bnm-blocks' ) }
-					/>
-					<ColorPopupButton
-						color={ categoryBGHoverColor }
-						onChange={ ( value ) => {
-							setAttributes({
-								categoryBGHoverColor: value,
-							});
-						} }
-						label={ __( 'Category Background Hover Color', 'bnm-blocks' ) }
-					/>
+					<PanelColorSettings
+						title={ __( 'Category Color', 'bnm-blocks' ) }
+						initialOpen={ false }
+						colorSettings={ [
+							{
+								value: attributes.categoryColor,
+								onChange: categoryColor => setAttributes({ categoryColor }),
+								label: __( 'Text Color', 'bnm-blocks' )
+							},
+							{
+								value: attributes.categoryHoverColor,
+								onChange: categoryHoverColor => setAttributes({ categoryHoverColor }),
+								label: __( 'Text Color: Hover', 'bnm-blocks' )
+							},
+							{
+								value: attributes.categoryBGColor,
+								onChange: categoryBGColor => setAttributes({ categoryBGColor }),
+								label: __( 'Background Color', 'bnm-blocks' )
+							},
+							{
+								value: attributes.categoryBGHoverColor,
+								onChange: categoryBGHoverColor => setAttributes({ categoryBGHoverColor }),
+								label: __( 'Background Color: Hover', 'bnm-blocks' )
+							}
+						] }
+					/>	
 				</PanelBody>
 	
 				<PanelBody title={ __( 'Post Meta', 'bnm-blocks' ) } className="thbnm-panelbody" initialOpen={ false }>
@@ -272,8 +323,7 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
                         letterSpacing = { metaLetterSpacing }
                         onLetterSpacingChange = { ( newLetterSpacing ) => setAttributes( { metaLetterSpacing: newLetterSpacing } ) }
                     />
-
-
+					
 					<br />
 
 					<UnitControl
@@ -299,23 +349,21 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 						onChange={ nextValues => setAttributes( { metaPadding: nextValues } ) }
 					/>
 
-					<ColorPopupButton
-						color={ metaColor }
-						onChange={ ( value ) => {
-							setAttributes({
-								metaColor: value,
-							});
-						} }
-						label={ __( 'Post Meta Color', 'bnm-blocks' ) }
-					/>
-					<ColorPopupButton
-						color={ metaHoverColor }
-						onChange={ ( value ) => {
-							setAttributes({
-								metaHoverColor: value,
-							});
-						} }
-						label={ __( 'Post Meta Hover Color', 'bnm-blocks' ) }
+					<PanelColorSettings
+						title={ __( 'Post Meta Color', 'bnm-blocks' ) }
+						initialOpen={ false }
+						colorSettings={ [
+							{
+								value: attributes.metaColor,
+								onChange: metaColor => setAttributes({ metaColor }),
+								label: __( 'Text Color', 'bnm-blocks' )
+							},
+							{
+								value: attributes.metaHoverColor,
+								onChange: metaHoverColor => setAttributes({ metaHoverColor }),
+								label: __( 'Text Color: Hover', 'bnm-blocks' )
+							}
+						] }
 					/>
 			</PanelBody>
 			<PanelBody title={ __( 'Post Excerpt', 'bnm-blocks' ) } className="thbnm-panelbody" initialOpen={ false }>
@@ -386,26 +434,7 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 					] }
 				/>
 			</PanelBody>
-			<PanelBody title={ __( 'Featured Image Settings', 'bnm-blocks') } initialOpen={ false }>
 
-                <ToggleControl
-                    label={ __( 'Display Featured Image', 'bnm-blocks' ) }
-                    checked={ showFeaturedImage }
-                    onChange={ () => setAttributes( { showFeaturedImage: ! showFeaturedImage } ) }
-                />
-                { showFeaturedImage && (
-                    <SelectControl
-                        label={ __( 'Image Size', 'bnm-blocks' ) }
-                        value={ attributes.featuredImageSizeSlug }
-                        options={ window.themezHutGutenberg.imageSizes.map( size => ({
-                            label: startCase( toLower( size ) ),
-                            value: size
-                        }) ) }
-                        onChange={ imageSize => setAttributes({ featuredImageSizeSlug: imageSize }) }
-                    /> 
-                ) }
-	
-			</PanelBody>
-		</InspectorControls>
+		</>
     );
 }

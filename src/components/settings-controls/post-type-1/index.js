@@ -7,9 +7,6 @@ import { startCase, toLower } from 'lodash';
  * WordPress dependencies
  */
  import {
-	BaseControl,
-	Button,
-	ButtonGroup,
 	PanelBody,
 	PanelRow,
 	RangeControl,
@@ -17,18 +14,13 @@ import { startCase, toLower } from 'lodash';
 	ToggleControl,
 	TextControl,
 	__experimentalUnitControl as UnitControl,
-    FontSizePicker,
     __experimentalNumberControl as NumberControl,
     __experimentalBoxControl as BoxControl,
 	TabPanel,
-    ColorPalette,
-    ColorPicker
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
+import { PanelColorSettings } from '@wordpress/block-editor';
 
-
-import ColorPopupButton from '../../../components/color-control';
 import TypographyControl from '../../../components/typography'; 
 
 export default function BlockExtraSettings( { attributes, setAttributes } ) {
@@ -88,7 +80,7 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
     } = attributes;
 
     return (
-        <InspectorControls>
+        <>
 			<PanelBody title={ __( 'Post Title', 'bnm-blocks' ) } initialOpen={ false }>
 				<ToggleControl
 					label={ __( 'Show Title', 'bnm-blocks' ) }
@@ -600,6 +592,6 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 					} }
 				</TabPanel>
 			</PanelBody>
-		</InspectorControls>
+		</>
     );
 }

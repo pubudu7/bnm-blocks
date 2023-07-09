@@ -7,6 +7,7 @@ import {
 	PostCategories,
 	FeaturedImage,
 	PostAuthor,
+	PostAuthorAvatar,
 	PostDateTime,
 	PostCommentCount,
 } from '../../../components/meta/meta.js'
@@ -25,6 +26,10 @@ export const Layout = ({
             <div className="posts-block-1-container">
                 <div className="bnm-left-block">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => {
+
+                        const currentAuthor = authorsList?.find(
+                            ( writer ) => writer.id === post.author
+                        );
 
                         return(
                             index === 0 && (
@@ -51,11 +56,15 @@ export const Layout = ({
                                             />
                                         ) }
                                         <div className="entry-meta">
-                                            { attributes.showAuthor && authorsList && (
+                                            { attributes.showAuthor && attributes.showAvatar && currentAuthor && (
+                                                <PostAuthorAvatar
+                                                    author={currentAuthor}
+                                                />
+                                            ) }
+                                            
+                                            { attributes.showAuthor && currentAuthor && (
                                                 <PostAuthor
-                                                    post={post}
-                                                    authorsList={authorsList}
-                                                    showAvatar={attributes.showAvatar}
+                                                    author={currentAuthor}
                                                 />
                                             ) }
 
@@ -86,7 +95,11 @@ export const Layout = ({
                 </div>
                 <div className="bnm-right-block">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => { 
-                        
+
+                        const currentAuthor = authorsList?.find(
+                            ( writer ) => writer.id === post.author
+                        );
+                            
                         return(
                             index > 0 && (
                                 <div className="bnm-pb1-small-post">
@@ -114,13 +127,18 @@ export const Layout = ({
                                             />
                                         ) }
                                         <div className="entry-meta">
-                                            { attributes.showAuthorSmall && authorsList && (
-                                                <PostAuthor
-                                                    post={post}
-                                                    authorsList={authorsList}
-                                                    showAvatar={attributes.showAvatarSmall}
+                                            
+                                            { attributes.showAuthorSmall && attributes.showAvatarSmall && currentAuthor && (
+                                                <PostAuthorAvatar
+                                                    author={currentAuthor}
                                                 />
                                             ) }
+                                            { attributes.showAuthorSmall && currentAuthor && (
+                                                <PostAuthor
+                                                    author={currentAuthor}
+                                                />
+                                            ) }
+                                            
                                             { attributes.showDateSmall && (
                                                 <PostDateTime 
                                                     post={post}

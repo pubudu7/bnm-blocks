@@ -1,6 +1,7 @@
 .wpbnmfpb1 {
 
-    --title-font-size: 18px;
+    --title-font-size: 24px;
+    --title-font-size-small: 18px;
     --title-line-height: 1.2;
     --title-line-height-small: 1.2;
     --title-margin: 5px 0 10px 0;
@@ -14,7 +15,7 @@
     --meta-margin: 0;
     --meta-color: #cccccc;
     --meta-hover-color: #dddddd;
-    --category-font-size: 13px;
+    --category-font-size: 14px;
     --category-margin: 0 .5em 0 0;
     --excerpt-font-size: 16px;
     --excerpt-color: #dddddd;
@@ -114,6 +115,23 @@
         }
     }
 
+    .bnm-fp1-post-content {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0));
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding: 15px 25px;
+        width: 100%;
+
+        a {
+            color: inherit;
+        }
+    
+        a.bnm-readmore {
+            color: var(--excerpt-color);
+        }
+    }
+
     .bnm-category-list {
         display: block;
         a {
@@ -174,22 +192,7 @@
         display: inline-block;
     }
 
-    .bnm-fp1-post-content {
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0));
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        padding: 15px 25px;
-        width: 100%;
 
-        a {
-            color: inherit;
-        }
-    
-        a.bnm-readmore {
-            color: var(--excerpt-color);
-        }
-    }
 
 }
 

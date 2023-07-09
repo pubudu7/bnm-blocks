@@ -10,14 +10,15 @@ import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import { 
 	useBlockProps,
+	InspectorControls,
 	store as blockEditorStore
 } from '@wordpress/block-editor';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useInstanceId } from '@wordpress/compose';
 import { store as coreStore } from '@wordpress/core-data';
 import { useRef, useEffect } from '@wordpress/element';
-import { InspectorControls } from '@wordpress/block-editor';
 import {
+	PanelBody,
 	Placeholder,
 	Spinner
 } from '@wordpress/components';
@@ -26,13 +27,14 @@ import {
  * Internal Dependencies.
  */
 import './editor.scss';
-import QueryInspectorControls from '../../components/query-controls';
+import QueryControls from '../../components/query-controls';
 import createSwiper from './create-swiper';
 import { SliderSettings } from './slider-controls'; 
 import {
 	PostTitle,
 	PostCategories,
 	PostAuthor,
+	PostAuthorAvatar,
 	PostDateTime,
 	PostCommentCount,
 } from '../../components/meta/meta.js';
@@ -270,10 +272,12 @@ export default function PostsSliderEdit( {
 
 	const inspectorControls = (
 		<InspectorControls>
-			<QueryInspectorControls
-				attributes={ attributes }
-				setQuery={ updateQuery }
-			/>
+			<PanelBody title={ __( 'Content Settings', 'bnm-blocks' ) } initialOpen={ true }>
+				<QueryControls
+					attributes={ attributes }
+					setQuery={ updateQuery }
+				/>
+			</PanelBody>
 			<SliderSettings
 				attributes={ attributes } 
 				setAttributes={ setAttributes }
@@ -310,6 +314,10 @@ export default function PostsSliderEdit( {
 								url: imageSourceUrl,
 								alt: featuredImageAlt,
 							} = getFeaturedImageDetails( post, attributes.featuredImageSizeSlug );
+
+							const currentAuthor = authorsList?.find(
+								( writer ) => writer.id === post.author
+							);
 
 							return (
 								<div className="swiper-slide" key={ post.id }>
@@ -350,11 +358,15 @@ export default function PostsSliderEdit( {
 
 											<div className="entry-meta">
 
-												{ attributes.showAuthor && authorsList && (
+												{ showAuthor && showAvatar && currentAuthor && (
+													<PostAuthorAvatar
+														author={currentAuthor}
+													/>
+												) }
+												
+												{ showAuthor && currentAuthor && (
 													<PostAuthor
-														post={post}
-														authorsList={authorsList}
-														showAvatar={showAvatar}
+														author={currentAuthor}
 													/>
 												) }
 

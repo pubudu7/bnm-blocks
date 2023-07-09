@@ -131,7 +131,7 @@
     },
     "showCategory": {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     "showAuthor": {
       "type": "boolean",
@@ -151,7 +151,7 @@
     },
     "showDateSmall": {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     "showCategorySmall": {
       "type": "boolean",

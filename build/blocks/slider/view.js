@@ -124,11 +124,11 @@ function createSwiper(element) {
           const alt = currentImage ? currentImage === null || currentImage === void 0 ? void 0 : currentImage.alt : false;
           const slideInfo = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)(
           /* translators: 1: current slide number and 2: total number of slides */
-          (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Slide %1$s of %2$s', 'newspack-blocks'), this.realIndex + 1, ((_this$pagination = this.pagination) === null || _this$pagination === void 0 ? void 0 : (_this$pagination$bull = _this$pagination.bullets) === null || _this$pagination$bull === void 0 ? void 0 : _this$pagination$bull.length) || 0);
+          (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Slide %1$s of %2$s', 'bnm-blocks'), this.realIndex + 1, ((_this$pagination = this.pagination) === null || _this$pagination === void 0 ? void 0 : (_this$pagination$bull = _this$pagination.bullets) === null || _this$pagination$bull === void 0 ? void 0 : _this$pagination$bull.length) || 0);
           (0,_wordpress_a11y__WEBPACK_IMPORTED_MODULE_0__.speak)((0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(`${currentSlide.innerText},
 							${alt ?
           /* translators: the title of the image. */
-          (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Image: %s, ', 'newspack-blocks'), alt) : ''}
+          (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Image: %s, ', 'bnm-blocks'), alt) : ''}
 							${slideInfo}`), 'assertive');
         }
       }

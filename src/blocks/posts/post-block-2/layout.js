@@ -6,6 +6,7 @@ import {
 	PostTitle,
 	PostCategories,
 	FeaturedImage,
+    PostAuthorAvatar,
 	PostAuthor,
 	PostDateTime,
 	PostCommentCount,
@@ -24,6 +25,11 @@ export const Layout = ({
             <div className="posts-block-2-container">
                 <div className="bnm-pb2-posts-grid">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => {
+
+                        const currentAuthor = authorsList?.find(
+                            ( writer ) => writer.id === post.author
+                        );
+
                         return(
                             ( index === 0 || index === 1 ) && (
                                 <div className="bnm-pb2-large-post">
@@ -48,11 +54,15 @@ export const Layout = ({
                                             />
                                         ) }
                                         <div className="entry-meta">
-                                            { attributes.showAuthor && authorsList && (
+                                            { attributes.showAuthor && attributes.showAvatar && currentAuthor && (
+                                                <PostAuthorAvatar
+                                                    author={currentAuthor}
+                                                />
+                                            ) }
+                                            
+                                            { attributes.showAuthor && currentAuthor && (
                                                 <PostAuthor
-                                                    post={post}
-                                                    authorsList={authorsList}
-                                                    showAvatar={attributes.showAvatar}
+                                                    author={currentAuthor}
                                                 />
                                             ) }
 
@@ -82,6 +92,11 @@ export const Layout = ({
                     } ) }
                 
                     { posts && posts.length > 0 && posts.map( ( post, index ) => { 
+
+                        const currentAuthor = authorsList?.find(
+                            ( writer ) => writer.id === post.author
+                        );
+
                         return(
                             index > 1 && (
                                 <div className="bnm-pb2-small-post">
@@ -109,11 +124,14 @@ export const Layout = ({
                                             />
                                         ) }
                                         <div className="entry-meta">
-                                            { attributes.showAuthorSmall && authorsList && (
+                                            { attributes.showAuthorSmall && attributes.showAvatarSmall && currentAuthor && (
+                                                <PostAuthorAvatar
+                                                    author={currentAuthor}
+                                                />
+                                            ) }
+                                            { attributes.showAuthorSmall && currentAuthor && (
                                                 <PostAuthor
-                                                    post={post}
-                                                    authorsList={authorsList}
-                                                    showAvatar={attributes.showAvatarSmall}
+                                                    author={currentAuthor}
                                                 />
                                             ) }
                                             { attributes.showDateSmall && (

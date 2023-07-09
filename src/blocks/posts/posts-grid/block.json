@@ -1,8 +1,8 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "bnm-blocks/post-block-3",
-	"title": "Post Block: #3",
+	"name": "bnm-blocks/posts-grid",
+	"title": "Posts Grid",
 	"category": "bnm-blocks",
 	"icon": "smiley",
 	"description": "Post block style #3.",
@@ -46,6 +46,25 @@
 			"items": {
 				"type": "integer"
 			}
+		},
+		"postLayout": {
+			"type": "string",
+			"default": "grid"
+		},
+		"columns": {
+			"type": "integer",
+			"default": 3
+		},
+		"colGap": {
+			"type": ["number", "string"]
+		},
+		"textAlign": {
+			"type": "string",
+			"default": "left"
+		},
+		"imagePosition": {
+			"type": "string",
+			"default": "top"
 		},
 		"showTitle": {
 			"type": "boolean",
@@ -92,6 +111,22 @@
 			"type": "string",
 			"default": "bnm-featured"
 		},
+		"featuredImageWidth": {
+			"type": ["number", "string"],
+			"default": "33%"
+		},
+		"entryContentWidth": {
+			"type": ["number", "string"],
+			"default": "67%"
+		},
+		"featuredImageMargin": {
+			"type": ["number", "object"],
+			"default": []
+		},
+		"imageMinHeight": {
+			"type": "integer",
+			"default": 0
+		},
 		"addLinkToFeaturedImage": {
 			"type": "boolean",
 			"default": false
@@ -110,7 +145,7 @@
 		},
 		"showAvatar": {
 			"type": "boolean",
-			"default": true
+			"default": false
 		},
 		"showCommentCount": {
 			"type": "boolean",

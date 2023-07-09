@@ -1,18 +1,18 @@
 <?php
 
-use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Block_3_CSS;
+use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Block_SP_CSS;
 
-function bnm_blocks_post_block_3_init() {
+function bnm_blocks_posts_grid_init() {
 
-	register_block_type( BNM_BLOCKS__PLUGIN_DIR . 'build/blocks/posts/post-block-3', array(
+	register_block_type( BNM_BLOCKS__PLUGIN_DIR . 'build/blocks/posts/posts-grid', array(
 		'api_version'		=> 2,
-		'render_callback'	=> 'bnm_blocks_post_block_3_render_callback'
+		'render_callback'	=> 'bnm_blocks_posts_grid_render_callback'
 	) );
 
 }
-add_action( 'init', 'bnm_blocks_post_block_3_init' );
+add_action( 'init', 'bnm_blocks_posts_grid_init' );
 
-function bnm_blocks_post_block_3_render_callback( $attributes ) {
+function bnm_blocks_posts_grid_render_callback( $attributes ) {
 
 	$post_query_args = BNM_Blocks::build_articles_query( $attributes );
 
@@ -20,19 +20,37 @@ function bnm_blocks_post_block_3_render_callback( $attributes ) {
 
 	ob_start();
 	?>
-	<div class="posts-block-3-container">
-	<div class="bnm-pb3-posts-grid">
+
+	<div class="bnmspp-container">
 
 	<?php
-		$bnmp_count = 1;
 
 		if ( $article_query -> have_posts() ) {
 
 			while ( $article_query -> have_posts() ) {
 
-				$article_query -> the_post(); ?>
+				$article_query -> the_post(); 
+
+				$post_classes = 'bnmsp-post';
 				
-				<div class="bnm-pb3-post">
+				if ( $attributes[ 'showFeaturedImage' ] && has_post_thumbnail() ) {
+					$post_classes .= ' post-has-image';
+				}
+
+				$article_styles = '';
+
+				if ( "behind" === $attributes[ 'imagePosition' ] && $attributes[ 'showFeaturedImage' ] && has_post_thumbnail() ) {
+					$article_styles .= "min-height: ". $attributes[ 'imageMinHeight' ] ."vh;";
+				}
+
+				if ( "behind" === $attributes[ 'imagePosition' ] && $attributes[ 'showFeaturedImage' ] && has_post_thumbnail() ) {
+					$padding_top = $attributes[ 'imageMinHeight' ] / 5;
+					$article_styles .= " padding-top: ". $padding_top ."vh;";
+				}
+				
+				?>
+				
+				<article class="<?php echo esc_attr( $post_classes ); ?>" style="<?php echo esc_attr( $article_styles ); ?>">
 					<?php if ( has_post_thumbnail() ) : ?>
 						<figure class="post-thumbnail">
 							<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
@@ -41,7 +59,7 @@ function bnm_blocks_post_block_3_render_callback( $attributes ) {
 						</figure>
 					<?php endif; ?>
 
-					<div class="bnm-pb3-post-content">
+					<div class="bnm-entry-wrapper">
 
 						<?php if ( $attributes['showCategory'] ) { ?>
 							<div class="bnm-category-list">
@@ -92,12 +110,10 @@ function bnm_blocks_post_block_3_render_callback( $attributes ) {
 							</div>
 						<?php } ?>
 
-					</div><!-- ."bnm-pb1-large-post-content -->
+					</div><!-- ."bnm-entry-wrapper -->
 
-				</div><!-- .bnm-pb3-post -->
+				</article>
 		<?php
-
-			$bnmp_count++;
 
 			} // Endwhile;
 
@@ -107,21 +123,36 @@ function bnm_blocks_post_block_3_render_callback( $attributes ) {
 
 		?>
 
-		</div><!-- .bnm-pb2-posts-grid -->
-		</div><!-- .posts-block-2-container -->
+	</div><!-- .bnmspp-container -->
 	
 	<?php
 
 	
 	$block = ob_get_clean();
 	
-	$css = new Post_Block_3_CSS();
+	$css = new Post_Block_SP_CSS();
 	$styles = $css->render_css( $attributes );
 
-	$classes = array( 'wpbnmpb3' );
+	$classes = array( 'wpbnmspp' );
 
 	if ( $attributes['categoryBGColor'] || $attributes['categoryBGHoverColor'] || ! empty($attributes['categoryPadding']) ) {
 		$classes[] = 'bnm-box-cat';
+	}
+
+	if ( isset( $attributes['postLayout'] ) && 'grid' === $attributes['postLayout'] ) {
+		$classes[] = 'is-grid';
+	}
+
+	if ( isset( $attributes['columns'] ) && 'grid' === $attributes['postLayout'] ) {
+		$classes[] = 'columns-' . $attributes['columns'];
+	}
+
+	if ( $attributes['showFeaturedImage'] && isset( $attributes['imagePosition'] ) ) {
+		$classes[] = 'image-align' . $attributes['imagePosition'];
+	}
+
+	if ( $attributes['textAlign'] ) {
+		$classes[] = 'has-text-align' . $attributes['textAlign'];
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );

@@ -10,14 +10,15 @@ import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import { 
 	useBlockProps,
+	InspectorControls,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useInstanceId } from '@wordpress/compose';
 import { store as coreStore } from '@wordpress/core-data';
 import { useEffect, Fragment } from '@wordpress/element';
-import { InspectorControls } from '@wordpress/block-editor';
 import {
+	PanelBody,
 	Placeholder,
 	Spinner
 } from '@wordpress/components';
@@ -25,7 +26,7 @@ import {
 /**
  * Internal Dependencies.
  */
-import QueryInspectorControls from '../../../components/query-controls';
+import QueryControls from '../../../components/query-controls';
 import BlockExtraSettings from '../../../components/settings-controls/post-type-1';
 import {
 	mightBeUnit,
@@ -216,10 +217,12 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const inspectorControls = (
 		<InspectorControls>
-			<QueryInspectorControls
-				attributes={ attributes }
-				setQuery={ updateQuery }
-			/>
+			<PanelBody title={ __( 'Content Settings', 'bnm-blocks' ) } initialOpen={ true }>
+				<QueryControls
+					attributes={ attributes }
+					setQuery={ updateQuery }
+				/>
+			</PanelBody>
 			<BlockExtraSettings
 				attributes={ attributes }
 				setAttributes={ setAttributes }

@@ -104,7 +104,7 @@ export default function createSwiper( element, config={} ) {
 
 					const slideInfo = sprintf(
 						/* translators: 1: current slide number and 2: total number of slides */
-						__( 'Slide %1$s of %2$s', 'newspack-blocks' ),
+						__( 'Slide %1$s of %2$s', 'bnm-blocks' ),
 						this.realIndex + 1,
 						this.pagination?.bullets?.length || 0
 					);
@@ -115,7 +115,7 @@ export default function createSwiper( element, config={} ) {
 							${
 								alt
 									? /* translators: the title of the image. */ sprintf(
-											__( 'Image: %s, ', 'newspack-blocks' ),
+											__( 'Image: %s, ', 'bnm-blocks' ),
 											alt
 									  )
 									: ''

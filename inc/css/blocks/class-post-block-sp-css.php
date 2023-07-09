@@ -4,7 +4,7 @@ namespace ThemezHut\BNM_Blocks\CSS\Blocks;
 
 use ThemezHut\BNM_Blocks\CSS\CSS_Utility;
 
-class Post_Block_3_CSS {
+class Post_Block_SP_CSS {
 
     public function render_css( $attributes ) {
 
@@ -142,6 +142,23 @@ class Post_Block_3_CSS {
                 array(
                     'property'  =>  '--excerpt-margin',
                     'value'     =>  'excerptMargin',
+                    'type'      =>  'box-control',
+                ),
+                array(
+                    'property'  =>  '--wpbnmspp-col-gap',
+                    'value'     =>  'colGap',
+                ),
+                array(
+                    'property'  =>  '--image-width',
+                    'value'     =>  'featuredImageWidth',
+                ),
+                array(
+                    'property'  =>  '--content-width',
+                    'value'     =>  'entryContentWidth',
+                ),
+                array(
+                    'property'  =>  '--image-margin',
+                    'value'     =>  'featuredImageMargin',
                     'type'      =>  'box-control',
                 ),
             )

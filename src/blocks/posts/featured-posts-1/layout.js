@@ -6,6 +6,7 @@ import {
 	PostTitle,
 	PostCategories,
 	PostAuthor,
+	PostAuthorAvatar,
 	PostDateTime,
 	PostCommentCount,
 } from '../../../components/meta/meta.js';
@@ -33,6 +34,10 @@ export const Layout = ({
                         url: imageSourceUrl,
                         alt: featuredImageAlt,
                     } = getFeaturedImageDetails( post, attributes.featuredImageSizeSlug );
+
+                    const currentAuthor = authorsList?.find(
+                        ( writer ) => writer.id === post.author
+                    );
 
                     return(
                         index === 0 && (
@@ -62,11 +67,15 @@ export const Layout = ({
                                     />
                                 ) }
                                 <div className="entry-meta">
-                                    { attributes.showAuthor && authorsList && (
+                                    { attributes.showAuthor && attributes.showAvatar && currentAuthor && (
+                                        <PostAuthorAvatar
+                                            author={currentAuthor}
+                                        />
+                                    ) }
+                                    
+                                    { attributes.showAuthor && currentAuthor && (
                                         <PostAuthor
-                                            post={post}
-                                            authorsList={authorsList}
-                                            showAvatar={attributes.showAvatar}
+                                            author={currentAuthor}
                                         />
                                     ) }
 
@@ -106,6 +115,10 @@ export const Layout = ({
                             alt: featuredImageAlt,
                         } = getFeaturedImageDetails( post, attributes.featuredImageSizeSlug );
 
+                        const currentAuthor = authorsList?.find(
+                            ( writer ) => writer.id === post.author
+                        );
+
                         return(
                             ( index === 1 || index === 2 ) && (
                                 <div className="bnm-fp1-small-post">
@@ -135,11 +148,14 @@ export const Layout = ({
                                         />
                                     ) }
                                     <div className="entry-meta">
-                                        { attributes.showAuthorSmall && authorsList && (
+                                        { attributes.showAuthorSmall && attributes.showAvatarSmall && currentAuthor && (
+                                            <PostAuthorAvatar
+                                                author={currentAuthor}
+                                            />
+                                        ) }
+                                        { attributes.showAuthorSmall && currentAuthor && (
                                             <PostAuthor
-                                                post={post}
-                                                authorsList={authorsList}
-                                                showAvatar={attributes.showAvatar}
+                                                author={currentAuthor}
                                             />
                                         ) }
 
