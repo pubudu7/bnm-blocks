@@ -23,6 +23,15 @@
   --excerpt-margin-small: 0 0 20px;
   margin: 0 0 50px 0;
 }
+.wpbnmpb1 .article-section-title {
+  font-size: 21px;
+  margin-bottom: 1em;
+  border-bottom: 2px solid #000000;
+  width: 100%;
+}
+.wpbnmpb1 .article-section-title mark {
+  background-color: transparent;
+}
 .wpbnmpb1 .bnm-pb1-large-post .entry-title {
   clear: none;
   font-size: var(--title-font-size);

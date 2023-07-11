@@ -1,4 +1,12 @@
 /**
+ * WordPress Dependencies.
+ */
+import { __ } from '@wordpress/i18n';
+import { 
+	RichText
+} from '@wordpress/block-editor';
+
+/**
  * Internal Dependencies.
  */
 import {
@@ -10,8 +18,7 @@ import {
 	PostAuthorAvatar,
 	PostDateTime,
 	PostCommentCount,
-} from '../../../components/meta/meta.js'
-
+} from '../../../components/meta/meta.js';
 
 export const Layout = ({
     posts,
@@ -19,10 +26,18 @@ export const Layout = ({
     categoriesList,
     blockProps,
     inlineStyles,
-    attributes
+    attributes,
+    setAttributes
 }) => {
     return(
         <div { ...blockProps } style={ inlineStyles }>
+            <RichText
+                onChange={ value => setAttributes( { sectionHeader: value } ) }
+                placeholder={ __( 'Write section header…', 'bnm-blocks' ) }
+                value={ attributes.sectionHeader }
+                tagName="h2"
+                className="article-section-title"
+            />
             <div className="posts-block-1-container">
                 <div className="bnm-left-block">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => {

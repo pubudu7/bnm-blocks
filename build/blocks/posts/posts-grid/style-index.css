@@ -2,6 +2,8 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/posts/posts-grid/style.scss ***!
   \***************************************************************************************************************************************************************************************************************************************************************/
 .wpbnmspp {
+  --header-font-size: 21px;
+  --header-margin: 0 0 1em;
   --title-color: #000000;
   --title-hover-color: #444444;
   --title-font-size: 18px;
@@ -38,6 +40,19 @@
 .wpbnmspp article:last-of-type {
   margin-bottom: 0;
 }
+.wpbnmspp .article-section-title {
+  color: var(--header-color);
+  font-size: var(--header-font-size);
+  line-height: var(--header-line-height);
+  letter-spacing: var(--header-letter-spacing);
+  margin: var(--header-margin);
+  padding: var(--header-padding);
+  border-bottom: 2px solid #000000;
+  width: 100%;
+}
+.wpbnmspp .article-section-title mark {
+  background-color: transparent;
+}
 .wpbnmspp.is-grid > div {
   display: flex;
   flex-flow: row wrap;
@@ -49,6 +64,9 @@
 .wpbnmspp.is-grid article {
   flex-basis: 100%;
   margin-bottom: 0;
+}
+.wpbnmspp.is-grid .article-section-title {
+  margin-bottom: calc(1.4em - var(--wpbnmspp-col-gap));
 }
 @media only screen and (min-width: 600px) {
   .wpbnmspp.columns-3 article, .wpbnmspp.columns-6 article {
@@ -141,8 +159,9 @@
 .wpbnmspp.image-alignbehind .post-has-image .bnm-entry-wrapper,
 .wpbnmspp.image-alignbehind .post-has-image .entry-title a,
 .wpbnmspp.image-alignbehind .post-has-image .entry-title a:visited,
-.wpbnmspp.image-alignbehind .post-has-image .bnm-post-author a,
-.wpbnmspp.image-alignbehind .post-has-image .bnm-post-author a:visited,
+.wpbnmspp.image-alignbehind .post-has-image .byline,
+.wpbnmspp.image-alignbehind .post-has-image .byline a,
+.wpbnmspp.image-alignbehind .post-has-image .byline a:visited,
 .wpbnmspp.image-alignbehind .post-has-image .bnm-post-date a,
 .wpbnmspp.image-alignbehind .post-has-image .bnm-post-date a:visited,
 .wpbnmspp.image-alignbehind .post-has-image .bnm-comment-count a,
@@ -199,18 +218,18 @@
 .wpbnmspp .entry-meta a:hover {
   color: var(--meta-hover-color);
 }
-.wpbnmspp .bnm-post-author,
+.wpbnmspp .byline,
 .wpbnmspp .bnm-post-date,
 .wpbnmspp .bnm-comment-count {
   margin-right: var(--meta-spacing);
 }
-.wpbnmspp .bnm-post-author a,
+.wpbnmspp .byline a,
 .wpbnmspp .bnm-post-date a,
 .wpbnmspp .bnm-comment-count a {
   text-decoration: inherit;
   color: var(--meta-color);
 }
-.wpbnmspp .bnm-post-author a:hover,
+.wpbnmspp .byline a:hover,
 .wpbnmspp .bnm-post-date a:hover,
 .wpbnmspp .bnm-comment-count a:hover {
   color: var(--meta-hover-color);

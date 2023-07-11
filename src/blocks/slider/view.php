@@ -97,18 +97,19 @@ function bnm_blocks_slider_posts_block_1_render_callback( $attributes ) {
 								?>
 
 								<div class="entry-meta">
-									<?php
-										if ( $attributes['showAuthor'] ) {
-											bnm_posted_by();
+									<?php 
+										if ( $attributes['showAuthor'] && $attributes['showAvatar'] ) {
+											bnm_author_avatar();
 										}
-
-										if ( $attributes['showDate'] ) {
-											bnm_posted_on();
-										}
-
-										if ( $attributes['showCommentCount'] ) {
-											bnm_comments_link();
-										}
+										if ( $attributes['showAuthor'] ) { 
+											bnm_posted_by(); 
+										} 
+										if ( $attributes['showDate'] ) { 
+											bnm_posted_on(); 
+										} 
+										if ( $attributes['showCommentCount'] ) { 
+											bnm_comments_link(); 
+										} 
 									?>
 								</div><!-- .entry-meta -->
 							</div><!-- .bnm-slider-content -->

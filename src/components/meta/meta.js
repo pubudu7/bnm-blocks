@@ -159,14 +159,16 @@ export const FeaturedImage = ({ post, featuredImageSizeSlug }) => {
 
 export const PostAuthor = ({ author } ) => {
     return (
-        <span className="bnm-post-author">
-            <a href="#">
-                { sprintf(
-                    /* translators: byline. %s: current author. */
-                    __( 'by %s' ),
-                    author.name
-                ) }
-            </a>
+        <span className="byline">
+            <span className="author vcard bnm-post-author">
+                <a href="#">
+                    { sprintf(
+                        /* translators: byline. %s: current author. */
+                        __( 'by %s' ),
+                        author.name
+                    ) }
+                </a>
+            </span>
         </span>
     );
 };

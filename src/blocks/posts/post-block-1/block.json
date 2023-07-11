@@ -17,6 +17,10 @@
 		"queryId": {
 		  	"type": "number"
 		},
+		"sectionHeader": {
+			"type": "string",
+			"default": ""
+		},
 		"query": {
 			"type": "object",
 			"default": {

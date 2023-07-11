@@ -72,19 +72,16 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 
 								<div class="entry-meta">
 									<?php 
+										if ( $attributes['showAuthor'] && $attributes['showAvatar'] ) {
+											bnm_author_avatar();
+										}
 										if ( $attributes['showAuthor'] ) { 
 											bnm_posted_by(); 
 										} 
-									?>
-
-									<?php 
-										if ( $attributes['showDate'] ) {
-											bnm_posted_on();
+										if ( $attributes['showDate'] ) { 
+											bnm_posted_on(); 
 										} 
-									?>
-
-									<?php 
-										if ( $attributes['showCommentCount'] ) {
+										if ( $attributes['showCommentCount'] ) { 
 											bnm_comments_link(); 
 										} 
 									?>

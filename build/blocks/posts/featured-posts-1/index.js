@@ -768,12 +768,14 @@ const PostAuthor = _ref5 => {
     author
   } = _ref5;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "bnm-post-author"
+    className: "byline"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "author vcard bnm-post-author"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "#"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.sprintf)(
   /* translators: byline. %s: current author. */
-  (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('by %s'), author.name)));
+  (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('by %s'), author.name))));
 };
 const PostAuthorAvatar = _ref6 => {
   var _author$avatar_urls;

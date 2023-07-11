@@ -1,5 +1,7 @@
 .wpbnmspp {
 
+    --header-font-size: 21px;
+    --header-margin: 0 0 1em;
     --title-color: #000000;
     --title-hover-color: #444444;
     --title-font-size: 18px;
@@ -40,6 +42,21 @@
         }
     }
 
+    .article-section-title {
+        color: var(--header-color);
+		font-size: var(--header-font-size);
+        line-height: var(--header-line-height);
+        letter-spacing: var(--header-letter-spacing);
+		margin: var(--header-margin);
+        padding: var(--header-padding);
+        border-bottom: 2px solid #000000;
+		width: 100%; // make sure this isn't caught up in the flex styles.
+
+		mark {
+			background-color: transparent;
+		}
+	}
+
     &.is-grid {
         > div {
             display: flex;
@@ -54,6 +71,10 @@
             flex-basis: 100%;
             margin-bottom: 0;
         }
+
+        .article-section-title {
+			margin-bottom: calc( 1.4em - var( --wpbnmspp-col-gap ) );
+		}
     }
 
     @media only screen and ( min-width: 600px ) {
@@ -182,8 +203,9 @@
             .bnm-entry-wrapper,
             .entry-title a,
             .entry-title a:visited,
-            .bnm-post-author a,
-            .bnm-post-author a:visited,
+            .byline,
+            .byline a,
+            .byline a:visited,
             .bnm-post-date a,
             .bnm-post-date a:visited,
             .bnm-comment-count a,
@@ -251,10 +273,10 @@
         }
     }
 
-    .bnm-post-author,
+    .byline,
     .bnm-post-date,
     .bnm-comment-count {
-
+        
         margin-right: var(--meta-spacing);
 
         a {

@@ -61,23 +61,20 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 							?>
 
 							<div class="entry-meta">
-								<?php if ( $attributes['showAuthor'] ) { ?>
-									<span class="bnm-post-author">
-										<?php bnm_posted_by(); ?>
-									</span>
-								<?php } ?>
-
-								<?php if ( $attributes['showDate'] ) { ?>
-									<span class="bnm-post-date">
-										<?php bnm_posted_on(); ?>
-									</span>
-								<?php } ?>
-
-								<?php if ( $attributes['showCommentCount'] ) { ?>
-									<span class="bnm-comment-count">
-										<?php bnm_comments_link(); ?>
-									</span>
-								<?php } ?>
+								<?php 
+									if ( $attributes['showAuthor'] && $attributes['showAvatar'] ) {
+										bnm_author_avatar();
+									}
+									if ( $attributes['showAuthor'] ) { 
+										bnm_posted_by(); 
+									} 
+									if ( $attributes['showDate'] ) { 
+										bnm_posted_on(); 
+									} 
+									if ( $attributes['showCommentCount'] ) { 
+										bnm_comments_link(); 
+									} 
+								?>
 							</div><!-- .entry-meta-->
 
 							<?php if ( $attributes['displayPostExcerpt'] && ( isset( $attributes['excerptLength'] ) && $attributes['excerptLength']  > 0 ) ) { ?>
@@ -131,23 +128,20 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 							?>
 
 							<div class="entry-meta">
-								<?php if ( $attributes['showAuthorSmall'] ) { ?>
-									<span class="bnm-post-author">
-										<?php bnm_posted_by(); ?>
-									</span>
-								<?php } ?>
-
-								<?php if ( $attributes['showDateSmall'] ) { ?>
-									<span class="bnm-post-date">
-										<?php bnm_posted_on(); ?>
-									</span>
-								<?php } ?>
-
-								<?php if ( $attributes['showCommentCountSmall'] ) { ?>
-									<span class="bnm-comment-count">
-										<?php bnm_comments_link(); ?>
-									</span>
-								<?php } ?>
+								<?php 
+									if ( $attributes['showAuthorSmall'] && $attributes['showAvatarSmall'] ) {
+										bnm_author_avatar();
+									}
+									if ( $attributes['showAuthorSmall'] ) { 
+										bnm_posted_by(); 
+									} 
+									if ( $attributes['showDateSmall'] ) { 
+										bnm_posted_on(); 
+									} 
+									if ( $attributes['showCommentCountSmall'] ) { 
+										bnm_comments_link(); 
+									} 
+								?>
 							</div><!-- .entry-meta-->
 
 							<?php if ( $attributes['displayPostExcerptSmall'] && ( isset( $attributes['excerptLengthSmall'] ) && $attributes['excerptLengthSmall']  > 0 ) ) { ?>

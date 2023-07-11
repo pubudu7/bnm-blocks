@@ -291,6 +291,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				blockProps={ blockProps }
 				inlineStyles={ inlineStyles }
 				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 		</>
 	);

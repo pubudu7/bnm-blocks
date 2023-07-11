@@ -1,4 +1,12 @@
 /**
+ * WordPress Dependencies.
+ */
+import { __ } from '@wordpress/i18n';
+import { 
+	RichText
+} from '@wordpress/block-editor';
+
+/**
  * Internal Dependencies.
  */
 import {
@@ -18,11 +26,19 @@ export const Layout = ({
     categoriesList,
     blockProps,
     inlineStyles,
-    attributes
+    attributes,
+    setAttributes
 }) => {
     return(
         <div { ...blockProps } style={ inlineStyles }>
             <div className="posts-block-2-container">
+                <RichText
+                    onChange={ value => setAttributes( { sectionHeader: value } ) }
+                    placeholder={ __( 'Write section header…', 'bnm-blocks' ) }
+                    value={ attributes.sectionHeader }
+                    tagName="h2"
+                    className="article-section-title"
+                />
                 <div className="bnm-pb2-posts-grid">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => {
 

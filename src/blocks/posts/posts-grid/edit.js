@@ -13,6 +13,7 @@ import {
 	BlockControls,
 	InspectorControls,
 	AlignmentControl,
+	RichText,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect, useDispatch } from '@wordpress/data';
@@ -74,6 +75,7 @@ const USERS_LIST_QUERY = {
 export default function Edit( { attributes, setAttributes } ) {
 
     const {
+		sectionHeader,
 		queryId,
 		query,
 		categoryPadding,
@@ -235,7 +237,14 @@ export default function Edit( { attributes, setAttributes } ) {
 		'--wpbnmspp-col-gap': attributes.colGap,
 		'--image-width': attributes.featuredImageWidth,
 		'--content-width': attributes.entryContentWidth,
-		'--image-margin': boxValues(attributes.featuredImageMargin)
+		'--image-margin': boxValues(attributes.featuredImageMargin),
+		'--header-font-size': mightBeUnit(attributes.headerFontSize),
+		'--header-line-height': attributes.headerLineHeight,
+		'--header-letter-spacing': attributes.headerLetterSpacing,
+		'--header-padding': boxValues(attributes.headerPadding),
+		'--header-margin': boxValues(attributes.headerMargin),
+		'--header-color': attributes.headerColor,
+		'--header-hover-color': attributes.headerHoverColor
 	};
 
 	let hasCategoryClass = false;
@@ -389,11 +398,22 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	return (
 		<>
+
 		{ inspectorControls }
 			
 		<div { ...blockProps } style={ inlineStyles }>
             
 			<div className="bnmspp-container">
+
+				{ attributes.showSectionHeader && (
+					<RichText
+						onChange={ value => setAttributes( { sectionHeader: value } ) }
+						placeholder={ __( 'Write section header…', 'bnm-blocks' ) }
+						value={ sectionHeader }
+						tagName="h2"
+						className="article-section-title"
+					/>
+				) }
                 
 				{ posts && posts.length > 0 && posts.map( ( post ) => {
 

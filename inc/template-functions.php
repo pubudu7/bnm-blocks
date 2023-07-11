@@ -6,12 +6,7 @@
 /**
  * Prints HTML with meta information for the current author.
  */
-function bnm_posted_by( $show_avatar = true ) {
-
-	$author_email	= get_the_author_meta( 'user_email' );
-	$avatar_url		= get_avatar_url( $author_email );
-	$avatar_markup  = '<span class="bnm-avatar"><img class="author-photo" alt="' . esc_attr( get_the_author() ) . '" src="' . esc_url( $avatar_url ) . '" /></span>';
-	//$icon_markup 	= '<i class="fas fa-user"></i>';
+function bnm_posted_by() {
 
 	$byline = sprintf(
 		/* translators: %s: post author. */
@@ -19,16 +14,24 @@ function bnm_posted_by( $show_avatar = true ) {
 		'<span class="author vcard bnm-post-author"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
 
-	$markup = '<span class="byline"> ';
-	if( $show_avatar ) {
-		$markup .= $avatar_markup;
-	} else {
-		//$markup .= $icon_markup;
-	}
-	$markup .= $byline;
+	$markup = '<span class="byline">';
+		$markup .= $byline;
 	$markup .= '</span>';
 
 	echo $markup; // WPCS: XSS OK.
+
+}
+
+/**
+ * Prints author avatar
+ */
+function bnm_author_avatar() {
+	
+	$author_email	= get_the_author_meta( 'user_email' );
+	$avatar_url		= get_avatar_url( $author_email );
+	$avatar_markup  = '<span class="bnm-avatar"><img class="author-photo" alt="' . esc_attr( get_the_author() ) . '" src="' . esc_url( $avatar_url ) . '" /></span>';
+
+	echo $avatar_markup; // WPCS: XSS OK.
 
 }
 

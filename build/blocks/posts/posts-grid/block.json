@@ -47,6 +47,58 @@
         "type": "integer"
       }
     },
+    "sectionHeader": {
+      "type": "string",
+      "default": ""
+    },
+    "showSectionHeader": {
+      "type": "boolean",
+      "default": true
+    },
+    "headerHtmlTag": {
+      "type": "string",
+      "default": "h3"
+    },
+    "headerFontSize": {
+      "type": [
+        "string",
+        "number"
+      ]
+    },
+    "headerLineHeight": {
+      "type": [
+        "number",
+        "string"
+      ]
+    },
+    "headerLetterSpacing": {
+      "type": [
+        "number",
+        "string"
+      ]
+    },
+    "headerPadding": {
+      "type": [
+        "number",
+        "object"
+      ],
+      "default": []
+    },
+    "headerMargin": {
+      "type": [
+        "number",
+        "object"
+      ],
+      "default": []
+    },
+    "headerColor": {
+      "type": "string",
+      "default": ""
+    },
+    "headerHoverColor": {
+      "type": "string",
+      "default": ""
+    },
     "postLayout": {
       "type": "string",
       "default": "grid"

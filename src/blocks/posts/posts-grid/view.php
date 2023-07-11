@@ -23,6 +23,12 @@ function bnm_blocks_posts_grid_render_callback( $attributes ) {
 
 	<div class="bnmspp-container">
 
+	<?php if ( '' !== $attributes['sectionHeader'] ) : ?>
+		<h2 class="article-section-title">
+			<span><?php echo wp_kses_post( $attributes['sectionHeader'] ); ?></span>
+		</h2>
+	<?php endif; ?>
+
 	<?php
 
 		if ( $article_query -> have_posts() ) {
@@ -32,18 +38,20 @@ function bnm_blocks_posts_grid_render_callback( $attributes ) {
 				$article_query -> the_post(); 
 
 				$post_classes = 'bnmsp-post';
+
+				$has_post_thumbnail = has_post_thumbnail();
 				
-				if ( $attributes[ 'showFeaturedImage' ] && has_post_thumbnail() ) {
+				if ( $attributes[ 'showFeaturedImage' ] && $has_post_thumbnail ) {
 					$post_classes .= ' post-has-image';
 				}
 
 				$article_styles = '';
 
-				if ( "behind" === $attributes[ 'imagePosition' ] && $attributes[ 'showFeaturedImage' ] && has_post_thumbnail() ) {
+				if ( "behind" === $attributes[ 'imagePosition' ] && $attributes[ 'showFeaturedImage' ] && $has_post_thumbnail ) {
 					$article_styles .= "min-height: ". $attributes[ 'imageMinHeight' ] ."vh;";
 				}
 
-				if ( "behind" === $attributes[ 'imagePosition' ] && $attributes[ 'showFeaturedImage' ] && has_post_thumbnail() ) {
+				if ( "behind" === $attributes[ 'imagePosition' ] && $attributes[ 'showFeaturedImage' ] && $has_post_thumbnail ) {
 					$padding_top = $attributes[ 'imageMinHeight' ] / 5;
 					$article_styles .= " padding-top: ". $padding_top ."vh;";
 				}
@@ -51,10 +59,10 @@ function bnm_blocks_posts_grid_render_callback( $attributes ) {
 				?>
 				
 				<article class="<?php echo esc_attr( $post_classes ); ?>" style="<?php echo esc_attr( $article_styles ); ?>">
-					<?php if ( has_post_thumbnail() ) : ?>
+					<?php if ( $has_post_thumbnail ) : ?>
 						<figure class="post-thumbnail">
 							<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-								<?php the_post_thumbnail( 'bnm-featured' ); ?>
+								<?php the_post_thumbnail( $attributes['featuredImageSizeSlug'] ); ?>
 							</a>
 						</figure>
 					<?php endif; ?>
@@ -74,23 +82,20 @@ function bnm_blocks_posts_grid_render_callback( $attributes ) {
 						?>
 
 						<div class="entry-meta">
-							<?php if ( $attributes['showAuthor'] ) { ?>
-								<span class="bnm-post-author">
-									<?php bnm_posted_by(); ?>
-								</span>
-							<?php } ?>
-
-							<?php if ( $attributes['showDate'] ) { ?>
-								<span class="bnm-post-date">
-									<?php bnm_posted_on(); ?>
-								</span>
-							<?php } ?>
-
-							<?php if ( $attributes['showCommentCount'] ) { ?>
-								<span class="bnm-comment-count">
-									<?php bnm_comments_link(); ?>
-								</span>
-							<?php } ?>
+							<?php 
+								if ( $attributes['showAuthor'] && $attributes['showAvatar'] ) {
+									bnm_author_avatar();
+								}
+								if ( $attributes['showAuthor'] ) { 
+									bnm_posted_by(); 
+								} 
+								if ( $attributes['showDate'] ) { 
+									bnm_posted_on(); 
+								} 
+								if ( $attributes['showCommentCount'] ) { 
+									bnm_comments_link(); 
+								} 
+							?>
 						</div><!-- .entry-meta-->
 
 						<?php if ( $attributes['displayPostExcerpt'] && ( isset( $attributes['excerptLength'] ) && $attributes['excerptLength']  > 0 ) ) { ?>
@@ -153,6 +158,10 @@ function bnm_blocks_posts_grid_render_callback( $attributes ) {
 
 	if ( $attributes['textAlign'] ) {
 		$classes[] = 'has-text-align' . $attributes['textAlign'];
+	}
+
+	if ( "33%" !== $attributes['featuredImageWidth'] || "67%" !== $attributes['entryContentWidth'] ) {
+		$classes[] = 'custom-image-width';
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
