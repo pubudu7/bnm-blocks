@@ -32,6 +32,18 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 	$featured_image_slug_small = ! empty( $attributes['featuredImageSizeSlugSmall'] ) ? $attributes['featuredImageSizeSlugSmall'] : 'bnm-featured-thumb';
 
 	ob_start();
+
+	if ( '' !== $attributes['sectionHeader'] && true === $attributes['showSectionHeader'] ) {
+		echo "<div class=\"bnm-block-title-wrap\">";
+			$tag = ( isset ( $attributes['headerHtmlTag'] ) && ! empty( $attributes['headerHtmlTag'] ) ) ? $attributes['headerHtmlTag'] : 'h2';									
+			echo "<". esc_attr($tag) ." class=\"article-section-title\">";
+				echo "<span>";
+					echo wp_kses_post( $attributes['sectionHeader'] ); 
+				echo "</span>";
+			echo "</".esc_attr($tag).">";
+		echo "</div>";
+	}
+
 	?>
 	<div class="posts-block-1-container">
 
@@ -65,9 +77,17 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 								<?php } ?>
 
 								<?php 
-									if ( $attributes['showTitle'] ) {
-										the_title( '<h3 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' ); 
-									}
+									if ( $attributes['showTitle'] ) { 
+										$tag = ( isset ( $attributes['titleHtmlTag'] ) && ! empty( $attributes['titleHtmlTag'] ) ) ? $attributes['titleHtmlTag'] : 'h3';									
+										echo "<". esc_attr($tag) ." class=\"entry-title\">";
+										?>
+											<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+												<?php the_title(); ?>
+											</a>
+										
+									<?php 
+										echo "</".esc_attr($tag).">";
+									} 
 								?>
 
 								<div class="entry-meta">
@@ -128,9 +148,17 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 							<?php } ?>
 
 							<?php 
-								if ( $attributes['showTitle'] ) {
-									the_title( '<h3 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' ); 
-								}
+								if ( $attributes['showTitle'] ) { 
+									$tag = ( isset ( $attributes['titleHtmlTag'] ) && ! empty( $attributes['titleHtmlTag'] ) ) ? $attributes['titleHtmlTag'] : 'h3';									
+									echo "<". esc_attr($tag) ." class=\"entry-title\">";
+									?>
+										<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+											<?php the_title(); ?>
+										</a>
+									
+								<?php 
+									echo "</".esc_attr($tag).">";
+								} 
 							?>
 						
 							<div class="entry-meta">

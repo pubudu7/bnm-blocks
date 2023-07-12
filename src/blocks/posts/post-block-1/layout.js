@@ -31,13 +31,17 @@ export const Layout = ({
 }) => {
     return(
         <div { ...blockProps } style={ inlineStyles }>
-            <RichText
-                onChange={ value => setAttributes( { sectionHeader: value } ) }
-                placeholder={ __( 'Write section header…', 'bnm-blocks' ) }
-                value={ attributes.sectionHeader }
-                tagName="h2"
-                className="article-section-title"
-            />
+            { attributes.showSectionHeader && (
+                <div className='bnm-block-title-wrap'>
+                    <RichText
+                        onChange={ value => setAttributes( { sectionHeader: value } ) }
+                        placeholder={ __( 'Write section header…', 'bnm-blocks' ) }
+                        value={ attributes.sectionHeader }
+                        tagName={ attributes.headerHtmlTag }
+                        className="article-section-title"
+                    />
+                </div>
+            ) }
             <div className="posts-block-1-container">
                 <div className="bnm-left-block">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => {

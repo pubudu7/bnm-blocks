@@ -18,10 +18,6 @@
     "queryId": {
       "type": "number"
     },
-    "sectionHeader": {
-      "type": "string",
-      "default": ""
-    },
     "query": {
       "type": "object",
       "default": {
@@ -50,6 +46,58 @@
       "items": {
         "type": "integer"
       }
+    },
+    "showSectionHeader": {
+      "type": "boolean",
+      "default": true
+    },
+    "sectionHeader": {
+      "type": "string",
+      "default": ""
+    },
+    "headerHtmlTag": {
+      "type": "string",
+      "default": "h2"
+    },
+    "headerFontSize": {
+      "type": [
+        "string",
+        "number"
+      ]
+    },
+    "headerLineHeight": {
+      "type": [
+        "number",
+        "string"
+      ]
+    },
+    "headerLetterSpacing": {
+      "type": [
+        "number",
+        "string"
+      ]
+    },
+    "headerPadding": {
+      "type": [
+        "number",
+        "object"
+      ],
+      "default": []
+    },
+    "headerMargin": {
+      "type": [
+        "number",
+        "object"
+      ],
+      "default": []
+    },
+    "headerColor": {
+      "type": "string",
+      "default": ""
+    },
+    "headerHoverColor": {
+      "type": "string",
+      "default": ""
     },
     "showTitle": {
       "type": "boolean",

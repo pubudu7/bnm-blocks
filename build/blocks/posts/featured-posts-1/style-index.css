@@ -2,6 +2,8 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/posts/featured-posts-1/style.scss ***!
   \*********************************************************************************************************************************************************************************************************************************************************************/
 .wpbnmfpb1 {
+  --header-font-size: 21px;
+  --header-margin: 0 0 1em;
   --title-font-size: 24px;
   --title-font-size-small: 18px;
   --title-line-height: 1.2;
@@ -27,6 +29,20 @@
   --excerpt-margin: 0 0 20px;
   --excerpt-margin-small: 0 0 20px;
   margin: 0 0 50px 0;
+}
+.wpbnmfpb1 .bnm-block-title-wrap {
+  position: relative;
+  margin: var(--header-margin);
+  padding: var(--header-padding);
+}
+.wpbnmfpb1 .article-section-title {
+  color: var(--header-color);
+  font-size: var(--header-font-size);
+  line-height: var(--header-line-height);
+  letter-spacing: var(--header-letter-spacing);
+  border-bottom: 2px solid #000000;
+  margin: 0;
+  padding: 0;
 }
 .wpbnmfpb1 .bnm-fp1-large-post .entry-title {
   font-size: var(--title-font-size);

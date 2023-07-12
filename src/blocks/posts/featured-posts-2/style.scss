@@ -1,5 +1,7 @@
 .wpbnmfpb2 {
 
+    --header-font-size: 21px;
+    --header-margin: 0 0 1em;
     --title-font-size: 21px;
     --title-font-size-small: 18px;
     --title-line-height: 1.2;
@@ -26,6 +28,22 @@
     --excerpt-margin-small: 0 0 20px;
 
     margin: 0 0 50px 0;
+
+    .bnm-block-title-wrap {
+        position: relative;
+        margin: var(--header-margin);
+        padding: var(--header-padding);
+    }
+
+    .article-section-title {
+        color: var(--header-color);
+		font-size: var(--header-font-size);
+        line-height: var(--header-line-height);
+        letter-spacing: var(--header-letter-spacing);
+        border-bottom: 2px solid #000000;
+        margin: 0;
+        padding: 0;
+	}
 
     .bnm-fp2-large-post {
         .entry-title {

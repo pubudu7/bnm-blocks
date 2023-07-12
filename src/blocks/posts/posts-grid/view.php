@@ -23,13 +23,17 @@ function bnm_blocks_posts_grid_render_callback( $attributes ) {
 
 	<div class="bnmspp-container">
 
-	<?php if ( '' !== $attributes['sectionHeader'] ) : ?>
-		<h2 class="article-section-title">
-			<span><?php echo wp_kses_post( $attributes['sectionHeader'] ); ?></span>
-		</h2>
-	<?php endif; ?>
-
-	<?php
+	<?php 
+		if ( '' !== $attributes['sectionHeader'] && true === $attributes['showSectionHeader'] ) {
+			echo "<div class=\"bnm-block-title-wrap\">";
+				$tag = ( isset ( $attributes['headerHtmlTag'] ) && ! empty( $attributes['headerHtmlTag'] ) ) ? $attributes['headerHtmlTag'] : 'h2';									
+				echo "<". esc_attr($tag) ." class=\"article-section-title\">";
+					echo "<span>";
+						echo wp_kses_post( $attributes['sectionHeader'] ); 
+					echo "</span>";
+				echo "</".esc_attr($tag).">";
+			echo "</div>";
+		}
 
 		if ( $article_query -> have_posts() ) {
 
@@ -76,9 +80,17 @@ function bnm_blocks_posts_grid_render_callback( $attributes ) {
 						<?php } ?>
 
 						<?php 
-							if ( $attributes['showTitle'] ) {
-								the_title( '<h3 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' ); 
-							}
+							if ( $attributes['showTitle'] ) { 
+								$tag = ( isset ( $attributes['titleHtmlTag'] ) && ! empty( $attributes['titleHtmlTag'] ) ) ? $attributes['titleHtmlTag'] : 'h3';									
+								echo "<". esc_attr($tag) ." class=\"entry-title\">";
+								?>
+									<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+										<?php the_title(); ?>
+									</a>
+								
+							<?php 
+								echo "</".esc_attr($tag).">";
+							} 
 						?>
 
 						<div class="entry-meta">

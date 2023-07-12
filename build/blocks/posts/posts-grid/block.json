@@ -47,17 +47,17 @@
         "type": "integer"
       }
     },
-    "sectionHeader": {
-      "type": "string",
-      "default": ""
-    },
     "showSectionHeader": {
       "type": "boolean",
       "default": true
     },
+    "sectionHeader": {
+      "type": "string",
+      "default": ""
+    },
     "headerHtmlTag": {
       "type": "string",
-      "default": "h3"
+      "default": "h2"
     },
     "headerFontSize": {
       "type": [

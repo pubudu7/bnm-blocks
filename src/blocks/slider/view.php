@@ -42,11 +42,22 @@ function bnm_blocks_slider_posts_block_1_render_callback( $attributes ) {
 	$delay    = isset( $attributes['delay'] ) ? absint( $attributes['delay'] ) : 5;
 	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : 'bnm-featured';
 	$image_fit = ! empty( $attributes['imageFit'] ) ? $attributes['imageFit'] : 'cover';
-	$slide_image_class = "image-fit-{$image_fit}"
+	$slide_image_class = "image-fit-{$image_fit}";
 
+	ob_start(); 
+	
+	if ( '' !== $attributes['sectionHeader'] && true === $attributes['showSectionHeader'] ) {
+		echo "<div class=\"bnm-block-title-wrap\">";
+			$tag = ( isset ( $attributes['headerHtmlTag'] ) && ! empty( $attributes['headerHtmlTag'] ) ) ? $attributes['headerHtmlTag'] : 'h2';									
+			echo "<". esc_attr($tag) ." class=\"article-section-title\">";
+				echo "<span>";
+					echo wp_kses_post( $attributes['sectionHeader'] ); 
+				echo "</span>";
+			echo "</".esc_attr($tag).">";
+		echo "</div>";
+	}	
+	
 	?>
-
-	<?php ob_start(); ?>
 
 	<div class="swiper thbnm-swiper">
 		<div class="swiper-wrapper">

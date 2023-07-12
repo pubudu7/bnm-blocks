@@ -1,5 +1,7 @@
 .wpbnmpb1 {
 
+    --header-font-size: 21px;
+    --header-margin: 0 0 1em;
     --title-font-size: 24px;
     --title-font-size-small: 16px;
     --title-line-height: 1.2;
@@ -22,15 +24,20 @@
 
     margin: 0 0 50px 0;
 
-    .article-section-title {
-		font-size: 21px;
-		margin-bottom: 1em;
-        border-bottom: 2px solid #000000;
-		width: 100%; // make sure this isn't caught up in the flex styles.
+    .bnm-block-title-wrap {
+        position: relative;
+        margin: var(--header-margin);
+        padding: var(--header-padding);
+    }
 
-		mark {
-			background-color: transparent;
-		}
+    .article-section-title {
+        color: var(--header-color);
+		font-size: var(--header-font-size);
+        line-height: var(--header-line-height);
+        letter-spacing: var(--header-letter-spacing);
+        border-bottom: 2px solid #000000;
+        margin: 0;
+        padding: 0;
 	}
 
     .bnm-pb1-large-post {

@@ -203,6 +203,37 @@ class Post_Block_1_CSS {
                     'value'     =>  'excerptMarginSmall',
                     'type'      =>  'box-control',
                 ),
+                array(
+                    'property'  =>  '--header-font-size',
+                    'value'     =>  'headerFontSize',
+                    'type'      =>  'font-size'
+                ),
+                array(
+                    'property'  =>  '--header-line-height',
+                    'value'     =>  'headerLineHeight',
+                ),
+                array(
+                    'property'  =>  '--header-letter-spacing',
+                    'value'     =>  'headerLetterSpacing',
+                ),
+                array(
+                    'property'  =>  '--header-padding',
+                    'value'     =>  'headerPadding',
+                    'type'      =>  'box-control',
+                ),
+                array(
+                    'property'  =>  '--header-margin',
+                    'value'     =>  'headerMargin',
+                    'type'      =>  'box-control',
+                ),
+                array(
+                    'property'  =>  '--header-color',
+                    'value'     =>  'headerColor',
+                ),
+                array(
+                    'property'  =>  '--header-hover-color',
+                    'value'     =>  'headerHoverColor',
+                ),
             )
         );
 

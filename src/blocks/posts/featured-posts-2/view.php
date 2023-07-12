@@ -19,6 +19,18 @@ function bnm_blocks_featured_posts_block_2_render_callback( $attributes ) {
 	$article_query = new WP_Query( $post_query_args );
 
 	ob_start();
+
+	if ( '' !== $attributes['sectionHeader'] && true === $attributes['showSectionHeader'] ) {
+		echo "<div class=\"bnm-block-title-wrap\">";
+			$tag = ( isset ( $attributes['headerHtmlTag'] ) && ! empty( $attributes['headerHtmlTag'] ) ) ? $attributes['headerHtmlTag'] : 'h2';									
+			echo "<". esc_attr($tag) ." class=\"article-section-title\">";
+				echo "<span>";
+					echo wp_kses_post( $attributes['sectionHeader'] ); 
+				echo "</span>";
+			echo "</".esc_attr($tag).">";
+		echo "</div>";
+	}
+	
 	?>
 	<div class="bnm-fp2-container">
 

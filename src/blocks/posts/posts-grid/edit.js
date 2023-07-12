@@ -406,13 +406,15 @@ export default function Edit( { attributes, setAttributes } ) {
 			<div className="bnmspp-container">
 
 				{ attributes.showSectionHeader && (
-					<RichText
-						onChange={ value => setAttributes( { sectionHeader: value } ) }
-						placeholder={ __( 'Write section header…', 'bnm-blocks' ) }
-						value={ sectionHeader }
-						tagName="h2"
-						className="article-section-title"
-					/>
+					<div className='bnm-block-title-wrap'>
+						<RichText
+							onChange={ value => setAttributes( { sectionHeader: value } ) }
+							placeholder={ __( 'Write section header…', 'bnm-blocks' ) }
+							value={ sectionHeader }
+							tagName={ attributes.headerHtmlTag }
+							className="article-section-title"
+						/>
+					</div>
 				) }
                 
 				{ posts && posts.length > 0 && posts.map( ( post ) => {

@@ -40,18 +40,20 @@
 .wpbnmspp article:last-of-type {
   margin-bottom: 0;
 }
+.wpbnmspp .bnm-block-title-wrap {
+  position: relative;
+  width: 100%;
+  margin: var(--header-margin);
+  padding: var(--header-padding);
+}
 .wpbnmspp .article-section-title {
   color: var(--header-color);
   font-size: var(--header-font-size);
   line-height: var(--header-line-height);
   letter-spacing: var(--header-letter-spacing);
-  margin: var(--header-margin);
-  padding: var(--header-padding);
   border-bottom: 2px solid #000000;
-  width: 100%;
-}
-.wpbnmspp .article-section-title mark {
-  background-color: transparent;
+  margin: 0;
+  padding: 0;
 }
 .wpbnmspp.is-grid > div {
   display: flex;
@@ -65,7 +67,7 @@
   flex-basis: 100%;
   margin-bottom: 0;
 }
-.wpbnmspp.is-grid .article-section-title {
+.wpbnmspp.is-grid .bnm-block-title-wrap {
   margin-bottom: calc(1.4em - var(--wpbnmspp-col-gap));
 }
 @media only screen and (min-width: 600px) {

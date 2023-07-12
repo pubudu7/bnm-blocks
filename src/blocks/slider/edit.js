@@ -10,6 +10,7 @@ import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import { 
 	useBlockProps,
+	RichText,
 	InspectorControls,
 	store as blockEditorStore
 } from '@wordpress/block-editor';
@@ -268,6 +269,13 @@ export default function PostsSliderEdit( {
 		'--meta-margin': boxValues(attributes.metaMargin),
 		'--meta-color': attributes.metaColor,
 		'--meta-hover-color': attributes.metaHoverColor,
+		'--header-font-size': mightBeUnit(attributes.headerFontSize),
+		'--header-line-height': attributes.headerLineHeight,
+		'--header-letter-spacing': attributes.headerLetterSpacing,
+		'--header-padding': boxValues(attributes.headerPadding),
+		'--header-margin': boxValues(attributes.headerMargin),
+		'--header-color': attributes.headerColor,
+		'--header-hover-color': attributes.headerHoverColor
 	}
 
 	const inspectorControls = (
@@ -291,6 +299,18 @@ export default function PostsSliderEdit( {
 			{ inspectorControls }
 
 			<div { ...blockProps } style={ inlineStyles }>
+
+				{ attributes.showSectionHeader && (
+					<div className='bnm-block-title-wrap'>
+						<RichText
+							onChange={ value => setAttributes( { sectionHeader: value } ) }
+							placeholder={ __( 'Write section header…', 'bnm-blocks' ) }
+							value={ attributes.sectionHeader }
+							tagName={ attributes.headerHtmlTag }
+							className="article-section-title"
+						/>
+					</div>
+				) }
 
 				{ ! posts && (
 					<Placeholder>

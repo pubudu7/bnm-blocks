@@ -605,6 +605,8 @@ button.swiper-pagination-bullet {
 
 .wpbnmposw {
 
+    --header-font-size: 21px;
+    --header-margin: 0 0 1em;
 	--title-color: #ffffff;
 	--title-hover-color: #dddddd;
 	--title-font-size: 32px;
@@ -626,6 +628,22 @@ button.swiper-pagination-bullet {
 	--category-padding: 2px 8px;
 
     margin: 0 0 50px 0;
+
+    .bnm-block-title-wrap {
+        position: relative;
+        margin: var(--header-margin);
+        padding: var(--header-padding);
+    }
+
+    .article-section-title {
+        color: var(--header-color);
+		font-size: var(--header-font-size);
+        line-height: var(--header-line-height);
+        letter-spacing: var(--header-letter-spacing);
+        border-bottom: 2px solid #000000;
+        margin: 0;
+        padding: 0;
+	}
 	
 	.bnm-slider-content .entry-title {
 

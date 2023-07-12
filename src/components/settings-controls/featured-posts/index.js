@@ -7,9 +7,6 @@ import { startCase, toLower } from 'lodash';
  * WordPress dependencies
  */
  import {
-	BaseControl,
-	Button,
-	ButtonGroup,
 	PanelBody,
 	PanelRow,
 	RangeControl,
@@ -17,22 +14,24 @@ import { startCase, toLower } from 'lodash';
 	ToggleControl,
 	TextControl,
 	__experimentalUnitControl as UnitControl,
-    FontSizePicker,
     __experimentalNumberControl as NumberControl,
     __experimentalBoxControl as BoxControl,
 	TabPanel,
-    ColorPalette,
-    ColorPicker
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
 
-
-import ColorPopupButton from '../../color-control';
 import TypographyControl from '../../typography'; 
 
 export default function BlockExtraSettings( { attributes, setAttributes } ) {
     const {
+		showSectionHeader,
+		headerHtmlTag,
+		headerFontSize,
+		headerLineHeight,
+		headerLetterSpacing,
+		headerMargin,
+		headerPadding,
         showTitle,
         titleHtmlTag,
         titleFontSize,
@@ -43,8 +42,6 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 		titleLetterSpacingSmall,
 		titleMargin,
         titlePadding,
-		showFeaturedImage,
-		showFeaturedImageSmall,
         showDate,
         showCategory,
         showAuthor,
@@ -88,7 +85,76 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
     } = attributes;
 
     return (
-        <InspectorControls>
+        <>
+			<PanelBody title={ __( 'Section Header', 'bnm-blocks') } initialOpen={ false }>
+				<ToggleControl
+					label={ __( 'Show Section Header', 'bnm-blocks' ) }
+					checked={ showSectionHeader }
+					onChange={ () => setAttributes( { showSectionHeader: ! showSectionHeader } ) }
+				/>
+				{ showSectionHeader && (
+					<div className="thbnm-settings-panel">
+						<SelectControl
+							label={ __( 'Section Header HTML tag', 'bnm-blocks' ) }
+							labelPosition={ "side" }
+							value={ headerHtmlTag }
+							options={ [
+								{ label: 'h1', value: 'h1' },
+								{ label: 'h2', value: 'h2' },
+								{ label: 'h3', value: 'h3' },
+								{ label: 'h4', value: 'h4' },
+								{ label: 'h5', value: 'h5' },
+								{ label: 'h6', value: 'h6' },
+								{ label: 'span', value: 'span' },
+								{ label: 'p', value: 'p' },
+							] }
+							onChange={ ( newTitleTag ) => setAttributes( { headerHtmlTag: newTitleTag } ) }
+							__nextHasNoMarginBottom
+						/>
+
+						<TypographyControl
+							label = { __( 'Typography', 'bnm-blocks' ) }
+							fontSize={ headerFontSize }
+							onFontSizeChange={ ( newFontSize ) => setAttributes( { headerFontSize: newFontSize } ) }
+							lineHeight = { headerLineHeight }
+							onLineHeightChange = { ( newLineHeight ) => setAttributes( { headerLineHeight: newLineHeight } ) }
+							letterSpacing = { headerLetterSpacing }
+							onLetterSpacingChange = { ( newLetterSpacing ) => setAttributes( { headerLetterSpacing: newLetterSpacing } ) }
+						/>
+
+						<br />
+
+						<BoxControl
+							label={ __( 'Margin', 'bnm-blocks' ) }
+							values={ headerMargin }
+							onChange={ nextValues => setAttributes( { headerMargin: nextValues } ) }
+						/>
+					
+						<BoxControl
+							label={ __( 'Padding', 'bnm-blocks' ) }
+							values={ headerPadding }
+							onChange={ nextValues => setAttributes( { headerPadding: nextValues } ) }
+						/>
+
+						<PanelColorSettings
+							title={ __( 'Color', 'bnm-blocks' ) }
+							initialOpen={ false }
+							colorSettings={ [
+								{
+									value: attributes.headerColor,
+									onChange: headerColor => setAttributes({ headerColor }),
+									label: __( 'Header Text Color', 'bnm-blocks' )
+								},
+								{
+									value: attributes.headerHoverColor,
+									onChange: headerHoverColor => setAttributes({ headerHoverColor }),
+									label: __( 'Header Text Hover Color', 'bnm-blocks' )
+								}
+							] }
+						/>				
+					</div>
+				) }
+			</PanelBody>
 			<PanelBody title={ __( 'Post Title', 'bnm-blocks' ) } initialOpen={ false }>
 				<ToggleControl
 					label={ __( 'Show Title', 'bnm-blocks' ) }
@@ -533,6 +599,6 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 					] }
 				/>
 			</PanelBody>
-		</InspectorControls>
+		</>
     );
 }

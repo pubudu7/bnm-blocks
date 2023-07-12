@@ -1,4 +1,12 @@
 /**
+ * WordPress Dependencies.
+ */
+import { __ } from '@wordpress/i18n';
+import { 
+	RichText
+} from '@wordpress/block-editor';
+
+/**
  * Internal Dependencies.
  */
 import {
@@ -22,10 +30,22 @@ export const Layout = ({
     categoriesList,
     blockProps,
     inlineStyles,
-    attributes
+    attributes,
+    setAttributes
 }) => {
     return(
         <div { ...blockProps } style={ inlineStyles }>
+            { attributes.showSectionHeader && (
+                <div className='bnm-block-title-wrap'>
+                    <RichText
+                        onChange={ value => setAttributes( { sectionHeader: value } ) }
+                        placeholder={ __( 'Write section header…', 'bnm-blocks' ) }
+                        value={ attributes.sectionHeader }
+                        tagName={ attributes.headerHtmlTag }
+                        className="article-section-title"
+                    />
+                </div>
+            ) }
             <div className="bnm-fp2-container">
                 <div className="bnm-fp2-top">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => {

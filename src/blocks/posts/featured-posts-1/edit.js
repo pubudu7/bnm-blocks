@@ -211,6 +211,13 @@ export default function Edit( { attributes, setAttributes } ) {
 		'--excerpt-padding-small': boxValues(attributes.excerptPaddingSmall),
 		'--excerpt-margin-small': boxValues(attributes.excerptMarginSmall),
 		'--excerpt-color': attributes.excerptColor,
+		'--header-font-size': mightBeUnit(attributes.headerFontSize),
+		'--header-line-height': attributes.headerLineHeight,
+		'--header-letter-spacing': attributes.headerLetterSpacing,
+		'--header-padding': boxValues(attributes.headerPadding),
+		'--header-margin': boxValues(attributes.headerMargin),
+		'--header-color': attributes.headerColor,
+		'--header-hover-color': attributes.headerHoverColor
 	};
 
 	let hasCategoryClass = false;
@@ -277,6 +284,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				blockProps={ blockProps }
 				inlineStyles={ inlineStyles }
 				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 		</Fragment>
 	);

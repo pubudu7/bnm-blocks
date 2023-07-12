@@ -25,6 +25,13 @@ import TypographyControl from '../../components/typography';
 export function SliderSettings( { attributes, setAttributes } ) {
 
     const { 
+        showSectionHeader,
+		headerHtmlTag,
+		headerFontSize,
+		headerLineHeight,
+		headerLetterSpacing,
+		headerMargin,
+		headerPadding,
         aspectRatio, 
         imageFit, 
         hidePagination,
@@ -108,7 +115,76 @@ export function SliderSettings( { attributes, setAttributes } ) {
     ];
 
     return (
-        <InspectorControls>
+        <>
+        	<PanelBody title={ __( 'Section Header', 'bnm-blocks') } initialOpen={ false }>
+				<ToggleControl
+					label={ __( 'Show Section Header', 'bnm-blocks' ) }
+					checked={ showSectionHeader }
+					onChange={ () => setAttributes( { showSectionHeader: ! showSectionHeader } ) }
+				/>
+				{ showSectionHeader && (
+					<div className="thbnm-settings-panel">
+						<SelectControl
+							label={ __( 'Section Header HTML tag', 'bnm-blocks' ) }
+							labelPosition={ "side" }
+							value={ headerHtmlTag }
+							options={ [
+								{ label: 'h1', value: 'h1' },
+								{ label: 'h2', value: 'h2' },
+								{ label: 'h3', value: 'h3' },
+								{ label: 'h4', value: 'h4' },
+								{ label: 'h5', value: 'h5' },
+								{ label: 'h6', value: 'h6' },
+								{ label: 'span', value: 'span' },
+								{ label: 'p', value: 'p' },
+							] }
+							onChange={ ( newTitleTag ) => setAttributes( { headerHtmlTag: newTitleTag } ) }
+							__nextHasNoMarginBottom
+						/>
+
+						<TypographyControl
+							label = { __( 'Typography', 'bnm-blocks' ) }
+							fontSize={ headerFontSize }
+							onFontSizeChange={ ( newFontSize ) => setAttributes( { headerFontSize: newFontSize } ) }
+							lineHeight = { headerLineHeight }
+							onLineHeightChange = { ( newLineHeight ) => setAttributes( { headerLineHeight: newLineHeight } ) }
+							letterSpacing = { headerLetterSpacing }
+							onLetterSpacingChange = { ( newLetterSpacing ) => setAttributes( { headerLetterSpacing: newLetterSpacing } ) }
+						/>
+
+						<br />
+
+						<BoxControl
+							label={ __( 'Margin', 'bnm-blocks' ) }
+							values={ headerMargin }
+							onChange={ nextValues => setAttributes( { headerMargin: nextValues } ) }
+						/>
+					
+						<BoxControl
+							label={ __( 'Padding', 'bnm-blocks' ) }
+							values={ headerPadding }
+							onChange={ nextValues => setAttributes( { headerPadding: nextValues } ) }
+						/>
+
+						<PanelColorSettings
+							title={ __( 'Color', 'bnm-blocks' ) }
+							initialOpen={ false }
+							colorSettings={ [
+								{
+									value: attributes.headerColor,
+									onChange: headerColor => setAttributes({ headerColor }),
+									label: __( 'Header Text Color', 'bnm-blocks' )
+								},
+								{
+									value: attributes.headerHoverColor,
+									onChange: headerHoverColor => setAttributes({ headerHoverColor }),
+									label: __( 'Header Text Hover Color', 'bnm-blocks' )
+								}
+							] }
+						/>				
+					</div>
+				) }
+			</PanelBody>
             <PanelBody title={ __( 'Slideshow Settings' ) }  initialOpen={ false }>
                 <BaseControl
                     label={ __( 'Slide Aspect Ratio', 'bnm-blocks' ) }
@@ -441,6 +517,6 @@ export function SliderSettings( { attributes, setAttributes } ) {
                 />
                 </div>
             </PanelBody>
-        </InspectorControls>
+        </>
     );
 }
