@@ -616,7 +616,7 @@ button.swiper-pagination-bullet {
 	--meta-color: #ffffff;
 	--meta-hover-color: #dddddd;
     --meta-font-size: 14px;
-    --meta-spacing: 10px;
+    --meta-spacing: 15px;
     --meta-margin: 0 0 15px;
 	--category-color: #ffffff;
 	--category-hover-color: #dddddd;
@@ -644,28 +644,120 @@ button.swiper-pagination-bullet {
         margin: 0;
         padding: 0;
 	}
-	
-	.bnm-slider-content .entry-title {
 
-        font-size: var(--title-font-size);
-		letter-spacing: var(--title-letter-spacing);
-		line-height: var(--title-line-height);
-		margin: var(--title-margin);
-		padding: var(--title-padding);
-        
-        a {
-            color: var(--title-color);
-            position: relative;
-            text-decoration: none;
-			z-index: 2;
-
-            &:hover {
-                color: var(--title-hover-color);
+    article {
+        .entry-title {
+            font-size: var(--title-font-size);
+            letter-spacing: var(--title-letter-spacing);
+            line-height: var(--title-line-height);
+            margin: var(--title-margin);
+            padding: var(--title-padding);
+            
+            a {
+                color: var(--title-color);
+                position: relative;
+                text-decoration: none;
+                z-index: 2;
+    
+                &:hover {
+                    color: var(--title-hover-color);
+                }
             }
         }
+
+        .entry-meta {
+            color: var(--meta-color);
+            font-size: var(--meta-font-size);
+            padding: var(--meta-padding);
+            margin: var(--meta-margin);
+            letter-spacing: var(--meta-letter-spacing);
+            line-height: var(--meta-line-height);
+            text-decoration: inherit;
+
+            a {
+                color: var(--meta-color);
+                text-decoration: inherit;
+                font-size: var(--meta-font-size);
+                line-height: var(--meta-line-height);
+                letter-spacing: var(--meta-letter-spacing);
+
+                &:visited {
+                    color: var(--meta-color);
+                }
+    
+                &:hover {
+                    color: var(--meta-hover-color);
+                }
+            }
+        }
+
+        .bnm-category-list {
+
+            font-size: var(--category-font-size);
+
+            a {
+                color: var(--category-color);
+                margin: var(--category-margin);
+                text-decoration: none;
+    
+                &:hover {
+                    color: var(--category-hover-color);
+                }
+            }
+        }
+    }
+
+    .entry-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        a {
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    .byline,
+    .bnm-post-date,
+    .bnm-comment-count {
+        
+        margin-right: var(--meta-spacing);
+
+        a {
+            text-decoration: none;
+            position: relative;
+			z-index: 2;
+            color: var(--meta-color);
+
+            &:hover {
+                color: var(--meta-hover-color);
+            }
+        }
+    }
+
+    .bnm-category-list {
+		a {
+			display: inline-block;
+			position: relative;
+			z-index: 2;
+		}
 	}
 
-	.post-thumbnail {
+	&.bnm-box-cat {
+		article .bnm-category-list {
+			a {
+				background-color: var(--category-bg-color);
+				padding: var(--category-padding);
+
+				&:hover {
+					background-color: var(--category-bg-hover-color);
+				}
+			}
+		}
+	}
+
+    .post-thumbnail {
 		margin: 0;
 		height: 100%;
 		width: 100%;
@@ -684,7 +776,7 @@ button.swiper-pagination-bullet {
 		}
 	}
 
-	.bnm-slider-content {
+    .bnm-slider-content {
 		bottom: 0;
 		background: linear-gradient(0deg,rgba(0,0,0,0.7),rgba(0,0,0,0) 100%,rgba(0,0,0,0));
 		color: var(--meta-color);
@@ -692,24 +784,6 @@ button.swiper-pagination-bullet {
 		padding: 1.5em;
 		position: absolute;
 		right: 0;
-	}
-
-	.entry-meta {
-		font-size: var(--meta-font-size);
-		line-height: var(--meta-line-height);
-		letter-spacing: var(--meta-letter-spacing);
-		margin: var(--meta-margin);
-		padding: var(--meta-padding);
-	}
-
-	.bnm-post-author,
-	.bnm-comment-count,
-	.bnm-post-date {
-		margin: 0 15px 0 0;
-	}
-
-	.bnm-category-list {
-		font-size: var(--category-font-size);
 	}
 
 	&.hide-pagination {
@@ -728,49 +802,6 @@ button.swiper-pagination-bullet {
 	.bnm-img-placeholder {
 		height: 420px;
 		background: #f8f8f8;
-	}
-
-	.bnm-slider-content .bnm-post-author,
-	.bnm-slider-content .bnm-post-date,
-	.bnm-slider-content .bnm-comment-count {
-		a {
-			color: var(--meta-color);
-			text-decoration: none;
-			position: relative;
-			z-index: 2;
-
-			&:hover {
-				color: var(--meta-hover-color);
-			}
-		}
-	}
-
-	.bnm-slider-content .bnm-category-list {
-		a {
-			color: var(--category-color);
-			margin: var(--category-margin);
-			text-decoration: none;
-			display: inline-block;
-			position: relative;
-			z-index: 2;
-
-			&:hover {
-				color: var(--category-hover-color);
-			}
-		}
-	}
-
-	&.bnm-box-cat {
-		.bnm-slider-content .bnm-category-list {
-			a {
-				background-color: var(--category-bg-color);
-				padding: var(--category-padding);
-
-				&:hover {
-					background-color: var(--category-bg-hover-color);
-				}
-			}
-		}
 	}
 
 	.swiper-button-next, 

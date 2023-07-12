@@ -762,8 +762,9 @@ const PostDateTime = _ref7 => {
 
   if (post.date_gmt) {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "bnm-post-date"
+      className: "posted-on bnm-post-date"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("time", {
+      className: "entry-date published",
       dateTime: (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_2__.format)('c', post.date_gmt)
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: "#"
@@ -779,7 +780,7 @@ const PostCommentCount = _ref8 => {
 
   if (post.comment_count) {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "bnm-comment-count"
+      className: "comments-link bnm-comment-count"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: "#"
     }, post.comment_count));

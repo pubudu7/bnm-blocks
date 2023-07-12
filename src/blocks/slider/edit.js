@@ -90,8 +90,8 @@ export default function PostsSliderEdit( {
 	} = query;
 
 	const postQueryArgs = {
-		author: author,
-		order: order,
+		author,
+		order,
 		orderby: orderBy,
 		per_page: perPage,
 		_embed: 'wp:featuredmedia',
@@ -340,7 +340,7 @@ export default function PostsSliderEdit( {
 							);
 
 							return (
-								<div className="swiper-slide" key={ post.id }>
+								<article className="swiper-slide" key={ post.id }>
 
 									<figure className="post-thumbnail">
 										{ imageSourceUrl ? (
@@ -407,7 +407,7 @@ export default function PostsSliderEdit( {
 										</div>
 
 									) }
-								</div>
+								</article>
 							);
 						} ) }
 					</div>

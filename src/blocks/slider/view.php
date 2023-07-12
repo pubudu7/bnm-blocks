@@ -72,7 +72,7 @@ function bnm_blocks_slider_posts_block_1_render_callback( $attributes ) {
 
 					?>
 
-						<div class="swiper-slide">
+						<article class="swiper-slide">
 							<figure class="post-thumbnail">
 								<?php 
 									if ( has_post_thumbnail() ) {
@@ -124,7 +124,7 @@ function bnm_blocks_slider_posts_block_1_render_callback( $attributes ) {
 									?>
 								</div><!-- .entry-meta -->
 							</div><!-- .bnm-slider-content -->
-						</div><!-- .swiper-slide -->
+						</article><!-- .swiper-slide -->
 
 					<?php
 

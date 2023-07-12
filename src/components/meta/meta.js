@@ -192,8 +192,9 @@ export const PostDateTime = ({ post }) => {
     
     if ( post.date_gmt ) {
         return (
-            <span className="bnm-post-date">
+            <span className="posted-on bnm-post-date">
                 <time
+                    className="entry-date published"
                     dateTime={ format( 'c', post.date_gmt ) }
                 >
                     <a href="#">
@@ -209,7 +210,7 @@ export const PostDateTime = ({ post }) => {
 export const PostCommentCount = ({ post }) => {
     if ( post.comment_count ) {
         return (
-            <span className="bnm-comment-count">
+            <span className="comments-link bnm-comment-count">
                 <a href="#">
                     { post.comment_count }
                 </a>

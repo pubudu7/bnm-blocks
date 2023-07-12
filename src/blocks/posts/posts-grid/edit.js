@@ -31,7 +31,6 @@ import {
 import {
 	Icon,
 	formatListBullets,
-	fullscreen,
 	grid,
 	image,
 	postFeaturedImage,
@@ -101,8 +100,8 @@ export default function Edit( { attributes, setAttributes } ) {
 	} = query;
 
 	const postQueryArgs = {
-		author: author,
-		order: order,
+		author,
+		order,
 		orderby: orderBy,
 		per_page: perPage,
 		_embed: 'wp:featuredmedia'

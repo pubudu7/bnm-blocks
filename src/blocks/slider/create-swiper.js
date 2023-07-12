@@ -1,8 +1,9 @@
 import { speak } from '@wordpress/a11y';
 import { escapeHTML } from '@wordpress/escape-html';
 import { __, sprintf } from '@wordpress/i18n';
-
+// eslint-disable-next-line import/no-unresolved
 import Swiper from 'swiper/bundle';
+// eslint-disable-next-line import/no-unresolved
 import 'swiper/css/bundle';
 
 /**

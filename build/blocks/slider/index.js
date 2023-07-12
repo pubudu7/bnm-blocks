@@ -22,7 +22,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper_css_bundle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! swiper/css/bundle */ "./node_modules/swiper/swiper-bundle.min.css");
 
 
+ // eslint-disable-next-line import/no-unresolved
 
+ // eslint-disable-next-line import/no-unresolved
 
 
 /**
@@ -265,8 +267,8 @@ function PostsSliderEdit(_ref) {
     taxQuery
   } = query;
   const postQueryArgs = {
-    author: author,
-    order: order,
+    author,
+    order,
     orderby: orderBy,
     per_page: perPage,
     _embed: 'wp:featuredmedia'
@@ -463,7 +465,7 @@ function PostsSliderEdit(_ref) {
       alt: featuredImageAlt
     } = (0,_components_meta_meta_helper_js__WEBPACK_IMPORTED_MODULE_15__.getFeaturedImageDetails)(post, attributes.featuredImageSizeSlug);
     const currentAuthor = authorsList === null || authorsList === void 0 ? void 0 : authorsList.find(writer => writer.id === post.author);
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("article", {
       className: "swiper-slide",
       key: post.id
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("figure", {
@@ -1361,8 +1363,9 @@ const PostDateTime = _ref7 => {
 
   if (post.date_gmt) {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "bnm-post-date"
+      className: "posted-on bnm-post-date"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("time", {
+      className: "entry-date published",
       dateTime: (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_2__.format)('c', post.date_gmt)
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: "#"
@@ -1378,7 +1381,7 @@ const PostCommentCount = _ref8 => {
 
   if (post.comment_count) {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "bnm-comment-count"
+      className: "comments-link bnm-comment-count"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: "#"
     }, post.comment_count));
