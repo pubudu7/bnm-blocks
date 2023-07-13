@@ -382,9 +382,8 @@
     "metaSpacing": {
       "type": [
         "number",
-        "object"
-      ],
-      "default": []
+        "string"
+      ]
     },
     "metaPadding": {
       "type": [

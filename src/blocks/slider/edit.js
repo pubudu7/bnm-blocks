@@ -412,10 +412,10 @@ export default function PostsSliderEdit( {
 						} ) }
 					</div>
 
-					<div className="swiper-pagination thbnm-swiper-pagination" ref={paginationRef}></div>
+					<div className="swiper-pagination bnm-swiper-pagination" ref={paginationRef}></div>
 								
-					<div className="swiper-button-prev thbnm-swiper-btn-prev" ref={btnPrevRef}></div>
-					<div className="swiper-button-next thbnm-swiper-btn-next" ref={btnNextRef}></div>
+					<div className="swiper-button-prev bnm-swiper-btn-prev" ref={btnPrevRef}></div>
+					<div className="swiper-button-next bnm-swiper-btn-next" ref={btnNextRef}></div>
 					
 				</div>
 			

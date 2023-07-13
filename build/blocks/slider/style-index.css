@@ -730,7 +730,7 @@ button.swiper-pagination-bullet {
   --header-margin: 0 0 1em;
   --title-color: #ffffff;
   --title-hover-color: #dddddd;
-  --title-font-size: 32px;
+  --title-font-size: 26px;
   --title-line-height: 1.2;
   --title-letter-spacing: normal;
   --title-margin: 0 0 10px 0;
@@ -743,9 +743,9 @@ button.swiper-pagination-bullet {
   --category-hover-color: #dddddd;
   --category-bg-color: #000000;
   --category-bg-hover-color: #000000;
-  --category-font-size: 14px;
+  --category-font-size: 13px;
   --category-bg-hover-color: #eee;
-  --category-margin: 0 0 5px;
+  --category-margin: 0 10px 8px 0;
   --category-padding: 2px 8px;
   margin: 0 0 50px 0;
 }
@@ -843,6 +843,7 @@ button.swiper-pagination-bullet {
   display: inline-block;
   position: relative;
   z-index: 2;
+  font-weight: bold;
 }
 .wpbnmposw.bnm-box-cat article .bnm-category-list a {
   background-color: var(--category-bg-color);
@@ -880,26 +881,46 @@ button.swiper-pagination-bullet {
   position: absolute;
   right: 0;
 }
-.wpbnmposw.hide-pagination .thbnm-swiper-pagination {
+.wpbnmposw.hide-pagination .bnm-swiper-pagination {
   display: none;
 }
-.wpbnmposw.hide-next-prev-btns .thbnm-swiper-btn-prev,
-.wpbnmposw.hide-next-prev-btns .thbnm-swiper-btn-next {
+.wpbnmposw.hide-next-prev-btns .bnm-swiper-btn-prev,
+.wpbnmposw.hide-next-prev-btns .bnm-swiper-btn-next {
   display: none;
 }
 .wpbnmposw .bnm-img-placeholder {
   height: 420px;
   background: #f8f8f8;
 }
+.wpbnmposw .swiper-slide {
+  height: auto;
+  max-height: 100vh;
+}
 .wpbnmposw .swiper-button-next,
 .wpbnmposw .swiper-button-prev {
   color: #ffffff !important;
-  padding: 0 8px;
+  width: 45px;
+  height: 45px;
   background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
 }
 .wpbnmposw .swiper-button-next:after,
 .wpbnmposw .swiper-button-prev:after {
   font-size: 20px !important;
+}
+.wpbnmposw .swiper-button-next, .wpbnmposw .swiper-rtl .swiper-button-prev {
+  right: 27px;
+  left: auto;
+}
+.wpbnmposw .swiper-button-prev, .wpbnmposw .swiper-rtl .swiper-button-next {
+  left: 27px;
+  right: auto;
+}
+.wpbnmposw .thbnm-swiper .swiper-pagination-bullet {
+  background-color: #cccccc;
+}
+.wpbnmposw .thbnm-swiper .swiper-pagination-bullet-active {
+  background-color: #ffffff;
 }
 
 .updated:not(.published) {

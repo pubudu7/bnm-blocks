@@ -271,8 +271,7 @@
 			"type": ["number", "string"]
 		},
 		"metaSpacing": {
-			"type": ["number", "object"],
-			"default": []
+			"type": ["number", "string"]
 		},
 		"metaPadding": {
 			"type": ["number", "object"],

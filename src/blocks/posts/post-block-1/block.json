@@ -83,6 +83,9 @@
 			"type": "string",
 			"default": ""
 		},
+		"colGap": {
+			"type": ["number", "string"]
+		},
 		"showTitle": {
 			"type": "boolean",
 			"default": true
@@ -144,6 +147,18 @@
 		"featuredImageSizeSlugSmall": {
 			"type": "string",
 			"default": "bnm-featured-thumb"
+		},
+		"featuredImageWidth": {
+			"type": ["number", "string"],
+			"default": "33%"
+		},
+		"entryContentWidth": {
+			"type": ["number", "string"],
+			"default": "67%"
+		},
+		"featuredImageMargin": {
+			"type": ["number", "object"],
+			"default": []
 		},
 		"addLinkToFeaturedImage": {
 			"type": "boolean",
@@ -279,6 +294,9 @@
 			"type": ["number", "string"]
 		},
 		"metaLetterSpacingSmall": {
+			"type": ["number", "string"]
+		},
+		"metaSpacing": {
 			"type": ["number", "string"]
 		},
 		"metaPadding": {

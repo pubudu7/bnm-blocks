@@ -234,6 +234,10 @@ class Post_Block_2_CSS {
                     'property'  =>  '--header-hover-color',
                     'value'     =>  'headerHoverColor',
                 ),
+                array(
+                    'property'  =>  '--col-gap',
+                    'value'     =>  'colGap',
+                ),
             )
         );
 

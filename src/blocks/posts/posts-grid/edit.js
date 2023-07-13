@@ -233,7 +233,8 @@ export default function Edit( { attributes, setAttributes } ) {
 		'--excerpt-padding': boxValues(attributes.excerptPadding),
 		'--excerpt-margin': boxValues(attributes.excerptMargin),
 		'--excerpt-color': attributes.excerptColor,
-		'--wpbnmspp-col-gap': attributes.colGap,
+		'--col-gap': attributes.colGap,
+		'--row-gap': attributes.rowGap,
 		'--image-width': attributes.featuredImageWidth,
 		'--content-width': attributes.entryContentWidth,
 		'--image-margin': boxValues(attributes.featuredImageMargin),
@@ -361,12 +362,21 @@ export default function Edit( { attributes, setAttributes } ) {
 							onChange={ ( value ) => setAttributes( { colGap: value } ) }
 							step={ 5 }
 							units={[
-								{
-									a11yLabel: 'Pixels (px)',
-									label: 'px',
-									step: 5,
-									value: 'px'
-								}
+								{ value: 'px', label: 'px', },
+								{ value: '%', label: '%', },
+								{ value: 'em', label: 'em'}
+							]}
+						/>
+
+						<UnitControl
+							label={ __( 'Row Gap', 'bnm-blocks' ) }
+							value={ attributes.rowGap }
+							onChange={ ( value ) => setAttributes( { rowGap: value } ) }
+							step={ 5 }
+							units={[
+								{ value: 'px', label: 'px', },
+								{ value: '%', label: '%', },
+								{ value: 'em', label: 'em'}
 							]}
 						/>
 						</>

@@ -609,7 +609,7 @@ button.swiper-pagination-bullet {
     --header-margin: 0 0 1em;
 	--title-color: #ffffff;
 	--title-hover-color: #dddddd;
-	--title-font-size: 32px;
+	--title-font-size: 26px;
     --title-line-height: 1.2;
 	--title-letter-spacing: normal;
     --title-margin: 0 0 10px 0;
@@ -622,9 +622,9 @@ button.swiper-pagination-bullet {
 	--category-hover-color: #dddddd;
 	--category-bg-color: #000000;
 	--category-bg-hover-color: #000000;
-    --category-font-size: 14px;
+    --category-font-size: 13px;
     --category-bg-hover-color: #eee;
-    --category-margin: 0 0 5px;
+    --category-margin: 0 10px 8px 0;
 	--category-padding: 2px 8px;
 
     margin: 0 0 50px 0;
@@ -741,6 +741,7 @@ button.swiper-pagination-bullet {
 			display: inline-block;
 			position: relative;
 			z-index: 2;
+            font-weight: bold;
 		}
 	}
 
@@ -787,14 +788,14 @@ button.swiper-pagination-bullet {
 	}
 
 	&.hide-pagination {
-		.thbnm-swiper-pagination {
+		.bnm-swiper-pagination {
 			display: none;
 		}
 	}
 
 	&.hide-next-prev-btns {
-		.thbnm-swiper-btn-prev,
-		.thbnm-swiper-btn-next {
+		.bnm-swiper-btn-prev,
+		.bnm-swiper-btn-next {
 			display: none;
 		}
 	}
@@ -804,16 +805,44 @@ button.swiper-pagination-bullet {
 		background: #f8f8f8;
 	}
 
+    .swiper-slide {
+		height: auto;
+		max-height: 100vh;
+	}
+
 	.swiper-button-next, 
 	.swiper-button-prev {
 		color: #ffffff !important;
-		padding: 0 8px;
+		width: 45px;
+        height: 45px;
 		background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
 
 		&:after {
 			font-size: 20px !important;
 		}
 	}
+
+    .swiper-button-next, .swiper-rtl .swiper-button-prev {
+        right: 27px;
+        left: auto;
+    }
+
+    .swiper-button-prev, .swiper-rtl .swiper-button-next {
+        left: 27px;
+        right: auto;
+    }
+
+    .thbnm-swiper {
+        .swiper-pagination-bullet {
+            background-color: #cccccc;
+        }
+    
+        .swiper-pagination-bullet-active {
+            background-color: #ffffff;
+        }
+    }
+
 }
 
 .updated:not(.published) {

@@ -45,7 +45,7 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 	}
 
 	?>
-	<div class="posts-block-1-container">
+	<div class="pb1-container">
 
 	<?php
 		$bnmp_count = 1;
@@ -59,7 +59,7 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 				if ( $bnmp_count === 1 ) { ?>
 
 					<div class="bnm-left-block">
-						<div class="bnm-pb1-large-post">
+						<article class="bnm-pb1-large">
 							<?php if ( has_post_thumbnail() ) : ?>
 								<figure class="post-thumbnail">
 									<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
@@ -68,7 +68,7 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 								</figure>
 							<?php endif; ?>
 
-							<div class="bnm-pb1-large-post-content">
+							<div class="bnm-entry-wrapper">
 
 								<?php if ( $attributes['showCategory'] ) { ?>
 									<div class="bnm-category-list">
@@ -124,15 +124,15 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 									</div>
 								<?php } ?>
 
-							</div><!-- ."bnm-pb1-large-post-content -->
+							</div><!-- ."bnm-entry-wrapper -->
 
-						</div><!-- .bnm-pb1-large-post -->
+						</article><!-- .bnm-pb1-large -->
 					</div><!-- .bnm-left-block -->
 
 					<div class="bnm-right-block">
 
 				<?php } else { ?>
-					<div class="bnm-pb1-small-post">
+					<article class="bnm-pb1-small">
 						<?php if ( has_post_thumbnail() ) : ?>
 							<figure class="post-thumbnail">
 								<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
@@ -162,23 +162,20 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 							?>
 						
 							<div class="entry-meta">
-								<?php if ( $attributes['showAuthorSmall'] ) { ?>
-									<span class="bnm-post-author">
-										<?php bnm_posted_by(); ?>
-									</span>
-								<?php } ?>
-
-								<?php if ( $attributes['showDateSmall'] ) { ?>
-									<span class="bnm-post-date">
-										<?php bnm_posted_on(); ?>
-									</span>
-								<?php } ?>
-
-								<?php if ( $attributes['showCommentCountSmall'] ) { ?>
-									<span class="bnm-comment-count">
-										<?php bnm_comments_link(); ?>
-									</span>
-								<?php } ?>
+							<?php 
+								if ( $attributes['showAuthor'] && $attributes['showAvatar'] ) {
+									bnm_author_avatar();
+								}
+								if ( $attributes['showAuthor'] ) { 
+									bnm_posted_by(); 
+								} 
+								if ( $attributes['showDate'] ) { 
+									bnm_posted_on(); 
+								} 
+								if ( $attributes['showCommentCount'] ) { 
+									bnm_comments_link(); 
+								} 
+							?>
 							</div><!-- .entry-meta -->
 
 							<?php if ( $attributes['displayPostExcerptSmall'] && ( isset( $attributes['excerptLengthSmall'] ) && $attributes['excerptLengthSmall']  > 0 ) ) { ?>
@@ -196,7 +193,7 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 								</div>
 							<?php } ?>
 						</div>
-					</div>
+					</article>
 				<?php } ?>
 
 					

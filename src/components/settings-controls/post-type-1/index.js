@@ -44,6 +44,9 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
         titlePadding,
 		showFeaturedImage,
 		showFeaturedImageSmall,
+		featuredImageMargin,
+		featuredImageWidth,
+		entryContentWidth,
         showDate,
         showCategory,
         showAuthor,
@@ -79,12 +82,27 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 		metaLineHeightSmall,
 		metaLetterSpacing,
 		metaLetterSpacingSmall,
+		metaSpacing,
 		metaMargin,
 		metaPadding,
         categoryFontSize,
 		categoryLineHeight,
 		categoryLetterSpacing,
     } = attributes;
+
+	const formatWidthValue = ( value, propertyToUpdate ) => {
+		if(!value) {
+			return;
+		}
+		const numericValue = parseFloat(value.match(/\d+/)[0]);
+
+		if ( numericValue >= 20 && numericValue <= 80 ) {
+			setAttributes( { [propertyToUpdate]: value } );
+		} else {
+			const defaultValue = propertyToUpdate === "entryContentWidth" ? "67%" : "33%";
+			setAttributes( { [propertyToUpdate]: defaultValue } );
+		}
+	};
 
     return (
         <>
@@ -415,6 +433,12 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 						} }
 					</TabPanel>
 
+					<UnitControl
+						label={ __( 'Meta Spacing', 'bnm-blocks' ) }
+						value={ metaSpacing }
+						onChange={ ( value ) => setAttributes( { metaSpacing: value } ) }
+					/>
+
 					<BoxControl
 						label={ __( 'Margin', 'bnm-blocks' ) }
 						values={ metaMargin }
@@ -652,6 +676,7 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 										onChange={ () => setAttributes( { showFeaturedImageSmall: ! showFeaturedImageSmall } ) }
 									/>
 									{ showFeaturedImageSmall && (
+										<>
 										<SelectControl
 											label={ __( 'Image Size(Small)', 'bnm-blocks' ) }
 											value={ attributes.featuredImageSizeSlugSmall }
@@ -660,7 +685,41 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 												value: size
 											}) ) }
 											onChange={ imageSize => setAttributes( { featuredImageSizeSlugSmall: imageSize } ) }
+										/>										
+										<UnitControl
+											label={ __( 'Featured Image Width (%)', 'bnm-blocks' ) }
+											value={ featuredImageWidth }
+											onChange={ value => formatWidthValue(value, "featuredImageWidth") }
+											step={ 5 }
+											units={[
+												{
+													a11yLabel: 'Percentage (%)',
+													label: '%',
+													step: 5,
+													value: '%'
+												}
+											]}
 										/>
+										<UnitControl
+											label={ __( 'Content Width (%)', 'bnm-blocks' ) }
+											value={ entryContentWidth }
+											onChange={ value => formatWidthValue(value, "entryContentWidth") }
+											step={ 5 }
+											units={[
+												{
+													a11yLabel: 'Percentage (%)',
+													label: '%',
+													step: 5,
+													value: '%'
+												}
+											]}
+										/>
+										<BoxControl
+											label={ __( 'Margin', 'bnm-blocks' ) }
+											values={ featuredImageMargin }
+											onChange={ nextValues => setAttributes( { featuredImageMargin: nextValues } ) }
+										/>
+										</>
 									) }
 								</>
 							); 

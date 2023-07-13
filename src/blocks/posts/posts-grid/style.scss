@@ -15,13 +15,14 @@
     --category-color: #222222;
     --category-hover-color: #444444;
     --category-font-size: 12px;
-    --category-padding: 2px 5px;
+    --category-padding: 2px 8px;
     --category-bg-hover-color: #eee;
-    --category-margin: 0 5px 8px 0;
+    --category-margin: 0 10px 8px 0;
     --excerpt-font-size: 16px;
     --excerpt-line-height: 1.5;
     --excerpt-margin: 0 0 20px;
-    --wpbnmspp-col-gap: 40px;
+    --col-gap: 40px;
+    --row-gap: 25px;
     --image-margin: 0 0 10px;
 
     --image-width: 33%;
@@ -64,7 +65,8 @@
             display: flex;
             flex-flow: row wrap;
             justify-content: flex-start;
-            gap: var( --wpbnmspp-col-gap );
+            column-gap: var( --col-gap );
+            row-gap: var( --row-gap );
             padding: 0;
             list-style: none;
         }
@@ -75,20 +77,20 @@
         }
 
         .bnm-block-title-wrap {
-			margin-bottom: calc( 1.4em - var( --wpbnmspp-col-gap ) );
+			margin-bottom: calc( 1.4em - var( --row-gap ) );
 		}
     }
 
     @media only screen and ( min-width: 600px ) {
         &.columns-3 article,
         &.columns-6 article {
-            flex-basis: calc( 33.33% - ( var( --wpbnmspp-col-gap ) / 3 * 2 ) );
+            flex-basis: calc( 33.33% - ( var( --col-gap ) / 3 * 2 ) );
         }
 
         &.columns-2 article,
         &.columns-4 article,
         &.columns-5 article {
-            flex-basis: calc( 50% - ( var( --wpbnmspp-col-gap ) / 2 ) );
+            flex-basis: calc( 50% - ( var( --col-gap ) / 2 ) );
         }
 
         &.columns-5 article:last-of-type {
@@ -98,16 +100,16 @@
 
     @media only screen and ( min-width: 782px ) {
         &.columns-4 article {
-            flex-basis: calc( 25% - ( var( --wpbnmspp-col-gap ) / 4 * 3 ) );
+            flex-basis: calc( 25% - ( var( --col-gap ) / 4 * 3 ) );
         }
 
         &.columns-5 article,
 		&.columns-5 article:last-of-type {
-			flex-basis: calc( 20% - ( var( --wpbnmspp-col-gap ) / 5 * 4 ) );
+			flex-basis: calc( 20% - ( var( --col-gap ) / 5 * 4 ) );
 		}
 
         &.columns-6 article {
-            flex-basis: calc( 16.6666% - ( var( --wpbnmspp-col-gap ) / 6 * 5 ) );
+            flex-basis: calc( 16.6666% - ( var( --col-gap ) / 6 * 5 ) );
         }
     }
 
@@ -276,7 +278,7 @@
     }
 
     .byline,
-    .bnm-post-date,
+    .posted-on,
     .bnm-comment-count {
         
         margin-right: var(--meta-spacing);

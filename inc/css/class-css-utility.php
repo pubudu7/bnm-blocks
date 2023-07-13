@@ -57,7 +57,12 @@ class CSS_Utility {
         if ( 'font-size' === $value_type ) {
             return $value . 'px';
         } elseif ( 'box-control' === $value_type ) {
-            return $value['top'] . ' ' . $value['right'] . ' ' . $value['bottom'] . ' ' . $value['left'];
+            $top = ( isset($value['top'] ) && ! empty( $value['top'] ) ) ? $value['top'] : 0;
+            $right = ( isset($value['right'] ) && ! empty( $value['right'] ) ) ? $value['right'] : 0;
+            $bottom = ( isset($value['bottom'] ) && ! empty( $value['bottom'] ) ) ? $value['bottom'] : 0;
+            $left = ( isset($value['left'] ) && ! empty( $value['left'] ) ) ? $value['left'] : 0;
+            
+            return $top . ' ' . $right . ' ' . $bottom . ' ' . $left;
         }
     }
 

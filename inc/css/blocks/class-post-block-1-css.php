@@ -234,6 +234,23 @@ class Post_Block_1_CSS {
                     'property'  =>  '--header-hover-color',
                     'value'     =>  'headerHoverColor',
                 ),
+                array(
+                    'property'  =>  '--col-gap',
+                    'value'     =>  'colGap',
+                ),
+                array(
+                    'property'  =>  '--image-width',
+                    'value'     =>  'featuredImageWidth',
+                ),
+                array(
+                    'property'  =>  '--content-width',
+                    'value'     =>  'entryContentWidth',
+                ),
+                array(
+                    'property'  =>  '--image-margin',
+                    'value'     =>  'featuredImageMargin',
+                    'type'      =>  'box-control',
+                ),
             )
         );
 

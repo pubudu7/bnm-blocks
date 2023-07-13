@@ -20,7 +20,8 @@ import { useEffect, Fragment } from '@wordpress/element';
 import {
 	PanelBody,
 	Placeholder,
-	Spinner
+	Spinner,
+	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 
 /**
@@ -213,7 +214,11 @@ export default function Edit( { attributes, setAttributes } ) {
 		'--header-padding': boxValues(attributes.headerPadding),
 		'--header-margin': boxValues(attributes.headerMargin),
 		'--header-color': attributes.headerColor,
-		'--header-hover-color': attributes.headerHoverColor
+		'--header-hover-color': attributes.headerHoverColor,
+		'--col-gap': attributes.colGap,
+		'--image-width': attributes.featuredImageWidth,
+		'--content-width': attributes.entryContentWidth,
+		'--image-margin': boxValues(attributes.featuredImageMargin)
 	};
 
 	const updateQuery = ( newQuery ) =>
@@ -227,6 +232,17 @@ export default function Edit( { attributes, setAttributes } ) {
 				<QueryControls
 					attributes={ attributes }
 					setQuery={ updateQuery }
+				/>
+				<UnitControl
+					label={ __( 'Column Gap', 'bnm-blocks' ) }
+					value={ attributes.colGap }
+					onChange={ ( value ) => setAttributes( { colGap: value } ) }
+					step={ 5 }
+					units={[
+						{ value: 'px', label: 'px', },
+						{ value: '%', label: '%', },
+						{ value: 'em', label: 'em'}
+					]}
 				/>
 			</PanelBody>
 			<BlockExtraSettings

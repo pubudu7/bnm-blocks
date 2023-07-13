@@ -229,6 +229,12 @@
       ],
       "default": []
     },
+    "metaSpacing": {
+      "type": [
+        "number",
+        "string"
+      ]
+    },
     "categoryFontSize": {
       "type": [
         "string",

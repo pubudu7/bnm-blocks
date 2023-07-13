@@ -77,6 +77,7 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 		metaLineHeightSmall,
 		metaLetterSpacing,
 		metaLetterSpacingSmall,
+		metaSpacing,
 		metaMargin,
 		metaPadding,
         categoryFontSize,
@@ -412,6 +413,12 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 							}  
 						} }
 					</TabPanel>
+
+					<UnitControl
+						label={ __( 'Meta Spacing', 'bnm-blocks' ) }
+						value={ metaSpacing }
+						onChange={ ( value ) => setAttributes( { metaSpacing: value } ) }
+					/>
 
 					<BoxControl
 						label={ __( 'Margin', 'bnm-blocks' ) }

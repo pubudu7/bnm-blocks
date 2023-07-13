@@ -42,7 +42,7 @@ export const Layout = ({
                     />
                 </div>
             ) }
-            <div className="posts-block-1-container">
+            <div className="pb1-container">
                 <div className="bnm-left-block">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => {
 
@@ -52,7 +52,7 @@ export const Layout = ({
 
                         return(
                             index === 0 && (
-                                <div className="bnm-pb1-large-post">
+                                <article className="bnm-pb1-large">
                                     
                                     { attributes.showFeaturedImage && (
                                         <FeaturedImage 
@@ -61,7 +61,7 @@ export const Layout = ({
                                         />
                                     ) }
 
-                                    <div className="bnm-pb1-large-post-content">
+                                    <div className="bnm-entry-wrapper">
                                         { attributes.showCategory && categoriesList && (
                                             <PostCategories
                                                 categoriesList={categoriesList}
@@ -107,7 +107,7 @@ export const Layout = ({
                                             />
                                         ) }
                                     </div>
-                                </div>
+                                </article>
                             ) 
                         );
                     } ) }
@@ -121,7 +121,7 @@ export const Layout = ({
                             
                         return(
                             index > 0 && (
-                                <div className="bnm-pb1-small-post">
+                                <article className="bnm-pb1-small">
                                     
                                     { attributes.showFeaturedImage && (
                                         <FeaturedImage 
@@ -177,7 +177,7 @@ export const Layout = ({
                                             />
                                         ) }
                                     </div>
-                                </div>
+                                </article>
                             )
                         );
                     } ) }

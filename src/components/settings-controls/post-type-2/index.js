@@ -406,9 +406,6 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 						label={ __( 'Meta Spacing', 'bnm-blocks' ) }
 						value={ metaSpacing }
 						onChange={ ( value ) => setAttributes( { metaSpacing: value } ) }
-						step={ 1 }
-						min={ 0 }
-						max={ 100 }
 					/>
 
 					<br />

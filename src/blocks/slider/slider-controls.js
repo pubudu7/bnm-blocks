@@ -15,10 +15,11 @@ import { startCase, toLower } from 'lodash';
 	RangeControl,
     SelectControl,
 	ToggleControl,
+    __experimentalUnitControl as UnitControl,
     __experimentalBoxControl as BoxControl
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
+import { PanelColorSettings } from '@wordpress/block-editor';
 
 import TypographyControl from '../../components/typography'; 
 
@@ -53,6 +54,7 @@ export function SliderSettings( { attributes, setAttributes } ) {
         metaFontSize,
         metaLineHeight,
         metaLetterSpacing,
+        metaSpacing,
         metaMargin,
         metaPadding,
         categoryFontSize,
@@ -488,6 +490,11 @@ export function SliderSettings( { attributes, setAttributes } ) {
                     onLetterSpacingChange = { ( newLetterSpacing ) => setAttributes( { metaLetterSpacing: newLetterSpacing } ) }
                 />
                 <br></br>
+                <UnitControl
+                    label={ __( 'Meta Spacing', 'bnm-blocks' ) }
+                    value={ metaSpacing }
+                    onChange={ ( value ) => setAttributes( { metaSpacing: value } ) }
+                />
                 <BoxControl
                     label={ __( 'Margin', 'bnm-blocks' ) }
                     values={ metaMargin }

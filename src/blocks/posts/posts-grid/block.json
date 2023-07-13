@@ -96,6 +96,9 @@
 		"colGap": {
 			"type": ["number", "string"]
 		},
+		"rowGap": {
+			"type": ["number", "string"]
+		},
 		"textAlign": {
 			"type": "string",
 			"default": "left"
@@ -244,8 +247,7 @@
 			"type": ["number", "string"]
 		},
 		"metaSpacing": {
-			"type": ["number", "object"],
-			"default": []
+			"type": ["number", "string"]
 		},
 		"metaPadding": {
 			"type": ["number", "object"],

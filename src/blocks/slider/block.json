@@ -190,6 +190,9 @@
 			"type": ["number", "object"],
 			"default": []
 		},
+		"metaSpacing": {
+			"type": ["number", "string"]
+		},
 		"categoryFontSize": {
 			"type": [ "string", "number" ]
 		},

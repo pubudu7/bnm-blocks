@@ -145,8 +145,12 @@ class Post_Block_SP_CSS {
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--wpbnmspp-col-gap',
+                    'property'  =>  '--col-gap',
                     'value'     =>  'colGap',
+                ),
+                array(
+                    'property'  =>  '--row-gap',
+                    'value'     =>  'rowGap',
                 ),
                 array(
                     'property'  =>  '--image-width',
