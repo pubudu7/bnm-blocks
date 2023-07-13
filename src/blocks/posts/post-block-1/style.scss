@@ -185,6 +185,10 @@
                 text-decoration: inherit;
                 color: var(--meta-color);
 
+                &:visited {
+                    color: var(--meta-color);
+                }
+
                 &:hover {
                     color: var(--meta-hover-color);
                 }

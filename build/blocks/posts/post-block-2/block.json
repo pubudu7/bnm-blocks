@@ -189,6 +189,27 @@
       "type": "string",
       "default": "bnm-featured-thumb"
     },
+    "featuredImageWidth": {
+      "type": [
+        "number",
+        "string"
+      ],
+      "default": "33%"
+    },
+    "entryContentWidth": {
+      "type": [
+        "number",
+        "string"
+      ],
+      "default": "67%"
+    },
+    "featuredImageMargin": {
+      "type": [
+        "number",
+        "object"
+      ],
+      "default": []
+    },
     "addLinkToFeaturedImage": {
       "type": "boolean",
       "default": false
@@ -440,6 +461,18 @@
     "categoryBGHoverColor": {
       "type": "string",
       "default": ""
+    },
+    "colGap": {
+      "type": [
+        "number",
+        "string"
+      ]
+    },
+    "rowGap": {
+      "type": [
+        "number",
+        "string"
+      ]
     }
   }
 }

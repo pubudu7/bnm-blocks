@@ -238,13 +238,18 @@ function Edit(_ref) {
     '--excerpt-padding-small': (0,_shared_js_utils_js__WEBPACK_IMPORTED_MODULE_12__.boxValues)(attributes.excerptPaddingSmall),
     '--excerpt-margin-small': (0,_shared_js_utils_js__WEBPACK_IMPORTED_MODULE_12__.boxValues)(attributes.excerptMarginSmall),
     '--excerpt-color': attributes.excerptColor,
+    '--col-gap': attributes.colGap,
+    '--row-gap': attributes.rowGap,
     '--header-font-size': (0,_shared_js_utils_js__WEBPACK_IMPORTED_MODULE_12__.mightBeUnit)(attributes.headerFontSize),
     '--header-line-height': attributes.headerLineHeight,
     '--header-letter-spacing': attributes.headerLetterSpacing,
     '--header-padding': (0,_shared_js_utils_js__WEBPACK_IMPORTED_MODULE_12__.boxValues)(attributes.headerPadding),
     '--header-margin': (0,_shared_js_utils_js__WEBPACK_IMPORTED_MODULE_12__.boxValues)(attributes.headerMargin),
     '--header-color': attributes.headerColor,
-    '--header-hover-color': attributes.headerHoverColor
+    '--header-hover-color': attributes.headerHoverColor,
+    '--image-width': attributes.featuredImageWidth,
+    '--content-width': attributes.entryContentWidth,
+    '--image-margin': (0,_shared_js_utils_js__WEBPACK_IMPORTED_MODULE_12__.boxValues)(attributes.featuredImageMargin)
   };
   let hasCategoryClass = false;
 
@@ -277,6 +282,40 @@ function Edit(_ref) {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_query_controls__WEBPACK_IMPORTED_MODULE_10__["default"], {
     attributes: attributes,
     setQuery: updateQuery
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.__experimentalUnitControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Column Gap', 'bnm-blocks'),
+    value: attributes.colGap,
+    onChange: value => setAttributes({
+      colGap: value
+    }),
+    step: 5,
+    units: [{
+      value: 'px',
+      label: 'px'
+    }, {
+      value: '%',
+      label: '%'
+    }, {
+      value: 'em',
+      label: 'em'
+    }]
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.__experimentalUnitControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Row Gap', 'bnm-blocks'),
+    value: attributes.rowGap,
+    onChange: value => setAttributes({
+      rowGap: value
+    }),
+    step: 5,
+    units: [{
+      value: 'px',
+      label: 'px'
+    }, {
+      value: '%',
+      label: '%'
+    }, {
+      value: 'em',
+      label: 'em'
+    }]
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_settings_controls_post_type_1__WEBPACK_IMPORTED_MODULE_11__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
@@ -420,12 +459,12 @@ const Layout = _ref => {
   }, posts && posts.length > 0 && posts.map((post, index) => {
     const currentAuthor = authorsList === null || authorsList === void 0 ? void 0 : authorsList.find(writer => writer.id === post.author);
     return (index === 0 || index === 1) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "bnm-pb2-large-post"
+      className: "bnm-pb2-large"
     }, attributes.showFeaturedImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_4__.FeaturedImage, {
       post: post,
       featuredImageSizeSlug: attributes.featuredImageSizeSlug
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "bnm-pb2-large-post-content"
+      className: "bnm-entry-wrapper"
     }, attributes.showCategory && categoriesList && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_4__.PostCategories, {
       categoriesList: categoriesList,
       post: post
@@ -450,7 +489,7 @@ const Layout = _ref => {
   }), posts && posts.length > 0 && posts.map((post, index) => {
     const currentAuthor = authorsList === null || authorsList === void 0 ? void 0 : authorsList.find(writer => writer.id === post.author);
     return index > 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "bnm-pb2-small-post"
+      className: "bnm-pb2-small"
     }, attributes.showFeaturedImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_4__.FeaturedImage, {
       post: post,
       featuredImageSizeSlug: attributes.featuredImageSizeSlugSmall
@@ -3106,7 +3145,7 @@ function _extends() {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"bnm-blocks/post-block-2","title":"Post Block: #2","category":"bnm-blocks","icon":"smiley","description":"Post block style #2.","supports":{"html":false},"textdomain":"bnm-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"queryId":{"type":"number"},"query":{"type":"object","default":{"posts":[],"perPage":8,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":null}},"specificMode":{"type":"boolean","default":"false"},"specificPosts":{"type":"array","default":[],"items":{"type":"integer"}},"showSectionHeader":{"type":"boolean","default":true},"sectionHeader":{"type":"string","default":""},"headerHtmlTag":{"type":"string","default":"h2"},"headerFontSize":{"type":["string","number"]},"headerLineHeight":{"type":["number","string"]},"headerLetterSpacing":{"type":["number","string"]},"headerPadding":{"type":["number","object"],"default":[]},"headerMargin":{"type":["number","object"],"default":[]},"headerColor":{"type":"string","default":""},"headerHoverColor":{"type":"string","default":""},"showTitle":{"type":"boolean","default":true},"titleHtmlTag":{"type":"string","default":"h3"},"titleFontSize":{"type":["string","number"]},"titleFontSizeSmall":{"type":["string","number"]},"titleLineHeight":{"type":["number","string"]},"titleLineHeightSmall":{"type":["number","string"]},"titleLetterSpacing":{"type":["number","string"]},"titleLetterSpacingSmall":{"type":["number","string"]},"titlePadding":{"type":["number","object"],"default":[]},"titleMargin":{"type":["number","object"],"default":[]},"titleColor":{"type":"string","default":""},"titleHoverColor":{"type":"string","default":""},"showFeaturedImage":{"type":"boolean","default":true},"showFeaturedImageSmall":{"type":"boolean","default":true},"featuredImageAlign":{"type":"string","enum":["left","center","right"]},"featuredImageSizeSlug":{"type":"string","default":"bnm-featured"},"featuredImageSizeSlugSmall":{"type":"string","default":"bnm-featured-thumb"},"addLinkToFeaturedImage":{"type":"boolean","default":false},"showDate":{"type":"boolean","default":true},"showCategory":{"type":"boolean","default":true},"showAuthor":{"type":"boolean","default":true},"showAvatar":{"type":"boolean","default":true},"showCommentCount":{"type":"boolean","default":true},"displayPostExcerpt":{"type":"boolean","default":true},"showDateSmall":{"type":"boolean","default":true},"showCategorySmall":{"type":"boolean","default":false},"categoryPadding":{"type":["number","object"],"default":[]},"categoryMargin":{"type":["number","object"],"default":[]},"showAuthorSmall":{"type":"boolean","default":false},"showAvatarSmall":{"type":"boolean","default":false},"showCommentCountSmall":{"type":"boolean","default":false},"displayPostExcerptSmall":{"type":"boolean","default":false},"excerptLength":{"type":"number","default":20},"excerptLengthSmall":{"type":"number","default":10},"excerptFontSize":{"type":["string","number"]},"excerptFontSizeSmall":{"type":["string","number"]},"excerptLineHeight":{"type":["number","string"]},"excerptLetterSpacing":{"type":["number","string"]},"excerptLineHeightSmall":{"type":["number","string"]},"excerptLetterSpacingSmall":{"type":["number","string"]},"excerptPadding":{"type":["number","object"],"default":[]},"excerptPaddingSmall":{"type":["number","object"],"default":[]},"excerptMargin":{"type":["number","object"],"default":[]},"excerptMarginSmall":{"type":["number","object"],"default":[]},"excerptColor":{"type":"string","default":""},"showReadMore":{"type":"boolean","default":false},"showReadMoreSmall":{"type":"boolean","default":false},"readMoreLabel":{"type":"string","default":"Keep reading"},"metaFontSize":{"type":["string","number"]},"metaFontSizeSmall":{"type":["string","number"]},"metaLineHeight":{"type":["number","string"]},"metaLetterSpacing":{"type":["number","string"]},"metaLineHeightSmall":{"type":["number","string"]},"metaLetterSpacingSmall":{"type":["number","string"]},"metaSpacing":{"type":["number","string"]},"metaPadding":{"type":["number","object"],"default":[]},"metaMargin":{"type":["number","object"],"default":[]},"metaColor":{"type":"string","default":""},"metaHoverColor":{"type":"string","default":""},"categoryFontSize":{"type":["string","number"]},"categoryLineHeight":{"type":["number","string"]},"categoryLetterSpacing":{"type":["number","string"]},"categoryColor":{"type":"string","default":""},"categoryHoverColor":{"type":"string","default":""},"categoryBGColor":{"type":"string","default":""},"categoryBGHoverColor":{"type":"string","default":""}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"bnm-blocks/post-block-2","title":"Post Block: #2","category":"bnm-blocks","icon":"smiley","description":"Post block style #2.","supports":{"html":false},"textdomain":"bnm-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"queryId":{"type":"number"},"query":{"type":"object","default":{"posts":[],"perPage":8,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":null}},"specificMode":{"type":"boolean","default":"false"},"specificPosts":{"type":"array","default":[],"items":{"type":"integer"}},"showSectionHeader":{"type":"boolean","default":true},"sectionHeader":{"type":"string","default":""},"headerHtmlTag":{"type":"string","default":"h2"},"headerFontSize":{"type":["string","number"]},"headerLineHeight":{"type":["number","string"]},"headerLetterSpacing":{"type":["number","string"]},"headerPadding":{"type":["number","object"],"default":[]},"headerMargin":{"type":["number","object"],"default":[]},"headerColor":{"type":"string","default":""},"headerHoverColor":{"type":"string","default":""},"showTitle":{"type":"boolean","default":true},"titleHtmlTag":{"type":"string","default":"h3"},"titleFontSize":{"type":["string","number"]},"titleFontSizeSmall":{"type":["string","number"]},"titleLineHeight":{"type":["number","string"]},"titleLineHeightSmall":{"type":["number","string"]},"titleLetterSpacing":{"type":["number","string"]},"titleLetterSpacingSmall":{"type":["number","string"]},"titlePadding":{"type":["number","object"],"default":[]},"titleMargin":{"type":["number","object"],"default":[]},"titleColor":{"type":"string","default":""},"titleHoverColor":{"type":"string","default":""},"showFeaturedImage":{"type":"boolean","default":true},"showFeaturedImageSmall":{"type":"boolean","default":true},"featuredImageAlign":{"type":"string","enum":["left","center","right"]},"featuredImageSizeSlug":{"type":"string","default":"bnm-featured"},"featuredImageSizeSlugSmall":{"type":"string","default":"bnm-featured-thumb"},"featuredImageWidth":{"type":["number","string"],"default":"33%"},"entryContentWidth":{"type":["number","string"],"default":"67%"},"featuredImageMargin":{"type":["number","object"],"default":[]},"addLinkToFeaturedImage":{"type":"boolean","default":false},"showDate":{"type":"boolean","default":true},"showCategory":{"type":"boolean","default":true},"showAuthor":{"type":"boolean","default":true},"showAvatar":{"type":"boolean","default":true},"showCommentCount":{"type":"boolean","default":true},"displayPostExcerpt":{"type":"boolean","default":true},"showDateSmall":{"type":"boolean","default":true},"showCategorySmall":{"type":"boolean","default":false},"categoryPadding":{"type":["number","object"],"default":[]},"categoryMargin":{"type":["number","object"],"default":[]},"showAuthorSmall":{"type":"boolean","default":false},"showAvatarSmall":{"type":"boolean","default":false},"showCommentCountSmall":{"type":"boolean","default":false},"displayPostExcerptSmall":{"type":"boolean","default":false},"excerptLength":{"type":"number","default":20},"excerptLengthSmall":{"type":"number","default":10},"excerptFontSize":{"type":["string","number"]},"excerptFontSizeSmall":{"type":["string","number"]},"excerptLineHeight":{"type":["number","string"]},"excerptLetterSpacing":{"type":["number","string"]},"excerptLineHeightSmall":{"type":["number","string"]},"excerptLetterSpacingSmall":{"type":["number","string"]},"excerptPadding":{"type":["number","object"],"default":[]},"excerptPaddingSmall":{"type":["number","object"],"default":[]},"excerptMargin":{"type":["number","object"],"default":[]},"excerptMarginSmall":{"type":["number","object"],"default":[]},"excerptColor":{"type":"string","default":""},"showReadMore":{"type":"boolean","default":false},"showReadMoreSmall":{"type":"boolean","default":false},"readMoreLabel":{"type":"string","default":"Keep reading"},"metaFontSize":{"type":["string","number"]},"metaFontSizeSmall":{"type":["string","number"]},"metaLineHeight":{"type":["number","string"]},"metaLetterSpacing":{"type":["number","string"]},"metaLineHeightSmall":{"type":["number","string"]},"metaLetterSpacingSmall":{"type":["number","string"]},"metaSpacing":{"type":["number","string"]},"metaPadding":{"type":["number","object"],"default":[]},"metaMargin":{"type":["number","object"],"default":[]},"metaColor":{"type":"string","default":""},"metaHoverColor":{"type":"string","default":""},"categoryFontSize":{"type":["string","number"]},"categoryLineHeight":{"type":["number","string"]},"categoryLetterSpacing":{"type":["number","string"]},"categoryColor":{"type":"string","default":""},"categoryHoverColor":{"type":"string","default":""},"categoryBGColor":{"type":"string","default":""},"categoryBGHoverColor":{"type":"string","default":""},"colGap":{"type":["number","string"]},"rowGap":{"type":["number","string"]}}}');
 
 /***/ })
 

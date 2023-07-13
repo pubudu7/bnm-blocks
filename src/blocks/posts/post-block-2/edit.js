@@ -21,7 +21,8 @@ import { useEffect } from '@wordpress/element';
 import {
 	PanelBody,
 	Placeholder,
-	Spinner
+	Spinner,
+	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 
 /**
@@ -226,13 +227,18 @@ export default function Edit( { attributes, setAttributes } ) {
 		'--excerpt-padding-small': boxValues(attributes.excerptPaddingSmall),
 		'--excerpt-margin-small': boxValues(attributes.excerptMarginSmall),
 		'--excerpt-color': attributes.excerptColor,
+		'--col-gap': attributes.colGap,
+		'--row-gap': attributes.rowGap,
 		'--header-font-size': mightBeUnit(attributes.headerFontSize),
 		'--header-line-height': attributes.headerLineHeight,
 		'--header-letter-spacing': attributes.headerLetterSpacing,
 		'--header-padding': boxValues(attributes.headerPadding),
 		'--header-margin': boxValues(attributes.headerMargin),
 		'--header-color': attributes.headerColor,
-		'--header-hover-color': attributes.headerHoverColor
+		'--header-hover-color': attributes.headerHoverColor,
+		'--image-width': attributes.featuredImageWidth,
+		'--content-width': attributes.entryContentWidth,
+		'--image-margin': boxValues(attributes.featuredImageMargin)
 	};
 
 	let hasCategoryClass = false;
@@ -264,6 +270,28 @@ export default function Edit( { attributes, setAttributes } ) {
 				<QueryControls
 					attributes={ attributes }
 					setQuery={ updateQuery }
+				/>
+				<UnitControl
+					label={ __( 'Column Gap', 'bnm-blocks' ) }
+					value={ attributes.colGap }
+					onChange={ ( value ) => setAttributes( { colGap: value } ) }
+					step={ 5 }
+					units={[
+						{ value: 'px', label: 'px', },
+						{ value: '%', label: '%', },
+						{ value: 'em', label: 'em'}
+					]}
+				/>
+				<UnitControl
+					label={ __( 'Row Gap', 'bnm-blocks' ) }
+					value={ attributes.rowGap }
+					onChange={ ( value ) => setAttributes( { rowGap: value } ) }
+					step={ 5 }
+					units={[
+						{ value: 'px', label: 'px', },
+						{ value: '%', label: '%', },
+						{ value: 'em', label: 'em'}
+					]}
 				/>
 			</PanelBody>
 			<BlockExtraSettings

@@ -238,6 +238,23 @@ class Post_Block_2_CSS {
                     'property'  =>  '--col-gap',
                     'value'     =>  'colGap',
                 ),
+                array(
+                    'property'  =>  '--row-gap',
+                    'value'     =>  'rowGap',
+                ),
+                array(
+                    'property'  =>  '--image-width',
+                    'value'     =>  'featuredImageWidth',
+                ),
+                array(
+                    'property'  =>  '--content-width',
+                    'value'     =>  'entryContentWidth',
+                ),
+                array(
+                    'property'  =>  '--image-margin',
+                    'value'     =>  'featuredImageMargin',
+                    'type'      =>  'box-control',
+                ),
             )
         );
 

@@ -162,6 +162,11 @@
   text-decoration: inherit;
   color: var(--meta-color);
 }
+.wpbnmpb1 .entry-meta .byline a:visited,
+.wpbnmpb1 .entry-meta .posted-on a:visited,
+.wpbnmpb1 .entry-meta .bnm-comment-count a:visited {
+  color: var(--meta-color);
+}
 .wpbnmpb1 .entry-meta .byline a:hover,
 .wpbnmpb1 .entry-meta .posted-on a:hover,
 .wpbnmpb1 .entry-meta .bnm-comment-count a:hover {

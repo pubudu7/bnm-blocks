@@ -163,16 +163,16 @@ function bnm_blocks_post_block_1_render_callback( $attributes ) {
 						
 							<div class="entry-meta">
 							<?php 
-								if ( $attributes['showAuthor'] && $attributes['showAvatar'] ) {
+								if ( $attributes['showAuthorSmall'] && $attributes['showAvatarSmall'] ) {
 									bnm_author_avatar();
 								}
-								if ( $attributes['showAuthor'] ) { 
+								if ( $attributes['showAuthorSmall'] ) { 
 									bnm_posted_by(); 
 								} 
-								if ( $attributes['showDate'] ) { 
+								if ( $attributes['showDateSmall'] ) { 
 									bnm_posted_on(); 
 								} 
-								if ( $attributes['showCommentCount'] ) { 
+								if ( $attributes['showCommentCountSmall'] ) { 
 									bnm_comments_link(); 
 								} 
 							?>

@@ -52,7 +52,7 @@ export const Layout = ({
 
                         return(
                             ( index === 0 || index === 1 ) && (
-                                <div className="bnm-pb2-large-post">
+                                <div className="bnm-pb2-large">
                                     { attributes.showFeaturedImage && (
                                         <FeaturedImage 
                                             post={post}
@@ -60,7 +60,7 @@ export const Layout = ({
                                         />
                                     ) }
 
-                                    <div className="bnm-pb2-large-post-content">
+                                    <div className="bnm-entry-wrapper">
                                         { attributes.showCategory && categoriesList && (
                                             <PostCategories
                                                 categoriesList={categoriesList}
@@ -119,7 +119,7 @@ export const Layout = ({
 
                         return(
                             index > 1 && (
-                                <div className="bnm-pb2-small-post">
+                                <div className="bnm-pb2-small">
                                     
                                     { attributes.showFeaturedImage && (
                                         <FeaturedImage 

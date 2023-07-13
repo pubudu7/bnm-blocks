@@ -48,7 +48,7 @@ function bnm_blocks_post_block_2_render_callback( $attributes ) {
 				$article_query -> the_post();
 
 				if ( $bnmp_count === 1 || $bnmp_count === 2 ) { ?>
-					<div class="bnm-pb2-large-post">
+					<div class="bnm-pb2-large">
 						<?php if ( has_post_thumbnail() ) : ?>
 							<figure class="post-thumbnail">
 								<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
@@ -57,7 +57,7 @@ function bnm_blocks_post_block_2_render_callback( $attributes ) {
 							</figure>
 						<?php endif; ?>
 
-						<div class="bnm-pb2-large-post-content">
+						<div class="bnm-entry-content">
 
 							<?php if ( $attributes['showCategory'] ) { ?>
 								<div class="bnm-category-list">
@@ -107,9 +107,9 @@ function bnm_blocks_post_block_2_render_callback( $attributes ) {
 
 						</div><!-- ."bnm-pb1-large-post-content -->
 
-					</div><!-- .bnm-pb2-large-post -->
+					</div><!-- .bnm-pb2-large -->
 				<?php } else { ?>
-					<div class="bnm-pb2-small-post">
+					<div class="bnm-pb2-small">
 						<?php if ( has_post_thumbnail() ) : ?>
 							<figure class="post-thumbnail">
 								<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
@@ -162,7 +162,7 @@ function bnm_blocks_post_block_2_render_callback( $attributes ) {
 								</div>
 							<?php } ?>
 						</div>
-					</div><!-- .bnm-pb2-small-post -->
+					</div><!-- .bnm-pb2-small -->
 				<?php } ?>
 
 		<?php
