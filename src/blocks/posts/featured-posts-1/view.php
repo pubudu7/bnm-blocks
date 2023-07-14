@@ -18,6 +18,9 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 
 	$article_query = new WP_Query( $post_query_args );
 
+	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : 'bnm-featured';
+	$featured_image_slug_small = ! empty( $attributes['featuredImageSizeSlugSmall'] ) ? $attributes['featuredImageSizeSlugSmall'] : 'bnm-featured';
+
 	ob_start();
 
 	if ( '' !== $attributes['sectionHeader'] && true === $attributes['showSectionHeader'] ) {
@@ -45,11 +48,11 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 				if ( $bnmp_count === 1 ) { ?>
 
 				<div class="bnm-fp1-left-side">
-					<div class="bnm-fp1-large-post">
+					<article class="bnm-fp1-large">
 						
 						<?php 
 							if ( has_post_thumbnail() ) {
-								the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
+								the_post_thumbnail( $featured_image_slug, array( 'class' => 'bnm-fp-img') );
 							} 
 						?>
 
@@ -106,17 +109,17 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 							<?php } ?>
 
 						</div><!-- ."bnm-pb1-large-post-content -->
-					</div><!-- .bnm-fp1-large-post -->
+					</article><!-- .bnm-fp1-large -->
 				</div><!-- .bnm-fp1-left-side -->
 
 				<div class="bnm-fp1-right-side">
 
 				<?php } elseif ( $bnmp_count === 2 || $bnmp_count === 3 ) { ?>
-					<div class="bnm-fp1-small-post">
+					<article class="bnm-fp1-small">
 
 						<?php 
 							if ( has_post_thumbnail() ) {
-								the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
+								the_post_thumbnail( $featured_image_slug_small, array( 'class' => 'bnm-fp-img') );
 							} 
 						?>	
 						
@@ -174,7 +177,7 @@ function bnm_blocks_featured_posts_block_1_render_callback( $attributes ) {
 
 						</div><!-- ."bnm-fp1-post-content -->
 
-					</div><!-- .bnm-fp1-small-post -->
+					</article><!-- .bnm-fp1-small -->
 				<?php } ?>
 		<?php
 

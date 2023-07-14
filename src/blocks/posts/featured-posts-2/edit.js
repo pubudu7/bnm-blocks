@@ -20,7 +20,8 @@ import { useEffect, Fragment } from '@wordpress/element';
 import {
 	PanelBody,
 	Placeholder,
-	Spinner
+	Spinner,
+	__experimentalUnitControl as UnitControl
 } from '@wordpress/components';
 
 /**
@@ -218,7 +219,8 @@ export default function Edit( { attributes, setAttributes } ) {
 		'--header-padding': boxValues(attributes.headerPadding),
 		'--header-margin': boxValues(attributes.headerMargin),
 		'--header-color': attributes.headerColor,
-		'--header-hover-color': attributes.headerHoverColor
+		'--header-hover-color': attributes.headerHoverColor,
+		'--col-gap': attributes.colGap
 	};
 
 	let hasCategoryClass = false;

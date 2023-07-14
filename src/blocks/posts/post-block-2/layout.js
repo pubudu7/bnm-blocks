@@ -52,7 +52,7 @@ export const Layout = ({
 
                         return(
                             ( index === 0 || index === 1 ) && (
-                                <div className="bnm-pb2-large">
+                                <article className="bnm-pb2-large">
                                     { attributes.showFeaturedImage && (
                                         <FeaturedImage 
                                             post={post}
@@ -106,7 +106,7 @@ export const Layout = ({
                                             />
                                         ) }
                                     </div>
-                                </div>
+                                </article>
                             )
                         );
                     } ) }
@@ -119,7 +119,7 @@ export const Layout = ({
 
                         return(
                             index > 1 && (
-                                <div className="bnm-pb2-small">
+                                <article className="bnm-pb2-small">
                                     
                                     { attributes.showFeaturedImage && (
                                         <FeaturedImage 
@@ -173,7 +173,7 @@ export const Layout = ({
                                             />
                                         ) }
                                     </div>
-                                </div>
+                                </article>
                             )
                         );
                     } ) }

@@ -196,7 +196,7 @@
   overflow-wrap: break-word;
   word-break: break-word;
 }
-@media (min-width: 480px) {
+@media (min-width: 768px) {
   .pb1-container {
     display: flex;
     flex-direction: row;

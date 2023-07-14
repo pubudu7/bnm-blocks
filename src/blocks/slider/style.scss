@@ -666,6 +666,9 @@ button.swiper-pagination-bullet {
         }
 
         .entry-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
             color: var(--meta-color);
             font-size: var(--meta-font-size);
             padding: var(--meta-padding);
@@ -680,6 +683,8 @@ button.swiper-pagination-bullet {
                 font-size: var(--meta-font-size);
                 line-height: var(--meta-line-height);
                 letter-spacing: var(--meta-letter-spacing);
+                position: relative;
+                z-index: 2;
 
                 &:visited {
                     color: var(--meta-color);
@@ -707,19 +712,8 @@ button.swiper-pagination-bullet {
         }
     }
 
-    .entry-meta {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-
-        a {
-            position: relative;
-            z-index: 2;
-        }
-    }
-
     .byline,
-    .bnm-post-date,
+    .posted-on,
     .bnm-comment-count {
         
         margin-right: var(--meta-spacing);
@@ -737,6 +731,9 @@ button.swiper-pagination-bullet {
     }
 
     .bnm-category-list {
+        display: flex;
+		flex-wrap: wrap;
+
 		a {
 			display: inline-block;
 			position: relative;

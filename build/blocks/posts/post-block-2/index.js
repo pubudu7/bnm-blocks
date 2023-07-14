@@ -458,7 +458,7 @@ const Layout = _ref => {
     className: "bnm-pb2-posts-grid"
   }, posts && posts.length > 0 && posts.map((post, index) => {
     const currentAuthor = authorsList === null || authorsList === void 0 ? void 0 : authorsList.find(writer => writer.id === post.author);
-    return (index === 0 || index === 1) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    return (index === 0 || index === 1) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("article", {
       className: "bnm-pb2-large"
     }, attributes.showFeaturedImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_4__.FeaturedImage, {
       post: post,
@@ -488,7 +488,7 @@ const Layout = _ref => {
     })));
   }), posts && posts.length > 0 && posts.map((post, index) => {
     const currentAuthor = authorsList === null || authorsList === void 0 ? void 0 : authorsList.find(writer => writer.id === post.author);
-    return index > 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    return index > 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("article", {
       className: "bnm-pb2-small"
     }, attributes.showFeaturedImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_4__.FeaturedImage, {
       post: post,

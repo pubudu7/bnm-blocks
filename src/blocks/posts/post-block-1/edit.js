@@ -21,7 +21,7 @@ import {
 	PanelBody,
 	Placeholder,
 	Spinner,
-	__experimentalUnitControl as UnitControl,
+	__experimentalUnitControl as UnitControl
 } from '@wordpress/components';
 
 /**

@@ -606,6 +606,56 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 					] }
 				/>
 			</PanelBody>
+
+			<PanelBody title={ __( 'Featured Image Settings', 'bnm-blocks') } initialOpen={ false }>
+
+				<TabPanel
+					className="thbnm-featured-image-settings-tab-panel thbnm-tab-panel"
+					activeclassName="thbnm-active-tab"
+					//onSelect={ onSelect }
+					initialTabName="big-post"
+					tabs={ [
+						{
+							name: 'big-post',
+							title: 'Big Post',
+							className: 'tab-big-post',
+						},
+						{
+							name: 'small-post',
+							title: 'Small Posts',
+							className: 'tab-small-post',
+						},
+					] }
+				>
+					{ ( tab ) => {
+						if ( tab.name === 'big-post' ) { 
+							return (
+								<SelectControl
+									label={ __( 'Image Size', 'bnm-blocks' ) }
+									value={ attributes.featuredImageSizeSlug }
+									options={ window.themezHutGutenberg.imageSizes.map( size => ({
+										label: startCase( toLower( size ) ),
+										value: size
+									}) ) }
+									onChange={ imageSize => setAttributes({ featuredImageSizeSlug: imageSize }) }
+								/> 
+							);
+						} else if ( tab.name === 'small-post' ) { 
+							return (
+								<SelectControl
+									label={ __( 'Image Size (Small)', 'bnm-blocks' ) }
+									value={ attributes.featuredImageSizeSlugSmall }
+									options={ window.themezHutGutenberg.imageSizes.map( size => ({
+										label: startCase( toLower( size ) ),
+										value: size
+									}) ) }
+									onChange={ imageSize => setAttributes( { featuredImageSizeSlugSmall: imageSize } ) }
+								/>										
+							); 
+						}  
+					} }
+				</TabPanel>
+			</PanelBody>
 		</>
     );
 }

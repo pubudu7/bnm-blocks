@@ -45,6 +45,12 @@
         padding: 0;
 	}
 
+    article {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        position: relative;
+    }
+
     .bnm-pb2-large {
         .entry-title {
             clear: none;
@@ -122,9 +128,6 @@
         }
         .entry-details {
             flex-basis: var(--content-width);
-        }
-        .entry-details {
-            word-wrap: break-word;
         }
     }
 
@@ -220,7 +223,7 @@
     column-gap: var(--col-gap);
     row-gap: var(--row-gap);
     
-    @media ( min-width: 480px ) {
+    @media ( min-width: 768px ) {
         grid-template-columns: 1fr 1fr;
     }
 }

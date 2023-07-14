@@ -18,6 +18,9 @@ function bnm_blocks_featured_posts_block_2_render_callback( $attributes ) {
 
 	$article_query = new WP_Query( $post_query_args );
 
+	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : 'bnm-featured';
+	$featured_image_slug_small = ! empty( $attributes['featuredImageSizeSlugSmall'] ) ? $attributes['featuredImageSizeSlugSmall'] : 'bnm-featured';
+
 	ob_start();
 
 	if ( '' !== $attributes['sectionHeader'] && true === $attributes['showSectionHeader'] ) {
@@ -45,79 +48,76 @@ function bnm_blocks_featured_posts_block_2_render_callback( $attributes ) {
 
 				if ( $bnmp_count === 1 || $bnmp_count === 2 ) { ?>
 
-				<div class="bnm-fp2-large-post">
+				<article class="bnm-fp2-large">
 				
-					<div class="bnm-fp2-inner-container">
-						
+					<?php 
+						if ( has_post_thumbnail() ) {
+							the_post_thumbnail( $featured_image_slug, array( 'class' => 'bnm-fp-img') );
+						} 
+					?>
+
+					<div class="bnmfp2ovrlay">
+						<a class="bnmlnkovrlay" href="<?php echo esc_url( get_permalink() ); ?>"></a>
+					</div>
+
+					<div class="bnm-fp2-post-content">
+						<?php if ( $attributes['showCategory'] ) { ?>
+							<div class="bnm-category-list">
+								<?php the_category( ' ' ); ?>
+							</div>
+						<?php } ?>
+
 						<?php 
-							if ( has_post_thumbnail() ) {
-								the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
-							} 
+							if ( $attributes['showTitle'] ) {
+								the_title( '<h3 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' ); 
+							}
 						?>
 
-						<div class="bnmfp2ovrlay">
-							<a class="bnmlnkovrlay" href="<?php echo esc_url( get_permalink() ); ?>"></a>
-						</div>
-
-						<div class="bnm-fp2-post-content">
-							<?php if ( $attributes['showCategory'] ) { ?>
-								<div class="bnm-category-list">
-									<?php the_category( ' ' ); ?>
-								</div>
-							<?php } ?>
-
+						<div class="entry-meta">
 							<?php 
-								if ( $attributes['showTitle'] ) {
-									the_title( '<h3 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' ); 
+								if ( $attributes['showAuthor'] && $attributes['showAvatar'] ) {
+									bnm_author_avatar();
 								}
+								if ( $attributes['showAuthor'] ) { 
+									bnm_posted_by(); 
+								} 
+								if ( $attributes['showDate'] ) { 
+									bnm_posted_on(); 
+								} 
+								if ( $attributes['showCommentCount'] ) { 
+									bnm_comments_link(); 
+								} 
 							?>
+						</div><!-- .entry-meta-->
 
-							<div class="entry-meta">
-								<?php 
-									if ( $attributes['showAuthor'] && $attributes['showAvatar'] ) {
-										bnm_author_avatar();
-									}
-									if ( $attributes['showAuthor'] ) { 
-										bnm_posted_by(); 
-									} 
-									if ( $attributes['showDate'] ) { 
-										bnm_posted_on(); 
-									} 
-									if ( $attributes['showCommentCount'] ) { 
-										bnm_comments_link(); 
-									} 
-								?>
-							</div><!-- .entry-meta-->
+						<?php if ( $attributes['displayPostExcerpt'] && ( isset( $attributes['excerptLength'] ) && $attributes['excerptLength']  > 0 ) ) { ?>
+							<div class="bnm-post-excerpt">
+								
+								<?php echo wp_kses_post( BNM_Blocks::get_excerpt_by_id( get_the_id(), $attributes['excerptLength'] ) ); ?>
+								
+								<?php if ( $attributes['showReadMore'] && ! empty( $attributes['readMoreLabel'] ) ) { ?>
+									<span class="bnm-readmore">
+										<a href="<?php the_permalink(); ?>" class="bnm-readmore-link">
+											<?php the_title( '<span class="screen-reader-text">', '</span>' ); ?>
+											<?php echo esc_html( $attributes['readMoreLabel'] ); ?>
+										</a>
+									</span>
+								<?php } ?>
 
-							<?php if ( $attributes['displayPostExcerpt'] && ( isset( $attributes['excerptLength'] ) && $attributes['excerptLength']  > 0 ) ) { ?>
-								<div class="bnm-post-excerpt">
-									
-									<?php echo wp_kses_post( BNM_Blocks::get_excerpt_by_id( get_the_id(), $attributes['excerptLength'] ) ); ?>
-									
-									<?php if ( $attributes['showReadMore'] && ! empty( $attributes['readMoreLabel'] ) ) { ?>
-										<span class="bnm-readmore">
-											<a href="<?php the_permalink(); ?>" class="bnm-readmore-link">
-												<?php the_title( '<span class="screen-reader-text">', '</span>' ); ?>
-												<?php echo esc_html( $attributes['readMoreLabel'] ); ?>
-											</a>
-										</span>
-									<?php } ?>
+							</div>
+						<?php } ?>
+					</div><!-- ."bnm-fp2-post-content -->
 
-								</div>
-							<?php } ?>
-						</div><!-- ."bnm-fp2-post-content -->
-					</div><!-- .bnm-fp2-inner-container -->
 					
-				</div><!-- .bnm-fp2-large-post -->
+				</article><!-- .bnm-fp2-large -->
 
 				<?php } elseif ( $bnmp_count === 3 || $bnmp_count === 4 || $bnmp_count === 5 ) { ?>
-					<div class="bnm-fp2-small-post">
-
-						<div class="bnm-fp2-inner-container">
+					
+					<article class="bnm-fp2-small">
 
 						<?php 
 							if ( has_post_thumbnail() ) {
-								the_post_thumbnail( 'bnm-featured', array( 'class' => 'bnm-fp-img') );
+								the_post_thumbnail( $featured_image_slug_small, array( 'class' => 'bnm-fp-img') );
 							} 
 						?>
 
@@ -126,7 +126,6 @@ function bnm_blocks_featured_posts_block_2_render_callback( $attributes ) {
 						</div>
 
 						<div class="bnm-fp2-post-content">
-							<div class="bnm-fp2-content-inner">
 
 							<?php if ( $attributes['showCategorySmall'] ) { ?>
 								<div class="bnm-category-list">
@@ -174,14 +173,8 @@ function bnm_blocks_featured_posts_block_2_render_callback( $attributes ) {
 								</div>
 							<?php } ?>
 
-							</div><!-- .bnm-fp2-content-inner -->
-
 						</div><!-- .bnm-fp2-post-content -->
-
-					</div><!-- .bnm-fp2-inner-container -->
-
-				</div><!-- .bnm-fp2-small-post -->
-		
+					</article><!-- .bnm-fp2-small -->
 				<?php } ?>
 		<?php
 

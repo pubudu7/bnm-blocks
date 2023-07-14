@@ -63,66 +63,66 @@ export const Layout = ({
 
                     return(
                         index === 0 && (
-                            <div className="bnm-fp1-large-post">
-                            { imageSourceUrl && (
-                                <img
-                                    src={ imageSourceUrl }
-                                    alt={ featuredImageAlt }
-                                    className="bnm-fp-img"
-                                />
-                            ) }
-                            <div className="bnmfpovrlay inside-gut-editor">
-                                <a className="bnmlnkovrlay-ge" href="#"></a>
-                            </div>
-
-                            <div className="bnm-fp1-post-content">
-                                { attributes.showCategory && categoriesList && (
-                                    <PostCategories
-                                        categoriesList={categoriesList}
-                                        post={post}
+                            <article className="bnm-fp1-large">
+                                { imageSourceUrl && (
+                                    <img
+                                        src={ imageSourceUrl }
+                                        alt={ featuredImageAlt }
+                                        className="bnm-fp-img"
                                     />
                                 ) }
-                                { attributes.showTitle && (
-                                    <PostTitle
-                                        post={post}
-                                        attributes={attributes}
-                                    />
-                                ) }
-                                <div className="entry-meta">
-                                    { attributes.showAuthor && attributes.showAvatar && currentAuthor && (
-                                        <PostAuthorAvatar
-                                            author={currentAuthor}
-                                        />
-                                    ) }
-                                    
-                                    { attributes.showAuthor && currentAuthor && (
-                                        <PostAuthor
-                                            author={currentAuthor}
-                                        />
-                                    ) }
+                                <div className="bnmfpovrlay inside-gut-editor">
+                                    <a className="bnmlnkovrlay-ge" href="#"></a>
+                                </div>
 
-                                    { attributes.showDate && (
-                                        <PostDateTime 
+                                <div className="bnm-fp1-post-content">
+                                    { attributes.showCategory && categoriesList && (
+                                        <PostCategories
+                                            categoriesList={categoriesList}
                                             post={post}
                                         />
                                     ) }
-
-                                    { attributes.showCommentCount && (
-                                        <PostCommentCount
+                                    { attributes.showTitle && (
+                                        <PostTitle
                                             post={post}
+                                            attributes={attributes}
+                                        />
+                                    ) }
+                                    <div className="entry-meta">
+                                        { attributes.showAuthor && attributes.showAvatar && currentAuthor && (
+                                            <PostAuthorAvatar
+                                                author={currentAuthor}
+                                            />
+                                        ) }
+                                        
+                                        { attributes.showAuthor && currentAuthor && (
+                                            <PostAuthor
+                                                author={currentAuthor}
+                                            />
+                                        ) }
+
+                                        { attributes.showDate && (
+                                            <PostDateTime 
+                                                post={post}
+                                            />
+                                        ) }
+
+                                        { attributes.showCommentCount && (
+                                            <PostCommentCount
+                                                post={post}
+                                            />
+                                        ) }
+                                    </div>
+                                    { attributes.displayPostExcerpt && (
+                                        <PostExcerpt
+                                            post={post}
+                                            excerptLength={attributes.excerptLength}
+                                            showReadMore={attributes.showReadMore}
+                                            readMoreLabel={attributes.readMoreLabel}
                                         />
                                     ) }
                                 </div>
-                                { attributes.displayPostExcerpt && (
-                                    <PostExcerpt
-                                        post={post}
-                                        excerptLength={attributes.excerptLength}
-                                        showReadMore={attributes.showReadMore}
-                                        readMoreLabel={attributes.readMoreLabel}
-                                    />
-                                ) }
-                            </div>
-                            </div>
+                            </article>
                         )
                     );
                 } ) }
@@ -135,7 +135,7 @@ export const Layout = ({
                         const {
                             url: imageSourceUrl,
                             alt: featuredImageAlt,
-                        } = getFeaturedImageDetails( post, attributes.featuredImageSizeSlug );
+                        } = getFeaturedImageDetails( post, attributes.featuredImageSizeSlugSmall );
 
                         const currentAuthor = authorsList?.find(
                             ( writer ) => writer.id === post.author
@@ -143,7 +143,7 @@ export const Layout = ({
 
                         return(
                             ( index === 1 || index === 2 ) && (
-                                <div className="bnm-fp1-small-post">
+                                <article className="bnm-fp1-small">
                                 { imageSourceUrl && (
                                     <img
                                         src={ imageSourceUrl }
@@ -202,7 +202,7 @@ export const Layout = ({
                                         />
                                     ) }
                                 </div>
-                                </div>
+                                </article>
                             )
                         );
                     } ) }                        

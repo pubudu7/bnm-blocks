@@ -99,6 +99,12 @@
       "type": "string",
       "default": ""
     },
+    "colGap": {
+      "type": [
+        "number",
+        "string"
+      ]
+    },
     "showTitle": {
       "type": "boolean",
       "default": true
@@ -171,7 +177,7 @@
     },
     "featuredImageSizeSlugSmall": {
       "type": "string",
-      "default": "bnm-featured-thumb"
+      "default": "bnm-featured"
     },
     "addLinkToFeaturedImage": {
       "type": "boolean",
