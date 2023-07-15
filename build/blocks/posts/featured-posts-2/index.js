@@ -408,7 +408,7 @@ const Layout = _ref => {
     }, imageSourceUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
       src: imageSourceUrl,
       alt: featuredImageAlt,
-      className: "bnm-fp-image"
+      className: "bnm-fp-img"
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "bnmfpovrlay inside-gut-editor"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
@@ -449,7 +449,7 @@ const Layout = _ref => {
     }, imageSourceUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
       src: imageSourceUrl,
       alt: featuredImageAlt,
-      className: "bnm-fp-image"
+      className: "bnm-fp-img"
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "bnmfpovrlay inside-gut-editor"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {

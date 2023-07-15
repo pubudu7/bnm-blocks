@@ -73,6 +73,25 @@
 .wpbnmfpb2 article .entry-meta:hover {
   color: var(--meta-hover-color);
 }
+.wpbnmfpb2 article img.bnm-fp-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  -o-object-fit: cover;
+     object-fit: cover;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.3s;
+}
 .wpbnmfpb2 .bnm-fp2-large .entry-title {
   font-size: var(--title-font-size);
   line-height: var(--title-line-height);
@@ -133,11 +152,6 @@
   padding: var(--excerpt-padding-small);
   margin: var(--excerpt-margin-small);
 }
-.wpbnmfpb2 .bnm-fp2-small .post-thumbnail {
-  margin: 0 20px 0 0;
-  width: 35%;
-  float: left;
-}
 .wpbnmfpb2 .bnm-fp2-post-content {
   position: absolute;
   left: 0;
@@ -153,6 +167,7 @@
 .wpbnmfpb2 .bnm-category-list a {
   display: inline-block;
   font-size: var(--category-font-size);
+  font-weight: bold;
   line-height: var(--category-line-height);
   letter-spacing: var(--category-letter-spacing);
   text-decoration: inherit;
@@ -201,15 +216,6 @@
   vertical-align: top;
 }
 
-.bnm-fp-image {
-  vertical-align: top;
-}
-
-.bnm-fp2-small,
-.bnm-fp2-large {
-  position: relative;
-}
-
 .bnm-fp2-small,
 .bnm-fp2-large {
   display: flex;
@@ -228,26 +234,6 @@
 .bnm-fp2-large:hover img.bnm-fp-img {
   transform: scale(1.1);
 }
-.bnm-fp2-small img.bnm-fp-img,
-.bnm-fp2-large img.bnm-fp-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  max-height: none;
-  -o-object-fit: cover;
-     object-fit: cover;
-  outline: none;
-  border: none;
-  box-shadow: none;
-  transition: transform 0.3s;
-}
 
 .bnm-fp2-large:before {
   padding-top: 58.9569160998%;
@@ -255,11 +241,6 @@
 
 .bnm-fp2-small:before {
   padding-top: 59.3607305936%;
-}
-
-.bnm-fp2-bottom,
-.bnm-fp2-top {
-  display: flex;
 }
 
 .bnm-fp2-large {
@@ -287,7 +268,6 @@
 .bnm-fp2-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   max-width: 100%;
 }
 

@@ -68,7 +68,7 @@ export const Layout = ({
                                     <img 
                                         src={ imageSourceUrl }
                                         alt={ featuredImageAlt }
-                                        className="bnm-fp-image"
+                                        className="bnm-fp-img"
                                     />
                                 ) }
 
@@ -151,7 +151,7 @@ export const Layout = ({
                                     <img 
                                         src={ imageSourceUrl }
                                         alt={ featuredImageAlt }
-                                        className="bnm-fp-image"
+                                        className="bnm-fp-img"
                                     />
                                 ) }
 

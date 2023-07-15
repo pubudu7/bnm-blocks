@@ -144,64 +144,64 @@ export const Layout = ({
                         return(
                             ( index === 1 || index === 2 ) && (
                                 <article className="bnm-fp1-small">
-                                { imageSourceUrl && (
-                                    <img
-                                        src={ imageSourceUrl }
-                                        alt={ featuredImageAlt }
-                                        className="bnm-fp-img"
-                                    />
-                                ) }
-
-                                <div className="bnmfpovrlay inside-gut-editor">
-                                    <a className="bnmlnkovrlay-ge" href="#"></a>
-                                </div>
-
-                                <div className="bnm-fp1-post-content">
-                                    { attributes.showCategorySmall && categoriesList && (
-                                        <PostCategories
-                                            categoriesList={categoriesList}
-                                            post={post}
+                                    { imageSourceUrl && (
+                                        <img
+                                            src={ imageSourceUrl }
+                                            alt={ featuredImageAlt }
+                                            className="bnm-fp-img"
                                         />
                                     ) }
-                                    { attributes.showTitle && (
-                                        <PostTitle
-                                            post={post}
-                                            attributes={attributes}
-                                        />
-                                    ) }
-                                    <div className="entry-meta">
-                                        { attributes.showAuthorSmall && attributes.showAvatarSmall && currentAuthor && (
-                                            <PostAuthorAvatar
-                                                author={currentAuthor}
-                                            />
-                                        ) }
-                                        { attributes.showAuthorSmall && currentAuthor && (
-                                            <PostAuthor
-                                                author={currentAuthor}
-                                            />
-                                        ) }
 
-                                        { attributes.showDateSmall && (
-                                            <PostDateTime 
+                                    <div className="bnmfpovrlay inside-gut-editor">
+                                        <a className="bnmlnkovrlay-ge" href="#"></a>
+                                    </div>
+
+                                    <div className="bnm-fp1-post-content">
+                                        { attributes.showCategorySmall && categoriesList && (
+                                            <PostCategories
+                                                categoriesList={categoriesList}
                                                 post={post}
                                             />
                                         ) }
-
-                                        { attributes.showCommentCountSmall && (
-                                            <PostCommentCount
+                                        { attributes.showTitle && (
+                                            <PostTitle
                                                 post={post}
+                                                attributes={attributes}
+                                            />
+                                        ) }
+                                        <div className="entry-meta">
+                                            { attributes.showAuthorSmall && attributes.showAvatarSmall && currentAuthor && (
+                                                <PostAuthorAvatar
+                                                    author={currentAuthor}
+                                                />
+                                            ) }
+                                            { attributes.showAuthorSmall && currentAuthor && (
+                                                <PostAuthor
+                                                    author={currentAuthor}
+                                                />
+                                            ) }
+
+                                            { attributes.showDateSmall && (
+                                                <PostDateTime 
+                                                    post={post}
+                                                />
+                                            ) }
+
+                                            { attributes.showCommentCountSmall && (
+                                                <PostCommentCount
+                                                    post={post}
+                                                />
+                                            ) }
+                                        </div>
+                                        { attributes.displayPostExcerptSmall && (
+                                            <PostExcerpt
+                                                post={post}
+                                                excerptLength={attributes.excerptLengthSmall}
+                                                showReadMore={attributes.showReadMoreSmall}
+                                                readMoreLabel={attributes.readMoreLabel}
                                             />
                                         ) }
                                     </div>
-                                    { attributes.displayPostExcerptSmall && (
-                                        <PostExcerpt
-                                            post={post}
-                                            excerptLength={attributes.excerptLengthSmall}
-                                            showReadMore={attributes.showReadMoreSmall}
-                                            readMoreLabel={attributes.readMoreLabel}
-                                        />
-                                    ) }
-                                </div>
                                 </article>
                             )
                         );
