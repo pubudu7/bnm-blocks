@@ -1,5 +1,6 @@
 <?php
 
+use ThemezHut\BNM_Blocks\Main;
 use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Block_SP_CSS;
 
 function bnm_blocks_posts_grid_init() {
@@ -14,7 +15,7 @@ add_action( 'init', 'bnm_blocks_posts_grid_init' );
 
 function bnm_blocks_posts_grid_render_callback( $attributes ) {
 
-	$post_query_args = BNM_Blocks::build_articles_query( $attributes );
+	$post_query_args = Main::build_articles_query( $attributes );
 
 	$article_query = new WP_Query( $post_query_args );
 
@@ -113,7 +114,7 @@ function bnm_blocks_posts_grid_render_callback( $attributes ) {
 						<?php if ( $attributes['displayPostExcerpt'] && ( isset( $attributes['excerptLength'] ) && $attributes['excerptLength']  > 0 ) ) { ?>
 							<div class="bnm-post-excerpt">
 								
-								<?php echo wp_kses_post( BNM_Blocks::get_excerpt_by_id( get_the_id(), $attributes['excerptLength'] ) ); ?>
+								<?php echo wp_kses_post( Main::get_excerpt_by_id( get_the_id(), $attributes['excerptLength'] ) ); ?>
 								
 								<?php if ( $attributes['showReadMore'] && ! empty( $attributes['readMoreLabel'] ) ) { ?>
 									<span class="bnm-readmore">

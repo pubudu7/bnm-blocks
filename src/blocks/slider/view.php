@@ -1,5 +1,6 @@
 <?php
 
+use ThemezHut\BNM_Blocks\Main;
 use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Slider_1_CSS;
 
 /**
@@ -34,7 +35,7 @@ function bnm_blocks_slider_posts_block_1_render_callback( $attributes ) {
 	// Naming convention: '{namespace}-{blockname}-view-script
 	wp_enqueue_script( 'bnm-blocks-posts-slider-view-script' );
 
-	$post_query_args = BNM_Blocks::build_articles_query( $attributes );
+	$post_query_args = Main::build_articles_query( $attributes );
 
 	$article_query = new WP_Query( $post_query_args );
 

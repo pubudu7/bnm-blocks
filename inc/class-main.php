@@ -1,9 +1,11 @@
 <?php
 
+namespace ThemezHut\BNM_Blocks;
+
 /**
  * bnm blocks functionality.
  */
-class BNM_Blocks {
+class Main {
 
     /**
      * Initialize the class.
@@ -146,4 +148,4 @@ class BNM_Blocks {
     }
 
 }
-BNM_Blocks::init();
+Main::init();
