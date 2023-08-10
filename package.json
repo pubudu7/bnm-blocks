@@ -1,8 +1,8 @@
 {
 	"name": "bnm-blocks",
-	"version": "0.1.0",
-	"description": "Example block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
+	"version": "1.0.1",
+	"description": "A collection of blocks for blogs, news and magazine publishers.",
+	"author": "ThemezHut",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {

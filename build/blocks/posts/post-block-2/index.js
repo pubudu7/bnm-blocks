@@ -712,43 +712,7 @@ const FeaturedImage = _ref4 => {
   }
 
   return featuredImage;
-}; // export const PostAuthorAvatar = ({ author }) => {
-//     const authorAvatarUrl = author?.avatar_urls?.[48];			
-//     const avatarMarkup = authorAvatarUrl && (
-//         <span className="bnm-avatar">
-//             <img src={authorAvatarUrl} />
-//         </span>
-//     );
-//     if ( ! avatarMarkup ) {
-//         return null;
-//     }
-//     return avatarMarkup;
-// };
-// export const PostAuthor = ({ post, authorsList, showAvatar} ) => {
-//     const currentAuthor = authorsList?.find(
-//         ( author ) => author.id === post.author
-//     );
-//     if ( currentAuthor ) {
-//         return (
-//             <span className="bnm-post-author">
-//                 <a href="#">
-//                     { showAvatar && (
-//                         <PostAuthorAvatar 
-//                             author={currentAuthor}
-//                         />
-//                     ) }
-//                     { sprintf(
-//                         /* translators: byline. %s: current author. */
-//                         __( 'by %s' ),
-//                         currentAuthor.name
-//                     ) }
-//                 </a>
-//             </span>
-//         );
-//     }
-//     return null;
-// };
-
+};
 const PostAuthor = _ref5 => {
   let {
     author
