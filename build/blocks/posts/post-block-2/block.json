@@ -2,10 +2,10 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
   "name": "bnm-blocks/post-block-2",
-  "title": "Post Block: #2",
+  "title": "Posts Block: #2",
   "category": "bnm-blocks",
   "icon": "smiley",
-  "description": "Post block style #2.",
+  "description": "Posts block style #2.",
   "supports": {
     "html": false
   },

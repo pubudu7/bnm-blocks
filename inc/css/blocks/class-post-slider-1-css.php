@@ -4,6 +4,11 @@ namespace ThemezHut\BNM_Blocks\CSS\Blocks;
 
 use ThemezHut\BNM_Blocks\CSS\CSS_Utility;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+
 class Post_Slider_1_CSS {
 
     public function render_css( $attributes ) {

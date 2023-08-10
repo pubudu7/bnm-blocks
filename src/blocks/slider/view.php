@@ -3,6 +3,10 @@
 use ThemezHut\BNM_Blocks\Main;
 use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Slider_1_CSS;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
  * Behind the scenes, it registers also all assets so they can be enqueued
@@ -10,28 +14,18 @@ use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Slider_1_CSS;
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function create_block_bnm_blocks_block_init() {
+function bnmbt_posts_slider_block_1_init() {
 
-	//$asset_file = include( plugin_dir_path( __FILE__ ) . 'build/blocks/slider/index.asset.php' );
-
-	// wp_register_script(
-	// 	'bnm-blocks-post-block-1',
-	// 	plugins_url( 'build/index.js', __FILE__ ),
-	// 	$asset_file[ 'dependencies' ],
-	// 	$asset_file[ 'version' ]
-	// );
-
-	register_block_type( BNM_BLOCKS__PLUGIN_DIR . 'build/blocks/slider', array(
+	register_block_type( BNMBT__PLUGIN_DIR . 'build/blocks/slider', array(
 		'api_version'		=> 2,
-		//'editor_script'	=> 'bnm-blocks-post-block-1',
-		'render_callback'	=> 'bnm_blocks_slider_posts_block_1_render_callback'
+		'render_callback'	=> 'bnmbt_posts_slider_block_1_render_callback'
 	) );
 
 }
-add_action( 'init', 'create_block_bnm_blocks_block_init' );
+add_action( 'init', 'bnmbt_posts_slider_block_1_init' );
 
 
-function bnm_blocks_slider_posts_block_1_render_callback( $attributes ) {
+function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 	// Naming convention: '{namespace}-{blockname}-view-script
 	wp_enqueue_script( 'bnm-blocks-posts-slider-view-script' );
 
@@ -111,16 +105,16 @@ function bnm_blocks_slider_posts_block_1_render_callback( $attributes ) {
 								<div class="entry-meta">
 									<?php 
 										if ( $attributes['showAuthor'] && $attributes['showAvatar'] ) {
-											bnm_author_avatar();
+											bnmbt_author_avatar();
 										}
 										if ( $attributes['showAuthor'] ) { 
-											bnm_posted_by(); 
+											bnmbt_posted_by(); 
 										} 
 										if ( $attributes['showDate'] ) { 
-											bnm_posted_on(); 
+											bnmbt_posted_on(); 
 										} 
 										if ( $attributes['showCommentCount'] ) { 
-											bnm_comments_link(); 
+											bnmbt_comments_link(); 
 										} 
 									?>
 								</div><!-- .entry-meta -->

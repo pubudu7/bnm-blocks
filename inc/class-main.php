@@ -2,6 +2,10 @@
 
 namespace ThemezHut\BNM_Blocks;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * bnm blocks functionality.
  */
@@ -11,6 +15,7 @@ class Main {
      * Initialize the class.
      */
     public static function init() {
+        add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'enqueue_block_editor_assets' ) );
         add_action( 'after_setup_theme', array( __CLASS__, 'add_image_sizes' ) );
         add_filter( 'block_categories_all', array( __CLASS__, 'register_block_categories' ), 11, 2 );
     }
@@ -34,7 +39,7 @@ class Main {
 	 * Enqueue block scripts and styles for editor.
 	 */
     public static function enqueue_block_editor_assets() {
-        wp_enqueue_script( 'bnm-blocks-assets-common', BNM_BLOCKS_URL . 'admin/js/blocks.js', array(), '', true );
+        wp_enqueue_script( 'bnm-blocks-assets-common', BNMBT_URL . 'admin/js/blocks.js', array(), '', true );
     
         wp_localize_script(
             'bnm-blocks-assets-common',
@@ -44,13 +49,13 @@ class Main {
             )
         );
 
-        $editor_style = plugins_url( BNM_BLOCKS__ADMIN_DIRECTORY . 'css/editor.css', BNM_BLOCKS__PLUGIN_FILE );
+        $editor_style = plugins_url( BNMBT__ADMIN_DIRECTORY . 'css/editor.css', BNMBT__PLUGIN_FILE );
 
 		wp_enqueue_style(
 			'bnm-blocks-editor',
 			$editor_style,
 			array(),
-			BNM_BLOCKS__VERSION
+			BNMBT__VERSION
 		);
     }
 

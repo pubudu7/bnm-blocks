@@ -3,18 +3,22 @@
 use ThemezHut\BNM_Blocks\Main;
 use ThemezHut\BNM_Blocks\CSS\Blocks\Post_Block_2_CSS;
 
-function bnm_blocks_post_block_2_init() {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
-	register_block_type( BNM_BLOCKS__PLUGIN_DIR . 'build/blocks/posts/post-block-2', array(
+function bnmbt_post_block_2_init() {
+
+	register_block_type( BNMBT__PLUGIN_DIR . 'build/blocks/posts/post-block-2', array(
 		'api_version'		=> 2,
 		//'editor_script'	=> 'bnm-blocks-post-block-1',
-		'render_callback'	=> 'bnm_blocks_post_block_2_render_callback'
+		'render_callback'	=> 'bnmbt_post_block_2_render_callback'
 	) );
 
 }
-add_action( 'init', 'bnm_blocks_post_block_2_init' );
+add_action( 'init', 'bnmbt_post_block_2_init' );
 
-function bnm_blocks_post_block_2_render_callback( $attributes ) {
+function bnmbt_post_block_2_render_callback( $attributes ) {
 
 	$post_query_args = Main::build_articles_query( $attributes );
 
@@ -75,16 +79,16 @@ function bnm_blocks_post_block_2_render_callback( $attributes ) {
 							<div class="entry-meta">
 								<?php 
 									if ( $attributes['showAuthor'] && $attributes['showAvatar'] ) {
-										bnm_author_avatar();
+										bnmbt_author_avatar();
 									}
 									if ( $attributes['showAuthor'] ) { 
-										bnm_posted_by(); 
+										bnmbt_posted_by(); 
 									} 
 									if ( $attributes['showDate'] ) { 
-										bnm_posted_on(); 
+										bnmbt_posted_on(); 
 									} 
 									if ( $attributes['showCommentCount'] ) { 
-										bnm_comments_link(); 
+										bnmbt_comments_link(); 
 									} 
 								?>
 							</div><!-- .entry-meta-->
@@ -134,16 +138,16 @@ function bnm_blocks_post_block_2_render_callback( $attributes ) {
 							<div class="entry-meta">
 								<?php 
 									if ( $attributes['showAuthorSmall'] && $attributes['showAvatarSmall'] ) {
-										bnm_author_avatar();
+										bnmbt_author_avatar();
 									}
 									if ( $attributes['showAuthorSmall'] ) { 
-										bnm_posted_by(); 
+										bnmbt_posted_by(); 
 									} 
 									if ( $attributes['showDateSmall'] ) { 
-										bnm_posted_on(); 
+										bnmbt_posted_on(); 
 									} 
 									if ( $attributes['showCommentCountSmall'] ) { 
-										bnm_comments_link(); 
+										bnmbt_comments_link(); 
 									} 
 								?>
 							</div><!-- .entry-meta -->

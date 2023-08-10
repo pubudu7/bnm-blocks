@@ -4,7 +4,7 @@
  * Description:       A Collection of Blocks for Blogs, Newspapers and Magazine websites.
  * Requires at least: 6.0
  * Requires PHP:      7.0
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            ThemezHut
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -13,16 +13,20 @@
  * @package           bnm-blocks
  */
 
-define( 'BNM_BLOCKS_URL', plugins_url( '/', __FILE__ ) );
-define( 'BNM_BLOCKS__PLUGIN_FILE', __FILE__ );
-define( 'BNM_BLOCKS__BLOCKS_DIRECTORY', 'build/' );
-define( 'BNM_BLOCKS__ADMIN_DIRECTORY', 'admin/' );
-define( 'BNM_BLOCKS__PLUGIN_DIR', plugin_dir_path( BNM_BLOCKS__PLUGIN_FILE ) );
-define( 'BNM_BLOCKS__VERSION', '1.0.0' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
-$src_directory = BNM_BLOCKS__PLUGIN_DIR . 'src/blocks/';
-$dist_directory = BNM_BLOCKS__PLUGIN_DIR . 'build/';
-$inc_directory = BNM_BLOCKS__PLUGIN_DIR . 'inc/';
+define( 'BNMBT_URL', plugins_url( '/', __FILE__ ) );
+define( 'BNMBT__PLUGIN_FILE', __FILE__ );
+define( 'BNMBT__BLOCKS_DIRECTORY', 'build/' );
+define( 'BNMBT__ADMIN_DIRECTORY', 'admin/' );
+define( 'BNMBT__PLUGIN_DIR', plugin_dir_path( BNMBT__PLUGIN_FILE ) );
+define( 'BNMBT__VERSION', '1.0.1' );
+
+$src_directory = BNMBT__PLUGIN_DIR . 'src/blocks/';
+$dist_directory = BNMBT__PLUGIN_DIR . 'build/';
+$inc_directory = BNMBT__PLUGIN_DIR . 'inc/';
 
 require_once $inc_directory . 'class-main.php';
 require_once $inc_directory . 'css/class-css-utility.php';
@@ -35,9 +39,6 @@ include_once $inc_directory . 'template-functions.php';
 include_once $src_directory . 'slider/view.php';
 include_once $src_directory . 'posts/post-block-1/view.php';
 include_once $src_directory . 'posts/post-block-2/view.php';
-include_once $src_directory . 'posts/posts-grid/view.php';
+include_once $src_directory . 'posts/posts-ultra/view.php';
 include_once $src_directory . 'posts/featured-posts-1/view.php';
 include_once $src_directory . 'posts/featured-posts-2/view.php';
-
-
-add_action( 'enqueue_block_editor_assets', array( 'BNM_Blocks', 'enqueue_block_editor_assets' ) );

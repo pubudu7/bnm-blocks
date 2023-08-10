@@ -2,9 +2,9 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
 	"name": "bnm-blocks/post-block-1",
-	"title": "Post Block: #1",
+	"title": "Posts Block: #1",
 	"category": "bnm-blocks",
-	"description": "Post block style #1.",
+	"description": "Posts block style #1.",
 	"supports": {
 		"html": false
 	},

@@ -2,6 +2,10 @@
 
 namespace ThemezHut\BNM_Blocks\CSS;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class CSS_Utility {
 
     /**

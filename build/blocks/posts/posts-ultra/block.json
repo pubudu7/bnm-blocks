@@ -1,10 +1,11 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "bnm-blocks/post-block-1",
-  "title": "Posts Block: #1",
+  "name": "bnm-blocks/posts-ultra",
+  "title": "Posts Ultra",
   "category": "bnm-blocks",
-  "description": "Posts block style #1.",
+  "icon": "smiley",
+  "description": "Posts Block that can be used to display posts in different layouts.",
   "supports": {
     "html": false
   },
@@ -21,7 +22,7 @@
       "type": "object",
       "default": {
         "posts": [],
-        "perPage": 5,
+        "perPage": 6,
         "pages": 0,
         "offset": 0,
         "postType": "post",
@@ -98,11 +99,33 @@
       "type": "string",
       "default": ""
     },
+    "postLayout": {
+      "type": "string",
+      "default": "grid"
+    },
+    "columns": {
+      "type": "integer",
+      "default": 3
+    },
     "colGap": {
       "type": [
         "number",
         "string"
       ]
+    },
+    "rowGap": {
+      "type": [
+        "number",
+        "string"
+      ]
+    },
+    "textAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "imagePosition": {
+      "type": "string",
+      "default": "top"
     },
     "showTitle": {
       "type": "boolean",
@@ -118,31 +141,13 @@
         "number"
       ]
     },
-    "titleFontSizeSmall": {
-      "type": [
-        "string",
-        "number"
-      ]
-    },
     "titleLineHeight": {
       "type": [
         "number",
         "string"
       ]
     },
-    "titleLineHeightSmall": {
-      "type": [
-        "number",
-        "string"
-      ]
-    },
     "titleLetterSpacing": {
-      "type": [
-        "number",
-        "string"
-      ]
-    },
-    "titleLetterSpacingSmall": {
       "type": [
         "number",
         "string"
@@ -174,10 +179,6 @@
       "type": "boolean",
       "default": true
     },
-    "showFeaturedImageSmall": {
-      "type": "boolean",
-      "default": true
-    },
     "featuredImageAlign": {
       "type": "string",
       "enum": [
@@ -189,10 +190,6 @@
     "featuredImageSizeSlug": {
       "type": "string",
       "default": "bnm-featured"
-    },
-    "featuredImageSizeSlugSmall": {
-      "type": "string",
-      "default": "bnm-featured-thumb"
     },
     "featuredImageWidth": {
       "type": [
@@ -215,6 +212,10 @@
       ],
       "default": []
     },
+    "imageMinHeight": {
+      "type": "integer",
+      "default": 0
+    },
     "addLinkToFeaturedImage": {
       "type": "boolean",
       "default": false
@@ -233,21 +234,13 @@
     },
     "showAvatar": {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     "showCommentCount": {
       "type": "boolean",
       "default": true
     },
     "displayPostExcerpt": {
-      "type": "boolean",
-      "default": true
-    },
-    "showDateSmall": {
-      "type": "boolean",
-      "default": true
-    },
-    "showCategorySmall": {
       "type": "boolean",
       "default": false
     },
@@ -265,37 +258,11 @@
       ],
       "default": []
     },
-    "showAuthorSmall": {
-      "type": "boolean",
-      "default": false
-    },
-    "showAvatarSmall": {
-      "type": "boolean",
-      "default": false
-    },
-    "showCommentCountSmall": {
-      "type": "boolean",
-      "default": false
-    },
-    "displayPostExcerptSmall": {
-      "type": "boolean",
-      "default": false
-    },
     "excerptLength": {
       "type": "number",
       "default": 20
     },
-    "excerptLengthSmall": {
-      "type": "number",
-      "default": 10
-    },
     "excerptFontSize": {
-      "type": [
-        "string",
-        "number"
-      ]
-    },
-    "excerptFontSizeSmall": {
       "type": [
         "string",
         "number"
@@ -313,18 +280,6 @@
         "string"
       ]
     },
-    "excerptLineHeightSmall": {
-      "type": [
-        "number",
-        "string"
-      ]
-    },
-    "excerptLetterSpacingSmall": {
-      "type": [
-        "number",
-        "string"
-      ]
-    },
     "excerptPadding": {
       "type": [
         "number",
@@ -332,21 +287,7 @@
       ],
       "default": []
     },
-    "excerptPaddingSmall": {
-      "type": [
-        "number",
-        "object"
-      ],
-      "default": []
-    },
     "excerptMargin": {
-      "type": [
-        "number",
-        "object"
-      ],
-      "default": []
-    },
-    "excerptMarginSmall": {
       "type": [
         "number",
         "object"
@@ -361,21 +302,11 @@
       "type": "boolean",
       "default": false
     },
-    "showReadMoreSmall": {
-      "type": "boolean",
-      "default": false
-    },
     "readMoreLabel": {
       "type": "string",
       "default": "Keep reading"
     },
     "metaFontSize": {
-      "type": [
-        "string",
-        "number"
-      ]
-    },
-    "metaFontSizeSmall": {
       "type": [
         "string",
         "number"
@@ -388,18 +319,6 @@
       ]
     },
     "metaLetterSpacing": {
-      "type": [
-        "number",
-        "string"
-      ]
-    },
-    "metaLineHeightSmall": {
-      "type": [
-        "number",
-        "string"
-      ]
-    },
-    "metaLetterSpacingSmall": {
       "type": [
         "number",
         "string"
