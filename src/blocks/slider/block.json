@@ -5,7 +5,7 @@
 	"title": "Posts Slider",
 	"category": "bnm-blocks",
 	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "Displays posts in a image slider.",
 	"supports": {
 		"html": false
 	},

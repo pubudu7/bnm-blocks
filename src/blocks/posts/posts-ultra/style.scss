@@ -223,7 +223,7 @@
         }
     }
 
-    .entry-title {
+    .bnmsp-post .entry-title {
         font-size: var(--title-font-size);
         line-height: var(--title-line-height);
         letter-spacing: var(--title-letter-spacing);
@@ -247,8 +247,6 @@
     }
 
     .entry-meta {
-        display: flex;
-        flex-wrap: wrap;
         align-items: center;
         color: var(--meta-color);
         font-size: var(--meta-font-size);
@@ -303,9 +301,6 @@
     }
 
     .bnm-category-list {
-        display: flex;
-		flex-wrap: wrap;
-
         a {
             color: var(--category-color);
             display: inline-block;
@@ -354,28 +349,4 @@
         }
     }
 
-}
-
-.bnm-avatar {
-    margin-right: 0.5em;
-    img {
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        vertical-align: top;
-    }
-}
-
-.bnmfpovrlay,
-.bnmlnkovrlay {
-	position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-}
-
-.bnmfpovrlay.inside-gut-editor {
-	cursor: pointer
 }

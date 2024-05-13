@@ -18,6 +18,7 @@ class Main {
         add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'enqueue_block_editor_assets' ) );
         add_action( 'after_setup_theme', array( __CLASS__, 'add_image_sizes' ) );
         add_filter( 'block_categories_all', array( __CLASS__, 'register_block_categories' ), 11, 2 );
+        add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
     }
 
     /**
@@ -57,6 +58,12 @@ class Main {
 			array(),
 			BNMBT__VERSION
 		);
+
+        wp_enqueue_style( 'bnm-blocks-common', BNMBT_URL . 'assets/css/style.css', array(), BNMBT__VERSION );
+    }
+
+    public static function enqueue_scripts() {
+        wp_enqueue_style( 'bnm-blocks-common', BNMBT_URL . 'assets/css/style.css', array(), BNMBT__VERSION );
     }
 
     /**

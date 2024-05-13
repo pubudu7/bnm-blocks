@@ -78,18 +78,20 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 
 							<div class="entry-meta">
 								<?php 
+									$meta_array = array();
 									if ( $attributes['showAuthor'] && $attributes['showAvatar'] ) {
-										bnmbt_author_avatar();
+										$meta_array[] = 'avatar';
 									}
 									if ( $attributes['showAuthor'] ) { 
-										bnmbt_posted_by(); 
+										$meta_array[] = 'author';
 									} 
 									if ( $attributes['showDate'] ) { 
-										bnmbt_posted_on(); 
+										$meta_array[] = 'date';
 									} 
 									if ( $attributes['showCommentCount'] ) { 
-										bnmbt_comments_link(); 
+										$meta_array[] = 'comments';
 									} 
+									bnmbt_entry_meta( $meta_array );
 								?>
 							</div><!-- .entry-meta-->
 
@@ -137,18 +139,20 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 						
 							<div class="entry-meta">
 								<?php 
+									$meta_array = array();
 									if ( $attributes['showAuthorSmall'] && $attributes['showAvatarSmall'] ) {
-										bnmbt_author_avatar();
+										$meta_array[] = 'avatar';
 									}
 									if ( $attributes['showAuthorSmall'] ) { 
-										bnmbt_posted_by(); 
+										$meta_array[] = 'author';
 									} 
 									if ( $attributes['showDateSmall'] ) { 
-										bnmbt_posted_on(); 
+										$meta_array[] = 'date';
 									} 
 									if ( $attributes['showCommentCountSmall'] ) { 
-										bnmbt_comments_link(); 
+										$meta_array[] = 'comments';
 									} 
+									bnmbt_entry_meta( $meta_array );
 								?>
 							</div><!-- .entry-meta -->
 

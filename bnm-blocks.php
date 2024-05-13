@@ -25,7 +25,6 @@ define( 'BNMBT__PLUGIN_DIR', plugin_dir_path( BNMBT__PLUGIN_FILE ) );
 define( 'BNMBT__VERSION', '1.0.1' );
 
 $src_directory = BNMBT__PLUGIN_DIR . 'src/blocks/';
-$dist_directory = BNMBT__PLUGIN_DIR . 'build/';
 $inc_directory = BNMBT__PLUGIN_DIR . 'inc/';
 
 require_once $inc_directory . 'class-main.php';

@@ -132,9 +132,6 @@
     }
 
     .bnm-category-list {
-        display: flex;
-		flex-wrap: wrap;
-
         a {
             color: var(--category-color);
             display: inline-block;
@@ -169,8 +166,6 @@
 	}
 
     .entry-meta {
-        display: flex;
-        flex-wrap: wrap;
         color: var(--meta-color);
         padding: var(--meta-padding);
         margin: var(--meta-margin);
@@ -206,16 +201,6 @@
         }
     }
 
-}
-
-.bnm-avatar{
-    margin-right: 5px;
-    img {
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        vertical-align: top;
-    }
 }
 
 .bnm-pb2-posts-grid {

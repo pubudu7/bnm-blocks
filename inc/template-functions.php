@@ -80,3 +80,21 @@ function bnmbt_posted_on() {
 		)
 	);
 }
+
+/**
+ * Entry Meta
+ */
+function bnmbt_entry_meta( $meta_array ) {
+	if ( in_array( 'avatar', $meta_array ) ) {
+		bnmbt_author_avatar();
+	}
+	if ( in_array( 'author', $meta_array ) ) { 
+		bnmbt_posted_by(); 
+	} 
+	if ( in_array( 'date', $meta_array ) ) { 
+		bnmbt_posted_on(); 
+	} 
+	if ( in_array( 'comments', $meta_array ) ) { 
+		bnmbt_comments_link(); 
+	} 
+}
