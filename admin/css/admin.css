@@ -1,0 +1,27 @@
+.bnmbti-demo-page {
+    padding: 50px 0;
+}
+
+.bnmbti-demo-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.bnmbti-view-theme-card {
+    width: calc( 33.33% - 33.33px );
+}
+
+.bnmbti-theme-preview-btn {
+    display: block;
+}
+
+.bnmbti-theme-details {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0;
+}
+
+.bnmbti-import-demo-data {
+
+}

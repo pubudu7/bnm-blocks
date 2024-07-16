@@ -59,11 +59,11 @@ class Main {
 			BNMBT__VERSION
 		);
 
-        wp_enqueue_style( 'bnm-blocks-common', BNMBT_URL . 'assets/css/style.css', array(), BNMBT__VERSION );
+        wp_enqueue_style( 'bnm-blocks-common', BNMBT_URL . 'public/css/style.css', array(), BNMBT__VERSION );
     }
 
     public static function enqueue_scripts() {
-        wp_enqueue_style( 'bnm-blocks-common', BNMBT_URL . 'assets/css/style.css', array(), BNMBT__VERSION );
+        wp_enqueue_style( 'bnm-blocks-common', BNMBT_URL . 'public/css/style.css', array(), BNMBT__VERSION );
     }
 
     /**
