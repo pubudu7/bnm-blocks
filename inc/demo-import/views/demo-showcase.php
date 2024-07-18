@@ -31,8 +31,9 @@ echo '</pre>';
                         <img src="<?php echo $preview_img_url ?>">
                     </div>
                     <div class="bnmbti-theme-details">
-                        <button class="bnmbti-import-demo-data">Import Demo</button>
-                        <a href="<?php echo $demo_preview_url ?>" class="bnmbti-theme-preview-btn" target="_blank">Preview Demo</a>
+                        <?php //$this->get_demo_settings_url( array( 'step' => 'import' ) ) ?>
+                        <a href="<?php echo esc_url( $demo_preview_url ); ?>" class="bnmbti-theme-preview-btn button" target="_blank">Preview Demo</a>
+                        <a href="<?php echo esc_url( $this->get_demo_settings_url( array( 'step' => 'import' ) ) ); ?>" class="bnmbti-import-demo-data button button-primary">Import Demo</a>
                     </div>
 
                 </div>

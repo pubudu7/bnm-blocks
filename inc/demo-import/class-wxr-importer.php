@@ -107,7 +107,7 @@ class WXR_Importer extends WP_Importer {
 			'prefill_existing_comments' => true,
 			'prefill_existing_terms'    => true,
 			'update_attachment_guids'   => false,
-			'fetch_attachments'         => false,
+			'fetch_attachments'         => true,
 			'aggressive_url_search'     => false,
 			'default_author'            => null,
 		) );
