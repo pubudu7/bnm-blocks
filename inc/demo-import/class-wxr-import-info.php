@@ -1,4 +1,5 @@
 <?php
+namespace ThemezHut\DemoImporter;
 
 class WXR_Import_Info {
 	public $home;

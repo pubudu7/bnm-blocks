@@ -19,7 +19,7 @@ echo '</pre>';
 
         //var_dump(admin_url());
 
-            foreach ( $predefined_demos as $demo ) {
+            foreach ( $predefined_demos as $index => $demo ) {
 
                 $preview_img_url = $demo['import_preview_image_url']; 
                 $demo_preview_url = $demo['preview_url'];
@@ -31,9 +31,8 @@ echo '</pre>';
                         <img src="<?php echo $preview_img_url ?>">
                     </div>
                     <div class="bnmbti-theme-details">
-                        <?php //$this->get_demo_settings_url( array( 'step' => 'import' ) ) ?>
                         <a href="<?php echo esc_url( $demo_preview_url ); ?>" class="bnmbti-theme-preview-btn button" target="_blank">Preview Demo</a>
-                        <a href="<?php echo esc_url( $this->get_demo_settings_url( array( 'step' => 'import' ) ) ); ?>" class="bnmbti-import-demo-data button button-primary">Import Demo</a>
+                        <a href="<?php echo esc_url( $this->get_demo_settings_url( array( 'step' => 'import', 'import' => esc_attr( $index ) ) ) ); ?>" class="bnmbti-import-demo-data button button-primary">Import Demo</a>
                     </div>
 
                 </div>

@@ -9,10 +9,16 @@ if ( ! class_exists( 'WP_Importer' ) ) {
 	require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
 }
 
-require BNMBT_IMPORTER_PATH . '/class-logger.php';
-require BNMBT_IMPORTER_PATH . '/class-wxr-import-info.php';
-require BNMBT_IMPORTER_PATH . '/class-wxr-importer.php';
-require_once BNMBT_IMPORTER_PATH . 'class-demo-import.php';
+require BNMBT_IMPORTER_PATH . 'class-wp-importer-logger.php';
+require BNMBT_IMPORTER_PATH . 'class-logger-cli.php';
+require BNMBT_IMPORTER_PATH . 'class-logger.php';
+require BNMBT_IMPORTER_PATH . 'class-wxr-import-info.php';
+require BNMBT_IMPORTER_PATH . 'class-wxr-importer.php';
+require BNMBT_IMPORTER_PATH . 'class-wxr-importer2.php';
+require BNMBT_IMPORTER_PATH . 'class-helpers.php';
+require BNMBT_IMPORTER_PATH . 'class-downloader.php';
+require BNMBT_IMPORTER_PATH . 'class-importer.php';
+require BNMBT_IMPORTER_PATH . 'class-demo-import.php';
 
 if ( ! function_exists( 'bnmbt_display_demo_showcase' ) ) {
     function bnmbt_display_demo_showcase() {
