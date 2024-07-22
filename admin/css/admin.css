@@ -25,3 +25,8 @@
 .bnmbti-import-demo-data {
 
 }
+
+.bnmbti-button-disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+}

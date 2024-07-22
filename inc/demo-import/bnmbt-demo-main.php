@@ -17,6 +17,9 @@ require BNMBT_IMPORTER_PATH . 'class-wxr-importer.php';
 require BNMBT_IMPORTER_PATH . 'class-wxr-importer2.php';
 require BNMBT_IMPORTER_PATH . 'class-helpers.php';
 require BNMBT_IMPORTER_PATH . 'class-downloader.php';
+require BNMBT_IMPORTER_PATH . 'class-customizer-importer.php';
+require BNMBT_IMPORTER_PATH . 'class-widget-importer.php';
+require BNMBT_IMPORTER_PATH . 'class-import-actions.php';
 require BNMBT_IMPORTER_PATH . 'class-importer.php';
 require BNMBT_IMPORTER_PATH . 'class-demo-import.php';
 

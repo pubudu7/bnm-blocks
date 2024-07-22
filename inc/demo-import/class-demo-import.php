@@ -75,6 +75,7 @@ class DemoImporter {
         add_action( 'bnmbt_display_demo_showcase', array( $this, 'display_demos' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
         add_action( 'wp_ajax_bnmbt_import_demo_data', array( $this, 'import_demo_data_ajax_callback' ) );
+		add_action( 'wp_ajax_bnmbt_import_customizer_data', array( $this, 'import_customizer_data_ajax_callback' ) );
     }
 
 	/**
@@ -112,6 +113,13 @@ class DemoImporter {
         // Get info of import data files and filter it.
         $this->import_files = Helpers::validate_import_file_info( apply_filters( 'bnmbt_import_files', array() ) );
 
+		/**
+		 * Register all default actions (before content import, widget, customizer import and other actions)
+		 * to the 'before_content_import_execution' and the 'bnmbt_importer_after_content_import_execution' action hook.
+		 */
+		$import_actions = new ImportActions();
+		$import_actions->register_hooks();
+
 		// Importer options array.
 		$importer_options = apply_filters( 'bnmbt_importer_importer_options', array(
 			'fetch_attachments' => true,
@@ -140,8 +148,9 @@ class DemoImporter {
         wp_localize_script( 'bnmbt-importer-main', 'bnmbti', array(
             'ajax_url'          => admin_url( 'admin-ajax.php' ),
             'ajax_nonce'        => wp_create_nonce( 'bnmbt-importer-ajax-verification' ),
-            'import_files'      => $this->import_files
-        ) );
+            'import_files'      => $this->import_files,
+        	'wp_customize_on'  	=> apply_filters( 'bnmbt_importer_enable_wp_customize_save_hooks', false ),
+		) );
 
     }
 
@@ -245,8 +254,86 @@ class DemoImporter {
         // Save the initial import data as a transient, so other import parts (in new AJAX calls) can use that data.
 		Helpers::set_bnmbt_import_data_transient( $this->get_current_importer_data() );
 
+		if ( ! $this->before_import_executed ) {
+			$this->before_import_executed = true;
 
+			/**
+			 * 2). Execute the actions hooked to the 'bnmbt_importer_before_content_import_execution' action:
+			 *
+			 * Default actions:
+			 * 1 - Before content import WP action (with priority 10).
+			 */
+			do_action( 'bnmbt_importer_before_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
+		}
+
+		/**
+		 * 3). Import content (if the content XML file is set for this import).
+		 * Returns any errors greater then the "warning" logger level, that will be displayed on front page.
+		 */
+		if ( ! empty( $this->selected_import_files['content'] ) ) {
+			$this->append_to_frontend_error_messages( $this->importer->import_content( $this->selected_import_files['content'] ) );
+		}
+
+		/**
+		 * 4). Execute the actions hooked to the 'bnmbt_importer_after_content_import_execution' action:
+		 *
+		 * Default actions:
+		 * 1 - Before widgets import setup (with priority 10).
+		 * 2 - Import widgets (with priority 20).
+		 * 3 - Import Redux data (with priority 30).
+		 */
+		do_action( 'bnmbt_importer_after_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
+
+		// Save the import data as a transient, so other import parts (in new AJAX calls) can use that data.
+		Helpers::set_bnmbt_import_data_transient( $this->get_current_importer_data() );
+
+		// Request the customizer import AJAX call.
+		if ( ! empty( $this->selected_import_files['customizer'] ) ) {
+			wp_send_json( array( 'status' => 'customizerAJAX' ) );
+		}
+
+		// Request the after all import AJAX call.
+		if ( false !== Helpers::has_action( 'bnmbt_importer_after_all_import_execution' ) ) {
+			wp_send_json( array( 'status' => 'afterAllImportAJAX' ) );
+		}
+
+		// Update terms count.
+		$this->update_terms_count();
+
+		// Send a JSON response with final report.
+		$this->final_response();
     }
+
+	/**
+	 * AJAX callback for importing the customizer data.
+	 * This request has the wp_customize set to 'on', so that the customizer hooks can be called
+	 * (they can only be called with the $wp_customize instance). But if the $wp_customize is defined,
+	 * then the widgets do not import correctly, that's why the customizer import has its own AJAX call.
+	 */
+	public function import_customizer_data_ajax_callback() {
+		// Verify if the AJAX call is valid (checks nonce and current_user_can).
+		Helpers::verify_ajax_call();
+
+		// Get existing import data.
+		if ( $this->use_existing_importer_data() ) {
+			/**
+			 * Execute the customizer import actions.
+			 *
+			 * Default actions:
+			 * 1 - Customizer import (with priority 10).
+			 */
+			do_action( 'bnmbt_importer_customizer_import_execution', $this->selected_import_files );
+		}
+
+		// Request the after all import AJAX call.
+		if ( false !== has_action( 'bnmbt_importer_after_all_import_execution' ) ) {
+			wp_send_json( array( 'status' => 'afterAllImportAJAX' ) );
+		}
+
+		// Send a JSON response with final report.
+		$this->final_response();
+	}
+
 
     /**
 	 * Get content importer data, so we can continue the import with this new AJAX request.
