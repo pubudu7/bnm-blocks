@@ -18,7 +18,7 @@ class WidgetImporter {
 	 */
 	public static function import( $widget_import_file_path ) {
 		$results       = array();
-		$demo_importer = OneClickDemoImport::get_instance();
+		$demo_importer = DemoImporter::get_instance();
 		$log_file_path = $demo_importer->get_log_file_path();
 
 		// Import widgets and return result.
@@ -121,7 +121,7 @@ class WidgetImporter {
 
 		// Hook before import.
 		do_action( 'bnmbt_importer_widget_importer_before_widgets_import' );
-		$data = Helpers::apply_filters( 'bnmbt_importer_before_widgets_import_data', $data );
+		$data = apply_filters( 'bnmbt_importer_before_widgets_import_data', $data );
 
 		// Get all available widgets site supports.
 		$available_widgets = self::available_widgets();
@@ -181,7 +181,7 @@ class WidgetImporter {
 				// Filter to modify settings object before conversion to array and import.
 				// Leave this filter here for backwards compatibility with manipulating objects (before conversion to array below).
 				// Ideally the newer wie_widget_settings_array below will be used instead of this.
-				$widget = Helpers::apply_filters( 'bnmbt_importer_widget_settings', $widget ); // Object.
+				$widget = apply_filters( 'bnmbt_importer_widget_settings', $widget ); // Object.
 
 				// Convert multidimensional objects to multidimensional arrays.
 				// Some plugins like Jetpack Widget Visibility store settings as multidimensional arrays.
@@ -193,7 +193,7 @@ class WidgetImporter {
 				// Filter to modify settings array.
 				// This is preferred over the older wie_widget_settings filter above.
 				// Do before identical check because changes may make it identical to end result (such as URL replacements).
-				$widget = Helpers::apply_filters( 'bnmbt_importer_widget_settings_array', $widget );
+				$widget = apply_filters( 'bnmbt_importer_widget_settings_array', $widget );
 
 				// Does widget with identical settings already exist in same sidebar?
 				if ( ! $fail && isset( $widget_instances[ $id_base ] ) ) {
@@ -294,7 +294,7 @@ class WidgetImporter {
 		do_action( 'bnmbt_importer_widget_importer_after_widgets_import' );
 
 		// Return results.
-		return Helpers::apply_filters( 'bnmbt_importer_widget_import_results', $results );
+		return apply_filters( 'bnmbt_importer_widget_import_results', $results );
 	}
 
 
@@ -319,7 +319,7 @@ class WidgetImporter {
 			}
 		}
 
-		return Helpers::apply_filters( 'bnmbt_importer_available_widgets', $available_widgets );
+		return apply_filters( 'bnmbt_importer_available_widgets', $available_widgets );
 	}
 
 

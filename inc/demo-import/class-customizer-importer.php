@@ -101,7 +101,7 @@ class CustomizerImporter {
 		}
 
 		// Import images.
-		if ( Helpers::apply_filters( 'bnmbt_importer_customizer_import_images', true ) ) {
+		if ( apply_filters( 'bnmbt_importer_customizer_import_images', true ) ) {
 			$data['mods'] = self::import_customizer_images( $data['mods'] );
 		}
 
@@ -124,7 +124,7 @@ class CustomizerImporter {
 		}
 
 		// Should the customizer import use the WP customize_save* hooks?
-		$use_wp_customize_save_hooks = Helpers::apply_filters( 'bnmbt_importer_enable_wp_customize_save_hooks', false );
+		$use_wp_customize_save_hooks = apply_filters( 'bnmbt_importer_enable_wp_customize_save_hooks', false );
 
 		if ( $use_wp_customize_save_hooks ) {
 			do_action( 'customize_save', $wp_customize );

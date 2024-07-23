@@ -15,9 +15,12 @@ class DemoImporter {
 	 */
 	private static $instance;
 
-    public $importer;
-
-    public $demo_page_setup = array();
+	/**
+	 * The instance of the OCDI\Importer class.
+	 *
+	 * @var object
+	 */
+	public $importer;
 
     /**
 	 * Holds the import files.
@@ -61,6 +64,13 @@ class DemoImporter {
 	 */
 	private $before_import_executed = false;
 
+	/**
+	 * Make demo page options available to other methods.
+	 *
+	 * @var array
+	 */
+	private $demo_page_setup = array();
+
     /**
 	 * Imported terms.
 	 *
@@ -91,6 +101,30 @@ class DemoImporter {
 		return static::$instance;
 	}
 
+	/**
+	 * Private clone method to prevent cloning of the instance of the *Singleton* instance.
+	 *
+	 * @return void
+	 */
+	private function __clone() {}
+
+	/**
+	 * Empty unserialize method to prevent unserializing of the *Singleton* instance.
+	 *
+	 * @return void
+	 */
+	public function __wakeup() {}
+
+	/**
+     * sets the $demo_page_setup array.
+     */
+    public function set_demo_page_setup( $location_data ) {
+
+        $this->demo_page_setup = Helpers::get_demo_page_setup_data();
+
+        register_importer( 'bnm-blocks-importer', 'BNM Blocks Importer', 'Importer by ThemezHut', apply_filters( 'bnmbt_demo_page_display_callback_function', array( $this, 'display_demos' ) ) );
+        
+    }
 
     public function display_demos() {
         if ( isset( $_GET['step'] ) && 'import' === $_GET['step'] ) {
@@ -102,44 +136,11 @@ class DemoImporter {
     }
 
 	/**
-	 * Get data from filters, after the theme has loaded and instantiate the importer.
+	 * Enqueue admin scripts (JS and CSS)
+	 *
+	 * @param string $hook holds info on which admin page you are currently loading.
 	 */
-    public function setup_plugin_with_filter_data() {
-
-        if ( ! ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) ) {
-			return;
-		}
-
-        // Get info of import data files and filter it.
-        $this->import_files = Helpers::validate_import_file_info( apply_filters( 'bnmbt_import_files', array() ) );
-
-		/**
-		 * Register all default actions (before content import, widget, customizer import and other actions)
-		 * to the 'before_content_import_execution' and the 'bnmbt_importer_after_content_import_execution' action hook.
-		 */
-		$import_actions = new ImportActions();
-		$import_actions->register_hooks();
-
-		// Importer options array.
-		$importer_options = apply_filters( 'bnmbt_importer_importer_options', array(
-			'fetch_attachments' => true,
-		) );
-
-		// Logger options for the logger used in the importer.
-		$logger_options = apply_filters( 'bnmbt_importer_logger_options', array(
-			'logger_min_level' => 'warning',
-		) );
-
-		// Configure logger instance and set it to the importer.
-		$logger            = new Logger();
-		$logger->min_level = $logger_options['logger_min_level'];
-
-		// Create importer instance with proper parameters.
-		$this->importer = new Importer( $importer_options, $logger );
-        
-    }
-
-    public function admin_enqueue_scripts() {
+	public function admin_enqueue_scripts() {
         $admin_css = plugins_url( BNMBT__ADMIN_DIRECTORY . 'css/admin.css', BNMBT__PLUGIN_FILE );
 		wp_enqueue_style( 'bnmbt-admin-common', BNMBT_URL . 'admin/css/admin.css', array(), BNMBT__VERSION );
 
@@ -151,48 +152,6 @@ class DemoImporter {
             'import_files'      => $this->import_files,
         	'wp_customize_on'  	=> apply_filters( 'bnmbt_importer_enable_wp_customize_save_hooks', false ),
 		) );
-
-    }
-
-    /**
-     * sets the $demo_page_setup array.
-     */
-    public function set_demo_page_setup( $location_data ) {
-
-        $this->demo_page_setup = Helpers::get_demo_page_setup_data();
-
-        register_importer( 'bnm-blocks-importer', 'BNM Blocks Importer', 'Importer by ThemezHut', apply_filters( 'bnmbt_demo_page_display_callback_function', array( $this, 'display_demos' ) ) );
-        
-    }
-
-    /**
-     * Returns the $demo_page_setup array.
-     */
-    public function get_demo_page_setup() {
-        return $this->demo_page_setup;
-    }
-
-    /**
-     * Get the demo settings url
-     */
-    public function get_demo_settings_url( $query_parameters ) {
-
-        $parameters = array_merge(
-            array( 
-                'page' => $this->demo_page_setup['menu_slug'], 
-                'tab' => $this->demo_page_setup['tab'] 
-            ),
-            $query_parameters
-        );
-
-        $url = menu_page_url( $this->demo_page_setup['parent_slug'], false );
-
-        if ( empty( $url ) ) {
-			$url = self_admin_url( $this->demo_page_setup['parent_slug'] );
-		}
-
-        return add_query_arg( $parameters, $url );
-
     }
 
     /**
@@ -302,7 +261,8 @@ class DemoImporter {
 
 		// Send a JSON response with final report.
 		$this->final_response();
-    }
+    }	
+
 
 	/**
 	 * AJAX callback for importing the customizer data.
@@ -335,6 +295,77 @@ class DemoImporter {
 	}
 
 
+	/**
+	 * Get data from filters, after the theme has loaded and instantiate the importer.
+	 */
+    public function setup_plugin_with_filter_data() {
+
+        if ( ! ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) ) {
+			return;
+		}
+
+        // Get info of import data files and filter it.
+        $this->import_files = Helpers::validate_import_file_info( apply_filters( 'bnmbt_import_files', array() ) );
+
+		/**
+		 * Register all default actions (before content import, widget, customizer import and other actions)
+		 * to the 'before_content_import_execution' and the 'bnmbt_importer_after_content_import_execution' action hook.
+		 */
+		$import_actions = new ImportActions();
+		$import_actions->register_hooks();
+
+		// Importer options array.
+		$importer_options = apply_filters( 'bnmbt_importer_importer_options', array(
+			'fetch_attachments' => true,
+		) );
+
+		// Logger options for the logger used in the importer.
+		$logger_options = apply_filters( 'bnmbt_importer_logger_options', array(
+			'logger_min_level' => 'warning',
+		) );
+
+		// Configure logger instance and set it to the importer.
+		$logger            = new Logger();
+		$logger->min_level = $logger_options['logger_min_level'];
+
+		// Create importer instance with proper parameters.
+		$this->importer = new Importer( $importer_options, $logger );
+        
+    }
+
+
+    /**
+     * Returns the $demo_page_setup array.
+     */
+    public function get_demo_page_setup() {
+        return $this->demo_page_setup;
+    }
+
+
+    /**
+     * Get the demo settings url
+     */
+    public function get_demo_settings_url( $query_parameters ) {
+
+        $parameters = array_merge(
+            array( 
+                'page' => $this->demo_page_setup['menu_slug'], 
+                'tab' => $this->demo_page_setup['tab'] 
+            ),
+            $query_parameters
+        );
+
+        $url = menu_page_url( $this->demo_page_setup['parent_slug'], false );
+
+        if ( empty( $url ) ) {
+			$url = self_admin_url( $this->demo_page_setup['parent_slug'] );
+		}
+
+        return add_query_arg( $parameters, $url );
+
+    }
+
+
     /**
 	 * Get content importer data, so we can continue the import with this new AJAX request.
 	 *
@@ -354,6 +385,52 @@ class DemoImporter {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Get the current state of selected data.
+	 *
+	 * @return array
+	 */
+	public function get_current_importer_data() {
+		return array(
+			'frontend_error_messages' => $this->frontend_error_messages,
+			'log_file_path'           => $this->log_file_path,
+			'selected_index'          => $this->selected_index,
+			'selected_import_files'   => $this->selected_import_files,
+			'import_files'            => $this->import_files,
+			'before_import_executed'  => $this->before_import_executed,
+			'imported_terms'          => $this->imported_terms,
+		);
+	}
+
+	/**
+	 * Setter function to append additional value to the private frontend_error_messages value.
+	 *
+	 * @param string $additional_value The additional value that will be appended to the existing frontend_error_messages.
+	 */
+	public function append_to_frontend_error_messages( $text ) {
+		$lines = array();
+
+		if ( ! empty( $text ) ) {
+			$text = str_replace( '<br>', PHP_EOL, $text );
+			$lines = explode( PHP_EOL, $text );
+		}
+
+		foreach ( $lines as $line ) {
+			if ( ! empty( $line ) && ! in_array( $line , $this->frontend_error_messages ) ) {
+				$this->frontend_error_messages[] = $line;
+			}
+		}
+	}	
+
+	/**
+	 * Getter function to retrieve the private log_file_path value.
+	 *
+	 * @return string The log_file_path value.
+	 */
+	public function get_log_file_path() {
+		return $this->log_file_path;
 	}
 
 }

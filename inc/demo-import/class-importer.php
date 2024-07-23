@@ -160,7 +160,7 @@ class Importer {
 		$time = microtime( true ) - $this->microtime;
 
 		// We should make a new ajax call, if the time is right.
-		if ( $time > Helpers::apply_filters( 'bnmbt_importer_time_for_one_ajax_call', 25 ) ) {
+		if ( $time > apply_filters( 'bnmbt_importer_time_for_one_ajax_call', 25 ) ) {
 			$response = array(
 				'status'  => 'newAJAX',
 				'message' => 'Time for new AJAX request!: ' . $time,
