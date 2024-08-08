@@ -7,6 +7,10 @@
 
 namespace ThemezHut\DemoImporter;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class WXRImporter2 extends WXRImporter {
 	/**
 	 * Constructor method.

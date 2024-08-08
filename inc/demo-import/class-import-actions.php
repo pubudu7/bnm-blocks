@@ -7,6 +7,10 @@
 
 namespace ThemezHut\DemoImporter;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class ImportActions {
 	/**
 	 * Register all action hooks for this class.
@@ -16,6 +20,7 @@ class ImportActions {
 		add_action( 'bnmbt_importer_before_content_import_execution', array( $this, 'before_content_import_action' ), 10, 3 );
 
 		// After content import.
+		add_action( 'bnmbt_importer_after_content_import_execution', array( $this, 'reset_old_widgets_before_import' ) );
 		add_action( 'bnmbt_importer_after_content_import_execution', array( $this, 'before_widget_import_action' ), 10, 3 );
 		add_action( 'bnmbt_importer_after_content_import_execution', array( $this, 'widgets_import' ), 20, 3 );
 
@@ -143,4 +148,12 @@ class ImportActions {
 			);
 		}
 	}
+
+	/**
+	 * Reset widgets before import.
+	 */
+	public function reset_old_widgets_before_import() {
+		Helpers::reset_widgets_data();
+	}
+
 }

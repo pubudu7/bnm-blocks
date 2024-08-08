@@ -6,6 +6,10 @@ namespace ThemezHut\DemoImporter;
  * @package bnm-blocks
  */
 
+ if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class Downloader {
 	/**
 	 * Holds full path to where the files will be saved.

@@ -7,6 +7,10 @@
 
 namespace ThemezHut\DemoImporter;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class Importer {
 	/**
 	 * The importer class object used for importing content.
@@ -172,7 +176,7 @@ class Importer {
 			// Add any error messages to the frontend_error_messages variable in OCDI main class.
 			if ( ! empty( $message ) ) {
 				$this->bnmbt_importer->append_to_frontend_error_messages( $message );
-			}
+			}			
 
 			// Add message to log file.
 			$log_added = Helpers::append_to_file(

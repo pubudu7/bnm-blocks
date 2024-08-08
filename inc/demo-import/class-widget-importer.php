@@ -10,6 +10,10 @@
 
 namespace ThemezHut\DemoImporter;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class WidgetImporter {
 	/**
 	 * Import widgets from WIE or JSON file.
@@ -41,6 +45,10 @@ class WidgetImporter {
 			);
 		}
 		else {
+
+			$sidebars_widgets = get_option( 'sidebars_widgets', array() );
+			update_option( '_bnmbt_sites_old_widgets_data', $sidebars_widgets, 'no' );
+
 			ob_start();
 				self::format_results_for_log( $results );
 			$message = ob_get_clean();
@@ -51,6 +59,7 @@ class WidgetImporter {
 				$log_file_path,
 				esc_html__( 'Importing widgets' , 'one-click-demo-import' )
 			);
+			
 		}
 
 	}

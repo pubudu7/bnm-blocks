@@ -1,6 +1,10 @@
 <?php
 namespace ThemezHut\DemoImporter;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class WXR_Import_Info {
 	public $home;
 	public $siteurl;

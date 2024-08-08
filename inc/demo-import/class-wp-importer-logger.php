@@ -18,6 +18,10 @@ namespace ThemezHut\DemoImporter;
  * for the full interface specification.
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class WP_Importer_Logger {
 	/**
 	 * System is unusable.

@@ -4,6 +4,10 @@ namespace ThemezHut\DemoImporter;
 use WP_Error;
 use XMLReader;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * WordPress Importer
  *

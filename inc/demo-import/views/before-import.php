@@ -7,17 +7,10 @@
 <div class="bnmbti-demo-page">
     <div class="bnmbti-option-form">
         <p>
-            <input type="checkbox" id="bnmbti-import-demo-data"></input>
-            <label class="bnmbti-label">Import Demo Content</label>
+            <input type="checkbox" id="bnmbti-import-demo-data" name="bnmbti-import-demo-data" checked></input>
+            <label class="bnmbti-label" for="bnmbti-import-demo-data">Import Demo Content</label>
+            <span class="bnmbti-field-description">If you already have content on your website you may not want to import demo content. Mark this checkbox if you want to import demo posts, pages and menus. </span>
         </p>
-        <p>
-            <input type="checkbox" id="bnmbti-import-options"></input>
-            <label class="bnmbti-label">Import Options</label>
-        </p>
-        <p>
-            <input type="checkbox" id="bnmbti-delete-old-data"></input>
-            <label class="bnmbti-label">Delete previously imported demo data</label>
-        </p>
-        <a class="js-bnmbti-import-demo button button-primary">Import Demo</a>
+        <a class="js-bnmbti-import-demo button button-primary">Import</a>
     </div>
 </div>

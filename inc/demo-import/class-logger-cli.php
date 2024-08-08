@@ -1,6 +1,10 @@
 <?php
 namespace ThemezHut\DemoImporter;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class WP_Importer_Logger_CLI extends WP_Importer_Logger {
 	public $min_level = 'notice';
 

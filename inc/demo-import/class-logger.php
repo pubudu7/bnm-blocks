@@ -6,6 +6,10 @@
 
 namespace ThemezHut\DemoImporter;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class Logger extends WP_Importer_Logger_CLI {
 	/**
 	 * Variable for front-end error display.

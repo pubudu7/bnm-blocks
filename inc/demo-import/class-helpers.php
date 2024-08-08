@@ -4,6 +4,10 @@ namespace ThemezHut\DemoImporter;
  * Helper functions for demo importer.
  */
 
+ if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class Helpers {
 
 	/**
@@ -596,6 +600,25 @@ class Helpers {
 		$failed_media_imports[] = $attachment_url;
 
 		set_transient( 'bnmbt_importer_data_failed_attachment_imports', $failed_media_imports, HOUR_IN_SECONDS );
+	}
+
+	/**
+	 * Reset widgets data
+	 *
+	 * @return void
+	 */
+	public static function reset_widgets_data() {
+
+		// Get all old widget ids.
+		$old_widgets_data = (array) get_option( '_bnmbt_sites_old_widgets_data', array() );
+
+		if ( class_exists( 'ThemezHut\DemoImporter\Resetter' ) ) {
+			Resetter::reset_widgets_data( $old_widgets_data );
+		} else {
+			//return or log error.
+			wp_send_json( esc_html__( 'Resetter class not found.', 'bnm-blocks' )  );
+		}
+		
 	}
 
 }

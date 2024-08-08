@@ -8,18 +8,54 @@
     gap: 50px;
 }
 
-.bnmbti-view-theme-card {
+.bnmbti-view-demo-card {
     width: calc( 33.33% - 33.33px );
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    position: relative;
 }
 
-.bnmbti-theme-preview-btn {
+.bnmbti-pro-label {
+    position: absolute;
+    padding: 2.5px 5px;
+    border-radius: 5px;
+    background-color: rgb(255, 136, 0);
+    color: #fff;
+    font-weight: bold;
+    font-size: 10px;
+    top: 10px;
+    right: 10px;
+}
+
+.bnmbti-demo-action .bnmbti-demo-preview-btn {
+    margin-right: 4px;
+}
+
+.bnmbti-demo-details {
+    border-top: 1px solid #dddddd;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bnmbti-demo-name {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.bnmbti-demo-action {
+    display: none;
+    text-align: center;
+}
+
+.bnmbti-view-demo-card:hover .bnmbti-demo-action {
     display: block;
 }
 
-.bnmbti-theme-details {
-    display: flex;
-    justify-content: space-between;
-    margin: 25px 0;
+.bnmbti-view-demo-card:hover .bnmbti-demo-name {
+    display: none;
 }
 
 .bnmbti-import-demo-data {
@@ -29,4 +65,13 @@
 .bnmbti-button-disabled {
     opacity: 0.6 !important;
     cursor: not-allowed !important;
+}
+
+.bnmbti-field-description {
+    display: block;
+    margin: 10px 0 30px;
+}
+
+.bnmbti-label {
+    font-size: 20px;
 }

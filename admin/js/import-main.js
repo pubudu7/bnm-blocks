@@ -11,7 +11,9 @@ jQuery( function ( $ ) {
 			return false;
 		}
 
-		startImport( getUrlParameter( 'import' ) );
+		var importDemoContent = $('#bnmbti-import-demo-data').prop("checked");
+
+		startImport( getUrlParameter( 'import' ), importDemoContent );
 
 		$button.addClass( 'bnmbti-button-disabled' );
 	} );
@@ -31,6 +33,9 @@ jQuery( function ( $ ) {
             contentType: false, 
 		})
 		.done( function( response ) {
+			var responseString = JSON.stringify(response);
+			alert( responseString );
+			
 			if ( 'undefined' !== typeof response.status && 'newAJAX' === response.status ) {
 				ajaxCall( data );
 			}
@@ -50,7 +55,7 @@ jQuery( function ( $ ) {
 			else if ( 'undefined' !== typeof response.status && 'afterAllImportAJAX' === response.status ) {
 				// Fix for data.set and data.delete, which they are not supported in some browsers.
 				var newData = new FormData();
-				newData.append( 'action', 'bnmbti_importer_after_import_data' );
+				newData.append( 'action', 'bnmbt_importer_after_import_data' );
 				newData.append( 'security', bnmbti.ajax_nonce );
 				ajaxCall( newData );
 			}
@@ -93,7 +98,7 @@ jQuery( function ( $ ) {
 	 *
 	 * Files for the manual import have already been uploaded in the '.js-ocdi-start-manual-import' event above.
 	 */
-	function startImport( selected ) {
+	function startImport( selected, importDemoContent ) {
 		var data = new FormData();
         data.append( 'action', 'bnmbt_import_demo_data' );
 		data.append( 'security', bnmbti.ajax_nonce );
@@ -101,7 +106,11 @@ jQuery( function ( $ ) {
 		if ( selected ) {
 			data.append( 'selected', selected );
 		}
-
+		
+		if ( importDemoContent ) {
+			data.append( 'importContent', 'content' );
+		}
+		
 		// AJAX call to import everything (content, widgets, before/after setup)
 		ajaxCall( data );
 	}
