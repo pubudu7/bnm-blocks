@@ -180,7 +180,7 @@ class Importer {
 
 			// Add message to log file.
 			$log_added = Helpers::append_to_file(
-				__( 'New AJAX call!' , 'one-click-demo-import' ) . PHP_EOL . $message,
+				__( 'New AJAX call!' , 'bnm-blocks' ) . PHP_EOL . $message,
 				$this->bnmbt_importer->get_log_file_path(),
 				''
 			);

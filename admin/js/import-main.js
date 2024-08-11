@@ -31,11 +31,12 @@ jQuery( function ( $ ) {
 			data:        data,
             processData: false, 
             contentType: false, 
+			beforeSend:  function() {
+				$( '.bnmbti-before-import-section' ).hide();
+				$( '.js-bnmbti-importing' ).show();
+			}
 		})
-		.done( function( response ) {
-			var responseString = JSON.stringify(response);
-			alert( responseString );
-			
+		.done( function( response ) {			
 			if ( 'undefined' !== typeof response.status && 'newAJAX' === response.status ) {
 				ajaxCall( data );
 			}
@@ -60,43 +61,43 @@ jQuery( function ( $ ) {
 				ajaxCall( newData );
 			}
 			else if ( 'undefined' !== typeof response.message ) {
-				$( '.js-ocdi-ajax-response' ).append( response.message );
+				$( '.js-bnmbti-ajax-response' ).append( response.message );
 
 				if ( 'undefined' !== typeof response.title ) {
-					$( '.js-ocdi-ajax-response-title' ).html( response.title );
+					$( '.js-bnmbti-ajax-response-title' ).html( response.title );
 				}
 
 				if ( 'undefined' !== typeof response.subtitle ) {
-					$( '.js-ocdi-ajax-response-subtitle' ).html( response.subtitle );
+					$( '.js-bnmbti-ajax-response-subtitle' ).html( response.subtitle );
 				}
 
-				$( '.js-ocdi-importing' ).hide();
-				$( '.js-ocdi-imported' ).show();
+				$( '.js-bnmbti-importing' ).hide();
+				$( '.js-bnmbti-imported' ).show();
 
 				// Trigger custom event, when OCDI import is complete.
-				$( document ).trigger( 'ocdiImportComplete' );
+				$( document ).trigger( 'bnmbtiImportComplete' );
 			}
 			else {
-				$( '.js-ocdi-ajax-response' ).append( '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--error" src="' + ocdi.plugin_url + 'assets/images/error.svg" alt="' + ocdi.texts.import_failed + '"><p>' + response + '</p>' );
-				$( '.js-ocdi-ajax-response-title' ).html( ocdi.texts.import_failed );
-				$( '.js-ocdi-ajax-response-subtitle' ).html( '<p>' + ocdi.texts.import_failed_subtitle + '</p>' );
-				$( '.js-ocdi-importing' ).hide();
-				$( '.js-ocdi-imported' ).show();
+				$( '.js-bnmbti-ajax-response' ).append( '<img class="bnmbti-imported-content-imported bnmbti-imported-content-imported--error" src="' + bnmbti.assets_url + 'images/error.svg" alt="' + bnmbti.texts.import_failed + '"><p>' + response + '</p>' );
+				$( '.js-bnmbti-ajax-response-title' ).html( bnmbti.texts.import_failed );
+				$( '.js-bnmbti-ajax-response-subtitle' ).html( '<p>' + bnmbti.texts.import_failed_subtitle + '</p>' );
+				$( '.js-bnmbti-importing' ).hide();
+				$( '.js-bnmbti-imported' ).show();
 			}
 		})
 		.fail( function( error ) {
-			$( '.js-ocdi-ajax-response' ).append( '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--error" src="' + ocdi.plugin_url + 'assets/images/error.svg" alt="' + ocdi.texts.import_failed + '"><p>Error: ' + error.statusText + ' (' + error.status + ')' + '</p>' );
-			$( '.js-ocdi-ajax-response-title' ).html( ocdi.texts.import_failed );
-			$( '.js-ocdi-ajax-response-subtitle' ).html( '<p>' + ocdi.texts.import_failed_subtitle + '</p>' );
-			$( '.js-ocdi-importing' ).hide();
-			$( '.js-ocdi-imported' ).show();
+			$( '.js-bnmbti-ajax-response' ).append( '<img class="bnmbti-imported-content-imported bnmbti-imported-content-imported--error" src="' + bnmbti.assets_url + 'images/error.svg" alt="' + bnmbti.texts.import_failed + '"><p>Error: ' + error.statusText + ' (' + error.status + ')' + '</p>' );
+			$( '.js-bnmbti-ajax-response-title' ).html( bnmbti.texts.import_failed );
+			$( '.js-bnmbti-ajax-response-subtitle' ).html( '<p>' + bnmbti.texts.import_failed_subtitle + '</p>' );
+			$( '.js-bnmbti-importing' ).hide();
+			$( '.js-bnmbti-imported' ).show();
 		});
     }
 
 	/**
 	 * Run the main import with a selected predefined demo or with manual files (selected = false).
 	 *
-	 * Files for the manual import have already been uploaded in the '.js-ocdi-start-manual-import' event above.
+	 * Files for the manual import have already been uploaded in the '.js-bnmbti-start-manual-import' event above.
 	 */
 	function startImport( selected, importDemoContent ) {
 		var data = new FormData();

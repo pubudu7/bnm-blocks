@@ -90,6 +90,20 @@ class DemoImporter {
 	private $import_demo_content;
 
 	/**
+	 * Theme Pro URL
+	 * 
+	 * @var string
+	 */
+	public $pro_url;
+
+	/**
+	 * Theme Pro URL
+	 * 
+	 * @var boolean
+	 */
+	public $license_active = false;
+
+	/**
 	 * Class construct function, to initiate the plugin.
 	 * Protected constructor to prevent creating a new instance of the
 	 * *Singleton* via the `new` operator from outside of this class.
@@ -146,7 +160,7 @@ class DemoImporter {
 
     public function display_demos() {
         if ( isset( $_GET['step'] ) && 'import' === $_GET['step'] ) {
-            require_once BNMBT_IMPORTER_PATH . 'views/before-import.php';
+            require_once BNMBT_IMPORTER_PATH . 'views/import.php';
             return;
         }
 
@@ -169,6 +183,25 @@ class DemoImporter {
             'ajax_nonce'        => wp_create_nonce( 'bnmbt-importer-ajax-verification' ),
             'import_files'      => $this->import_files,
         	'wp_customize_on'  	=> apply_filters( 'bnmbt_importer_enable_wp_customize_save_hooks', false ),
+			'assets_url'		=> BNMBT__ADMIN_DIRECTORY_URL,
+			'texts'            	=> array(
+				'missing_preview_image'    => esc_html__( 'No preview image defined for this import.', 'bnm-blocks' ),
+				'dialog_title'             => esc_html__( 'Are you sure?', 'bnm-blocks' ),
+				'dialog_no'                => esc_html__( 'Cancel', 'bnm-blocks' ),
+				'dialog_yes'               => esc_html__( 'Yes, import!', 'bnm-blocks' ),
+				'selected_import_title'    => esc_html__( 'Selected demo import:', 'bnm-blocks' ),
+				'installing'               => esc_html__( 'Installing...', 'bnm-blocks' ),
+				'importing'                => esc_html__( 'Importing...', 'bnm-blocks' ),
+				'successful_import'        => esc_html__( 'Successfully Imported!', 'bnm-blocks' ),
+				'install_plugin'           => esc_html__( 'Install Plugin', 'bnm-blocks' ),
+				'installed'                => esc_html__( 'Installed', 'bnm-blocks' ),
+				'import_failed'            => esc_html__( 'Import Failed', 'bnm-blocks' ),
+				'import_failed_subtitle'   => esc_html__( 'Whoops, there was a problem importing your content.', 'bnm-blocks' ),
+				'plugin_install_failed'    => esc_html__( 'Looks like some of the plugins failed to install. Please try again. If this issue persists, please manually install the failing plugins and come back to this step to import the theme demo data.', 'bnm-blocks' ),
+				'content_filetype_warn'    => esc_html__( 'Invalid file type detected! Please select an XML file for the Content Import.', 'bnm-blocks' ),
+				'widgets_filetype_warn'    => esc_html__( 'Invalid file type detected! Please select a JSON or WIE file for the Widgets Import.', 'bnm-blocks' ),
+				'customizer_filetype_warn' => esc_html__( 'Invalid file type detected! Please select a DAT file for the Customizer Import.', 'bnm-blocks' ),
+			),
 		) );
     }
 
@@ -218,22 +251,22 @@ class DemoImporter {
 					Helpers::log_error_and_send_ajax_response(
 						$this->selected_import_files->get_error_message(),
 						$this->log_file_path,
-						esc_html__( 'Downloaded files', 'one-click-demo-import' )
+						esc_html__( 'Downloaded files', 'bnm-blocks' )
 					);
 				}
 
 				// Add this message to log file.
 				$log_added = Helpers::append_to_file(
 					sprintf( /* translators: %s - the name of the selected import. */
-						__( 'The import files for: %s were successfully downloaded!', 'one-click-demo-import' ),
+						__( 'The import files for: %s were successfully downloaded!', 'bnm-blocks' ),
 						$this->import_files[ $this->selected_index ]['import_file_name']
 					) . Helpers::import_file_info( $this->selected_import_files ),
 					$this->log_file_path,
-					esc_html__( 'Downloaded files' , 'one-click-demo-import' )
+					esc_html__( 'Downloaded files' , 'bnm-blocks' )
 				);
 			} else {
 				// Send JSON Error response to the AJAX call.
-				wp_send_json( esc_html__( 'No import files specified!', 'one-click-demo-import' ) );
+				wp_send_json( esc_html__( 'No import files specified!', 'bnm-blocks' ) );
 			}
         
         }
@@ -304,6 +337,7 @@ class DemoImporter {
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 		Helpers::verify_ajax_call();
 
+		// Reset the customizer before importing new customizer settings.
 		Resetter::remove_theme_modifications();
 
 		// Get existing import data.
@@ -364,16 +398,16 @@ class DemoImporter {
 		delete_transient( 'bnmbt_import_posts_with_nav_block' );
 
 		// Display final messages (success or warning messages).
-		$response['title'] = esc_html__( 'Import Complete!', 'one-click-demo-import' );
-		$response['subtitle'] = '<p>' . esc_html__( 'Congrats, your demo was imported successfully. You can now begin editing your site.', 'one-click-demo-import' ) . '</p>';
-		$response['message'] = '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--success" src="' . esc_url( BNMBT_IMPORTER_URL . 'assets/images/success.svg' ) . '" alt="' . esc_attr__( 'Successful Import', 'one-click-demo-import' ) . '">';
+		$response['title'] = esc_html__( 'Import Complete!', 'bnm-blocks' );
+		$response['subtitle'] = '<p>' . esc_html__( 'Congrats, your demo was imported successfully. You can now begin editing your site.', 'bnm-blocks' ) . '</p>';
+		$response['message'] = '<img class="bnmbti-imported-content-imported bnmbti-imported-content-imported--success" src="' . esc_url( BNMBT__ADMIN_DIRECTORY_URL . 'images/success.svg' ) . '" alt="' . esc_attr__( 'Successful Import', 'bnm-blocks' ) . '">';
 
 		if ( ! empty( $this->frontend_error_messages ) ) {
-			$response['subtitle'] = '<p>' . esc_html__( 'Your import completed, but some things may not have imported properly.', 'one-click-demo-import' ) . '</p>';
+			$response['subtitle'] = '<p>' . esc_html__( 'Your import completed, but some things may not have imported properly.', 'bnm-blocks' ) . '</p>';
 			$response['subtitle'] .= sprintf(
 				wp_kses(
 				/* translators: %s - link to the log file. */
-					__( '<p><a href="%s" target="_blank">View error log</a> for more information.</p>', 'one-click-demo-import' ),
+					__( '<p><a href="%s" target="_blank">View error log</a> for more information.</p>', 'bnm-blocks' ),
 					array(
 						'p'      => [],
 						'a'      => [
@@ -513,6 +547,8 @@ class DemoImporter {
 			'logger_min_level' => 'warning',
 		) );
 
+		$this->pro_url = apply_filters( 'bnmbt_importer_pro_url', 'https://themezhut.com/' );
+
 		// Configure logger instance and set it to the importer.
 		$logger            = new Logger();
 		$logger->min_level = $logger_options['logger_min_level'];
@@ -541,7 +577,7 @@ class DemoImporter {
 			return;
 		}
 
-		echo '<div class="ocdi-notices-wrapper js-ocdi-notice-wrapper">';
+		echo '<div class="bnmbti-notices-wrapper js-bnmbti-notice-wrapper">';
 	}
 
 
@@ -559,14 +595,14 @@ class DemoImporter {
 			return;
 		}
 
-		echo '</div><!-- /.ocdi-notices-wrapper -->';
+		echo '</div><!-- /.bnmbti-notices-wrapper -->';
 	}
 
 
     /**
      * Get the demo settings url
      */
-    public function get_demo_settings_url( $query_parameters ) {
+    public function get_demo_settings_url( $query_parameters = [] ) {
 
         $parameters = array_merge(
             array( 
@@ -788,17 +824,17 @@ class DemoImporter {
 		 *     @type string $target Button target. Can be `_blank`, `_parent`, `_top`. Default is `_self`.
 		 * }
 		 */
-		$buttons = Helpers::apply_filters(
+		$buttons = apply_filters(
 			'bnmbt_import_successful_buttons',
 			[
 				[
-					'label'  => __( 'Theme Settings' , 'one-click-demo-import' ),
+					'label'  => __( 'Theme Settings' , 'bnm-blocks' ),
 					'class'  => 'button button-primary button-hero',
 					'href'   => admin_url( 'customize.php' ),
 					'target' => '_blank',
 				],
 				[
-					'label'  => __( 'Visit Site' , 'one-click-demo-import' ),
+					'label'  => __( 'Visit Site' , 'bnm-blocks' ),
 					'class'  => 'button button-primary button-hero',
 					'href'   => get_home_url(),
 					'target' => '_blank',

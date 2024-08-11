@@ -5,8 +5,7 @@
  *
  * Used in the Customizer importer.
  *
- * @since 1.1.1
- * @package ocdi
+ * @package bnm-blocks
  */
 
 namespace ThemezHut\DemoImporter;

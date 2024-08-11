@@ -134,7 +134,7 @@ class Helpers {
 			return new \WP_Error(
 				'failed_writing_file_to_server',
 				sprintf( /* translators: %1$s - br HTML tag, %2$s - file path */
-					__( 'An error occurred while writing file to your server! Tried to write a file to: %1$s%2$s.', 'one-click-demo-import' ),
+					__( 'An error occurred while writing file to your server! Tried to write a file to: %1$s%2$s.', 'bnm-blocks' ),
 					'<br>',
 					$file_path
 				)
@@ -176,7 +176,7 @@ class Helpers {
 			return new \WP_Error(
 				'failed_writing_file_to_server',
 				sprintf( /* translators: %1$s - br HTML tag, %2$s - file path */
-					__( 'An error occurred while writing file to your server! Tried to write a file to: %1$s%2$s.', 'one-click-demo-import' ),
+					__( 'An error occurred while writing file to your server! Tried to write a file to: %1$s%2$s.', 'bnm-blocks' ),
 					'<br>',
 					$file_path
 				)
@@ -209,7 +209,7 @@ class Helpers {
 			return new \WP_Error(
 				'failed_reading_file_from_server',
 				sprintf( /* translators: %1$s - br HTML tag, %2$s - file path */
-					__( 'An error occurred while reading a file from your server! Tried reading file from path: %1$s%2$s.', 'one-click-demo-import' ),
+					__( 'An error occurred while reading a file from your server! Tried reading file from path: %1$s%2$s.', 'bnm-blocks' ),
 					'<br>',
 					$file_path
 				)
@@ -231,7 +231,7 @@ class Helpers {
 			return new \WP_Error(
 				'no_direct_file_access',
 				sprintf( /* translators: %1$s and %2$s - strong HTML tags, %3$s - HTML link to a doc page. */
-					__( 'This WordPress page does not have %1$sdirect%2$s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %3$s.', 'one-click-demo-import' ),
+					__( 'This WordPress page does not have %1$sdirect%2$s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %3$s.', 'bnm-blocks' ),
 					'<strong>',
 					'</strong>',
 					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
@@ -248,7 +248,7 @@ class Helpers {
 		if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
 			return new \WP_error(
 				'filesystem_credentials_could_not_be_retrieved',
-				__( 'An error occurred while retrieving reading/writing permissions to your server (could not retrieve WP filesystem credentials)!', 'one-click-demo-import' )
+				__( 'An error occurred while retrieving reading/writing permissions to your server (could not retrieve WP filesystem credentials)!', 'bnm-blocks' )
 			);
 		}
 
@@ -256,7 +256,7 @@ class Helpers {
 		if ( ! WP_Filesystem( $creds ) ) {
 			return new \WP_Error(
 				'wrong_login_credentials',
-				__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'one-click-demo-import' )
+				__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'bnm-blocks' )
 			);
 		}
 
@@ -294,7 +294,7 @@ class Helpers {
 		$attachment = array(
 			'guid'           => self::get_log_url( $log_path ),
 			'post_mime_type' => $filetype['type'],
-			'post_title'     => apply_filters( 'bnmbt_importer_attachment_prefix', esc_html__( 'ThemezHut Demo Import - ', 'one-click-demo-import' ) ) . preg_replace( '/\.[^.]+$/', '', basename( $log_path ) ),
+			'post_title'     => apply_filters( 'bnmbt_importer_attachment_prefix', esc_html__( 'ThemezHut Demo Import - ', 'bnm-blocks' ) ) . preg_replace( '/\.[^.]+$/', '', basename( $log_path ) ),
 			'post_content'   => '',
 			'post_status'    => 'inherit',
 		);
@@ -326,7 +326,7 @@ class Helpers {
 		if ( ! current_user_can( 'import' ) ) {
 			wp_die(
 				sprintf( /* translators: %1$s - opening div and paragraph HTML tags, %2$s - closing div and paragraph HTML tags. */
-					__( '%1$sYour user role isn\'t high enough. You don\'t have permission to import demo data.%2$s', 'one-click-demo-import' ),
+					__( '%1$sYour user role isn\'t high enough. You don\'t have permission to import demo data.%2$s', 'bnm-blocks' ),
 					'<div class="notice  notice-error"><p>',
 					'</p></div>'
 				)
@@ -369,7 +369,7 @@ class Helpers {
 
 		// Error data if the demo file was not provided.
 		$file_not_provided_error = array(
-			'error' => esc_html__( 'No file provided.', 'one-click-demo-import' )
+			'error' => esc_html__( 'No file provided.', 'bnm-blocks' )
 		);
 
 		// Handle demo file uploads.
@@ -398,11 +398,11 @@ class Helpers {
 			// Add this error to log file.
 			$log_added = self::append_to_file(
 				sprintf( /* translators: %s - the error message. */
-					__( 'Content file was not uploaded. Error: %s', 'one-click-demo-import' ),
+					__( 'Content file was not uploaded. Error: %s', 'bnm-blocks' ),
 					$content_file_info['error']
 				),
 				$log_file_path,
-				esc_html__( 'Upload files' , 'one-click-demo-import' )
+				esc_html__( 'Upload files' , 'bnm-blocks' )
 			);
 		}
 
@@ -415,11 +415,11 @@ class Helpers {
 			// Add this error to log file.
 			$log_added = self::append_to_file(
 				sprintf( /* translators: %s - the error message. */
-					__( 'Widget file was not uploaded. Error: %s', 'one-click-demo-import' ),
+					__( 'Widget file was not uploaded. Error: %s', 'bnm-blocks' ),
 					$widget_file_info['error']
 				),
 				$log_file_path,
-				esc_html__( 'Upload files' , 'one-click-demo-import' )
+				esc_html__( 'Upload files' , 'bnm-blocks' )
 			);
 		}
 
@@ -432,11 +432,11 @@ class Helpers {
 			// Add this error to log file.
 			$log_added = self::append_to_file(
 				sprintf( /* translators: %s - the error message. */
-					__( 'Customizer file was not uploaded. Error: %s', 'one-click-demo-import' ),
+					__( 'Customizer file was not uploaded. Error: %s', 'bnm-blocks' ),
 					$customizer_file_info['error']
 				),
 				$log_file_path,
-				esc_html__( 'Upload files' , 'one-click-demo-import' )
+				esc_html__( 'Upload files' , 'bnm-blocks' )
 			);
 		}
 
@@ -445,9 +445,9 @@ class Helpers {
 			if ( isset( $_POST['redux_option_name'] ) && empty( $_POST['redux_option_name'] ) ) {
 				// Write error to log file and send an AJAX response with the error.
 				self::log_error_and_send_ajax_response(
-					esc_html__( 'Missing Redux option name! Please also enter the Redux option name!', 'one-click-demo-import' ),
+					esc_html__( 'Missing Redux option name! Please also enter the Redux option name!', 'bnm-blocks' ),
 					$log_file_path,
-					esc_html__( 'Upload files', 'one-click-demo-import' )
+					esc_html__( 'Upload files', 'bnm-blocks' )
 				);
 			}
 
@@ -463,19 +463,19 @@ class Helpers {
 			// Add this error to log file.
 			$log_added = self::append_to_file(
 				sprintf( /* translators: %s - the error message. */
-					__( 'Redux file was not uploaded. Error: %s', 'one-click-demo-import' ),
+					__( 'Redux file was not uploaded. Error: %s', 'bnm-blocks' ),
 					$redux_file_info['error']
 				),
 				$log_file_path,
-				esc_html__( 'Upload files' , 'one-click-demo-import' )
+				esc_html__( 'Upload files' , 'bnm-blocks' )
 			);
 		}
 
 		// Add this message to log file.
 		$log_added = self::append_to_file(
-			__( 'The import files were successfully uploaded!', 'one-click-demo-import' ) . self::import_file_info( $selected_import_files ),
+			__( 'The import files were successfully uploaded!', 'bnm-blocks' ) . self::import_file_info( $selected_import_files ),
 			$log_file_path,
-			esc_html__( 'Upload files' , 'one-click-demo-import' )
+			esc_html__( 'Upload files' , 'bnm-blocks' )
 		);
 
 		// Return array with paths of uploaded files.
@@ -498,17 +498,17 @@ class Helpers {
 
 		return PHP_EOL .
 		sprintf( /* translators: %s - the max execution time. */
-			__( 'Initial max execution time = %s', 'one-click-demo-import' ),
+			__( 'Initial max execution time = %s', 'bnm-blocks' ),
 			ini_get( 'max_execution_time' )
 		) . PHP_EOL .
 		sprintf( /* translators: %1$s - new line break, %2$s - the site URL, %3$s - the file path for content import, %4$s - the file path for widgets import, %5$s - the file path for widgets import, %6$s - the file path for redux import. */
-			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s', 'one-click-demo-import' ),
+			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s', 'bnm-blocks' ),
 			PHP_EOL,
 			get_site_url(),
-			empty( $selected_import_files['content'] ) ? esc_html__( 'not defined!', 'one-click-demo-import' ) : $selected_import_files['content'],
-			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'one-click-demo-import' ) : $selected_import_files['widgets'],
-			empty( $selected_import_files['customizer'] ) ? esc_html__( 'not defined!', 'one-click-demo-import' ) : $selected_import_files['customizer'],
-			empty( $redux_file_string ) ? esc_html__( 'not defined!', 'one-click-demo-import' ) : $redux_file_string
+			empty( $selected_import_files['content'] ) ? esc_html__( 'not defined!', 'bnm-blocks' ) : $selected_import_files['content'],
+			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'bnm-blocks' ) : $selected_import_files['widgets'],
+			empty( $selected_import_files['customizer'] ) ? esc_html__( 'not defined!', 'bnm-blocks' ) : $selected_import_files['customizer'],
+			empty( $redux_file_string ) ? esc_html__( 'not defined!', 'bnm-blocks' ) : $redux_file_string
 		);
 	}
 

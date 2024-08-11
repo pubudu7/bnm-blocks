@@ -4,10 +4,8 @@
  */
 
 $predefined_demos = $this->import_files;
-
-echo '<pre>';
-//var_dump($predefined_demos);
-echo '</pre>';
+$pro_url = $this->pro_url;
+$license_active = $this->license_active;
 
 ?>
 
@@ -23,30 +21,34 @@ echo '</pre>';
 
                 $preview_img_url = $demo[ 'import_preview_image_url' ]; 
                 $demo_preview_url = $demo[ 'preview_url' ];
-                $theme_plan = $demo[ 'plan' ];
+                $plan = $demo[ 'plan' ];
 
                 ?>
                 
                 <div class="bnmbti-view-demo-card">
 
                     <?php 
-                        if ( 'pro' === $theme_plan ) {
+                        if ( 'pro' === $plan ) {
                             echo '<div class="bnmbti-pro-label">'. esc_html( 'PRO', 'bnm-blocks' ) .'</div>';
                         }
                     ?>
 
                     <div class="bnmbti-demo-img">
-                        <a href="<?php echo esc_url( $demo_preview_url ); ?>" target="_blank">
-                            <img width="1200" height="900" src="<?php echo esc_url( $preview_img_url ); ?>">
-                        </a>
+                        <img width="1200" height="900" src="<?php echo esc_url( $preview_img_url ); ?>">
                     </div>
                     <div class="bnmbti-demo-details">
                         <div class="bnmbti-demo-name">
                             <?php echo esc_html( $demo['import_file_name'] ); ?>
                         </div>
                         <div class="bnmbti-demo-action">
-                            <a href="<?php echo esc_url( $demo_preview_url ); ?>" class="bnmbti-demo-preview-btn button" target="_blank"><?php esc_html_e( 'Preview Demo', 'bnm-blocks' ); ?></a>
-                            <a href="<?php echo esc_url( $this->get_demo_settings_url( array( 'step' => 'import', 'import' => esc_attr( $index ) ) ) ); ?>" class="bnmbti-import-demo-data button button-primary"><?php esc_html_e( 'Import Demo', 'bnm-blocks' ); ?></a>
+                            <a href="<?php echo esc_url( $demo_preview_url ); ?>" class="bnmbti-demo-preview-btn button" target="_blank"><?php esc_html_e( 'Preview', 'bnm-blocks' ); ?></a>
+                            
+                            <?php if ( 'pro' === $plan && ! $license_active ) { ?>
+                                <a href="<?php echo esc_url( $pro_url ); ?>" class="bnmbti-import-demo-data button button-primary" target="_blank"><?php esc_html_e( 'Buy Pro', 'bnm-blocks' ); ?></a>
+                            <?php } else { ?>
+                                <a href="<?php echo esc_url( $this->get_demo_settings_url( array( 'step' => 'import', 'import' => esc_attr( $index ) ) ) ); ?>" class="bnmbti-import-demo-data button button-primary"><?php esc_html_e( 'Import Demo', 'bnm-blocks' ); ?></a>
+                            <?php } ?>
+                        
                         </div>
                     </div>
 

@@ -21,6 +21,7 @@ define( 'BNMBT_URL', plugins_url( '/', __FILE__ ) );
 define( 'BNMBT__PLUGIN_FILE', __FILE__ );
 define( 'BNMBT__BLOCKS_DIRECTORY', 'build/' );
 define( 'BNMBT__ADMIN_DIRECTORY', 'admin/' );
+define( 'BNMBT__ADMIN_DIRECTORY_URL', plugins_url( BNMBT__ADMIN_DIRECTORY, BNMBT__PLUGIN_FILE ) );
 define( 'BNMBT__PLUGIN_DIR', plugin_dir_path( BNMBT__PLUGIN_FILE ) );
 define( 'BNMBT__VERSION', '1.0.3' );
 
