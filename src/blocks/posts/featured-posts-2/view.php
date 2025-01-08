@@ -209,7 +209,7 @@ function bnmbt_featured_posts_block_2_render_callback( $attributes ) {
 	$css = new Post_Block_1_CSS();
 	$styles = $css->render_css( $attributes );
 
-	$classes = array( 'wpbnmfpb2' );
+	$classes = array( 'wpbnmfpb2', 'bnmbcs' );
 
 	if ( $attributes['categoryBGColor'] || $attributes['categoryBGHoverColor'] || ! empty($attributes['categoryPadding']) ) {
 		$classes[] = 'bnm-box-cat';

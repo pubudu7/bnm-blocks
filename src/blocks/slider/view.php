@@ -152,7 +152,7 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 
 	$slider_block = ob_get_clean();
 
-	$classes = array( 'wpbnmposw' );
+	$classes = array( 'wpbnmposw', 'bnmbcs' );
 
 	if ( $attributes['categoryBGColor'] || $attributes['categoryBGHoverColor'] || ! empty($attributes['categoryPadding']) ) {
 		$classes[] = 'bnm-box-cat';

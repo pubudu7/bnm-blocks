@@ -19,8 +19,8 @@ if ( $selected_demo_arr ) {
         <div class="bnmbti-option-form">
             <p>
                 <input type="checkbox" id="bnmbti-import-demo-data" name="bnmbti-import-demo-data" checked></input>
-                <label class="bnmbti-label" for="bnmbti-import-demo-data">Import Demo Content</label>
-                <span class="bnmbti-field-description">If you already have content on your website you may not want to import demo content. Mark this checkbox if you want to import demo posts, pages and menus. </span>
+                <label class="bnmbti-label" for="bnmbti-import-demo-data"><?php esc_html_e( 'Import Demo Content', 'bnm-blocks' ); ?></label>
+                <span class="bnmbti-field-description"><?php esc_html_e( 'If you already have content on your website you may not want to import demo content. Mark this checkbox if you want to import demo posts, pages and menus.', 'bnm-blocks' ); ?> </span>
             </p>
             <a class="js-bnmbti-import-demo button button-primary button-hero">Import</a>
         </div>

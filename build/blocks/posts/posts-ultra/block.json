@@ -4,7 +4,6 @@
   "name": "bnm-blocks/posts-ultra",
   "title": "Posts Ultra",
   "category": "bnm-blocks",
-  "icon": "smiley",
   "description": "Posts Block that can be used to display posts in different layouts.",
   "supports": {
     "html": false

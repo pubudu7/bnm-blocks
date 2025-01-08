@@ -2,6 +2,9 @@
 namespace ThemezHut\DemoImporter;
 /**
  * Helper functions for demo importer.
+ * 
+ * Code is from the One Click Demo Import Plugin.
+ * @see https://wordpress.org/plugins/one-click-demo-import/
  */
 
  if ( ! defined( 'ABSPATH' ) ) {
@@ -570,7 +573,6 @@ class Helpers {
 	/**
 	 * Get the failed attachment imports.
 	 *
-	 * @since 3.2.0
 	 *
 	 * @return mixed
 	 */
@@ -582,7 +584,6 @@ class Helpers {
 	/**
 	 * Set the failed attachment imports.
 	 *
-	 * @since 3.2.0
 	 *
 	 * @param string $attachment_url The attachment URL that was not imported.
 	 *

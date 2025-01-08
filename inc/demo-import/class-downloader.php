@@ -1,10 +1,15 @@
 <?php
-namespace ThemezHut\DemoImporter;
+
 /**
  * Class for downloading a file from a given URL.
  *
+ * Code is from the One Click Demo Import Plugin.
+ * @see https://wordpress.org/plugins/one-click-demo-import/
+ * 
  * @package bnm-blocks
  */
+
+namespace ThemezHut\DemoImporter;
 
  if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

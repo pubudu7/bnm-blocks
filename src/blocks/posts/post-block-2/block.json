@@ -4,7 +4,6 @@
 	"name": "bnm-blocks/post-block-2",
 	"title": "Posts Block: #2",
 	"category": "bnm-blocks",
-	"icon": "smiley",
 	"description": "Posts block style #2.",
 	"supports": {
 		"html": false

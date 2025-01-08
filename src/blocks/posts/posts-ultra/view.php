@@ -157,7 +157,7 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 	$css = new Post_Block_SP_CSS();
 	$styles = $css->render_css( $attributes );
 
-	$classes = array( 'wpbnmspp' );
+	$classes = array( 'wpbnmspp', 'bnmbcs' );
 
 	if ( $attributes['categoryBGColor'] || $attributes['categoryBGHoverColor'] || ! empty($attributes['categoryPadding']) ) {
 		$classes[] = 'bnm-box-cat';

@@ -4,7 +4,6 @@
 	"name": "bnm-blocks/posts-slider",
 	"title": "Posts Slider",
 	"category": "bnm-blocks",
-	"icon": "smiley",
 	"description": "Displays posts in a image slider.",
 	"supports": {
 		"html": false

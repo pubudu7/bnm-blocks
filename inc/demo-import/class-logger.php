@@ -1,7 +1,9 @@
 <?php
 /**
- * Logger class used in the One Click Demo Import plugin
+ * Logger class.
  *
+ * Code is from the One Click Demo Import Plugin.
+ * @see https://wordpress.org/plugins/one-click-demo-import/
  */
 
 namespace ThemezHut\DemoImporter;

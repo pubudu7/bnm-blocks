@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * Main Demo Import Functionality.
+ * 
+ * Code is from the One Click Demo Import Plugin.
+ * @see https://wordpress.org/plugins/one-click-demo-import/
+ */
+
 namespace ThemezHut\DemoImporter;
 
 use WP_Error;
@@ -7,9 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-/**
- * Main Demo Import Functionality.
- */
+
 class DemoImporter {
 
 	/**
@@ -538,8 +544,9 @@ class DemoImporter {
 		$import_actions->register_hooks();
 
 		// Importer options array.
+		// Turn on/off featured images.
 		$importer_options = apply_filters( 'bnmbt_importer_options', array(
-			'fetch_attachments' => false,
+			'fetch_attachments' => true,
 		) );
 
 		// Logger options for the logger used in the importer.
@@ -645,8 +652,6 @@ class DemoImporter {
 	 *
 	 * This will skip the current attachment import.
 	 *
-	 * @since 3.2.0
-	 *
 	 * @param array $data Post data to be imported.
 	 *
 	 * @return array
@@ -674,8 +679,6 @@ class DemoImporter {
 	/**
 	 * Save the failed attachment import.
 	 *
-	 * @since 3.2.0
-	 *
 	 * @param WP_Error $post_id Error object.
 	 * @param array    $data Raw data imported for the post.
 	 * @param array    $meta Raw meta data, already processed.
@@ -694,8 +697,6 @@ class DemoImporter {
 
 	/**
 	 * Save the information needed to process the navigation block.
-	 *
-	 * @since 3.2.0
 	 *
 	 * @param int   $post_id     The new post ID.
 	 * @param int   $original_id The original post ID.
@@ -753,7 +754,6 @@ class DemoImporter {
 	 * We did this by looping through all the imported posts with the WP Navigation block
 	 * and replacing the original menu ID with the new menu ID.
 	 *
-	 * @since 3.2.0
 	 */
 	public function fix_imported_wp_navigation() {
 
@@ -804,7 +804,6 @@ class DemoImporter {
 	/**
 	 * Get the import buttons HTML for the successful import page.
 	 *
-	 * @since 3.2.0
 	 *
 	 * @return string
 	 */
@@ -813,7 +812,6 @@ class DemoImporter {
 		/**
 		 * Filter the buttons that are displayed on the successful import page.
 		 *
-		 * @since 3.2.0
 		 *
 		 * @param array $buttons {
 		 *     Array of buttons.

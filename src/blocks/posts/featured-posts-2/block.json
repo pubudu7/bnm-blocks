@@ -4,7 +4,6 @@
 	"name": "bnm-blocks/featured-posts-2",
 	"title": "Featured Posts: #2",
 	"category": "bnm-blocks",
-	"icon": "smiley",
 	"description": "Featured Posts Block style #2.",
 	"supports": {
 		"html": false

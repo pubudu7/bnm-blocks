@@ -1,17 +1,16 @@
-=== BNM Blocks ===
+=== BNM Blocks - Post Blocks and Tools for Blogs, News, and Magazine Websites ===
 Contributors:      pubudu-malalasekara
 Tags:              page builder, Gutenberg blocks, WordPress blocks, gutenberg, blocks
-Tested up to:      6.5
-Stable tag:        1.0.3
+Tested up to:      6.7
+Stable tag:        1.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-A collection of WordPress Gutenberg blocks for Blogs, News and Magazine publishers.
+A Collection of Post Blocks and tools for Blogs, Newspapers and Magazine websites.
 
 == Description ==
 
-A collection of blocks developed for WordPress Gutenberg editor. All of these blocks are specially for all kinds of publishing websites like
-Blogs, Newspapers and Magazines. Organize and display your posts on your frontpage using BNM blocks. Currently there are six blocks available.  
+A collection of blocks developed for WordPress Gutenberg editor. All of these blocks are specially for all kinds of publishing websites like Blogs, Newspapers and Magazines. Organize and display your posts on your frontpage using BNM blocks. Currently there are six blocks available.  
 
 == Installation ==
 
@@ -26,6 +25,10 @@ Blogs, Newspapers and Magazines. Organize and display your posts on your frontpa
 == Screenshots ==
 
 == Changelog ==
+
+= 1.1.0 =
+* Added demo import functionality.
+* Renamed the plugin from "BNM Blocks" to "BNM Blocks - Post Blocks and Tools for Blogs, News, and Magazine Websites".
 
 = 1.0.3 =
 * Changed css folder.

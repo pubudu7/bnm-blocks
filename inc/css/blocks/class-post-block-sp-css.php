@@ -18,187 +18,187 @@ class Post_Block_SP_CSS {
         $utility->generate_styles_array(
             array(
                 array(
-                    'property'  =>  '--title-font-size',
+                    'property'  =>  '--bnm-title-font-size',
                     'value'     =>  'titleFontSize',
                     'type'      =>  'font-size'
                 ),
                 array(
-                    'property'  =>  '--title-line-height',
+                    'property'  =>  '--bnm-title-line-height',
                     'value'     =>  'titleLineHeight',
                 ),
                 array(
-                    'property'  =>  '--title-letter-spacing',
+                    'property'  =>  '--bnm-title-letter-spacing',
                     'value'     =>  'titleLetterSpacing',
                 ),
                 array(
-                    'property'  =>  '--title-padding',
+                    'property'  =>  '--bnm-title-padding',
                     'value'     =>  'titlePadding',
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--title-margin',
+                    'property'  =>  '--bnm-title-margin',
                     'value'     =>  'titleMargin',
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--title-color',
+                    'property'  =>  '--bnm-title-color',
                     'value'     =>  'titleColor',
                 ),
                 array(
-                    'property'  =>  '--title-hover-color',
+                    'property'  =>  '--bnm-title-hover-color',
                     'value'     =>  'titleHoverColor',
                 ),
                 array(
-                    'property'  =>  '--category-font-size',
+                    'property'  =>  '--bnm-category-font-size',
                     'value'     =>  'categoryFontSize',
                     'type'      =>  'font-size',
                 ),
                 array(
-                    'property'  =>  '--category-line-height',
+                    'property'  =>  '--bnm-category-line-height',
                     'value'     =>  'categoryLineHeight',
                 ),
                 array(
-                    'property'  =>  '--category-letter-spacing',
+                    'property'  =>  '--bnm-category-letter-spacing',
                     'value'     =>  'categoryLetterSpacing',
                 ),
                 array(
-                    'property'  =>  '--category-color',
+                    'property'  =>  '--bnm-category-color',
                     'value'     =>  'categoryColor',
                 ),
                 array(
-                    'property'  =>  '--category-hover-color',
+                    'property'  =>  '--bnm-category-hover-color',
                     'value'     =>  'categoryHoverColor',
                 ),
                 array(
-                    'property'  =>  '--category-bg-color',
+                    'property'  =>  '--bnm-category-bg-color',
                     'value'     =>  'categoryBGColor',
                 ),
                 array(
-                    'property'  =>  '--category-bg-hover-color',
+                    'property'  =>  '--bnm-category-bg-hover-color',
                     'value'     =>  'categoryBGHoverColor',
                 ),
                 array(
-                    'property'  =>  '--category-padding',
+                    'property'  =>  '--bnm-category-padding',
                     'value'     =>  'categoryPadding',
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--category-margin',
+                    'property'  =>  '--bnm-category-margin',
                     'value'     =>  'categoryMargin',
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--meta-font-size',
+                    'property'  =>  '--bnm-meta-font-size',
                     'value'     =>  'metaFontSize',
                     'type'      =>  'font-size'
                 ),
                 array(
-                    'property'  =>  '--meta-line-height',
+                    'property'  =>  '--bnm-meta-line-height',
                     'value'     =>  'metaLineHeight',
                 ),
                 array(
-                    'property'  =>  '--meta-letter-spacing',
+                    'property'  =>  '--bnm-meta-letter-spacing',
                     'value'     =>  'metaLetterSpacing',
                 ),
                 array(
-                    'property'  =>  '--meta-spacing',
+                    'property'  =>  '--bnm-meta-spacing',
                     'value'     =>  'metaSpacing',
                 ),
                 array(
-                    'property'  =>  '--meta-color',
+                    'property'  =>  '--bnm-meta-color',
                     'value'     =>  'metaColor',
                 ),
                 array(
-                    'property'  =>  '--meta-hover-color',
+                    'property'  =>  '--bnm-meta-hover-color',
                     'value'     =>  'metaHoverColor',
                 ),
                 array(
-                    'property'  =>  '--meta-padding',
+                    'property'  =>  '--bnm-meta-padding',
                     'value'     =>  'metaPadding',
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--meta-margin',
+                    'property'  =>  '--bnm-meta-margin',
                     'value'     =>  'metaMargin',
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--excerpt-font-size',
+                    'property'  =>  '--bnm-excerpt-font-size',
                     'value'     =>  'excerptFontSize',
                     'type'      =>  'font-size'
                 ),
                 array(
-                    'property'  =>  '--excerpt-line-height',
+                    'property'  =>  '--bnm-excerpt-line-height',
                     'value'     =>  'excerptLineHeight',
                 ),
                 array(
-                    'property'  =>  '--excerpt-letter-spacing',
+                    'property'  =>  '--bnm-excerpt-letter-spacing',
                     'value'     =>  'excerptLetterSpacing',
                 ),
                 array(
-                    'property'  =>  '--excerpt-color',
+                    'property'  =>  '--bnm-excerpt-color',
                     'value'     =>  'excerptColor',
                 ),
                 array(
-                    'property'  =>  '--excerpt-padding',
+                    'property'  =>  '--bnm-excerpt-padding',
                     'value'     =>  'excerptPadding',
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--excerpt-margin',
+                    'property'  =>  '--bnm-excerpt-margin',
                     'value'     =>  'excerptMargin',
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--col-gap',
+                    'property'  =>  '--bnm-col-gap',
                     'value'     =>  'colGap',
                 ),
                 array(
-                    'property'  =>  '--row-gap',
+                    'property'  =>  '--bnm-row-gap',
                     'value'     =>  'rowGap',
                 ),
                 array(
-                    'property'  =>  '--image-width',
+                    'property'  =>  '--bnm-image-width',
                     'value'     =>  'featuredImageWidth',
                 ),
                 array(
-                    'property'  =>  '--content-width',
+                    'property'  =>  '--bnm-content-width',
                     'value'     =>  'entryContentWidth',
                 ),
                 array(
-                    'property'  =>  '--image-margin',
+                    'property'  =>  '--bnm-image-margin',
                     'value'     =>  'featuredImageMargin',
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--header-font-size',
+                    'property'  =>  '--bnm-header-font-size',
                     'value'     =>  'headerFontSize',
                     'type'      =>  'font-size'
                 ),
                 array(
-                    'property'  =>  '--header-line-height',
+                    'property'  =>  '--bnm-header-line-height',
                     'value'     =>  'headerLineHeight',
                 ),
                 array(
-                    'property'  =>  '--header-letter-spacing',
+                    'property'  =>  '--bnm-header-letter-spacing',
                     'value'     =>  'headerLetterSpacing',
                 ),
                 array(
-                    'property'  =>  '--header-padding',
+                    'property'  =>  '--bnm-header-padding',
                     'value'     =>  'headerPadding',
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--header-margin',
+                    'property'  =>  '--bnm-header-margin',
                     'value'     =>  'headerMargin',
                     'type'      =>  'box-control',
                 ),
                 array(
-                    'property'  =>  '--header-color',
+                    'property'  =>  '--bnm-header-color',
                     'value'     =>  'headerColor',
                 ),
                 array(
-                    'property'  =>  '--header-hover-color',
+                    'property'  =>  '--bnm-header-hover-color',
                     'value'     =>  'headerHoverColor',
                 ),
             )

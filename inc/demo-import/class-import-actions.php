@@ -1,8 +1,9 @@
 <?php
 /**
- * Class for the import actions used in the One Click Demo Import plugin.
  * Register default WP actions for Demo Importer.
- *
+ * 
+ * Code is from the One Click Demo Import Plugin.
+ * @see https://wordpress.org/plugins/one-click-demo-import/
  */
 
 namespace ThemezHut\DemoImporter;

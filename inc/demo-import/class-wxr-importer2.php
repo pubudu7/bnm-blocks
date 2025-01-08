@@ -1,6 +1,10 @@
 <?php
 /**
- * WXR importer class used in the One Click Demo Import plugin.
+ * WXR importer class.
+ * 
+ * Code is from the One Click Demo Import Plugin.
+ * @see https://wordpress.org/plugins/one-click-demo-import/
+ * 
  * Needed to extend the WXR_Importer class to get/set the importer protected variables,
  * for use in the multiple AJAX calls.
  */

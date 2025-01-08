@@ -1,7 +1,10 @@
 <?php
 /**
- * Class for declaring the content importer used in the One Click Demo Import plugin
- *
+ * Class for declaring the content importer.
+ * 
+ * Code is from the One Click Demo Import Plugin.
+ * @see https://wordpress.org/plugins/one-click-demo-import/
+ * 
  * @package BNM_Blocks/Importer
  */
 
