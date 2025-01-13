@@ -70,7 +70,7 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 				<article class="<?php echo esc_attr( $post_classes ); ?>" style="<?php echo esc_attr( $article_styles ); ?>">
 					<?php if ( $has_post_thumbnail ) : ?>
 						<figure class="post-thumbnail">
-							<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+							<a href="<?php the_permalink(); ?>">
 								<?php the_post_thumbnail( $attributes['featuredImageSizeSlug'] ); ?>
 							</a>
 						</figure>

@@ -26,6 +26,10 @@ A collection of blocks developed for WordPress Gutenberg editor. All of these bl
 
 == Changelog ==
 
+= 1.1.1 =
+* Few CSS fixes.
+* Removed tab-index from post thumbnails.
+
 = 1.1.0 =
 * Added demo import functionality.
 * Renamed the plugin from "BNM Blocks" to "BNM Blocks - Post Blocks and Tools for Blogs, News, and Magazine Websites".

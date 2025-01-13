@@ -56,7 +56,7 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 					<article class="bnm-pb2-large">
 						<?php if ( has_post_thumbnail() ) : ?>
 							<figure class="post-thumbnail">
-								<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+								<a href="<?php the_permalink(); ?>">
 									<?php the_post_thumbnail( 'bnm-featured' ); ?>
 								</a>
 							</figure>
@@ -119,7 +119,7 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 					<article class="bnm-pb2-small">
 						<?php if ( has_post_thumbnail() ) : ?>
 							<figure class="post-thumbnail">
-								<a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+								<a href="<?php the_permalink(); ?>">
 									<?php the_post_thumbnail( 'bnm-featured-thumb' ); ?>
 								</a>
 							</figure>
