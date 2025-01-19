@@ -5,7 +5,7 @@
 
 $predefined_demos = $this->import_files;
 $pro_url = $this->pro_url;
-$license_active = $this->license_active;
+//$license_active = $this->license_active;
 
 ?>
 
@@ -21,7 +21,8 @@ $license_active = $this->license_active;
 
                 $preview_img_url = $demo[ 'import_preview_image_url' ]; 
                 $demo_preview_url = $demo[ 'preview_url' ];
-                $plan = $demo[ 'plan' ];
+                $plan = isset( $demo[ 'plan' ] ) ? $demo[ 'plan' ] : '';
+                $license_active = isset( $demo[ 'license_active' ] ) ? $demo[ 'license_active' ] : false;
 
                 ?>
                 

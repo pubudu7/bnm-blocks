@@ -25,15 +25,16 @@ class Main {
      * Register our custom block categories.
      */
     public static function register_block_categories( $categories, $block_editor_context ) {
-        return array_merge(
-            array(
-                array(
-                    'slug'  => 'bnm-blocks',
-                    'title' => __( 'BNM', 'bnm-blocks' )
-                )
-            ),
-            $categories
+        
+        $bnm_blocks_category = array(
+            'slug'  => 'bnm-blocks',
+            'title' => __( 'Magazine Companion', 'bnm-blocks' )
         );
+        
+        // Add this category at the end of the categories list.
+        $categories[] = $bnm_blocks_category;
+
+        return $categories;
     }
 
     /**

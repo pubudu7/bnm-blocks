@@ -1,8 +1,3 @@
-.bnmbti-demo-page {
-    padding: 50px 0;
-    
-}
-
 .bnmbti-before-import-section {
     display: flex;
     flex-wrap: wrap;
@@ -141,4 +136,9 @@
 .bnmbti-importing-content-imported--error, .bnmbti-importing-content-imported--warning, .bnmbti-imported-content-imported--error, .bnmbti-imported-content-imported--warning {
     width: 124px;
     height: 124px;
+}
+
+.bnmbti-demo-img img {
+    width: 100%;
+    height: auto;
 }

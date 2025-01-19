@@ -160,7 +160,7 @@ class DemoImporter {
 
         $this->demo_page_setup = Helpers::get_demo_page_setup_data();
 
-        register_importer( 'bnm-blocks-importer', 'BNM Blocks Importer', 'Importer by ThemezHut', apply_filters( 'bnmbt_demo_page_display_callback_function', array( $this, 'display_demos' ) ) );
+        register_importer( 'bnm-blocks-importer', 'Magazine Companion Importer', 'Importer by ThemezHut', apply_filters( 'bnmbt_demo_page_display_callback_function', array( $this, 'display_demos' ) ) );
         
     }
 
