@@ -605,41 +605,41 @@ button.swiper-pagination-bullet {
 
 .wpbnmposw {
 
-    --header-font-size: 21px;
-    --header-margin: 0 0 1em;
-	--title-color: #ffffff;
-	--title-hover-color: #dddddd;
-	--title-font-size: 26px;
-    --title-line-height: 1.2;
-	--title-letter-spacing: normal;
-    --title-margin: 0 0 10px 0;
-	--meta-color: #ffffff;
-	--meta-hover-color: #dddddd;
-    --meta-font-size: 14px;
-    --meta-spacing: 15px;
-    --meta-margin: 0 0 15px;
-	--category-color: #ffffff;
-	--category-hover-color: #dddddd;
-	--category-bg-color: #000000;
-	--category-bg-hover-color: #000000;
-    --category-font-size: 13px;
-    --category-bg-hover-color: #eee;
-    --category-margin: 0 10px 8px 0;
-	--category-padding: 2px 8px;
+    --bnm-header-font-size: 21px;
+    --bnm-header-margin: 0 0 1em;
+	--bnm-title-color: #ffffff;
+	--bnm-title-hover-color: #dddddd;
+	--bnm-title-font-size: 26px;
+    --bnm-title-line-height: 1.2;
+	--bnm-title-letter-spacing: normal;
+    --bnm-title-margin: 0 0 10px 0;
+	--bnm-meta-color: #ffffff;
+	--bnm-meta-hover-color: #dddddd;
+    --bnm-meta-font-size: 14px;
+    --bnm-meta-spacing: 15px;
+    --bnm-meta-margin: 0 0 15px;
+	--bnm-category-color: #ffffff;
+	--bnm-category-hover-color: #dddddd;
+	--bnm-category-bg-color: #000000;
+	--bnm-category-bg-hover-color: #000000;
+    --bnm-category-font-size: 13px;
+    --bnm-category-bg-hover-color: #eee;
+    --bnm-category-margin: 0 10px 8px 0;
+	--bnm-category-padding: 2px 8px;
 
     margin: 0 0 50px 0;
 
     .bnm-block-title-wrap {
         position: relative;
-        margin: var(--header-margin);
-        padding: var(--header-padding);
+        margin: var(--bnm-header-margin);
+        padding: var(--bnm-header-padding);
     }
 
     .article-section-title {
-        color: var(--header-color);
-		font-size: var(--header-font-size);
-        line-height: var(--header-line-height);
-        letter-spacing: var(--header-letter-spacing);
+        color: var(--bnm-header-color);
+		font-size: var(--bnm-header-font-size);
+        line-height: var(--bnm-header-line-height);
+        letter-spacing: var(--bnm-header-letter-spacing);
         border-bottom: 2px solid #000000;
         margin: 0;
         padding: 0;
@@ -647,20 +647,20 @@ button.swiper-pagination-bullet {
 
     article {
         .entry-title {
-            font-size: var(--title-font-size);
-            letter-spacing: var(--title-letter-spacing);
-            line-height: var(--title-line-height);
-            margin: var(--title-margin);
-            padding: var(--title-padding);
+            font-size: var(--bnm-title-font-size);
+            letter-spacing: var(--bnm-title-letter-spacing);
+            line-height: var(--bnm-title-line-height);
+            margin: var(--bnm-title-margin);
+            padding: var(--bnm-title-padding);
             
             a {
-                color: var(--title-color);
+                color: var(--bnm-title-color);
                 position: relative;
                 text-decoration: none;
                 z-index: 2;
     
                 &:hover {
-                    color: var(--title-hover-color);
+                    color: var(--bnm-title-hover-color);
                 }
             }
         }
@@ -669,44 +669,44 @@ button.swiper-pagination-bullet {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            color: var(--meta-color);
-            font-size: var(--meta-font-size);
-            padding: var(--meta-padding);
-            margin: var(--meta-margin);
-            letter-spacing: var(--meta-letter-spacing);
-            line-height: var(--meta-line-height);
+            color: var(--bnm-meta-color);
+            font-size: var(--bnm-meta-font-size);
+            padding: var(--bnm-meta-padding);
+            margin: var(--bnm-meta-margin);
+            letter-spacing: var(--bnm-meta-letter-spacing);
+            line-height: var(--bnm-meta-line-height);
             text-decoration: inherit;
 
             a {
-                color: var(--meta-color);
+                color: var(--bnm-meta-color);
                 text-decoration: inherit;
-                font-size: var(--meta-font-size);
-                line-height: var(--meta-line-height);
-                letter-spacing: var(--meta-letter-spacing);
+                font-size: var(--bnm-meta-font-size);
+                line-height: var(--bnm-meta-line-height);
+                letter-spacing: var(--bnm-meta-letter-spacing);
                 position: relative;
                 z-index: 2;
 
                 &:visited {
-                    color: var(--meta-color);
+                    color: var(--bnm-meta-color);
                 }
     
                 &:hover {
-                    color: var(--meta-hover-color);
+                    color: var(--bnm-meta-hover-color);
                 }
             }
         }
 
         .bnm-category-list {
 
-            font-size: var(--category-font-size);
+            font-size: var(--bnm-category-font-size);
 
             a {
-                color: var(--category-color);
-                margin: var(--category-margin);
+                color: var(--bnm-category-color);
+                margin: var(--bnm-category-margin);
                 text-decoration: none;
     
                 &:hover {
-                    color: var(--category-hover-color);
+                    color: var(--bnm-category-hover-color);
                 }
             }
         }
@@ -716,16 +716,16 @@ button.swiper-pagination-bullet {
     .posted-on,
     .bnm-comment-count {
         
-        margin-right: var(--meta-spacing);
+        margin-right: var(--bnm-meta-spacing);
 
         a {
             text-decoration: none;
             position: relative;
 			z-index: 2;
-            color: var(--meta-color);
+            color: var(--bnm-meta-color);
 
             &:hover {
-                color: var(--meta-hover-color);
+                color: var(--bnm-meta-hover-color);
             }
         }
     }
@@ -745,11 +745,11 @@ button.swiper-pagination-bullet {
 	&.bnm-box-cat {
 		article .bnm-category-list {
 			a {
-				background-color: var(--category-bg-color);
-				padding: var(--category-padding);
+				background-color: var(--bnm-category-bg-color);
+				padding: var(--bnm-category-padding);
 
 				&:hover {
-					background-color: var(--category-bg-hover-color);
+					background-color: var(--bnm-category-bg-hover-color);
 				}
 			}
 		}
@@ -777,7 +777,7 @@ button.swiper-pagination-bullet {
     .bnm-slider-content {
 		bottom: 0;
 		background: linear-gradient(0deg,rgba(0,0,0,0.7),rgba(0,0,0,0) 100%,rgba(0,0,0,0));
-		color: var(--meta-color);
+		color: var(--bnm-meta-color);
 		left: 0;
 		padding: 1.5em;
 		position: absolute;
