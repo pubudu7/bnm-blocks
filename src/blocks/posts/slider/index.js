@@ -21,7 +21,7 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 
-import { Slider1Icon as icon } from '../../shared/js/icons';
+import { Slider1Icon as icon } from '../../../shared/js/icons';
 
 /**
  * Every block starts by registering a new block type definition.

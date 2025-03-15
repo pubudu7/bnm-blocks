@@ -21,7 +21,7 @@ import { startCase, toLower } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { PanelColorSettings } from '@wordpress/block-editor';
 
-import TypographyControl from '../../components/typography'; 
+import TypographyControl from '../../../components/typography'; 
 
 export function SliderSettings( { attributes, setAttributes } ) {
 

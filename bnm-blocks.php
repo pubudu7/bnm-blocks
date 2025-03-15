@@ -37,7 +37,7 @@ require_once $inc_directory . 'css/blocks/class-post-slider-1-css.php';
 include_once $inc_directory . 'demo-import/bnmbt-demo-main.php';
 
 include_once $inc_directory . 'template-functions.php';
-include_once $src_directory . 'slider/view.php';
+include_once $src_directory . 'posts/slider/view.php';
 include_once $src_directory . 'posts/post-block-1/view.php';
 include_once $src_directory . 'posts/post-block-2/view.php';
 include_once $src_directory . 'posts/posts-ultra/view.php';

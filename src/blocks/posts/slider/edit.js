@@ -28,9 +28,9 @@ import {
  * Internal Dependencies.
  */
 import './editor.scss';
-import QueryControls from '../../components/query-controls';
-import createSwiper from './create-swiper';
-import { SliderSettings } from './slider-controls'; 
+import QueryControls from '../../../components/query-controls/index.js';
+import createSwiper from './create-swiper.js';
+import { SliderSettings } from './slider-controls.js'; 
 import {
 	PostTitle,
 	PostCategories,
@@ -38,15 +38,15 @@ import {
 	PostAuthorAvatar,
 	PostDateTime,
 	PostCommentCount,
-} from '../../components/meta/meta.js';
+} from '../../../components/meta/meta.js';
 import {
 	getFeaturedImageDetails,
-} from '../../components/meta/meta-helper.js';
+} from '../../../components/meta/meta-helper.js';
 import {
 	mightBeUnit,
 	boxValues,
 	hasValueOnBox
-} from '../../shared/js/utils.js';
+} from '../../../shared/js/utils.js';
 
 /**
  * Module Constants.
