@@ -172,11 +172,11 @@
     },
     "featuredImageSizeSlug": {
       "type": "string",
-      "default": "bnm-featured"
+      "default": ""
     },
     "featuredImageSizeSlugSmall": {
       "type": "string",
-      "default": "bnm-featured"
+      "default": ""
     },
     "addLinkToFeaturedImage": {
       "type": "boolean",

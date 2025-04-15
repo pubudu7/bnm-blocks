@@ -14,7 +14,7 @@
     --bnm-category-font-size: 13px;
     --bnm-category-padding: 2px 5px;
     --bnm-category-bg-hover-color: #eee;
-    --bnm-category-margin: 0 10px 5px 0;
+    --bnm-category-margin: 0;
     --bnm-excerpt-font-size: 16px;
     --bnm-excerpt-line-height: 1.5;
     --bnm-excerpt-font-size-small: 14px;
@@ -97,7 +97,7 @@
             font-size: var(--bnm-title-font-size-small); 
             line-height: var(--bnm-title-line-height-small);
             letter-spacing: var(--bnm-title-letter-spacing-small);
-            margin: 0 0 5px;
+            margin: 0 0 8px;
 
             a {
                 text-decoration: inherit;

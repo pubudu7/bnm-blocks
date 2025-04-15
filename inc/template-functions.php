@@ -19,11 +19,7 @@ function bnmbt_posted_by() {
 		'<span class="author vcard bnm-post-author"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
 
-	$markup = '<span class="byline">';
-		$markup .= $byline;
-	$markup .= '</span>';
-
-	echo wp_kses_post( $markup );
+	return '<span class="byline">' . $byline . '</span>';
 
 }
 
@@ -34,7 +30,7 @@ function bnmbt_author_avatar() {
 	
 	$author_email	= get_the_author_meta( 'user_email' );
 	$avatar_url		= get_avatar_url( $author_email );
-	echo '<span class="bnm-avatar"><img class="author-photo" alt="' . esc_attr( get_the_author() ) . '" src="' . esc_url( $avatar_url ) . '" /></span>';
+	return '<span class="bnm-avatar"><img class="author-photo" alt="' . esc_attr( get_the_author() ) . '" src="' . esc_url( $avatar_url ) . '" /></span>';
 
 }
 
@@ -44,10 +40,23 @@ function bnmbt_author_avatar() {
 function bnmbt_comments_link() {
 
 	if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-		echo '<span class="comments-link bnm-comment-count">';
-			comments_popup_link( '0', '1', '%' );
-		echo '</span>';
-	}
+
+		$num_comments = esc_attr( get_comments_number() );
+
+		if ( $num_comments == 0 ) {
+			$comments_txt = esc_html__( '0', 'bnm-blocks' );
+		} elseif ( $num_comments > 1 ) {
+			/* translators: %d: number of comments */
+			$comments_txt = sprintf( esc_html__( '%d', 'bnm-blocks' ), $num_comments );
+		} else {
+			$comments_txt = esc_html__( '1', 'bnm-blocks' );
+		}
+
+		return '<span class="comments-link bnm-comment-count"><a href="' . esc_url( get_comments_link() ).'">' . $comments_txt . '</a></span>';
+	}	
+
+	return '';
+
 }
 
 /**
@@ -66,35 +75,83 @@ function bnmbt_posted_on() {
 		esc_html( get_the_modified_date() )
 	);
 
-	printf(
-		'<span class="posted-on bnm-post-date"><a href="%1$s" rel="bookmark">%2$s</a></span>',
-		esc_url( get_permalink() ),
-		wp_kses( 
-			$time_string, 
-			array(
-				'time' => array(
-					'class' => array(),
-					'datetime' => array()
-				)
-			)
-		)
-	);
+	$posted_on = '<span class="posted-on bnm-post-date"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a></span>';
+
+	return $posted_on;
 }
 
 /**
  * Entry Meta
  */
-function bnmbt_entry_meta( $meta_array ) {
-	if ( in_array( 'avatar', $meta_array ) ) {
-		bnmbt_author_avatar();
+function bnmbt_entry_meta( $meta_array = array() ) {
+	// Allow overriding meta_array via filter
+	$meta_array = apply_filters( 'bnm_blocks_meta_order', $meta_array );
+
+	$meta_data_strings = array();
+
+	if ( in_array( 'avatar', $meta_array, true ) ) {
+		$meta_data_strings['avatar'] = bnmbt_author_avatar();
 	}
-	if ( in_array( 'author', $meta_array ) ) { 
-		bnmbt_posted_by(); 
+
+	if ( in_array( 'author', $meta_array, true ) ) {
+		$meta_data_strings['author'] = bnmbt_posted_by();
 	} 
-	if ( in_array( 'date', $meta_array ) ) { 
-		bnmbt_posted_on(); 
+
+	if ( in_array( 'date', $meta_array, true ) ) {
+		$meta_data_strings['date'] = bnmbt_posted_on();
 	} 
-	if ( in_array( 'comments', $meta_array ) ) { 
-		bnmbt_comments_link(); 
-	} 
+
+	if ( in_array( 'comments', $meta_array, true ) ) {
+		$meta_data_strings['comments'] = bnmbt_comments_link();
+	}
+
+	$meta_data_strings = apply_filters( 'bnm_blocks_meta_data_strings', $meta_data_strings );
+
+	$meta_data_separator = apply_filters( 'bnm_blocks_meta_data_separator', '' );
+
+	// Order output based on the original meta_array
+	$ordered_meta = array();
+	foreach ( $meta_array as $meta_item ) {
+		if ( isset( $meta_data_strings[ $meta_item ] ) ) {
+			$ordered_meta[] = $meta_data_strings[ $meta_item ];
+		}
+	}
+
+	echo implode( $meta_data_separator, $ordered_meta ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+}
+
+/**
+ * Displays cateogories list
+ */
+function bnm_blocks_categories_list() {
+	if ( 'post' === get_post_type() ) {
+
+		add_filter( 'the_category', 'bnm_blocks_custom_class_to_category', 10, 3 );
+		$categories_list = get_the_category_list();
+		remove_filter( 'the_category', 'bnm_blocks_custom_class_to_category', 10, 3 );
+
+		if ( $categories_list ) {
+			/* translators: 1: posted in label 2: list of categories. */
+			printf( 
+				'<span class="bnm-cat-links"><span class="screen-reader-text">%1$s</span>%2$s</span>', 
+				esc_html__( 'Posted in', 'bnm-blocks' ),
+				apply_filters( 'bnm_blocks_categories_list', $categories_list )
+			); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+	}
+
+}
+
+function bnm_blocks_custom_class_to_category( $thelist, $separator, $parents ) {
+    // Use regex to find and replace the category links with the added class
+    $thelist = preg_replace_callback(
+        '/<a href="([^"]+)"(.*?)>(.*?)<\/a>/',
+        function( $matches ) {
+			$category_id = get_cat_ID( $matches[3] );
+			$term        = get_term( $category_id );
+			return sprintf( '<a href="%s" class="cat-%d" rel="' . $term->taxonomy . '" >%s</a>', $matches[1], $category_id, $matches[3] );
+        },
+        $thelist
+    );
+    return $thelist;
 }

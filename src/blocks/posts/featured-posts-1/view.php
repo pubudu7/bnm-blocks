@@ -23,8 +23,8 @@ function bnmbt_featured_posts_block_1_render_callback( $attributes ) {
 
 	$article_query = new WP_Query( $post_query_args );
 
-	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : 'bnm-featured';
-	$featured_image_slug_small = ! empty( $attributes['featuredImageSizeSlugSmall'] ) ? $attributes['featuredImageSizeSlugSmall'] : 'bnm-featured';
+	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : '';
+	$featured_image_slug_small = ! empty( $attributes['featuredImageSizeSlugSmall'] ) ? $attributes['featuredImageSizeSlugSmall'] : '';
 
 	ob_start();
 
@@ -69,7 +69,7 @@ function bnmbt_featured_posts_block_1_render_callback( $attributes ) {
 
 							<?php if ( $attributes['showCategory'] ) { ?>
 								<div class="bnm-category-list">
-									<?php the_category( ' ' ); ?>
+									<?php bnm_blocks_categories_list(); ?>
 								</div>
 							<?php } ?>
 
@@ -138,7 +138,7 @@ function bnmbt_featured_posts_block_1_render_callback( $attributes ) {
 
 							<?php if ( $attributes['showCategorySmall'] ) { ?>
 								<div class="bnm-category-list">
-									<?php the_category( ' ' ); ?>
+									<?php bnm_blocks_categories_list(); ?>
 								</div>
 							<?php } ?>
 

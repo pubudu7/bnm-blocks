@@ -233,7 +233,7 @@
     },
     "showAvatar": {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     "showCommentCount": {
       "type": "boolean",

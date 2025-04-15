@@ -42,7 +42,7 @@ export default function QueryControls( {
                 label={ __( 'Number of items', 'bnm-blocks' ) }
                 value={ perPage }
                 onChange={ ( value ) => setQuery( { perPage: value } ) }
-                min={ 2 }
+                min={ 1 }
                 max={ 100 }
                 required
             />

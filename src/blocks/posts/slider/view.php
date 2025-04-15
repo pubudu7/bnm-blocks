@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function bnmbt_posts_slider_block_1_init() {
 
-	register_block_type( BNMBT__PLUGIN_DIR . 'build/blocks/slider', array(
+	register_block_type( BNMBT__PLUGIN_DIR . 'build/blocks/posts/slider', array(
 		'api_version'		=> 2,
 		'render_callback'	=> 'bnmbt_posts_slider_block_1_render_callback'
 	) );
@@ -35,7 +35,7 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 
 	$autoplay = isset( $attributes['autoplay'] ) ? $attributes['autoplay'] : false;
 	$delay    = isset( $attributes['delay'] ) ? absint( $attributes['delay'] ) : 5;
-	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : 'bnm-featured';
+	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : '';
 	$image_fit = ! empty( $attributes['imageFit'] ) ? $attributes['imageFit'] : 'cover';
 	$slide_image_class = "image-fit-{$image_fit}";
 
@@ -85,7 +85,7 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 							<div class="bnm-slider-content">
 								<?php if ( $attributes['showCategory'] ) : ?>
 									<div class="bnm-category-list">
-										<?php the_category( ' ' ); ?>
+										<?php bnm_blocks_categories_list(); ?>
 									</div>
 								<?php endif; ?>
 								

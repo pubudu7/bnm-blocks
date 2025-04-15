@@ -66,7 +66,7 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 
 							<?php if ( $attributes['showCategory'] ) { ?>
 								<div class="bnm-category-list">
-									<?php the_category( ' ' ); ?>
+									<?php bnm_blocks_categories_list(); ?>
 								</div>
 							<?php } ?>
 
@@ -127,7 +127,7 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 						<div class="entry-details">
 							<?php if ( $attributes['showCategorySmall'] ) { ?>
 								<div class="bnm-category-list">
-									<?php the_category( ' ' ); ?>
+									<?php bnm_blocks_categories_list(); ?>
 								</div>
 							<?php } ?>
 

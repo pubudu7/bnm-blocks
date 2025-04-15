@@ -52,3 +52,12 @@ img.bnm-fp-img {
     box-shadow: none;
     transition: transform .3s;
 }
+
+.bnm-category-list .bnm-cat-links .post-categories {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 8px;
+    padding: 0;
+    gap: 8px;
+}

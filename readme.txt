@@ -2,7 +2,7 @@
 Contributors:      pubudu-malalasekara
 Tags:              page builder, Gutenberg blocks, WordPress blocks, gutenberg, blocks
 Tested up to:      6.7
-Stable tag:        1.2.0
+Stable tag:        1.2.1
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,11 @@ A collection of blocks developed for WordPress Gutenberg editor. All of these bl
 == Screenshots ==
 
 == Changelog ==
+
+= 1.2.1 =
+* Added PHP classes auto loading for demo importer files.
+* Changed slider directory.
+* Changed default image sizes on blocks.
 
 = 1.2.0 =
 * Renamed the plugin from "BNM Blocks - Post Blocks and Tools for Blogs, News, and Magazine Websites" to "Magazine Companion".

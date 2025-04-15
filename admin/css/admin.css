@@ -1,3 +1,8 @@
+.bnmbti-demo-page img {
+    max-width: 100%;
+    height: auto;
+}
+
 .bnmbti-before-import-section {
     display: flex;
     flex-wrap: wrap;

@@ -89,7 +89,7 @@
 		},
 		"featuredImageSizeSlug": {
 			"type": "string",
-			"default": "bnm-featured"
+			"default": ""
 		},
 		"imageFit": {
 			"type": "string",

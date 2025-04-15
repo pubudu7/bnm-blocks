@@ -340,7 +340,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				<Toolbar controls={ blockControlsImages } />
 			</BlockControls>
 			<InspectorControls>
-				<PanelBody title={ __( 'Content Settings', 'bnm-blocks' ) } initialOpen={ true }>
+				<PanelBody title={ __( 'Content Settings', 'bnm-blocks' ) } initialOpen={ false }>
 					<QueryControls
 						attributes={ attributes }
 						setQuery={ updateQuery }

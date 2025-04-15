@@ -49,18 +49,19 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 				$post_classes = 'bnmsp-post';
 
 				$has_post_thumbnail = has_post_thumbnail();
+				$show_featured_image = $attributes[ 'showFeaturedImage' ];
 				
-				if ( $attributes[ 'showFeaturedImage' ] && $has_post_thumbnail ) {
+				if ( $show_featured_image && $has_post_thumbnail ) {
 					$post_classes .= ' post-has-image';
 				}
 
 				$article_styles = '';
 
-				if ( "behind" === $attributes[ 'imagePosition' ] && $attributes[ 'showFeaturedImage' ] && $has_post_thumbnail ) {
+				if ( "behind" === $attributes[ 'imagePosition' ] && $show_featured_image && $has_post_thumbnail ) {
 					$article_styles .= "min-height: ". $attributes[ 'imageMinHeight' ] ."vh;";
 				}
 
-				if ( "behind" === $attributes[ 'imagePosition' ] && $attributes[ 'showFeaturedImage' ] && $has_post_thumbnail ) {
+				if ( "behind" === $attributes[ 'imagePosition' ] && $show_featured_image && $has_post_thumbnail ) {
 					$padding_top = $attributes[ 'imageMinHeight' ] / 5;
 					$article_styles .= " padding-top: ". $padding_top ."vh;";
 				}
@@ -68,7 +69,7 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 				?>
 				
 				<article class="<?php echo esc_attr( $post_classes ); ?>" style="<?php echo esc_attr( $article_styles ); ?>">
-					<?php if ( $has_post_thumbnail ) : ?>
+					<?php if ( $show_featured_image && $has_post_thumbnail ) : ?>
 						<figure class="post-thumbnail">
 							<a href="<?php the_permalink(); ?>">
 								<?php the_post_thumbnail( $attributes['featuredImageSizeSlug'] ); ?>
@@ -80,7 +81,7 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 
 						<?php if ( $attributes['showCategory'] ) { ?>
 							<div class="bnm-category-list">
-								<?php the_category( ' ' ); ?>
+								<?php bnm_blocks_categories_list(); ?>
 							</div>
 						<?php } ?>
 

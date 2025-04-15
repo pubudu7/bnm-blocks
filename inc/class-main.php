@@ -142,9 +142,13 @@ class Main {
      */
     public static function get_excerpt_by_id( $post_id, $excerpt_length = 30 ) {
 
-        $post           = get_post( $post_id );
-        $text           = $post->post_excerpt;
-        $raw_excerpt    = $text;
+        $post = get_post( $post_id );
+
+        if ( ! $post ) {
+            return '';
+        }
+
+        $text = $post->post_excerpt;
 
         if ( empty( $text ) ) {
             $text = get_the_content( '', false, $post );
@@ -152,9 +156,16 @@ class Main {
             $text = excerpt_remove_blocks( $text );
         }
 
-        /** This filter is documented in wp-includes/post-template.php */
         $text = str_replace( ']]>', ']]&gt;', $text );
-        $text = wp_trim_words( $text, $excerpt_length );
+
+        // Filterable "more" text (usually ‘ …’)
+        $excerpt_more = apply_filters( 'excerpt_more', ' &hellip;' );
+
+        // Trim words
+        $text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
+
+        // Allow plugins/themes to filter final output
+        $text = apply_filters( 'the_excerpt', $text );
 
         return $text;
 

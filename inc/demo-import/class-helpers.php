@@ -613,13 +613,8 @@ class Helpers {
 		// Get all old widget ids.
 		$old_widgets_data = (array) get_option( '_bnmbt_sites_old_widgets_data', array() );
 
-		if ( class_exists( 'ThemezHut\DemoImporter\Resetter' ) ) {
-			Resetter::reset_widgets_data( $old_widgets_data );
-		} else {
-			//return or log error.
-			wp_send_json( esc_html__( 'Resetter class not found.', 'bnm-blocks' )  );
-		}
-		
+		Resetter::reset_widgets_data( $old_widgets_data );
+
 	}
 
 }

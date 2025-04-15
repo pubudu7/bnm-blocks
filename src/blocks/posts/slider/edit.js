@@ -280,7 +280,7 @@ export default function PostsSliderEdit( {
 
 	const inspectorControls = (
 		<InspectorControls>
-			<PanelBody title={ __( 'Content Settings', 'bnm-blocks' ) } initialOpen={ true }>
+			<PanelBody title={ __( 'Content Settings', 'bnm-blocks' ) } initialOpen={ false }>
 				<QueryControls
 					attributes={ attributes }
 					setQuery={ updateQuery }

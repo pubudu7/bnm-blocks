@@ -1,0 +1,9 @@
+{
+    "name": "themezhut/bnm-blocks",
+    "require": {},
+    "autoload": {
+        "classmap": [
+            "inc/demo-import"
+        ]
+    }
+}
