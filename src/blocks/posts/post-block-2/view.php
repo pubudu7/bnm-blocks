@@ -24,6 +24,9 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 
 	$article_query = new WP_Query( $post_query_args );
 
+	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : 'bnm-featured';
+	$featured_image_slug_small = ! empty( $attributes['featuredImageSizeSlugSmall'] ) ? $attributes['featuredImageSizeSlugSmall'] : 'bnm-featured-thumb';
+
 	ob_start();
 	?>
 	<div class="posts-block-2-container">
@@ -57,7 +60,7 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 						<?php if ( has_post_thumbnail() ) : ?>
 							<figure class="post-thumbnail">
 								<a href="<?php the_permalink(); ?>">
-									<?php the_post_thumbnail( 'bnm-featured' ); ?>
+									<?php the_post_thumbnail( $featured_image_slug ); ?>
 								</a>
 							</figure>
 						<?php endif; ?>
@@ -120,7 +123,7 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 						<?php if ( has_post_thumbnail() ) : ?>
 							<figure class="post-thumbnail">
 								<a href="<?php the_permalink(); ?>">
-									<?php the_post_thumbnail( 'bnm-featured-thumb' ); ?>
+									<?php the_post_thumbnail( $featured_image_slug_small ); ?>
 								</a>
 							</figure>
 						<?php endif; ?>

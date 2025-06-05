@@ -62,7 +62,7 @@ export const Layout = ({
                     return(
                         ( index === 0 || index === 1 ) && (
                             
-                            <article className="bnm-fp2-large">
+                            <article className="bnm-fp2-large" key={ post.id }>
                                 
                                 { imageSourceUrl && (
                                     <img 
@@ -145,7 +145,7 @@ export const Layout = ({
 
                     return(
                         ( index === 2 || index === 3 || index === 4 ) && (
-                            <article className="bnm-fp2-small">
+                            <article className="bnm-fp2-small" key={ post.id }>
                             
                                 { imageSourceUrl && (
                                     <img 

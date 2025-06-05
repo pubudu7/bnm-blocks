@@ -47,7 +47,7 @@ class Main {
             'bnm-blocks-assets-common',
             'themezHutGutenberg',
             array(
-                'imageSizes'    => function_exists( 'is_wpcom_vip' ) ? array( 'thumbnail', 'medium', 'medium_large', 'large' ) : get_intermediate_image_sizes(), // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_intermediate_image_sizes_get_intermediate_image_sizes
+                'imageSizes'    => function_exists( 'is_wpcom_vip' ) ? array( 'thumbnail', 'medium', 'medium_large', 'large' ) : self::get_image_sizes(), // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.get_intermediate_image_sizes_get_intermediate_image_sizes
             )
         );
 
@@ -61,6 +61,39 @@ class Main {
 		);
 
         wp_enqueue_style( 'bnm-blocks-common', BNMBT_URL . 'public/css/style.css', array(), BNMBT__VERSION );
+    }
+
+	public static function get_image_sizes() {
+        $image_sizes = wp_get_registered_image_subsizes();
+        $new_image_sizes = array();
+        foreach ($image_sizes as $image_size_handle => $size_data) {
+
+			// Image Size String
+			$image_width = $size_data['width'];
+			$image_height = $size_data['height'];
+			if ( $image_height >= 9999 ) {
+				$image_height = 'auto';
+			}
+            $image_size_string = $image_width . 'X' . $image_height;
+
+			// Image Size Name
+			if ( 'bnm-featured' === $image_size_handle ) {
+				$image_size_name = "Featured Medium";
+			} elseif ( 'bnm-featured-thumb' === $image_size_handle ) {
+				$image_size_name = "Featured Thumbnail";
+			} else {
+				$image_size_name = str_replace(['-', '_'], ' ', $image_size_handle);
+				$image_size_name = ucwords($image_size_name);
+			}
+
+			// Image Size Select Control Name
+			$image_size_option_name = $image_size_name . ' (' .  $image_size_string . ')';
+
+			// Add data array to the array.
+            $new_image_sizes[$image_size_handle] = $image_size_option_name;
+
+        }
+		return $new_image_sizes;
     }
 
     public static function enqueue_scripts() {

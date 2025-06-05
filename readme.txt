@@ -1,8 +1,8 @@
 === Magazine Companion ===
 Contributors:      pubudu-malalasekara
 Tags:              page builder, Gutenberg blocks, WordPress blocks, gutenberg, blocks
-Tested up to:      6.7
-Stable tag:        1.2.1
+Tested up to:      6.8
+Stable tag:        1.2.2
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,10 @@ A collection of blocks developed for WordPress Gutenberg editor. All of these bl
 == Screenshots ==
 
 == Changelog ==
+
+= 1.2.2 =
+* Fixed featured image size select not working in Post Block 2
+* Added key prop to articles on all blocks.
 
 = 1.2.1 =
 * Added PHP classes auto loading for demo importer files.

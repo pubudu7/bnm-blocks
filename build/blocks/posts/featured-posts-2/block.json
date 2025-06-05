@@ -6,7 +6,11 @@
   "category": "bnm-blocks",
   "description": "Featured Posts Block style #2.",
   "supports": {
-    "html": false
+    "html": false,
+    "color": {
+      "text": false,
+      "background": true
+    }
   },
   "textdomain": "bnm-blocks",
   "editorScript": "file:./index.js",

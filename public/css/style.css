@@ -29,11 +29,6 @@
 	cursor: pointer
 }
 
-.bnm-category-list {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 img.bnm-fp-img {
     position: absolute;
     top: 0;
@@ -53,11 +48,22 @@ img.bnm-fp-img {
     transition: transform .3s;
 }
 
-.bnm-category-list .bnm-cat-links .post-categories {
+.bnm-category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    font-size: 16px;
+}
+
+.bnm-category-list .post-categories {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    margin: 0 0 8px;
+    margin: 0 0 0.5em;
     padding: 0;
-    gap: 8px;
+    gap: 0.125em 0.5em;
+}
+
+.bnm-box-cat .bnm-category-list .post-categories {
+    gap: 0.5em;
 }

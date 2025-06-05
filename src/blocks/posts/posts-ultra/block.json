@@ -6,7 +6,11 @@
 	"category": "bnm-blocks",
 	"description": "Posts Block that can be used to display posts in different layouts.",
 	"supports": {
-		"html": false
+		"html": false,
+		"color": {
+			"text": false,
+			"background": true
+		}
 	},
 	"textdomain": "bnm-blocks",
 	"editorScript": "file:./index.js",

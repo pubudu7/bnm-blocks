@@ -75,7 +75,10 @@ export const PostCategories = ({ categoriesList, post }) => {
         for ( let j = 0; j < list.length; j++ ) {
             for ( let i = 0; i < cat.length; i++ ) {
                 if ( list[ j ].id === cat[ i ] ) {
-                    categoryNames.push( list[ j ].name );
+                    categoryNames.push({
+                        id: list[ j ].id, 
+                        name: list[ j ].name 
+                    });
                 }
             }
         }
@@ -83,13 +86,19 @@ export const PostCategories = ({ categoriesList, post }) => {
 
     return (
         <div className="bnm-category-list">
-            { categoryNames.map( ( category ) => {
-                return (
-                    <a href="#">
-                        { category }
-                    </a>
-                );
-            } ) }
+            <span className="bnm-cat-links">
+                <ul className="post-categories">
+                    { categoryNames.map( ( category ) => {
+                        return (
+                            <li key={ category.id }>
+                                <a href="#">
+                                    { category.name }
+                                </a>
+                            </li>
+                        );
+                    } ) }
+                </ul>
+            </span>
         </div>
     );
 };

@@ -234,7 +234,7 @@ export default function PostsSliderEdit( {
 
 	const blockProps = useBlockProps( {
 		className: classnames( 
-			'wpbnmposw',
+			'wpbnmposw', 'bnmbcs',
 			{
 				'hide-pagination': hidePagination,
 				'hide-next-prev-btns': hideNextPrevBtns,

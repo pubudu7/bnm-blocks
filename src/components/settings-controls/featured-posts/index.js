@@ -633,10 +633,10 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 								<SelectControl
 									label={ __( 'Image Size', 'bnm-blocks' ) }
 									value={ attributes.featuredImageSizeSlug }
-									options={ window.themezHutGutenberg.imageSizes.map( size => ({
-										label: startCase( toLower( size ) ),
-										value: size
-									}) ) }
+									options={ Object.entries(window.themezHutGutenberg.imageSizes).map(([value, label]) => ({
+										value,
+										label
+									})) }
 									onChange={ imageSize => setAttributes({ featuredImageSizeSlug: imageSize }) }
 								/> 
 							);
@@ -645,12 +645,12 @@ export default function BlockExtraSettings( { attributes, setAttributes } ) {
 								<SelectControl
 									label={ __( 'Image Size (Small)', 'bnm-blocks' ) }
 									value={ attributes.featuredImageSizeSlugSmall }
-									options={ window.themezHutGutenberg.imageSizes.map( size => ({
-										label: startCase( toLower( size ) ),
-										value: size
-									}) ) }
-									onChange={ imageSize => setAttributes( { featuredImageSizeSlugSmall: imageSize } ) }
-								/>										
+									options={ Object.entries(window.themezHutGutenberg.imageSizes).map(([value, label]) => ({
+										value,
+										label
+									})) }
+									onChange={ imageSize => setAttributes({ featuredImageSizeSlugSmall: imageSize }) }
+								/> 										
 							); 
 						}  
 					} }

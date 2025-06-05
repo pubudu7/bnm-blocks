@@ -6,7 +6,11 @@
 	"category": "bnm-blocks",
 	"description": "Displays posts in a image slider.",
 	"supports": {
-		"html": false
+		"html": false,
+		"color": {
+			"text": false,
+			"background": true
+		}
 	},
 	"textdomain": "bnm-blocks",
 	"editorScript": "file:./index.js",
