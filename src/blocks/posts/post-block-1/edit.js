@@ -267,7 +267,8 @@ export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps({
 		className: classnames( 'wpbnmpb1', 'bnmbcs', {
 			'bnm-box-cat': hasCategoryClass
-		})
+		}),
+		style: inlineStyles
 	});
 
 	if ( ! hasPosts ) {
@@ -293,7 +294,6 @@ export default function Edit( { attributes, setAttributes } ) {
 				categoriesList={ categoriesList }
 				authorsList={ authorsList }
 				blockProps={ blockProps }
-				inlineStyles={ inlineStyles }
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 			/>

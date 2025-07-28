@@ -232,17 +232,6 @@ export default function PostsSliderEdit( {
 		hasCategoryClass = true;
 	}
 
-	const blockProps = useBlockProps( {
-		className: classnames( 
-			'wpbnmposw', 'bnmbcs',
-			{
-				'hide-pagination': hidePagination,
-				'hide-next-prev-btns': hideNextPrevBtns,
-				'bnm-box-cat': hasCategoryClass
-			}	
-		)
-	} );
-
 	//const hasPosts = !! posts?.length;
 	const inlineStyles = {
 		'--bnm-title-font-size': mightBeUnit(attributes.titleFontSize),
@@ -278,6 +267,18 @@ export default function PostsSliderEdit( {
 		'--bnm-header-hover-color': attributes.headerHoverColor
 	}
 
+	const blockProps = useBlockProps( {
+		className: classnames( 
+			'wpbnmposw', 'bnmbcs',
+			{
+				'hide-pagination': hidePagination,
+				'hide-next-prev-btns': hideNextPrevBtns,
+				'bnm-box-cat': hasCategoryClass
+			}	
+		),
+		style: inlineStyles
+	} );
+
 	const inspectorControls = (
 		<InspectorControls>
 			<PanelBody title={ __( 'Content Settings', 'bnm-blocks' ) } initialOpen={ false }>
@@ -298,7 +299,7 @@ export default function PostsSliderEdit( {
 		<>
 			{ inspectorControls }
 
-			<div { ...blockProps } style={ inlineStyles }>
+			<div { ...blockProps }>
 
 				{ attributes.showSectionHeader && (
 					<div className='bnm-block-title-wrap'>

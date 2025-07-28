@@ -25,12 +25,11 @@ export const Layout = ({
     authorsList,
     categoriesList,
     blockProps,
-    inlineStyles,
     attributes,
     setAttributes
 }) => {
     return(
-        <div { ...blockProps } style={ inlineStyles }>
+        <div { ...blockProps }>
             <div className="posts-block-2-container">
                 { attributes.showSectionHeader && (
 					<div className='bnm-block-title-wrap'>

@@ -184,11 +184,13 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 		$classes[] = 'custom-image-width';
 	}
 
-	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
+	$wrapper_attributes = get_block_wrapper_attributes( array( 
+		'class' => implode( ' ', $classes ),
+		'style' => $styles,
+	) );
 	
-	return sprintf( '<div %1$s style="%2$s">%3$s</div>', 
+	return sprintf( '<div %1$s>%2$s</div>', 
 		$wrapper_attributes, 
-		esc_attr( $styles ), 
 		$block
 	);
 

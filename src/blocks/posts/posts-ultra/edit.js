@@ -275,7 +275,8 @@ export default function Edit( { attributes, setAttributes } ) {
 			[`has-text-align-${ textAlign }`]: textAlign,
 			'custom-image-width': ( featuredImageWidth !== "33%" ) || ( entryContentWidth !== "67%" ),
 			'custom-image-margin': hasCustomImageMargin
-		})
+		}),
+		style: inlineStyles
 	});
 
 	const updateQuery = ( newQuery ) =>
@@ -410,7 +411,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
 		{ inspectorControls }
 			
-		<div { ...blockProps } style={ inlineStyles }>
+		<div { ...blockProps }>
             
 			<div className="bnmspp-container">
 

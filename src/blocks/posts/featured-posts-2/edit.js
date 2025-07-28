@@ -238,7 +238,8 @@ export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps({
 		className: classnames( 'wpbnmfpb2', 'bnmbcs', {
 			'bnm-box-cat': hasCategoryClass
-		})
+		}),
+		style: inlineStyles
 	});
 
 	const updateQuery = ( newQuery ) =>
@@ -284,7 +285,6 @@ export default function Edit( { attributes, setAttributes } ) {
 				categoriesList={ categoriesList }
 				authorsList={ authorsList }
 				blockProps={ blockProps }
-				inlineStyles={ inlineStyles }
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 			/>

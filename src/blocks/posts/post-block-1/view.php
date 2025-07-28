@@ -228,11 +228,13 @@ function bnmbt_post_block_1_render_callback( $attributes ) {
 		$classes[] = 'bnm-box-cat';
 	}
 
-	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
+	$wrapper_attributes = get_block_wrapper_attributes( array( 
+		'class' => implode( ' ', $classes ),
+		'style' => $styles,
+	) );
 	
-	return sprintf( '<div %1$s style="%2$s">%3$s</div>', 
-		$wrapper_attributes, 
-		esc_attr( $styles ), 
+	return sprintf( '<div %1$s>%2$s</div>', 
+		$wrapper_attributes,
 		$block
 	);
 

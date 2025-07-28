@@ -158,10 +158,13 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 		$classes[] = 'bnm-box-cat';
 	}
 
-	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
-
 	$css = new Post_Slider_1_CSS();
 	$styles = $css->render_css( $attributes );
+
+	$wrapper_attributes = get_block_wrapper_attributes( array( 
+		'class' => implode( ' ', $classes ),
+		'style' => $styles,
+	) );
 
 	$data_attributes = [
 		//'data-current-post-id=' . $post_id,
@@ -173,9 +176,8 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 		$data_attributes[] = sprintf( 'data-autoplay_delay=%s', esc_attr( $delay ) );
 	}
 
-	return sprintf( '<div %1$s style="%2$s" %3$s>%4$s</div>', 
-		$wrapper_attributes, 
-		esc_attr( $styles ), 
+	return sprintf( '<div %1$s %2$s>%3$s</div>', 
+		$wrapper_attributes,
 		esc_attr( implode( ' ', $data_attributes ) ),
 		$slider_block
 	);

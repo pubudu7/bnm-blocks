@@ -28,6 +28,7 @@ A collection of blocks developed for WordPress Gutenberg editor. All of these bl
 
 = 1.2.2 =
 * Fixed featured image size select not working in Post Block 2
+* Improved featured image size select control.
 * Added key prop to articles on all blocks.
 
 = 1.2.1 =
