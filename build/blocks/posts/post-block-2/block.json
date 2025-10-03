@@ -41,7 +41,7 @@
     },
     "specificMode": {
       "type": "boolean",
-      "default": "false"
+      "default": false
     },
     "specificPosts": {
       "type": "array",

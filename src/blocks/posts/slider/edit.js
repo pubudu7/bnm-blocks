@@ -69,6 +69,8 @@ export default function PostsSliderEdit( {
 	const {
 		queryId,
 		query,
+		specificMode,
+		specificPosts,
 		imageFit,
 		hidePagination,
         hideNextPrevBtns,
@@ -109,20 +111,32 @@ export default function PostsSliderEdit( {
 		categoriesList,
 		authorsList
 	} = useSelect( ( select ) => {
-		
+		const { getEntityRecords, getUsers } = select( coreStore );
+
 		const postQuery = pickBy(
 			postQueryArgs,
 			( value ) => ! isUndefined( value )
 		);
 
-		const { getEntityRecords, getUsers } = select( coreStore );
+		let posts;
 
-		return {
-			posts: getEntityRecords( 
+		if ( specificMode && specificPosts.length ) {
+			posts = getEntityRecords( 'postType', 'post', {
+				include: specificPosts,
+				orderby: 'include',
+				per_page: specificPosts.length,
+				_embed: 'wp:featuredmedia'
+			} );
+		} else {
+			posts = getEntityRecords( 
 				'postType', 
 				'post',
 				postQuery 
-			),
+			);
+		}
+
+		return {
+			posts,
 			categoriesList: getEntityRecords(
 				'taxonomy',
 				'category',
@@ -136,7 +150,8 @@ export default function PostsSliderEdit( {
 		order,
 		orderBy,
 		perPage,
-		taxQuery 
+		taxQuery,
+		specificPosts 
 	] );
 
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch(
@@ -285,6 +300,9 @@ export default function PostsSliderEdit( {
 				<QueryControls
 					attributes={ attributes }
 					setQuery={ updateQuery }
+					setAttributes={ setAttributes }
+					onSpecificModeChange={ () => setAttributes( { specificMode: true } ) }
+					onLoopModeChange={ () => setAttributes( { specificMode: false } ) }
 				/>
 			</PanelBody>
 			<SliderSettings

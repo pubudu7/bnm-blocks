@@ -79,7 +79,7 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 							</figure>
 
 							<div class="bnmslovrlay">
-								<a class="bnmlnkovrlay" href="<?php echo esc_url( get_permalink() ); ?>"></a>
+								<a class="bnmlnkovrlay" href="<?php echo esc_url( get_permalink() ); ?>" aria-label="<?php the_title_attribute(); ?>"></a>
 							</div>
 
 							<div class="bnm-slider-content">

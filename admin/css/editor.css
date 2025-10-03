@@ -78,3 +78,14 @@
 .block-editor-block-inspector .thbnm-panel .components-base-control.components-toggle-control:last-child {
     margin-bottom: 8px;
 }
+
+.thbnm-multi-post-selector {
+    position: relative;
+}
+
+.thbnm-loading-spinner-overlay {
+    position: absolute;
+    top: 40px; /* just below the input */
+    left: 10px;
+    z-index: 999;
+}

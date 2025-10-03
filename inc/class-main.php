@@ -112,61 +112,78 @@ class Main {
      * Setups the posts query for WP_Query.
      */
     public static function build_articles_query( $attributes ) {
-        
-        $posts_per_page = $attributes['query']['perPage'];
-        $authors = $attributes['query']['author'];
-        $taxonomies = $attributes['query']['taxQuery'];
-        $orderBy = $attributes['query']['orderBy'];
-        $order = $attributes['query']['order'];
-        $sticky = $attributes['query']['sticky'];
-    
-        $post_query_args = array( 
-            'posts_per_page' 	=> $posts_per_page
-        );
-    
-        if ( $authors ) {
-            $post_query_args[ 'author' ] = $authors;
-        }
-    
-        if ( $taxonomies ) {
-            if ( array_key_exists( 'category', $taxonomies ) && $taxonomies[ 'category' ] ) {
-                $post_query_args[ 'cat' ] = $taxonomies[ 'category' ];
-            }
-        
-            if ( array_key_exists( 'post_tag', $taxonomies ) && $taxonomies[ 'post_tag' ] ) {
-                $post_query_args[ 'tag__in' ] = $taxonomies[ 'post_tag' ];
-            }
-        } 
-    
-        if ( $sticky === 'only' ) {
-            $sticky = get_option( 'sticky_posts' );
-            $post_query_args[ 'post__in' ] = $sticky;
-            $post_query_args[ 'ignore_sticky_posts' ] = 1;
-        } elseif ( $sticky === 'exclude' ) {
-            $post_query_args[ 'post__not_in' ] = get_option( 'sticky_posts' );
+
+        // Initialize post query arguments array.
+        $post_query_args = array();
+
+        $specific_mode = $attributes['specificMode'];
+        $specific_posts = $attributes['specificPosts'];
+
+        if ( $specific_mode && ! empty( $specific_posts ) ) {
+
+            $post_query_args[ 'post_type' ] = 'post';
+            $post_query_args[ 'post__in' ] = $specific_posts;
+            $post_query_args[ 'orderby' ] = 'post__in';
+            $post_query_args[ 'posts_per_page' ] = count($specific_posts);
+            $post_query_args[ 'ignore_sticky_posts' ] = true;
+            return $post_query_args;
+
         } else {
-            $post_query_args[ 'ignore_sticky_posts' ] = false;
-        }
-    
-        if ( $orderBy === 'date' ) {
-            $post_query_args[ 'orderby' ] = 'date';
-            if ( $order === 'asc' ) {
-                $post_query_args[ 'order' ] = 'ASC';
-            } else {
-                $post_query_args[ 'order' ] = 'DESC';
+
+            $posts_per_page = $attributes['query']['perPage'];
+            $authors = $attributes['query']['author'];
+            $taxonomies = $attributes['query']['taxQuery'];
+            $orderBy = $attributes['query']['orderBy'];
+            $order = $attributes['query']['order'];
+            $sticky = $attributes['query']['sticky'];
+
+            $post_query_args[ 'posts_per_page' ] = $posts_per_page;
+        
+            if ( $authors ) {
+                $post_query_args[ 'author' ] = $authors;
             }
-        }
-    
-        if ( $orderBy === 'title' ) {
-            $post_query_args[ 'orderby' ] = 'title';
-            if ( $order === 'asc' ) {
-                $post_query_args[ 'order' ] = 'ASC';
+        
+            if ( $taxonomies ) {
+                if ( array_key_exists( 'category', $taxonomies ) && $taxonomies[ 'category' ] ) {
+                    $post_query_args[ 'cat' ] = $taxonomies[ 'category' ];
+                }
+            
+                if ( array_key_exists( 'post_tag', $taxonomies ) && $taxonomies[ 'post_tag' ] ) {
+                    $post_query_args[ 'tag__in' ] = $taxonomies[ 'post_tag' ];
+                }
+            } 
+        
+            if ( $sticky === 'only' ) {
+                $sticky = get_option( 'sticky_posts' );
+                $post_query_args[ 'post__in' ] = $sticky;
+                $post_query_args[ 'ignore_sticky_posts' ] = 1;
+            } elseif ( $sticky === 'exclude' ) {
+                $post_query_args[ 'post__not_in' ] = get_option( 'sticky_posts' );
             } else {
-                $post_query_args[ 'order' ] = 'DESC';
+                $post_query_args[ 'ignore_sticky_posts' ] = false;
             }
+        
+            if ( $orderBy === 'date' ) {
+                $post_query_args[ 'orderby' ] = 'date';
+                if ( $order === 'asc' ) {
+                    $post_query_args[ 'order' ] = 'ASC';
+                } else {
+                    $post_query_args[ 'order' ] = 'DESC';
+                }
+            }
+        
+            if ( $orderBy === 'title' ) {
+                $post_query_args[ 'orderby' ] = 'title';
+                if ( $order === 'asc' ) {
+                    $post_query_args[ 'order' ] = 'ASC';
+                } else {
+                    $post_query_args[ 'order' ] = 'DESC';
+                }
+            }
+            return $post_query_args;
+        
         }
 
-        return $post_query_args;
         
     }
 

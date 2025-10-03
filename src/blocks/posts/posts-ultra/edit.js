@@ -77,6 +77,8 @@ export default function Edit( { attributes, setAttributes } ) {
 		sectionHeader,
 		queryId,
 		query,
+		specificMode,
+		specificPosts,
 		categoryPadding,
 		showFeaturedImage,
 		featuredImageSizeSlug,
@@ -107,10 +109,6 @@ export default function Edit( { attributes, setAttributes } ) {
 		_embed: 'wp:featuredmedia'
 	};
 
-	if ( ! sticky ) {
-		
-	}
-
 	if ( sticky === 'exclude' ) {
 		postQueryArgs.sticky = false;
 	}
@@ -136,12 +134,25 @@ export default function Edit( { attributes, setAttributes } ) {
 			( value ) => ! isUndefined( value )
 		);
 
-		return {
-			posts: getEntityRecords( 
+		let posts;
+
+		if ( specificMode && specificPosts.length ) {
+			posts = getEntityRecords( 'postType', 'post', {
+				include: specificPosts,
+				orderby: 'include',
+				per_page: specificPosts.length,
+				_embed: 'wp:featuredmedia'
+			} );
+		} else {
+			posts = getEntityRecords( 
 				'postType', 
 				'post',
 				postQuery 
-			),
+			);
+		}
+
+		return {
+			posts,
 			categoriesList: getEntityRecords(
 				'taxonomy',
 				'category',
@@ -158,6 +169,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		taxQuery,
 		sticky,
 		featuredImageSizeSlug,
+		specificPosts
 	] );
 
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch(
@@ -282,7 +294,6 @@ export default function Edit( { attributes, setAttributes } ) {
 	const updateQuery = ( newQuery ) =>
 		setAttributes( { query: { ...query, ...newQuery } } );
 
-	const hasPosts = !! posts?.length;
 
 	const blockControls = [
 		{
@@ -345,6 +356,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					<QueryControls
 						attributes={ attributes }
 						setQuery={ updateQuery }
+						setAttributes={ setAttributes }
+						onSpecificModeChange={ () => setAttributes( { specificMode: true } ) }
+						onLoopModeChange={ () => setAttributes( { specificMode: false } ) }
 					/>
 					{ postLayout === 'grid' && (
 						<>
@@ -391,21 +405,6 @@ export default function Edit( { attributes, setAttributes } ) {
 		</Fragment>
 	);
 
-	if ( ! hasPosts ) {
-		return (
-			<div { ...blockProps }>
-				{ inspectorControls }
-				<Placeholder>
-					{ ! Array.isArray( posts ) ? (
-						<Spinner />
-					) : (
-						__( 'No posts found' )
-					) }
-				</Placeholder>
-			</div>
-		);
-	}
-
 	return (
 		<>
 
@@ -425,6 +424,18 @@ export default function Edit( { attributes, setAttributes } ) {
 							className="article-section-title"
 						/>
 					</div>
+				) }
+
+				{ ! posts && (
+					<Placeholder>
+						<Spinner />
+					</Placeholder>
+				) }
+
+				{ posts && posts.length === 0 && (
+					<Placeholder>
+						{ __( 'No Posts Found.', 'bnm-blocks' ) }
+					</Placeholder>
 				) }
                 
 				{ posts && posts.length > 0 && posts.map( ( post ) => {

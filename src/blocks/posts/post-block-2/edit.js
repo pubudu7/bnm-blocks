@@ -20,8 +20,6 @@ import { store as noticeStore } from '@wordpress/notices';
 import { useEffect } from '@wordpress/element';
 import {
 	PanelBody,
-	Placeholder,
-	Spinner,
 	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 
@@ -55,6 +53,8 @@ export default function Edit( { attributes, setAttributes } ) {
     const {
 		queryId,
 		query,
+		specificMode,
+		specificPosts,		
 		categoryPadding,
 		featuredImageSizeSlug,
     } = attributes;
@@ -75,10 +75,6 @@ export default function Edit( { attributes, setAttributes } ) {
 		per_page: perPage,
 		_embed: 'wp:featuredmedia'
 	};
-
-	if ( ! sticky ) {
-		
-	}
 
 	if ( sticky === 'exclude' ) {
 		postQueryArgs.sticky = false;
@@ -105,12 +101,25 @@ export default function Edit( { attributes, setAttributes } ) {
 			( value ) => ! isUndefined( value )
 		);
 
-		return {
-			posts: getEntityRecords( 
+		let posts;
+
+		if ( specificMode && specificPosts.length ) {
+			posts = getEntityRecords( 'postType', 'post', {
+				include: specificPosts,
+				orderby: 'include',
+				per_page: specificPosts.length,
+				_embed: 'wp:featuredmedia'
+			} );
+		} else {
+			posts = getEntityRecords( 
 				'postType', 
 				'post',
 				postQuery 
-			),
+			);
+		}
+
+		return {
+			posts,
 			categoriesList: getEntityRecords(
 				'taxonomy',
 				'category',
@@ -127,6 +136,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		taxQuery,
 		sticky,
 		featuredImageSizeSlug,
+		specificPosts
 	] );
 
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch(
@@ -263,14 +273,15 @@ export default function Edit( { attributes, setAttributes } ) {
 	const updateQuery = ( newQuery ) =>
 		setAttributes( { query: { ...query, ...newQuery } } );
 
-	const hasPosts = !! posts?.length;
-
 	const inspectorControls = (
 		<InspectorControls>
 			<PanelBody title={ __( 'Content Settings', 'bnm-blocks' ) } initialOpen={ false }>
 				<QueryControls
 					attributes={ attributes }
 					setQuery={ updateQuery }
+					setAttributes={ setAttributes }
+					onSpecificModeChange={ () => setAttributes( { specificMode: true } ) }
+					onLoopModeChange={ () => setAttributes( { specificMode: false } ) }
 				/>
 				<UnitControl
 					label={ __( 'Column Gap', 'bnm-blocks' ) }
@@ -301,21 +312,6 @@ export default function Edit( { attributes, setAttributes } ) {
 			/>
 		</InspectorControls>
 	);
-
-	if ( ! hasPosts ) {
-		return (
-			<div { ...blockProps }>
-				{ inspectorControls }
-				<Placeholder>
-					{ ! Array.isArray( posts ) ? (
-						<Spinner />
-					) : (
-						__( 'No posts found' )
-					) }
-				</Placeholder>
-			</div>
-		);
-	}
 
 	return (
 		<>

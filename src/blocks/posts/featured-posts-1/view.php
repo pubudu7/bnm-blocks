@@ -62,7 +62,7 @@ function bnmbt_featured_posts_block_1_render_callback( $attributes ) {
 						?>
 
 						<div class="bnmfp1ovrlay">
-							<a class="bnmlnkovrlay" href="<?php echo esc_url( get_permalink() ); ?>"></a>
+							<a class="bnmlnkovrlay" href="<?php echo esc_url( get_permalink() ); ?>" aria-label="<?php the_title_attribute(); ?>"></a>
 						</div>
 
 						<div class="bnm-fp1-post-content">
@@ -131,7 +131,7 @@ function bnmbt_featured_posts_block_1_render_callback( $attributes ) {
 						?>	
 						
 						<div class="bnmfp1ovrlay">
-							<a class="bnmlnkovrlay" href="<?php echo esc_url( get_permalink() ); ?>"></a>
+							<a class="bnmlnkovrlay" href="<?php echo esc_url( get_permalink() ); ?>" aria-label="<?php the_title_attribute(); ?>"></a>
 						</div>
 
 						<div class="bnm-fp1-post-content">

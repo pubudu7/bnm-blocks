@@ -5,6 +5,10 @@ import { __ } from '@wordpress/i18n';
 import { 
 	RichText
 } from '@wordpress/block-editor';
+import {
+	Placeholder,
+	Spinner
+} from '@wordpress/components';
 
 /**
  * Internal Dependencies.
@@ -42,6 +46,19 @@ export const Layout = ({
 						/>
 					</div>
 				) }
+
+                { ! posts && (
+                    <Placeholder>
+                        <Spinner />
+                    </Placeholder>
+                ) }
+
+                { posts && posts.length === 0 && (
+                    <Placeholder>
+                        { __( 'No Posts Found.', 'bnm-blocks' ) }
+                    </Placeholder>
+                ) }
+
                 <div className="bnm-pb2-posts-grid">
                     { posts && posts.length > 0 && posts.map( ( post, index ) => {
 
