@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
 import { 
 	useBlockProps,
 	InspectorControls,
+	PanelColorSettings,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect, useDispatch } from '@wordpress/data';
@@ -20,6 +21,7 @@ import { store as noticeStore } from '@wordpress/notices';
 import { useEffect } from '@wordpress/element';
 import {
 	PanelBody,
+	ToggleControl,
 	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 
@@ -36,6 +38,7 @@ import {
 import {
 	Layout
 } from './layout.js';
+import { Fragment } from 'react';
 
 const DEFAULTS_POSTS_PER_PAGE = 5;
 const CATEGORIES_LIST_QUERY = {
@@ -57,6 +60,9 @@ export default function Edit( { attributes, setAttributes } ) {
 		specificPosts,		
 		categoryPadding,
 		featuredImageSizeSlug,
+		textAlign,
+		hasPostBorder,
+		postBorderColor,		
     } = attributes;
 
 	const {
@@ -248,7 +254,8 @@ export default function Edit( { attributes, setAttributes } ) {
 		'--bnm-header-hover-color': attributes.headerHoverColor,
 		'--bnm-image-width': attributes.featuredImageWidth,
 		'--bnm-content-width': attributes.entryContentWidth,
-		'--bnm-image-margin': boxValues(attributes.featuredImageMargin)
+		'--bnm-image-margin': boxValues(attributes.featuredImageMargin),
+		'--bnm-border-color': attributes.postBorderColor,
 	};
 
 	let hasCategoryClass = false;
@@ -265,7 +272,8 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const blockProps = useBlockProps({
 		className: classnames( 'wpbnmpb2', 'bnmbcs', {
-			'bnm-box-cat': hasCategoryClass
+			'bnm-box-cat': hasCategoryClass,
+			'is-style-borders': hasPostBorder
 		}),
 		style: inlineStyles
 	});
@@ -274,43 +282,65 @@ export default function Edit( { attributes, setAttributes } ) {
 		setAttributes( { query: { ...query, ...newQuery } } );
 
 	const inspectorControls = (
-		<InspectorControls>
-			<PanelBody title={ __( 'Content Settings', 'bnm-blocks' ) } initialOpen={ false }>
-				<QueryControls
+		<Fragment>
+			<InspectorControls>
+				<PanelBody title={ __( 'Content Settings', 'bnm-blocks' ) } initialOpen={ false }>
+					<QueryControls
+						attributes={ attributes }
+						setQuery={ updateQuery }
+						setAttributes={ setAttributes }
+						onSpecificModeChange={ () => setAttributes( { specificMode: true } ) }
+						onLoopModeChange={ () => setAttributes( { specificMode: false } ) }
+					/>
+					<UnitControl
+						label={ __( 'Column Gap', 'bnm-blocks' ) }
+						value={ attributes.colGap }
+						onChange={ ( value ) => setAttributes( { colGap: value } ) }
+						step={ 5 }
+						units={[
+							{ value: 'px', label: 'px', },
+							{ value: '%', label: '%', },
+							{ value: 'em', label: 'em'}
+						]}
+					/>
+					<UnitControl
+						label={ __( 'Row Gap', 'bnm-blocks' ) }
+						value={ attributes.rowGap }
+						onChange={ ( value ) => setAttributes( { rowGap: value } ) }
+						step={ 5 }
+						units={[
+							{ value: 'px', label: 'px', },
+							{ value: '%', label: '%', },
+							{ value: 'em', label: 'em'}
+						]}
+					/>
+				</PanelBody>
+				<BlockExtraSettings
 					attributes={ attributes }
-					setQuery={ updateQuery }
 					setAttributes={ setAttributes }
-					onSpecificModeChange={ () => setAttributes( { specificMode: true } ) }
-					onLoopModeChange={ () => setAttributes( { specificMode: false } ) }
 				/>
-				<UnitControl
-					label={ __( 'Column Gap', 'bnm-blocks' ) }
-					value={ attributes.colGap }
-					onChange={ ( value ) => setAttributes( { colGap: value } ) }
-					step={ 5 }
-					units={[
-						{ value: 'px', label: 'px', },
-						{ value: '%', label: '%', },
-						{ value: 'em', label: 'em'}
-					]}
-				/>
-				<UnitControl
-					label={ __( 'Row Gap', 'bnm-blocks' ) }
-					value={ attributes.rowGap }
-					onChange={ ( value ) => setAttributes( { rowGap: value } ) }
-					step={ 5 }
-					units={[
-						{ value: 'px', label: 'px', },
-						{ value: '%', label: '%', },
-						{ value: 'em', label: 'em'}
-					]}
-				/>
-			</PanelBody>
-			<BlockExtraSettings
-				attributes={ attributes }
-				setAttributes={ setAttributes }
-			/>
-		</InspectorControls>
+			</InspectorControls>
+			<InspectorControls group="styles">
+				<PanelBody title={ __( 'Separator', 'textdomain' ) }>
+					<ToggleControl
+						label={ __( 'Show borders', 'bnm-blocks' ) }
+						checked={ hasPostBorder }
+						onChange={ () => setAttributes( { hasPostBorder: ! hasPostBorder } ) }
+					/>
+					<PanelColorSettings
+						title={ __( 'Color', 'bnm-blocks' ) }
+						initialOpen={ false }
+						colorSettings={ [
+							{
+								value: postBorderColor,
+								onChange: postBorderColor => setAttributes({ postBorderColor }),
+								label: __( 'Border Color', 'bnm-blocks' )
+							}
+						] }
+					/>
+				</PanelBody>
+			</InspectorControls>
+		</Fragment>
 	);
 
 	return (

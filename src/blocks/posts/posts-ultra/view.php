@@ -184,6 +184,10 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 		$classes[] = 'custom-image-width';
 	}
 
+	if ( $attributes['hasPostBorder'] ) {
+		$classes[] = 'is-style-borders';
+	}
+
 	$wrapper_attributes = get_block_wrapper_attributes( array( 
 		'class' => implode( ' ', $classes ),
 		'style' => $styles,

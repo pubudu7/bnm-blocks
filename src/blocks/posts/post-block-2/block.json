@@ -346,6 +346,14 @@
 		},
 		"rowGap": {
 			"type": ["number", "string"]
+		},
+		"hasPostBorder": {
+			"type": "boolean",
+			"default": false
+		},
+		"postBorderColor": {
+			"type": "string",
+			"default": ""
 		}
 	}
 }

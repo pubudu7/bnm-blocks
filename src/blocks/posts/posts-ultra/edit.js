@@ -14,6 +14,7 @@ import {
 	InspectorControls,
 	AlignmentControl,
 	RichText,
+	PanelColorSettings,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect, useDispatch } from '@wordpress/data';
@@ -26,6 +27,7 @@ import {
 	Placeholder,
 	Spinner,
 	Toolbar,
+	ToggleControl,
 	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 import {
@@ -89,7 +91,9 @@ export default function Edit( { attributes, setAttributes } ) {
 		imageMinHeight,
 		columns,
 		postLayout,
-		textAlign
+		textAlign,
+		hasPostBorder,
+		postBorderColor,
     } = attributes;
 
 	const {
@@ -256,7 +260,8 @@ export default function Edit( { attributes, setAttributes } ) {
 		'--bnm-header-padding': boxValues(attributes.headerPadding),
 		'--bnm-header-margin': boxValues(attributes.headerMargin),
 		'--bnm-header-color': attributes.headerColor,
-		'--bnm-header-hover-color': attributes.headerHoverColor
+		'--bnm-header-hover-color': attributes.headerHoverColor,
+		'--bnm-border-color': attributes.postBorderColor,
 	};
 
 	let hasCategoryClass = false;
@@ -286,7 +291,8 @@ export default function Edit( { attributes, setAttributes } ) {
 			'bnm-box-cat': hasCategoryClass,
 			[`has-text-align-${ textAlign }`]: textAlign,
 			'custom-image-width': ( featuredImageWidth !== "33%" ) || ( entryContentWidth !== "67%" ),
-			'custom-image-margin': hasCustomImageMargin
+			'custom-image-margin': hasCustomImageMargin,
+			'is-style-borders': hasPostBorder
 		}),
 		style: inlineStyles
 	});
@@ -401,6 +407,26 @@ export default function Edit( { attributes, setAttributes } ) {
 					attributes={ attributes }
 					setAttributes={ setAttributes }
 				/>
+			</InspectorControls>
+			<InspectorControls group="styles">
+				<PanelBody title={ __( 'Separator', 'textdomain' ) }>
+					<ToggleControl
+						label={ __( 'Show borders', 'bnm-blocks' ) }
+						checked={ hasPostBorder }
+						onChange={ () => setAttributes( { hasPostBorder: ! hasPostBorder } ) }
+					/>
+					<PanelColorSettings
+						title={ __( 'Color', 'bnm-blocks' ) }
+						initialOpen={ false }
+						colorSettings={ [
+							{
+								value: postBorderColor,
+								onChange: postBorderColor => setAttributes({ postBorderColor }),
+								label: __( 'Border Color', 'bnm-blocks' )
+							}
+						] }
+					/>
+				</PanelBody>
 			</InspectorControls>
 		</Fragment>
 	);

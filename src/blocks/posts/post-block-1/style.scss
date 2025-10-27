@@ -25,6 +25,7 @@
     --bnm-image-width: 33%;
     --bnm-content-width: 67%;
     --bnm-image-margin: 0 1em 0 0;
+    --bnm-border-color: rgba(0, 0, 0, 0.2);
 
     margin: 0 0 50px 0;
 
@@ -88,9 +89,8 @@
     }
 
     .bnm-pb1-small { 
-
         display: flex;
-        margin-bottom: 25px;
+        margin-bottom: 1.6em;
 
         .entry-title {
             clear: none;
@@ -129,6 +129,10 @@
         .entry-details {
             flex-basis: var(--bnm-content-width);
         }
+    }
+
+    .bnm-pb1-small:last-child {
+        margin-bottom: 0;
     }
 
     .bnm-category-list {
@@ -210,12 +214,42 @@
 
     @media(min-width: 768px) {
         display: flex;
-        flex-direction: row;
+        flex-flow: row wrap;
+        justify-content: flex-start;
         gap: var(--bnm-col-gap);
+        padding: 0;
+        list-style: none;
 
         .bnm-left-block,
         .bnm-right-block {
-            width: 50%;
+            flex-basis: calc( 50% - ( var( --bnm-col-gap ) / 2 ) );
         }
+    }
+}
+
+.wpbnmpb1.is-style-borders {
+    .bnm-left-block {
+        border: solid var(--bnm-border-color);
+        border-width: 0 0 1px;
+        padding-right: 0;
+        margin-bottom: 1.6em;
+    }
+    @media(min-width: 768px) {
+        .bnm-left-block {
+            flex-basis: calc( 50% - ( 2 * var( --bnm-col-gap ) / 2 ) - 1.1px );
+            box-sizing: content-box;
+            border-width: 0 1px 0 0;
+            padding-right: var(--bnm-col-gap);
+            margin-bottom: 0;
+        }
+        .bnm-right-block {
+            flex-basis: calc( 50% - ( 2 * var( --bnm-col-gap ) / 2 ) - 1.1px );
+        }
+    }
+
+    .bnm-pb1-small:not(:last-child) {
+        border: solid var(--bnm-border-color);
+        border-width: 0 0 1px;
+        padding-bottom: 1.6em;        
     }
 }

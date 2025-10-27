@@ -260,6 +260,10 @@ class Post_Block_2_CSS {
                     'value'     =>  'featuredImageMargin',
                     'type'      =>  'box-control',
                 ),
+                array(
+                    'property'  =>  '--bnm-border-color',
+                    'value'     =>  'postBorderColor',
+                ),
             )
         );
 

@@ -343,6 +343,14 @@
 		"categoryBGHoverColor": {
 			"type": "string",
 			"default": ""
+		},
+		"hasPostBorder": {
+			"type": "boolean",
+			"default": false
+		},
+		"postBorderColor": {
+			"type": "string",
+			"default": ""
 		}
 	}
 }

@@ -26,6 +26,7 @@
     --bnm-image-margin: 0 1em 0 0;
     --bnm-col-gap: 40px;
     --bnm-row-gap: 25px;
+    --bnm-border-color: rgba(0, 0, 0, 0.2);
 
     margin: 0 0 50px 0;
 
@@ -205,6 +206,7 @@
 
 .bnm-pb2-posts-grid {
     display: grid;
+    overflow: hidden;
     column-gap: var(--bnm-col-gap);
     row-gap: var(--bnm-row-gap);
     
@@ -216,6 +218,32 @@
 .bnm-pb2-large,
 .bnm-pb2-small {
     display: block;
-    overflow: hidden;
     width: 100%;
+}
+
+
+.wpbnmpb2.is-style-borders {
+    .bnm-pb2-posts-grid {
+        article {
+            &::before, &::after {
+                content: "";
+                position: absolute;
+                left: calc(var(--bnm-col-gap) / -2);
+                background-color: var(--bnm-border-color);
+            }
+
+            &::before {
+                height: 1px;
+                right: 0;
+                left: 0;
+                top: calc(var(--bnm-row-gap) / -2);
+            }
+
+            &::after {
+                height: 100%;
+                top: 0;
+                width: 1px;
+            }
+        }
+    }
 }

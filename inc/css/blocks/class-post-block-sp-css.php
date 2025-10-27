@@ -201,6 +201,10 @@ class Post_Block_SP_CSS {
                     'property'  =>  '--bnm-header-hover-color',
                     'value'     =>  'headerHoverColor',
                 ),
+                array(
+                    'property'  =>  '--bnm-border-color',
+                    'value'     =>  'postBorderColor',
+                ),
             )
         );
 

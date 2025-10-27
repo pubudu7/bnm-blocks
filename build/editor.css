@@ -1,0 +1,66 @@
+/*!******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/block-styles/core/columns/editor.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************************/
+body:not([class*=block-theme]) .editor-styles-wrapper div.wp-block-columns {
+  gap: 32px;
+}
+body:not([class*=block-theme]) .editor-styles-wrapper div.wp-block-columns.is-style-borders {
+  gap: 64px;
+}
+
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-style-first-col-to-second > [data-type="core/column"]:nth-child(2), .wp-block-columns.is-style-first-col-to-third > [data-type="core/column"]:nth-child(2), .wp-block-columns.is-style-first-col-to-third > [data-type="core/column"]:nth-child(3) {
+    order: -1;
+  }
+}
+.wp-block-columns.is-style-borders > [data-type="core/column"] {
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+}
+.wp-block-columns.is-style-borders > [data-type="core/column"]:last-child,
+.wp-block-columns.is-style-borders > [data-type="core/column"] [data-type="core/column"] {
+  border-bottom: 0;
+}
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-style-borders > [data-type="core/column"] {
+    border-bottom: 0;
+  }
+  .wp-block-columns.is-style-borders > [data-type="core/column"]::after {
+    border-right: 1px solid #e0e0e0;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    right: -32px;
+    top: 0;
+  }
+  .wp-block-columns.is-style-borders > [data-type="core/column"]:nth-child(odd)::after {
+    border-color: #e0e0e0;
+  }
+  .wp-block-columns.is-style-borders > [data-type="core/column"]:last-child::after,
+.wp-block-columns.is-style-borders > [data-type="core/column"] [data-type="core/column"]::after {
+    display: none;
+  }
+}
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-style-borders > [data-type="core/column"]::after {
+    border-color: #e0e0e0;
+  }
+}
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-style-borders.is-style-first-col-to-second > [data-type="core/column"]:first-child::after, .wp-block-columns.is-style-borders.is-style-first-col-to-third > [data-type="core/column"]:first-child::after {
+    display: none;
+  }
+  .wp-block-columns.is-style-borders.is-style-first-col-to-second > [data-type="core/column"]:nth-child(2)::after, .wp-block-columns.is-style-borders.is-style-first-col-to-third > [data-type="core/column"]:nth-child(3)::after {
+    display: block;
+  }
+}
+
+/**
+ * Temporary WP<6.0 styles
+ * TODO: These styles can be removed once WP 6.0 is released.
+ */
+.editor-styles-wrapper .wp-block-columns.is-not-stacked-on-mobile > .wp-block-column:not(:first-child), .editor-styles-wrapper .wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column:not(:first-child) {
+  margin-left: 0;
+}
+
+/*# sourceMappingURL=editor.css.map*/

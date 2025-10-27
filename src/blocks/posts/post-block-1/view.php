@@ -228,6 +228,10 @@ function bnmbt_post_block_1_render_callback( $attributes ) {
 		$classes[] = 'bnm-box-cat';
 	}
 
+	if ( $attributes['hasPostBorder'] ) {
+		$classes[] = 'is-style-borders';
+	}
+
 	$wrapper_attributes = get_block_wrapper_attributes( array( 
 		'class' => implode( ' ', $classes ),
 		'style' => $styles,

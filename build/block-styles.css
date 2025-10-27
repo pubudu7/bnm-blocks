@@ -1,0 +1,232 @@
+/*!****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/block-styles/core/columns/view.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************/
+body:not([class*=block-theme]) div.wp-block-columns {
+  gap: 32px;
+}
+body:not([class*=block-theme]) div.wp-block-columns.is-style-borders {
+  gap: 64px;
+}
+@media only screen and (max-width: 781px) {
+  body:not([class*=block-theme]) div.wp-block-columns.is-not-stacked-on-mobile {
+    gap: 20px;
+  }
+  body:not([class*=block-theme]) div.wp-block-columns.is-not-stacked-on-mobile.is-style-borders {
+    gap: 40px;
+  }
+}
+
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-style-first-col-to-second > .wp-block-column:nth-child(2) {
+    order: -1;
+  }
+  .wp-block-columns.is-style-first-col-to-third > .wp-block-column:nth-child(2),
+.wp-block-columns.is-style-first-col-to-third > .wp-block-column:nth-child(3) {
+    order: -1;
+  }
+}
+.wp-block-columns.is-style-borders > .wp-block-column {
+  position: relative;
+}
+.wp-block-columns.is-style-borders > .wp-block-column::after {
+  border: 0 solid #e0e0e0;
+  border-top-width: 1px;
+  bottom: -32px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+.wp-block-columns.is-style-borders > .wp-block-column:last-child::after {
+  display: none;
+}
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-style-borders > .wp-block-column {
+    margin-bottom: 0;
+  }
+  .wp-block-columns.is-style-borders > .wp-block-column::after {
+    border-right-width: 1px;
+    border-top-width: 0;
+    inset: 0 -32px 0 auto;
+  }
+}
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-style-borders.is-style-first-col-to-second > .wp-block-column:first-child::after, .wp-block-columns.is-style-borders.is-style-first-col-to-third > .wp-block-column:first-child::after {
+    display: none;
+  }
+  .wp-block-columns.is-style-borders.is-style-first-col-to-second > .wp-block-column:nth-child(2)::after, .wp-block-columns.is-style-borders.is-style-first-col-to-third > .wp-block-column:nth-child(3)::after {
+    display: block;
+  }
+}
+.wp-block-columns.is-not-stacked-on-mobile.is-style-borders > .wp-block-column::after {
+  border-right-width: 1px;
+  border-top-width: 0;
+  inset: 0 -20px 0 auto;
+}
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-not-stacked-on-mobile.is-style-borders > .wp-block-column::after {
+    right: -32px;
+  }
+}
+.wp-block-columns.is-not-stacked-on-mobile.is-style-borders.is-style-first-col-to-second > .wp-block-column:first-child::after, .wp-block-columns.is-not-stacked-on-mobile.is-style-borders.is-style-first-col-to-third > .wp-block-column:first-child::after {
+  display: none;
+}
+.wp-block-columns.is-not-stacked-on-mobile.is-style-borders.is-style-first-col-to-second > .wp-block-column:nth-child(2)::after, .wp-block-columns.is-not-stacked-on-mobile.is-style-borders.is-style-first-col-to-third > .wp-block-column:nth-child(3)::after {
+  display: block;
+}
+
+/**
+ * Temporary WP<6.0 styles
+ * TODO: These styles can be removed once WP 6.0 is released.
+ */
+/* stylelint-disable no-duplicate-selectors  */
+.wp-block-columns.is-not-stacked-on-mobile > .wp-block-column:not(:first-child), .wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column:not(:first-child) {
+  margin-left: 0;
+}
+
+/* stylelint-enable */
+@media (min-width: 600px) and (max-width: 781px) {
+  .wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column:not(:only-child) {
+    flex-basis: unset !important;
+    flex-grow: 1;
+  }
+}
+/*!******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/block-styles/core/columns/editor.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************************/
+body:not([class*=block-theme]) .editor-styles-wrapper div.wp-block-columns {
+  gap: 32px;
+}
+body:not([class*=block-theme]) .editor-styles-wrapper div.wp-block-columns.is-style-borders {
+  gap: 64px;
+}
+
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-style-first-col-to-second > [data-type="core/column"]:nth-child(2), .wp-block-columns.is-style-first-col-to-third > [data-type="core/column"]:nth-child(2), .wp-block-columns.is-style-first-col-to-third > [data-type="core/column"]:nth-child(3) {
+    order: -1;
+  }
+}
+.wp-block-columns.is-style-borders > [data-type="core/column"] {
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+}
+.wp-block-columns.is-style-borders > [data-type="core/column"]:last-child,
+.wp-block-columns.is-style-borders > [data-type="core/column"] [data-type="core/column"] {
+  border-bottom: 0;
+}
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-style-borders > [data-type="core/column"] {
+    border-bottom: 0;
+  }
+  .wp-block-columns.is-style-borders > [data-type="core/column"]::after {
+    border-right: 1px solid #e0e0e0;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    right: -32px;
+    top: 0;
+  }
+  .wp-block-columns.is-style-borders > [data-type="core/column"]:nth-child(odd)::after {
+    border-color: #e0e0e0;
+  }
+  .wp-block-columns.is-style-borders > [data-type="core/column"]:last-child::after,
+.wp-block-columns.is-style-borders > [data-type="core/column"] [data-type="core/column"]::after {
+    display: none;
+  }
+}
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-style-borders > [data-type="core/column"]::after {
+    border-color: #e0e0e0;
+  }
+}
+@media only screen and (min-width: 782px) {
+  .wp-block-columns.is-style-borders.is-style-first-col-to-second > [data-type="core/column"]:first-child::after, .wp-block-columns.is-style-borders.is-style-first-col-to-third > [data-type="core/column"]:first-child::after {
+    display: none;
+  }
+  .wp-block-columns.is-style-borders.is-style-first-col-to-second > [data-type="core/column"]:nth-child(2)::after, .wp-block-columns.is-style-borders.is-style-first-col-to-third > [data-type="core/column"]:nth-child(3)::after {
+    display: block;
+  }
+}
+
+/**
+ * Temporary WP<6.0 styles
+ * TODO: These styles can be removed once WP 6.0 is released.
+ */
+.editor-styles-wrapper .wp-block-columns.is-not-stacked-on-mobile > .wp-block-column:not(:first-child), .editor-styles-wrapper .wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column:not(:first-child) {
+  margin-left: 0;
+}
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/shared/sass/styles.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+.bnmfpovrlay,
+.bnmslovrlay,
+.bnmlnkovrlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bnm-avatar {
+  margin-right: 5px;
+}
+
+.bnm-avatar img {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  vertical-align: top;
+}
+
+.bnmfpovrlay.inside-gut-editor {
+  cursor: pointer;
+}
+
+img.bnm-fp-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  -o-object-fit: cover;
+     object-fit: cover;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.3s;
+}
+
+.bnm-category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  font-size: 16px;
+}
+
+.bnm-category-list .post-categories {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 0.5em;
+  padding: 0;
+  gap: 0.125em 0.5em;
+}
+
+.bnm-box-cat .bnm-category-list .post-categories {
+  gap: 0.5em;
+}
+
+/*# sourceMappingURL=block-styles.css.map*/
