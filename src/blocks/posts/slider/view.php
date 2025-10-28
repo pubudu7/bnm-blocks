@@ -142,8 +142,8 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 		<?php endif; ?>
 
 		<?php if ( $attributes['hideNextPrevBtns'] === false ) : ?>
-			<div class="swiper-button-prev"></div>
-			<div class="swiper-button-next"></div>
+			<div class="bnm-swiper-button-prev"></div>
+			<div class="bnm-swiper-button-next"></div>
 		<?php endif; ?>	
 
 	</div><!-- .swiper -->
@@ -169,6 +169,8 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 	$data_attributes = [
 		//'data-current-post-id=' . $post_id,
 		'data-aspect-ratio=' . $attributes['aspectRatio'],
+		'data-slides-per-view=' . $attributes['slidesPerView'],
+		'data-space-between-slides=' . $attributes['spaceBetweenSlides']
 	];
 
 	if ( $autoplay ) {

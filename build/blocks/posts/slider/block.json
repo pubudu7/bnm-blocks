@@ -282,6 +282,17 @@
         "object"
       ],
       "default": []
+    },
+    "slidesPerView": {
+      "type": "number",
+      "default": 1
+    },
+    "spaceBetweenSlides": {
+      "type": [
+        "number",
+        "string"
+      ],
+      "default": 20
     }
   }
 }

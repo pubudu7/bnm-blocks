@@ -21,7 +21,9 @@ import { useRef, useEffect } from '@wordpress/element';
 import {
 	PanelBody,
 	Placeholder,
-	Spinner
+	Spinner,
+	RangeControl,
+	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 
 /**
@@ -80,7 +82,9 @@ export default function PostsSliderEdit( {
         showAuthor,
         showAvatar,
 		showCommentCount,
-		categoryPadding
+		categoryPadding,
+		slidesPerView,
+		spaceBetweenSlides
 	} = attributes;
 
 	const {
@@ -225,7 +229,9 @@ export default function PostsSliderEdit( {
 				initialSlide,
 				aspectRatio,
 				autoplay,
-				delay: delay * 1000
+				delay: delay * 1000,
+				slidesPerView,
+				spaceBetweenSlides
 			} 
 		);
 
@@ -233,7 +239,7 @@ export default function PostsSliderEdit( {
 			swiperInstance.destroy();
 		}
 		
-	}, [aspectRatio, autoplay, delay] );
+	}, [aspectRatio, autoplay, delay, slidesPerView, spaceBetweenSlides] );
 
 	let hasCategoryClass = false;
 
@@ -304,6 +310,25 @@ export default function PostsSliderEdit( {
 					onSpecificModeChange={ () => setAttributes( { specificMode: true } ) }
 					onLoopModeChange={ () => setAttributes( { specificMode: false } ) }
 				/>
+				<RangeControl
+					label={ __( 'Slides per view', 'bnm-blocks' ) }
+					value={ slidesPerView }
+					onChange={ ( value ) => setAttributes( { slidesPerView: value } ) }
+					min={ 1 }
+					max={ 4 }
+					required
+				/>
+				{ Number( slidesPerView ) > 1 && (
+					<UnitControl
+						label={ __( 'Space Between Slides', 'bnm-blocks' ) }
+						value={ attributes.spaceBetweenSlides }
+						onChange={ ( value ) => setAttributes( { spaceBetweenSlides: value } ) }
+						step={ 5 }
+						units={[
+							{ value: 'px', label: 'px', }
+						]}
+					/>
+				) }
 			</PanelBody>
 			<SliderSettings
 				attributes={ attributes } 
@@ -433,8 +458,8 @@ export default function PostsSliderEdit( {
 
 					<div className="swiper-pagination bnm-swiper-pagination" ref={paginationRef}></div>
 								
-					<div className="swiper-button-prev bnm-swiper-btn-prev" ref={btnPrevRef}></div>
-					<div className="swiper-button-next bnm-swiper-btn-next" ref={btnNextRef}></div>
+					<div className="bnm-swiper-button-prev" ref={btnPrevRef}></div>
+					<div className="bnm-swiper-button-next" ref={btnNextRef}></div>
 					
 				</div>
 			

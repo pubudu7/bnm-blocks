@@ -47,107 +47,113 @@ function deactivateSlide( slide ) {
 
 export default function createSwiper( element, config={} ) {
 
-  const swiper = new Swiper( element.container, {
-	observer: true,
-	observeParents: true, 
-    a11y: false,
-    init: false,
-    speed: 400,
-    autoplay: !! config.autoplay && {
-			delay: config.delay,
-			disableOnInteraction: true,
+	const slides = element.container.querySelectorAll('.swiper-slide');
+
+	const swiper = new Swiper( element.container, {
+		slidesPerView: config.slidesPerView,
+		grabCursor: true,
+		observer: true,
+		observeParents: true, 
+		a11y: false,
+		init: false,
+		spaceBetween: 16,
+		speed: 400,
+		autoplay: !! config.autoplay && {
+				delay: config.delay,
+				disableOnInteraction: true,
+			},
+		// Optional parameters
+		direction: 'horizontal',
+		loop: slides.length > 1,
+		initialSlide: config.initialSlide,
+		spaceBetween: config.spaceBetweenSlides,
+	
+		// If we need pagination
+		pagination: {
+		el: element.pagination,
+		clickable: true
 		},
-    // Optional parameters
-    direction: 'horizontal',
-    loop: true,
-    initialSlide: config.initialSlide,
-  
-    // If we need pagination
-    pagination: {
-      el: element.pagination,
-	  clickable: true
-    },
-  
-    // Navigation arrows
-    navigation: {
-      nextEl: element.next,
-      prevEl: element.prev,
-    },
-    preventClicksPropagation: false, // Necessary for normal block interactions.
-	touchStartPreventDefault: false, // Necessary for normal block interactions.
-	releaseFormElements: false,
-	setWrapperSize: true,
+	
+		// Navigation arrows
+		navigation: {
+		nextEl: element.next,
+		prevEl: element.prev,
+		},
+		preventClicksPropagation: false, // Necessary for normal block interactions.
+		touchStartPreventDefault: false, // Necessary for normal block interactions.
+		releaseFormElements: false,
+		setWrapperSize: true,
 
-    on: {
-			init() {
-				forEachNode( this.wrapperEl.querySelectorAll( '.swiper-slide' ), slide =>
-					deactivateSlide( slide )
-				);
-
-				activateSlide( this.slides[ this.activeIndex ] ); // Set-up our active slide.
-			},
-
-			slideChange() {
-				const currentSlide = this.slides[ this.activeIndex ];
-
-				deactivateSlide( this.slides[ this.previousIndex ] );
-
-				activateSlide( currentSlide );
-
-				/**
-				 * If we're autoplaying, don't announce the slide change, as that would
-				 * be supremely annoying.
-				 */
-				if ( ! this.autoplay?.running ) {
-					// Announce the contents of the slide.
-					const currentImage = currentSlide.querySelector( 'img' );
-					const alt = currentImage ? currentImage?.alt : false;
-
-					const slideInfo = sprintf(
-						/* translators: 1: current slide number and 2: total number of slides */
-						__( 'Slide %1$s of %2$s', 'bnm-blocks' ),
-						this.realIndex + 1,
-						this.pagination?.bullets?.length || 0
+		on: {
+				init() {
+					forEachNode( this.wrapperEl.querySelectorAll( '.swiper-slide' ), slide =>
+						deactivateSlide( slide )
 					);
 
-					speak(
-						escapeHTML(
-							`${ currentSlide.innerText },
-							${
-								alt
-									? /* translators: the title of the image. */ sprintf(
-											__( 'Image: %s, ', 'bnm-blocks' ),
-											alt
-									  )
-									: ''
-							}
-							${ slideInfo }`
-						),
-						'assertive'
-					);
-				}
-			},
-    },
-  } );
+					activateSlide( this.slides[ this.activeIndex ] ); // Set-up our active slide.
+				},
 
-  /**
-   * Forces an aspect ratio for each slide.
-   */
-  function setAspectRatio() {
+				slideChange() {
+					const currentSlide = this.slides[ this.activeIndex ];
 
-    const { aspectRatio } = config;
-    const slides = Array.from( this.slides );
+					deactivateSlide( this.slides[ this.previousIndex ] );
 
-    slides.forEach( slide => {
-      slide.style.height = `${ slide.clientWidth * aspectRatio }px`;
-    } );
-    
-  } 
+					activateSlide( currentSlide );
+
+					/**
+					 * If we're autoplaying, don't announce the slide change, as that would
+					 * be supremely annoying.
+					 */
+					if ( ! this.autoplay?.running ) {
+						// Announce the contents of the slide.
+						const currentImage = currentSlide.querySelector( 'img' );
+						const alt = currentImage ? currentImage?.alt : false;
+
+						const slideInfo = sprintf(
+							/* translators: 1: current slide number and 2: total number of slides */
+							__( 'Slide %1$s of %2$s', 'bnm-blocks' ),
+							this.realIndex + 1,
+							this.pagination?.bullets?.length || 0
+						);
+
+						speak(
+							escapeHTML(
+								`${ currentSlide.innerText },
+								${
+									alt
+										? /* translators: the title of the image. */ sprintf(
+												__( 'Image: %s, ', 'bnm-blocks' ),
+												alt
+										)
+										: ''
+								}
+								${ slideInfo }`
+							),
+							'assertive'
+						);
+					}
+				},
+		},
+	} );
+
+	/**
+	 * Forces an aspect ratio for each slide.
+	 */
+	function setAspectRatio() {
+
+		const { aspectRatio } = config;
+		const slides = Array.from( this.slides );
+
+		slides.forEach( slide => {
+		slide.style.height = `${ slide.clientWidth * aspectRatio }px`;
+		} );
+		
+	} 
   
-  swiper.on( 'beforeSlideChangeStart', setAspectRatio );
-  swiper.on( 'resize', setAspectRatio );
+	swiper.on( 'beforeSlideChangeStart', setAspectRatio );
+	swiper.on( 'resize', setAspectRatio );
 
-  swiper.init();
+	swiper.init();
 
-  return swiper;
+	return swiper;
 }

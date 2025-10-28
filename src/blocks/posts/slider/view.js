@@ -15,16 +15,13 @@ if ( typeof window !== 'undefined' ) {
             document.querySelectorAll( '.wp-block-bnm-blocks-posts-slider' )
         );
 
-        blocksArray.forEach( block => {
-            //const slidesPerView = parseInt( block.dataset.slidesPerView );
-            //const slideCount = parseInt( block.dataset.slideCount );
-            
+        blocksArray.forEach( block => {            
             createSwiper(
                 {
                     block,
-                    container: block.querySelector( '.swiper' ),
-                    prev: block.querySelector( '.swiper-button-prev' ),
-                    next: block.querySelector( '.swiper-button-next' ),
+                    container: block.querySelector( '.thbnm-swiper' ),
+                    prev: block.querySelector( '.bnm-swiper-button-prev' ),
+                    next: block.querySelector( '.bnm-swiper-button-next' ),
                     pagination: block.querySelector( '.swiper-pagination' ),
                     pause: block.querySelector( '.swiper-button-pause' ),
                     play: block.querySelector( '.swiper-button-play' ,)
@@ -33,7 +30,9 @@ if ( typeof window !== 'undefined' ) {
                     aspectRatio: parseFloat( block.dataset.aspectRatio ),
 					autoplay: !! parseInt( block.dataset.autoplay ),
 					delay: parseInt( block.dataset.autoplay_delay ) * 1000,
-                    initialSlide: 0 
+                    initialSlide: 0,
+                    slidesPerView: parseInt( block.dataset.slidesPerView ),
+                    spaceBetweenSlides: parseInt( block.dataset.spaceBetweenSlides )
                 }
             );
         } );
