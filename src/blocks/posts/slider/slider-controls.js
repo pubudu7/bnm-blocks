@@ -22,6 +22,11 @@ import { __ } from '@wordpress/i18n';
 import { PanelColorSettings } from '@wordpress/block-editor';
 
 import TypographyControl from '../../../components/typography'; 
+import ImageSelectControl from '../../../components/image-select-control'; 
+import slideStyle1 from '../../../shared/images/style-1.png';
+import slideStyle2 from '../../../shared/images/style-2.png';
+import slideStyle3 from '../../../shared/images/style-3.png';
+import slideStyle4 from '../../../shared/images/style-4.png';
 
 export function SliderSettings( { attributes, setAttributes } ) {
 
@@ -61,7 +66,8 @@ export function SliderSettings( { attributes, setAttributes } ) {
         categoryLineHeight,
         categoryLetterSpacing,
         categoryMargin,
-        categoryPadding
+        categoryPadding,
+        sliderStyle
     } = attributes;
 
     const aspectRatioOptions = [
@@ -118,76 +124,20 @@ export function SliderSettings( { attributes, setAttributes } ) {
 
     return (
         <>
-        	<PanelBody title={ __( 'Section Header', 'bnm-blocks') } initialOpen={ false }>
-				<ToggleControl
-					label={ __( 'Show Section Header', 'bnm-blocks' ) }
-					checked={ showSectionHeader }
-					onChange={ () => setAttributes( { showSectionHeader: ! showSectionHeader } ) }
-				/>
-				{ showSectionHeader && (
-					<div className="thbnm-settings-panel">
-						<SelectControl
-							label={ __( 'Section Header HTML tag', 'bnm-blocks' ) }
-							labelPosition={ "side" }
-							value={ headerHtmlTag }
-							options={ [
-								{ label: 'h1', value: 'h1' },
-								{ label: 'h2', value: 'h2' },
-								{ label: 'h3', value: 'h3' },
-								{ label: 'h4', value: 'h4' },
-								{ label: 'h5', value: 'h5' },
-								{ label: 'h6', value: 'h6' },
-								{ label: 'span', value: 'span' },
-								{ label: 'p', value: 'p' },
-							] }
-							onChange={ ( newTitleTag ) => setAttributes( { headerHtmlTag: newTitleTag } ) }
-							__nextHasNoMarginBottom
-						/>
-
-						<TypographyControl
-							label = { __( 'Typography', 'bnm-blocks' ) }
-							fontSize={ headerFontSize }
-							onFontSizeChange={ ( newFontSize ) => setAttributes( { headerFontSize: newFontSize } ) }
-							lineHeight = { headerLineHeight }
-							onLineHeightChange = { ( newLineHeight ) => setAttributes( { headerLineHeight: newLineHeight } ) }
-							letterSpacing = { headerLetterSpacing }
-							onLetterSpacingChange = { ( newLetterSpacing ) => setAttributes( { headerLetterSpacing: newLetterSpacing } ) }
-						/>
-
-						<br />
-
-						<BoxControl
-							label={ __( 'Margin', 'bnm-blocks' ) }
-							values={ headerMargin }
-							onChange={ nextValues => setAttributes( { headerMargin: nextValues } ) }
-						/>
-					
-						<BoxControl
-							label={ __( 'Padding', 'bnm-blocks' ) }
-							values={ headerPadding }
-							onChange={ nextValues => setAttributes( { headerPadding: nextValues } ) }
-						/>
-
-						<PanelColorSettings
-							title={ __( 'Color', 'bnm-blocks' ) }
-							initialOpen={ false }
-							colorSettings={ [
-								{
-									value: attributes.headerColor,
-									onChange: headerColor => setAttributes({ headerColor }),
-									label: __( 'Header Text Color', 'bnm-blocks' )
-								},
-								{
-									value: attributes.headerHoverColor,
-									onChange: headerHoverColor => setAttributes({ headerHoverColor }),
-									label: __( 'Header Text Hover Color', 'bnm-blocks' )
-								}
-							] }
-						/>				
-					</div>
-				) }
-			</PanelBody>
             <PanelBody title={ __( 'Slideshow Settings' ) }  initialOpen={ false }>
+                
+                <ImageSelectControl
+                    label={ __( 'Slider Style', 'bnm-blocks' ) }
+                    value={sliderStyle}
+                    onChange={ ( value ) => setAttributes( { sliderStyle: value } ) }
+                    options={[
+                        { value: 'style-1', label: 'Style 1', image: slideStyle1 },
+                        { value: 'style-2', label: 'Style 2', image: slideStyle2 },
+                        { value: 'style-3', label: 'Style 3', image: slideStyle3 },
+                        { value: 'style-4', label: 'Style 4', image: slideStyle4 },
+                    ]}
+                />
+                
                 <BaseControl
                     label={ __( 'Slide Aspect Ratio', 'bnm-blocks' ) }
                     help={ __( 'All slides will share the same aspect ratio, for consistency.', 'bnm-blocks' ) }
@@ -303,6 +253,76 @@ export function SliderSettings( { attributes, setAttributes } ) {
                 ) }
 
             </PanelBody>
+
+            <PanelBody title={ __( 'Section Header', 'bnm-blocks') } initialOpen={ false }>
+				<ToggleControl
+					label={ __( 'Show Section Header', 'bnm-blocks' ) }
+					checked={ showSectionHeader }
+					onChange={ () => setAttributes( { showSectionHeader: ! showSectionHeader } ) }
+				/>
+				{ showSectionHeader && (
+					<div className="thbnm-settings-panel">
+						<SelectControl
+							label={ __( 'Section Header HTML tag', 'bnm-blocks' ) }
+							labelPosition={ "side" }
+							value={ headerHtmlTag }
+							options={ [
+								{ label: 'h1', value: 'h1' },
+								{ label: 'h2', value: 'h2' },
+								{ label: 'h3', value: 'h3' },
+								{ label: 'h4', value: 'h4' },
+								{ label: 'h5', value: 'h5' },
+								{ label: 'h6', value: 'h6' },
+								{ label: 'span', value: 'span' },
+								{ label: 'p', value: 'p' },
+							] }
+							onChange={ ( newTitleTag ) => setAttributes( { headerHtmlTag: newTitleTag } ) }
+							__nextHasNoMarginBottom
+						/>
+
+						<TypographyControl
+							label = { __( 'Typography', 'bnm-blocks' ) }
+							fontSize={ headerFontSize }
+							onFontSizeChange={ ( newFontSize ) => setAttributes( { headerFontSize: newFontSize } ) }
+							lineHeight = { headerLineHeight }
+							onLineHeightChange = { ( newLineHeight ) => setAttributes( { headerLineHeight: newLineHeight } ) }
+							letterSpacing = { headerLetterSpacing }
+							onLetterSpacingChange = { ( newLetterSpacing ) => setAttributes( { headerLetterSpacing: newLetterSpacing } ) }
+						/>
+
+						<br />
+
+						<BoxControl
+							label={ __( 'Margin', 'bnm-blocks' ) }
+							values={ headerMargin }
+							onChange={ nextValues => setAttributes( { headerMargin: nextValues } ) }
+						/>
+					
+						<BoxControl
+							label={ __( 'Padding', 'bnm-blocks' ) }
+							values={ headerPadding }
+							onChange={ nextValues => setAttributes( { headerPadding: nextValues } ) }
+						/>
+
+						<PanelColorSettings
+							title={ __( 'Color', 'bnm-blocks' ) }
+							initialOpen={ false }
+							colorSettings={ [
+								{
+									value: attributes.headerColor,
+									onChange: headerColor => setAttributes({ headerColor }),
+									label: __( 'Header Text Color', 'bnm-blocks' )
+								},
+								{
+									value: attributes.headerHoverColor,
+									onChange: headerHoverColor => setAttributes({ headerHoverColor }),
+									label: __( 'Header Text Hover Color', 'bnm-blocks' )
+								}
+							] }
+						/>				
+					</div>
+				) }
+			</PanelBody>
 
             <PanelBody title={ __( 'Post Title', 'bnm-blocks' ) } initialOpen={ false }>
                 

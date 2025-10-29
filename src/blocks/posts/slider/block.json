@@ -236,6 +236,10 @@
 		"spaceBetweenSlides": {
 			"type": ["number", "string"],
 			"default": 20
+		},
+		"sliderStyle": {
+			"type": "string",
+			"default": "style-1"
 		}
 	}
 }
