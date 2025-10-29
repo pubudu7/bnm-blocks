@@ -782,6 +782,21 @@
   --bnm-category-padding: 2px 8px;
   margin: 0 0 50px 0;
 }
+.wpbnmposw.bnm-sw-style-2, .wpbnmposw.bnm-sw-style-3 {
+  --bnm-title-font-size: 20px;
+  --bnm-meta-margin: 0;
+}
+.wpbnmposw.bnm-sw-style-3 {
+  --bnm-meta-color: #888;
+  --bnm-meta-hover-color: #555555;
+  --bnm-title-color: #222222;
+  --bnm-category-color: #444444;
+  --bnm-category-hover-color: #555555;
+  --bnm-title-hover-color: #000000;
+}
+.wpbnmposw .bnm-slider-wrapper {
+  position: relative;
+}
 .wpbnmposw .bnm-block-title-wrap {
   position: relative;
   margin: var(--bnm-header-margin);
@@ -914,6 +929,13 @@
   position: absolute;
   right: 0;
 }
+.wpbnmposw.bnm-sw-style-3 .bnm-slider-content {
+  position: relative;
+  background: transparent;
+}
+.wpbnmposw.bnm-sw-style-3 .post-thumbnail {
+  height: auto;
+}
 .wpbnmposw.hide-pagination .bnm-swiper-pagination {
   display: none;
 }
@@ -929,37 +951,10 @@
   height: auto;
   max-height: 100vh;
 }
-.wpbnmposw .bnm-swiper-button-next,
-.wpbnmposw .bnm-swiper-button-prev {
-  color: #ffffff !important;
-  width: 45px;
-  height: 45px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
-}
-.wpbnmposw .bnm-swiper-button-next svg,
-.wpbnmposw .bnm-swiper-button-prev svg {
-  font-size: 20px !important;
-  width: auto;
-  height: auto;
-}
-.wpbnmposw .bnm-swiper-button-next::before, .wpbnmposw .bnm-swiper-button-next::after,
-.wpbnmposw .bnm-swiper-button-prev::before,
-.wpbnmposw .bnm-swiper-button-prev::after {
-  display: none;
-}
-.wpbnmposw .swiper-horizontal .bnm-swiper-button-next, .wpbnmposw .swiper-rtl .swiper-horizontal .bnm-swiper-button-prev {
-  right: 27px;
-  left: auto;
-}
-.wpbnmposw .swiper-horizontal .bnm-swiper-button-prev, .wpbnmposw .swiper-rtl .swiper-horizontal .bnm-swiper-button-next {
-  left: 27px;
-  right: auto;
-}
-.wpbnmposw .thbnm-swiper .swiper-pagination-bullet {
+.wpbnmposw .swiper-pagination-bullet {
   background-color: #cccccc;
 }
-.wpbnmposw .thbnm-swiper .swiper-pagination-bullet-active {
+.wpbnmposw .swiper-pagination-bullet-active {
   background-color: #ffffff;
 }
 
@@ -967,7 +962,7 @@
   display: none;
 }
 
-.wpbnmposw:hover .bnm-slider-content {
+.wpbnmposw .swiper-slide:hover .bnm-slider-content {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0));
 }
 
@@ -975,11 +970,27 @@
   cursor: pointer;
 }
 
-.bnm-swiper-button-prev,
-.bnm-swiper-button-next {
+.bnm-swiper-button-next,
+.bnm-swiper-button-prev {
+  color: #ffffff !important;
+  width: 45px;
+  height: 45px;
+  background-color: rgba(0, 0, 0, 0.5);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 24px 24px;
+  border-radius: 5px;
+}
+.bnm-swiper-button-next svg,
+.bnm-swiper-button-prev svg {
+  font-size: 20px !important;
+  width: auto;
+  height: auto;
+}
+.bnm-swiper-button-next::before, .bnm-swiper-button-next::after,
+.bnm-swiper-button-prev::before,
+.bnm-swiper-button-prev::after {
+  display: none;
 }
 
 .bnm-swiper-button-prev {
@@ -988,6 +999,74 @@
 
 .bnm-swiper-button-next {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 640 640%27%3E%3Cpath d=%27M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z%27 fill=%27%23fff%27/%3E%3C/svg%3E");
+}
+
+.swiper-horizontal .bnm-swiper-button-prev, .swiper-horizontal ~ .bnm-swiper-button-prev, .swiper-horizontal.swiper-rtl .bnm-swiper-button-next, .swiper-horizontal.swiper-rtl ~ .bnm-swiper-button-next {
+  left: 27px;
+  right: auto;
+}
+.swiper-horizontal .bnm-swiper-button-next, .swiper-horizontal ~ .bnm-swiper-button-next, .swiper-horizontal.swiper-rtl .bnm-swiper-button-prev, .swiper-horizontal.swiper-rtl ~ .bnm-swiper-button-prev {
+  right: 27px;
+  left: auto;
+}
+
+@media (min-width: 992px) {
+  .bnm-sw-style-2 .bnm-swiper-button-next,
+.bnm-sw-style-2 .swiper-rtl .bnm-swiper-button-prev,
+.bnm-sw-style-3 .bnm-swiper-button-next,
+.bnm-sw-style-3 .swiper-rtl .bnm-swiper-button-prev {
+    right: -35px;
+  }
+  .bnm-sw-style-2 .bnm-swiper-button-prev,
+.bnm-sw-style-2 .swiper-rtl .bnm-swiper-button-next,
+.bnm-sw-style-3 .bnm-swiper-button-prev,
+.bnm-sw-style-3 .swiper-rtl .bnm-swiper-button-next {
+    left: -35px;
+  }
+}
+.bnm-sw-style-2 .bnm-swiper-button-prev,
+.bnm-sw-style-2 .bnm-swiper-button-next,
+.bnm-sw-style-3 .bnm-swiper-button-prev,
+.bnm-sw-style-3 .bnm-swiper-button-next {
+  width: 30px;
+  height: 30px;
+  background-size: 20px 20px;
+  border-radius: 15px;
+}
+
+.wpbnmposw.bnm-sw-style-3 .swiper-slide:hover .bnm-slider-content {
+  background: transparent;
+}
+
+.bnm-sw-style-3 .swiper-wrapper {
+  align-items: stretch;
+}
+
+.bnm-sw-style-3 .swiper-wrapper .swiper-slide {
+  height: auto;
+  background: #f5f5f5;
+}
+
+.bnm-sw-style-2,
+.bnm-sw-style-3 {
+  margin-bottom: 40px !important;
+}
+.bnm-sw-style-2 .swiper-horizontal > .swiper-pagination-bullets,
+.bnm-sw-style-2 .swiper-pagination-bullets.swiper-pagination-horizontal,
+.bnm-sw-style-2 .swiper-pagination-custom, .bnm-sw-style-2 .swiper-pagination-fraction,
+.bnm-sw-style-3 .swiper-horizontal > .swiper-pagination-bullets,
+.bnm-sw-style-3 .swiper-pagination-bullets.swiper-pagination-horizontal,
+.bnm-sw-style-3 .swiper-pagination-custom,
+.bnm-sw-style-3 .swiper-pagination-fraction {
+  bottom: -30px;
+}
+.bnm-sw-style-2 .swiper-pagination-bullet,
+.bnm-sw-style-3 .swiper-pagination-bullet {
+  background-color: #666;
+}
+.bnm-sw-style-2 .swiper-pagination-bullet-active,
+.bnm-sw-style-3 .swiper-pagination-bullet-active {
+  background-color: #222;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

@@ -27,6 +27,7 @@ if ( typeof window !== 'undefined' ) {
                     play: block.querySelector( '.swiper-button-play' ,)
                 },
                 {
+                    sliderStyle: block.dataset.sliderStyle,
                     aspectRatio: parseFloat( block.dataset.aspectRatio ),
 					autoplay: !! parseInt( block.dataset.autoplay ),
 					delay: parseInt( block.dataset.autoplay_delay ) * 1000,

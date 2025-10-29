@@ -67,6 +67,8 @@ export function SliderSettings( { attributes, setAttributes } ) {
         categoryLetterSpacing,
         categoryMargin,
         categoryPadding,
+        slidesPerView,
+        spaceBetweenSlides,
         sliderStyle
     } = attributes;
 
@@ -135,6 +137,27 @@ export function SliderSettings( { attributes, setAttributes } ) {
                         { value: 'style-2', label: 'Style 2', image: slideStyle2 },
                         { value: 'style-3', label: 'Style 3', image: slideStyle3 },
                         { value: 'style-4', label: 'Style 4', image: slideStyle4 },
+                    ]}
+                />
+
+                { ( 'style-2' === sliderStyle || 'style-3' === sliderStyle ) && (
+                    <RangeControl
+                        label={ __( 'Slides per view', 'bnm-blocks' ) }
+                        value={ slidesPerView }
+                        onChange={ ( value ) => setAttributes( { slidesPerView: value } ) }
+                        min={ 2 }
+                        max={ 4 }
+                        required
+                    />
+                ) }
+
+                <UnitControl
+                    label={ __( 'Space Between Slides', 'bnm-blocks' ) }
+                    value={ spaceBetweenSlides }
+                    onChange={ ( value ) => setAttributes( { spaceBetweenSlides: value } ) }
+                    step={ 5 }
+                    units={[
+                        { value: 'px', label: 'px', }
                     ]}
                 />
                 

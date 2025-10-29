@@ -40,7 +40,7 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 	$slide_image_class = "image-fit-{$image_fit}";
 
 	ob_start(); 
-	
+
 	if ( '' !== $attributes['sectionHeader'] && true === $attributes['showSectionHeader'] ) {
 		echo "<div class=\"bnm-block-title-wrap\">";
 			$tag = ( isset ( $attributes['headerHtmlTag'] ) && ! empty( $attributes['headerHtmlTag'] ) ) ? $attributes['headerHtmlTag'] : 'h2';									
@@ -54,6 +54,8 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 	
 	?>
 
+	<div class="bnm-slider-wrapper">
+	
 	<div class="swiper thbnm-swiper">
 		<div class="swiper-wrapper">
 		
@@ -137,22 +139,29 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 
 		</div><!-- .swiper-wrapper -->
 		
-		<?php if ( $attributes['hidePagination'] === false ) : ?>
-			<div class="swiper-pagination"></div>
-		<?php endif; ?>
-
-		<?php if ( $attributes['hideNextPrevBtns'] === false ) : ?>
-			<div class="bnm-swiper-button-prev"></div>
-			<div class="bnm-swiper-button-next"></div>
-		<?php endif; ?>	
+		
 
 	</div><!-- .swiper -->
+
+	<?php if ( $attributes['hidePagination'] === false ) : ?>
+		<div class="swiper-pagination"></div>
+	<?php endif; ?>
+
+	<?php if ( $attributes['hideNextPrevBtns'] === false ) : ?>
+		<div class="bnm-swiper-button-prev"></div>
+		<div class="bnm-swiper-button-next"></div>
+	<?php endif; ?>	
+
+	</div><!-- .bnm-slider-wrapper -->
 
 	<?php 
 
 	$slider_block = ob_get_clean();
 
-	$classes = array( 'wpbnmposw', 'bnmbcs' );
+	// Slider style class name.
+	$slider_style_class = 'bnm-sw-' . $attributes['sliderStyle'];
+
+	$classes = array( 'wpbnmposw', 'bnmbcs', $slider_style_class );
 
 	if ( $attributes['categoryBGColor'] || $attributes['categoryBGHoverColor'] || ! empty($attributes['categoryPadding']) ) {
 		$classes[] = 'bnm-box-cat';
@@ -168,6 +177,7 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 
 	$data_attributes = [
 		//'data-current-post-id=' . $post_id,
+		'data-slider-style=' . $attributes['sliderStyle'],
 		'data-aspect-ratio=' . $attributes['aspectRatio'],
 		'data-slides-per-view=' . $attributes['slidesPerView'],
 		'data-space-between-slides=' . $attributes['spaceBetweenSlides']

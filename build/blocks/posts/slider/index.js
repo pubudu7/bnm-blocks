@@ -72,14 +72,21 @@ function deactivateSlide(slide) {
 function createSwiper(element) {
   let config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   const slides = element.container.querySelectorAll('.swiper-slide');
+  const sliderStyle = config.sliderStyle;
+  let slidesPerView;
+
+  if ('style-1' === sliderStyle || 'style-4' === sliderStyle) {
+    slidesPerView = 1;
+  } else {
+    slidesPerView = config.slidesPerView;
+  }
+
   const swiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_3__["default"](element.container, {
-    slidesPerView: config.slidesPerView,
     grabCursor: true,
     observer: true,
     observeParents: true,
     a11y: false,
     init: false,
-    spaceBetween: 16,
     speed: 400,
     autoplay: !!config.autoplay && {
       delay: config.delay,
@@ -89,12 +96,27 @@ function createSwiper(element) {
     direction: 'horizontal',
     loop: slides.length > 1,
     initialSlide: config.initialSlide,
-    spaceBetween: config.spaceBetweenSlides,
+    spaceBetween: config.spaceBetweenSlides || 0,
+    // Slides per view.
+    slidesPerView: 1,
+    breakpoints: {
+      480: {
+        slidesPerView: slidesPerView > 1 ? 2 : 1
+      },
+      768: {
+        slidesPerView: slidesPerView
+      }
+    },
     // If we need pagination
     pagination: {
       el: element.pagination,
       clickable: true
     },
+    // If we need scrollbar.
+    // scrollbar: {
+    // 	el: ".swiper-scrollbar",
+    // 	hide: true,
+    // },
     // Navigation arrows
     navigation: {
       nextEl: element.next,
@@ -147,6 +169,10 @@ function createSwiper(element) {
    */
 
   function setAspectRatio() {
+    if (config.sliderStyle === 'style-3') {
+      return;
+    }
+
     const {
       aspectRatio
     } = config;
@@ -378,7 +404,8 @@ function PostsSliderEdit(_ref) {
   const {
     aspectRatio,
     autoplay,
-    delay
+    delay,
+    sliderStyle
   } = attributes;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     //const swiperInstance = initializeSwiper( 0 );
@@ -390,6 +417,7 @@ function PostsSliderEdit(_ref) {
       prev: btnPrevRef.current,
       pagination: paginationRef.current
     }, {
+      sliderStyle,
       initialSlide,
       aspectRatio,
       autoplay,
@@ -400,7 +428,7 @@ function PostsSliderEdit(_ref) {
     return () => {
       swiperInstance.destroy();
     };
-  }, [aspectRatio, autoplay, delay, slidesPerView, spaceBetweenSlides]);
+  }, [sliderStyle, aspectRatio, autoplay, delay, slidesPerView, spaceBetweenSlides]);
   let hasCategoryClass = false;
 
   if (Object.keys(categoryPadding).length !== 0 && categoryPadding.constructor === Object) {
@@ -446,9 +474,11 @@ function PostsSliderEdit(_ref) {
     '--bnm-header-margin': (0,_shared_js_utils_js__WEBPACK_IMPORTED_MODULE_15__.boxValues)(attributes.headerMargin),
     '--bnm-header-color': attributes.headerColor,
     '--bnm-header-hover-color': attributes.headerHoverColor
-  };
+  }; // slider style class.
+
+  const sliderStyleClass = 'bnm-sw-' + sliderStyle;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)({
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wpbnmposw', 'bnmbcs', {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wpbnmposw', 'bnmbcs', sliderStyleClass, {
       'hide-pagination': hidePagination,
       'hide-next-prev-btns': hideNextPrevBtns,
       'bnm-box-cat': hasCategoryClass
@@ -468,26 +498,6 @@ function PostsSliderEdit(_ref) {
     onLoopModeChange: () => setAttributes({
       specificMode: false
     })
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Slides per view', 'bnm-blocks'),
-    value: slidesPerView,
-    onChange: value => setAttributes({
-      slidesPerView: value
-    }),
-    min: 1,
-    max: 4,
-    required: true
-  }), Number(slidesPerView) > 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.__experimentalUnitControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Space Between Slides', 'bnm-blocks'),
-    value: attributes.spaceBetweenSlides,
-    onChange: value => setAttributes({
-      spaceBetweenSlides: value
-    }),
-    step: 5,
-    units: [{
-      value: 'px',
-      label: 'px'
-    }]
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_slider_controls_js__WEBPACK_IMPORTED_MODULE_12__.SliderSettings, {
     attributes: attributes,
     setAttributes: setAttributes
@@ -503,6 +513,8 @@ function PostsSliderEdit(_ref) {
     tagName: attributes.headerHtmlTag,
     className: "article-section-title"
   })), !posts && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Placeholder, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Spinner, null)), posts && posts.length === 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Placeholder, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('No Posts Found For Slider')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bnm-slider-wrapper"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "thbnm-swiper swiper",
     ref: carouselRef
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -548,7 +560,7 @@ function PostsSliderEdit(_ref) {
     }), attributes.showCommentCount && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_meta_meta_js__WEBPACK_IMPORTED_MODULE_13__.PostCommentCount, {
       post: post
     }))));
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "swiper-pagination bnm-swiper-pagination",
     ref: paginationRef
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -746,6 +758,8 @@ function SliderSettings(_ref) {
     categoryLetterSpacing,
     categoryMargin,
     categoryPadding,
+    slidesPerView,
+    spaceBetweenSlides,
     sliderStyle
   } = attributes;
   const aspectRatioOptions = [{
@@ -814,6 +828,26 @@ function SliderSettings(_ref) {
       value: 'style-4',
       label: 'Style 4',
       image: _shared_images_style_4_png__WEBPACK_IMPORTED_MODULE_10__
+    }]
+  }), ('style-2' === sliderStyle || 'style-3' === sliderStyle) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Slides per view', 'bnm-blocks'),
+    value: slidesPerView,
+    onChange: value => setAttributes({
+      slidesPerView: value
+    }),
+    min: 2,
+    max: 4,
+    required: true
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Space Between Slides', 'bnm-blocks'),
+    value: spaceBetweenSlides,
+    onChange: value => setAttributes({
+      spaceBetweenSlides: value
+    }),
+    step: 5,
+    units: [{
+      value: 'px',
+      label: 'px'
     }]
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Slide Aspect Ratio', 'bnm-blocks'),

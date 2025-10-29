@@ -22,8 +22,6 @@ import {
 	PanelBody,
 	Placeholder,
 	Spinner,
-	RangeControl,
-	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 
 /**
@@ -209,7 +207,7 @@ export default function PostsSliderEdit( {
 	const btnPrevRef = useRef(null);
 	const paginationRef = useRef(null);
 
-	const { aspectRatio, autoplay, delay } = attributes;
+	const { aspectRatio, autoplay, delay, sliderStyle } = attributes;
 
 	useEffect( () => {
 		
@@ -226,6 +224,7 @@ export default function PostsSliderEdit( {
 				pagination: paginationRef.current
 			}, 
 			{ 
+				sliderStyle,
 				initialSlide,
 				aspectRatio,
 				autoplay,
@@ -239,7 +238,7 @@ export default function PostsSliderEdit( {
 			swiperInstance.destroy();
 		}
 		
-	}, [aspectRatio, autoplay, delay, slidesPerView, spaceBetweenSlides] );
+	}, [sliderStyle, aspectRatio, autoplay, delay, slidesPerView, spaceBetweenSlides] );
 
 	let hasCategoryClass = false;
 
@@ -288,9 +287,12 @@ export default function PostsSliderEdit( {
 		'--bnm-header-hover-color': attributes.headerHoverColor
 	}
 
+	// slider style class.
+	const sliderStyleClass = 'bnm-sw-' + sliderStyle;
+
 	const blockProps = useBlockProps( {
 		className: classnames( 
-			'wpbnmposw', 'bnmbcs',
+			'wpbnmposw', 'bnmbcs', sliderStyleClass,
 			{
 				'hide-pagination': hidePagination,
 				'hide-next-prev-btns': hideNextPrevBtns,
@@ -310,25 +312,6 @@ export default function PostsSliderEdit( {
 					onSpecificModeChange={ () => setAttributes( { specificMode: true } ) }
 					onLoopModeChange={ () => setAttributes( { specificMode: false } ) }
 				/>
-				<RangeControl
-					label={ __( 'Slides per view', 'bnm-blocks' ) }
-					value={ slidesPerView }
-					onChange={ ( value ) => setAttributes( { slidesPerView: value } ) }
-					min={ 1 }
-					max={ 4 }
-					required
-				/>
-				{ Number( slidesPerView ) > 1 && (
-					<UnitControl
-						label={ __( 'Space Between Slides', 'bnm-blocks' ) }
-						value={ attributes.spaceBetweenSlides }
-						onChange={ ( value ) => setAttributes( { spaceBetweenSlides: value } ) }
-						step={ 5 }
-						units={[
-							{ value: 'px', label: 'px', }
-						]}
-					/>
-				) }
 			</PanelBody>
 			<SliderSettings
 				attributes={ attributes } 
@@ -367,6 +350,8 @@ export default function PostsSliderEdit( {
 						{ __( 'No Posts Found For Slider' ) }
 					</Placeholder>
 				) }
+
+				<div className="bnm-slider-wrapper">
 			
 				<div className="thbnm-swiper swiper" ref={ carouselRef }>
 
@@ -454,6 +439,10 @@ export default function PostsSliderEdit( {
 								</article>
 							);
 						} ) }
+					</div>
+
+					
+
 					</div>
 
 					<div className="swiper-pagination bnm-swiper-pagination" ref={paginationRef}></div>

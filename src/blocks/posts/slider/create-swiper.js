@@ -49,14 +49,21 @@ export default function createSwiper( element, config={} ) {
 
 	const slides = element.container.querySelectorAll('.swiper-slide');
 
+	const sliderStyle = config.sliderStyle;
+	let slidesPerView;
+	if ( 'style-1' === sliderStyle || 'style-4' === sliderStyle ) {
+		slidesPerView = 1;
+	} else {
+		slidesPerView = config.slidesPerView;
+	}
+	
 	const swiper = new Swiper( element.container, {
-		slidesPerView: config.slidesPerView,
+		
 		grabCursor: true,
 		observer: true,
 		observeParents: true, 
 		a11y: false,
 		init: false,
-		spaceBetween: 16,
 		speed: 400,
 		autoplay: !! config.autoplay && {
 				delay: config.delay,
@@ -66,19 +73,37 @@ export default function createSwiper( element, config={} ) {
 		direction: 'horizontal',
 		loop: slides.length > 1,
 		initialSlide: config.initialSlide,
-		spaceBetween: config.spaceBetweenSlides,
+		spaceBetween: config.spaceBetweenSlides || 0,
+
+		// Slides per view.
+		slidesPerView: 1,
+		breakpoints: {
+			480: {
+				slidesPerView: slidesPerView > 1 ? 2 : 1,
+			},
+			768: {
+				slidesPerView: slidesPerView,
+			},
+		},
 	
 		// If we need pagination
 		pagination: {
-		el: element.pagination,
-		clickable: true
+			el: element.pagination,
+			clickable: true
 		},
+
+		// If we need scrollbar.
+		// scrollbar: {
+		// 	el: ".swiper-scrollbar",
+		// 	hide: true,
+		// },
 	
 		// Navigation arrows
 		navigation: {
 		nextEl: element.next,
 		prevEl: element.prev,
 		},
+
 		preventClicksPropagation: false, // Necessary for normal block interactions.
 		touchStartPreventDefault: false, // Necessary for normal block interactions.
 		releaseFormElements: false,
@@ -140,6 +165,10 @@ export default function createSwiper( element, config={} ) {
 	 * Forces an aspect ratio for each slide.
 	 */
 	function setAspectRatio() {
+
+		if ( config.sliderStyle === 'style-3' ) {
+			return;
+		}
 
 		const { aspectRatio } = config;
 		const slides = Array.from( this.slides );
