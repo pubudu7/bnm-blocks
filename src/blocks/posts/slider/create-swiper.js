@@ -56,6 +56,25 @@ export default function createSwiper( element, config={} ) {
 	} else {
 		slidesPerView = config.slidesPerView;
 	}
+
+	// Parent Wrapper
+	const parentWrapper = element.container.closest('.wp-block-bnm-blocks-posts-slider');
+
+	// Find thumbswiper
+	const thumbEl = parentWrapper ? parentWrapper.querySelector('.bnm-thumbnail-swiper') : null;
+
+	let thumbSwiper = "";
+	if ( 'style-4' === sliderStyle && thumbEl ) {
+
+		let thumbSlidesPerView = config.thumbSlidesPerView ? config.thumbSlidesPerView : 5;
+
+		thumbSwiper = new Swiper( thumbEl, {
+			slidesPerView: thumbSlidesPerView,
+			freeMode: true,
+			watchSlidesProgress: true,
+			spaceBetween: 10
+		});
+	}
 	
 	const swiper = new Swiper( element.container, {
 		
@@ -100,8 +119,12 @@ export default function createSwiper( element, config={} ) {
 	
 		// Navigation arrows
 		navigation: {
-		nextEl: element.next,
-		prevEl: element.prev,
+			nextEl: element.next,
+			prevEl: element.prev,
+		},
+
+		thumbs: {
+			swiper: sliderStyle === "style-4" ? thumbSwiper : null,
 		},
 
 		preventClicksPropagation: false, // Necessary for normal block interactions.

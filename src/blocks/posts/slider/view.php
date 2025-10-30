@@ -36,7 +36,9 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 	$autoplay = isset( $attributes['autoplay'] ) ? $attributes['autoplay'] : false;
 	$delay    = isset( $attributes['delay'] ) ? absint( $attributes['delay'] ) : 5;
 	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : '';
+	$slider_thumb_size = ! empty( $attributes['slideThumbSize'] ) ? $attributes['slideThumbSize'] : '';
 	$image_fit = ! empty( $attributes['imageFit'] ) ? $attributes['imageFit'] : 'cover';
+	$thumbSlidesPerView = isset( $attributes['thumbSlidesPerView'] ) ? $attributes['thumbSlidesPerView'] : 5;
 	$slide_image_class = "image-fit-{$image_fit}";
 
 	ob_start(); 
@@ -154,6 +156,46 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 
 	</div><!-- .bnm-slider-wrapper -->
 
+	<?php if ( $attributes['sliderStyle'] === 'style-4' ) : ?>
+		<div thumbsSlider="" class="bnm-thumbnail-swiper swiper">
+			<div class="swiper-wrapper">
+			<?php
+
+				if ( $article_query -> have_posts() ) {
+					
+					while ( $article_query -> have_posts() ) {
+						
+						$article_query -> the_post(); ?>
+
+						<div class="swiper-slide">
+							<div class="bnm-swiper-thumb-bg">
+								<?php 
+									if ( has_post_thumbnail() ) {
+										the_post_thumbnail( $slider_thumb_size );
+									} else {
+										echo '<div class="bnm-img-thumb-placeholder"></div>';
+									}
+								?>
+							</div>
+						</div><!-- .swiper-slide -->
+
+						<?php
+
+					} // Endwhile
+
+					wp_reset_postdata();
+
+				} else {
+					// No posts found
+				}
+
+			?>
+			</div><!-- .swiper-wrapper -->
+		</div><!-- .swiper .bnm-swiper-wrappr -->
+	<?php endif; ?>
+
+	
+
 	<?php 
 
 	$slider_block = ob_get_clean();
@@ -180,7 +222,8 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 		'data-slider-style=' . $attributes['sliderStyle'],
 		'data-aspect-ratio=' . $attributes['aspectRatio'],
 		'data-slides-per-view=' . $attributes['slidesPerView'],
-		'data-space-between-slides=' . $attributes['spaceBetweenSlides']
+		'data-space-between-slides=' . $attributes['spaceBetweenSlides'],
+		'data-thumb-slides-per-view=' . $thumbSlidesPerView
 	];
 
 	if ( $autoplay ) {

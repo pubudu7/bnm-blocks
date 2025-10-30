@@ -79,6 +79,22 @@ function createSwiper(element) {
     slidesPerView = 1;
   } else {
     slidesPerView = config.slidesPerView;
+  } // Parent Wrapper
+
+
+  const parentWrapper = element.container.closest('.wp-block-bnm-blocks-posts-slider'); // Find thumbswiper
+
+  const thumbEl = parentWrapper ? parentWrapper.querySelector('.bnm-thumbnail-swiper') : null;
+  let thumbSwiper = "";
+
+  if ('style-4' === sliderStyle && thumbEl) {
+    let thumbSlidesPerView = config.thumbSlidesPerView ? config.thumbSlidesPerView : 5;
+    thumbSwiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_3__["default"](thumbEl, {
+      slidesPerView: thumbSlidesPerView,
+      freeMode: true,
+      watchSlidesProgress: true,
+      spaceBetween: 10
+    });
   }
 
   const swiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_3__["default"](element.container, {
@@ -121,6 +137,9 @@ function createSwiper(element) {
     navigation: {
       nextEl: element.next,
       prevEl: element.prev
+    },
+    thumbs: {
+      swiper: sliderStyle === "style-4" ? thumbSwiper : null
     },
     preventClicksPropagation: false,
     // Necessary for normal block interactions.
@@ -231,7 +250,8 @@ if (typeof window !== 'undefined') {
         delay: parseInt(block.dataset.autoplay_delay) * 1000,
         initialSlide: 0,
         slidesPerView: parseInt(block.dataset.slidesPerView),
-        spaceBetweenSlides: parseInt(block.dataset.spaceBetweenSlides)
+        spaceBetweenSlides: parseInt(block.dataset.spaceBetweenSlides),
+        thumbSlidesPerView: parseInt(block.dataset.thumbSlidesPerView)
       });
     });
   });

@@ -153,6 +153,10 @@ class Post_Slider_1_CSS {
                     'property'  =>  '--bnm-header-hover-color',
                     'value'     =>  'headerHoverColor',
                 ),
+                array(
+                    'property'  => '--bnm-thumbs-per-view',
+                    'value'     => 'thumbSlidesPerView'
+                )
             )
         );
 

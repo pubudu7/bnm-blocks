@@ -82,6 +82,7 @@ export default function PostsSliderEdit( {
 		showCommentCount,
 		categoryPadding,
 		slidesPerView,
+		thumbSlidesPerView,
 		spaceBetweenSlides
 	} = attributes;
 
@@ -230,7 +231,8 @@ export default function PostsSliderEdit( {
 				autoplay,
 				delay: delay * 1000,
 				slidesPerView,
-				spaceBetweenSlides
+				spaceBetweenSlides,
+				thumbSlidesPerView
 			} 
 		);
 
@@ -238,7 +240,7 @@ export default function PostsSliderEdit( {
 			swiperInstance.destroy();
 		}
 		
-	}, [sliderStyle, aspectRatio, autoplay, delay, slidesPerView, spaceBetweenSlides] );
+	}, [sliderStyle, aspectRatio, autoplay, delay, slidesPerView, spaceBetweenSlides, thumbSlidesPerView] );
 
 	let hasCategoryClass = false;
 
@@ -284,7 +286,8 @@ export default function PostsSliderEdit( {
 		'--bnm-header-padding': boxValues(attributes.headerPadding),
 		'--bnm-header-margin': boxValues(attributes.headerMargin),
 		'--bnm-header-color': attributes.headerColor,
-		'--bnm-header-hover-color': attributes.headerHoverColor
+		'--bnm-header-hover-color': attributes.headerHoverColor,
+		'--bnm-thumbs-per-view': thumbSlidesPerView
 	}
 
 	// slider style class.
@@ -353,95 +356,93 @@ export default function PostsSliderEdit( {
 
 				<div className="bnm-slider-wrapper">
 			
-				<div className="thbnm-swiper swiper" ref={ carouselRef }>
+					<div className="thbnm-swiper swiper" ref={ carouselRef }>
 
-					<div className="swiper-wrapper">
+						<div className="swiper-wrapper">
 
-						{ posts && posts.map( ( post ) => {
-							
-							const {
-								url: imageSourceUrl,
-								alt: featuredImageAlt,
-							} = getFeaturedImageDetails( post, attributes.featuredImageSizeSlug );
+							{ posts && posts.map( ( post ) => {
+								
+								const {
+									url: imageSourceUrl,
+									alt: featuredImageAlt,
+								} = getFeaturedImageDetails( post, attributes.featuredImageSizeSlug );
 
-							const currentAuthor = authorsList?.find(
-								( writer ) => writer.id === post.author
-							);
+								const currentAuthor = authorsList?.find(
+									( writer ) => writer.id === post.author
+								);
 
-							return (
-								<article className="swiper-slide" key={ post.id }>
+								return (
+									<article className="swiper-slide" key={ post.id }>
 
-									<figure className="post-thumbnail">
-										{ imageSourceUrl ? (
-											<img
-												className={ `image-fit-${ imageFit }` }
-												src={ imageSourceUrl }
-												alt={ featuredImageAlt }
-											/>
-										) : (
-											<div className="bnm-img-placeholder"></div>
-										) }
-									</figure>
-
-									<div className="bnmslovrlay inside-gut-editor">
-										<a className="bnmlnkovrlay-ge" href="#"></a>
-									</div>
-
-									{ ( showCategory || showTitle || showAuthor || showDate || showCommentCount ) && (
-										
-										<div className="bnm-slider-content">
-
-											{ showCategory && categoriesList && (
-												<PostCategories
-													categoriesList={categoriesList}
-													post={post}
+										<figure className="post-thumbnail">
+											{ imageSourceUrl ? (
+												<img
+													className={ `image-fit-${ imageFit }` }
+													src={ imageSourceUrl }
+													alt={ featuredImageAlt }
 												/>
+											) : (
+												<div className="bnm-img-placeholder"></div>
 											) }
+										</figure>
+
+										<div className="bnmslovrlay inside-gut-editor">
+											<a className="bnmlnkovrlay-ge" href="#"></a>
+										</div>
+
+										{ ( showCategory || showTitle || showAuthor || showDate || showCommentCount ) && (
 											
-											{ attributes.showTitle && (
-												<PostTitle
-													post={post}
-													attributes={attributes}
-												/>
-											) }
+											<div className="bnm-slider-content">
 
-											<div className="entry-meta">
-
-												{ showAuthor && showAvatar && currentAuthor && (
-													<PostAuthorAvatar
-														author={currentAuthor}
+												{ showCategory && categoriesList && (
+													<PostCategories
+														categoriesList={categoriesList}
+														post={post}
 													/>
 												) }
 												
-												{ showAuthor && currentAuthor && (
-													<PostAuthor
-														author={currentAuthor}
+												{ attributes.showTitle && (
+													<PostTitle
+														post={post}
+														attributes={attributes}
 													/>
 												) }
 
-												{ attributes.showDate && (
-													<PostDateTime 
-														post={post}
-													/>
-												) }
+												<div className="entry-meta">
 
-												{ attributes.showCommentCount && (
-													<PostCommentCount
-														post={post}
-													/>
-												) }
+													{ showAuthor && showAvatar && currentAuthor && (
+														<PostAuthorAvatar
+															author={currentAuthor}
+														/>
+													) }
+													
+													{ showAuthor && currentAuthor && (
+														<PostAuthor
+															author={currentAuthor}
+														/>
+													) }
+
+													{ attributes.showDate && (
+														<PostDateTime 
+															post={post}
+														/>
+													) }
+
+													{ attributes.showCommentCount && (
+														<PostCommentCount
+															post={post}
+														/>
+													) }
+
+												</div>
 
 											</div>
 
-										</div>
-
-									) }
-								</article>
-							);
-						} ) }
-					</div>
-
-					
+										) }
+									</article>
+								);
+							} ) }
+						</div>
 
 					</div>
 
@@ -449,9 +450,42 @@ export default function PostsSliderEdit( {
 								
 					<div className="bnm-swiper-button-prev" ref={btnPrevRef}></div>
 					<div className="bnm-swiper-button-next" ref={btnNextRef}></div>
-					
+						
 				</div>
-			
+
+				{ sliderStyle === 'style-4' && ( 
+					<div thumbsSlider="" className="swiper bnm-thumbnail-swiper">
+
+						<div className="swiper-wrapper">
+
+							{ posts && posts.map( ( post ) => {
+								
+								const {
+									url: imageSourceUrl,
+									alt: featuredImageAlt,
+								} = getFeaturedImageDetails( post, attributes.slideThumbSize );
+
+								return (
+									<div className="swiper-slide" key={ post.id }>
+										<div className="bnm-swiper-thumb-bg">
+											{ imageSourceUrl ? (
+												<img
+													className={ `image-fit-${ imageFit }` }
+													src={ imageSourceUrl }
+													alt={ featuredImageAlt }
+												/>
+											) : (
+												<div className="bnm-thumb-img-placeholder"></div>
+											) }
+										</div>
+									</div>
+								);
+							} ) }
+
+						</div>
+					</div>
+				) }
+				
 			</div>
 		</>
 		

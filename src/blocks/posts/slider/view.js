@@ -33,7 +33,8 @@ if ( typeof window !== 'undefined' ) {
 					delay: parseInt( block.dataset.autoplay_delay ) * 1000,
                     initialSlide: 0,
                     slidesPerView: parseInt( block.dataset.slidesPerView ),
-                    spaceBetweenSlides: parseInt( block.dataset.spaceBetweenSlides )
+                    spaceBetweenSlides: parseInt( block.dataset.spaceBetweenSlides ),
+                    thumbSlidesPerView: parseInt( block.dataset.thumbSlidesPerView )
                 }
             );
         } );

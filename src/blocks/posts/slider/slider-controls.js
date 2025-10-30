@@ -69,7 +69,8 @@ export function SliderSettings( { attributes, setAttributes } ) {
         categoryPadding,
         slidesPerView,
         spaceBetweenSlides,
-        sliderStyle
+        sliderStyle,
+        thumbSlidesPerView
     } = attributes;
 
     const aspectRatioOptions = [
@@ -151,6 +152,17 @@ export function SliderSettings( { attributes, setAttributes } ) {
                     />
                 ) }
 
+                { ( 'style-4' === sliderStyle ) && (
+                    <RangeControl
+                        label={ __( 'Number of thumbnails per view', 'bnm-blocks' ) }
+                        value={ thumbSlidesPerView }
+                        onChange={ ( value ) => setAttributes( { thumbSlidesPerView: value } ) }
+                        min={ 2 }
+                        max={ 20 }
+                        required
+                    />
+                ) }
+
                 <UnitControl
                     label={ __( 'Space Between Slides', 'bnm-blocks' ) }
                     value={ spaceBetweenSlides }
@@ -199,6 +211,18 @@ export function SliderSettings( { attributes, setAttributes } ) {
                     })) }
                     onChange={ imageSize => setAttributes({ featuredImageSizeSlug: imageSize }) }
                 /> 
+
+                { 'style-4' === sliderStyle && (
+                    <SelectControl
+                        label={ __( 'Slider Thumbnail Image Size', 'bnm-blocks' ) }
+                        value={ attributes.slideThumbSize }
+                        options={ Object.entries(window.themezHutGutenberg.imageSizes).map(([value, label]) => ({
+                            value,
+                            label
+                        })) }
+                        onChange={ imageSize => setAttributes({ slideThumbSize: imageSize }) }
+                    /> 
+                ) }
                     
                 <BaseControl
                     label={ __( 'Image Fit', 'bnm-blocks' ) }

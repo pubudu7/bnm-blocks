@@ -297,6 +297,12 @@
     "sliderStyle": {
       "type": "string",
       "default": "style-1"
+    },
+    "thumbSlidesPerView": {
+      "type": "number"
+    },
+    "slideThumbSize": {
+      "type": "string"
     }
   }
 }
