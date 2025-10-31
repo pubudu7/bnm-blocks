@@ -103,8 +103,7 @@
       "default": ""
     },
     "aspectRatio": {
-      "type": "number",
-      "default": 0.5625
+      "type": "number"
     },
     "featuredImageSizeSlug": {
       "type": "string",
@@ -285,14 +284,13 @@
     },
     "slidesPerView": {
       "type": "number",
-      "default": 1
+      "default": 3
     },
     "spaceBetweenSlides": {
       "type": [
         "number",
         "string"
-      ],
-      "default": 20
+      ]
     },
     "sliderStyle": {
       "type": "string",

@@ -188,16 +188,21 @@ function createSwiper(element) {
    */
 
   function setAspectRatio() {
-    if (config.sliderStyle === 'style-3') {
-      return;
-    }
-
     const {
       aspectRatio
     } = config;
     const slides = Array.from(this.slides);
     slides.forEach(slide => {
-      slide.style.height = `${slide.clientWidth * aspectRatio}px`;
+      if (config.sliderStyle === 'style-3') {
+        const slideImage = slide.querySelector('img');
+
+        if (slideImage) {
+          slideImage.style.height = `${slide.clientWidth * aspectRatio}px`;
+        }
+      } else {
+        //console.log(slide.clientWidth * aspectRatio);
+        slide.style.height = `${slide.clientWidth * aspectRatio}px`;
+      }
     });
   }
 

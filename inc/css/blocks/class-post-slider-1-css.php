@@ -154,9 +154,21 @@ class Post_Slider_1_CSS {
                     'value'     =>  'headerHoverColor',
                 ),
                 array(
+                    'property'  => '--bnm-slides-per-view',
+                    'value'     => 'slidesPerView'
+                ),
+                array(
                     'property'  => '--bnm-thumbs-per-view',
                     'value'     => 'thumbSlidesPerView'
-                )
+                ),
+                array(
+                    'property'  => '--bnm-slider-aspect-ratio',
+                    'value'     => 'aspectRatio'
+                ),
+                array(
+                    'property'  => '--bnm-space-between-slides',
+                    'value'     => 'spaceBetweenSlides'
+                ),
             )
         );
 

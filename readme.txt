@@ -26,6 +26,12 @@ A collection of blocks developed for WordPress Gutenberg editor. All of these bl
 
 == Changelog ==
 
+= 1.3.0 =
+* Added 3 different layouts for slider.
+* Updated swiper library to 12.0.3
+* Added block style "Borders" for the core "Columns" block.
+* TODO - Update wordpress scripts & check.
+
 = 1.2.3 =
 * Added a control to select specific posts for a block.
 * Fixed category select control re-render issue.

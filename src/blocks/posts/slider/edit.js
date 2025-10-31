@@ -287,7 +287,10 @@ export default function PostsSliderEdit( {
 		'--bnm-header-margin': boxValues(attributes.headerMargin),
 		'--bnm-header-color': attributes.headerColor,
 		'--bnm-header-hover-color': attributes.headerHoverColor,
-		'--bnm-thumbs-per-view': thumbSlidesPerView
+		'--bnm-space-between-slides': spaceBetweenSlides,
+		'--bnm-slides-per-view': slidesPerView,
+		'--bnm-thumbs-per-view': thumbSlidesPerView,
+		'--bnm-slider-aspect-ratio': aspectRatio
 	}
 
 	// slider style class.
@@ -382,7 +385,7 @@ export default function PostsSliderEdit( {
 													alt={ featuredImageAlt }
 												/>
 											) : (
-												<div className="bnm-img-placeholder"></div>
+												<img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" />
 											) }
 										</figure>
 

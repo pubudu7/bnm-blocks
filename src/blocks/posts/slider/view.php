@@ -33,6 +33,10 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 
 	$article_query = new WP_Query( $post_query_args );
 
+	$slider_style = isset( $attributes['sliderStyle'] ) ? $attributes['sliderStyle'] : 'style-1';
+	$slides_per_view = isset( $attributes['slidesPerView'] ) ? $attributes['slidesPerView'] : 1;
+	$asepec_ratio = isset( $attributes['aspectRatio'] ) ? $attributes['aspectRatio'] : 0.5625;
+	$space_between_slides = isset( $attributes['spaceBetweenSlides'] ) ? $attributes['spaceBetweenSlides'] : 20;
 	$autoplay = isset( $attributes['autoplay'] ) ? $attributes['autoplay'] : false;
 	$delay    = isset( $attributes['delay'] ) ? absint( $attributes['delay'] ) : 5;
 	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : '';
@@ -77,7 +81,10 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 									if ( has_post_thumbnail() ) {
 										the_post_thumbnail( $featured_image_slug, [ 'class' => $slide_image_class ] );
 									} else {
-										echo '<div class="bnm-img-placeholder"></div>';
+										//echo '<div class="bnm-img-placeholder"></div>'; 
+										?>
+										<img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="">
+										<?php
 									}
 								?>
 							</figure>
@@ -219,10 +226,10 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 
 	$data_attributes = [
 		//'data-current-post-id=' . $post_id,
-		'data-slider-style=' . $attributes['sliderStyle'],
-		'data-aspect-ratio=' . $attributes['aspectRatio'],
-		'data-slides-per-view=' . $attributes['slidesPerView'],
-		'data-space-between-slides=' . $attributes['spaceBetweenSlides'],
+		'data-slider-style=' . $slider_style,
+		'data-aspect-ratio=' . $asepec_ratio,
+		'data-slides-per-view=' . $slides_per_view,
+		'data-space-between-slides=' . $space_between_slides,
 		'data-thumb-slides-per-view=' . $thumbSlidesPerView
 	];
 
