@@ -54,6 +54,10 @@
 			"type": "boolean",
 			"default": true
 		},
+		"sectionHeaderStyle": {
+			"type": "string",
+			"default": "1"
+		},
 		"sectionHeader": {
 			"type": "string",
 			"default": ""

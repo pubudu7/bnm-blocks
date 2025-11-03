@@ -32,6 +32,7 @@ export function SliderSettings( { attributes, setAttributes } ) {
 
     const { 
         showSectionHeader,
+        sectionHeaderStyle,
 		headerHtmlTag,
 		headerFontSize,
 		headerLineHeight,
@@ -309,6 +310,18 @@ export function SliderSettings( { attributes, setAttributes } ) {
 				/>
 				{ showSectionHeader && (
 					<div className="thbnm-settings-panel">
+                        <SelectControl
+                            label={ __( 'Section Header Style', 'bnm-blocks' ) }
+                            value={ sectionHeaderStyle }
+                            options={ [
+                                { label: 'Style 1', value: '1' },
+                                { label: 'Style 2', value: '2' },
+                                { label: 'Style 3', value: '3' },
+                                { label: 'Style 4', value: '4' },
+                            ] }
+                            onChange={ ( newHeaderStyle ) => setAttributes( { sectionHeaderStyle: newHeaderStyle } ) }
+                            __nextHasNoMarginBottom
+                        />
 						<SelectControl
 							label={ __( 'Section Header HTML tag', 'bnm-blocks' ) }
 							labelPosition={ "side" }

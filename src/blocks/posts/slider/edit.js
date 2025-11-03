@@ -67,6 +67,7 @@ export default function PostsSliderEdit( {
 	setAttributes,
 } ) {
 	const {
+		sectionHeaderStyle,
 		queryId,
 		query,
 		specificMode,
@@ -303,8 +304,9 @@ export default function PostsSliderEdit( {
 				'hide-pagination': hidePagination,
 				'hide-next-prev-btns': hideNextPrevBtns,
 				'bnm-box-cat': hasCategoryClass
-			}	
-		),
+			},
+			sectionHeaderStyle ? `bnm-bhs-${sectionHeaderStyle}` : null
+			),
 		style: inlineStyles
 	} );
 

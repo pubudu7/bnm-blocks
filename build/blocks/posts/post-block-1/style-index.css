@@ -27,22 +27,7 @@
   --bnm-image-width: 33%;
   --bnm-content-width: 67%;
   --bnm-image-margin: 0 1em 0 0;
-  --bnm-border-color: rgba(0, 0, 0, 0.2);
   margin: 0 0 50px 0;
-}
-.wpbnmpb1 .bnm-block-title-wrap {
-  position: relative;
-  margin: var(--bnm-header-margin);
-  padding: var(--bnm-header-padding);
-}
-.wpbnmpb1 .article-section-title {
-  color: var(--bnm-header-color);
-  font-size: var(--bnm-header-font-size);
-  line-height: var(--bnm-header-line-height);
-  letter-spacing: var(--bnm-header-letter-spacing);
-  border-bottom: 2px solid #000000;
-  margin: 0;
-  padding: 0;
 }
 .wpbnmpb1 article {
   word-break: break-word;

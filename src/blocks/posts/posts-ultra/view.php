@@ -188,6 +188,10 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 		$classes[] = 'is-style-borders';
 	}
 
+	if ( $attributes['sectionHeaderStyle'] ) {
+		$classes[] = 'bnm-bhs-' . $attributes['sectionHeaderStyle'];
+	}
+
 	$wrapper_attributes = get_block_wrapper_attributes( array( 
 		'class' => implode( ' ', $classes ),
 		'style' => $styles,

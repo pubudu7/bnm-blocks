@@ -218,6 +218,10 @@ function bnmbt_featured_posts_block_1_render_callback( $attributes ) {
 		$classes[] = 'bnm-box-cat';
 	}
 
+	if ( $attributes['sectionHeaderStyle'] ) {
+		$classes[] = 'bnm-bhs-' . $attributes['sectionHeaderStyle'];
+	}
+
 	$wrapper_attributes = get_block_wrapper_attributes( array( 
 		'class' => implode( ' ', $classes ),
 		'style' => $styles,

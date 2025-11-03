@@ -54,6 +54,7 @@ const USERS_LIST_QUERY = {
 export default function Edit( { attributes, setAttributes } ) {
 
     const {
+		sectionHeaderStyle,
 		queryId,
 		query,
 		specificMode,
@@ -274,7 +275,9 @@ export default function Edit( { attributes, setAttributes } ) {
 		className: classnames( 'wpbnmpb2', 'bnmbcs', {
 			'bnm-box-cat': hasCategoryClass,
 			'is-style-borders': hasPostBorder
-		}),
+		},
+		sectionHeaderStyle ? `bnm-bhs-${sectionHeaderStyle}` : null
+		),
 		style: inlineStyles
 	});
 

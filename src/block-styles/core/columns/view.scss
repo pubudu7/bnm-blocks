@@ -35,7 +35,7 @@ body:not([class*="block-theme"]) div.wp-block-columns {
 			position: relative;
 
 			&::after {
-				border: 0 solid #e0e0e0;
+				border: 0 solid var(--bnm-border-color);
 				border-top-width: 1px;
 				bottom: -32px;
 				content: "";

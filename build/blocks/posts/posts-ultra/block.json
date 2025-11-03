@@ -41,7 +41,7 @@
     },
     "specificMode": {
       "type": "boolean",
-      "default": "false"
+      "default": false
     },
     "specificPosts": {
       "type": "array",
@@ -53,6 +53,10 @@
     "showSectionHeader": {
       "type": "boolean",
       "default": true
+    },
+    "sectionHeaderStyle": {
+      "type": "string",
+      "default": "1"
     },
     "sectionHeader": {
       "type": "string",

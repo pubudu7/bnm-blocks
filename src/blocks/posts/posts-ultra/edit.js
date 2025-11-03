@@ -77,6 +77,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
     const {
 		sectionHeader,
+		sectionHeaderStyle,
 		queryId,
 		query,
 		specificMode,
@@ -293,7 +294,9 @@ export default function Edit( { attributes, setAttributes } ) {
 			'custom-image-width': ( featuredImageWidth !== "33%" ) || ( entryContentWidth !== "67%" ),
 			'custom-image-margin': hasCustomImageMargin,
 			'is-style-borders': hasPostBorder
-		}),
+		},
+		sectionHeaderStyle ? `bnm-bhs-${sectionHeaderStyle}` : null
+		),
 		style: inlineStyles
 	});
 

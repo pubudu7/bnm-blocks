@@ -29,7 +29,7 @@ body:not([class*=block-theme]) div.wp-block-columns.is-style-borders {
   position: relative;
 }
 .wp-block-columns.is-style-borders > .wp-block-column::after {
-  border: 0 solid #e0e0e0;
+  border: 0 solid var(--bnm-border-color);
   border-top-width: 1px;
   bottom: -32px;
   content: "";
@@ -107,7 +107,7 @@ body:not([class*=block-theme]) .editor-styles-wrapper div.wp-block-columns.is-st
   }
 }
 .wp-block-columns.is-style-borders > [data-type="core/column"] {
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--bnm-border-color);
   position: relative;
 }
 .wp-block-columns.is-style-borders > [data-type="core/column"]:last-child,
@@ -119,7 +119,7 @@ body:not([class*=block-theme]) .editor-styles-wrapper div.wp-block-columns.is-st
     border-bottom: 0;
   }
   .wp-block-columns.is-style-borders > [data-type="core/column"]::after {
-    border-right: 1px solid #e0e0e0;
+    border-right: 1px solid var(--bnm-border-color);
     bottom: 0;
     content: "";
     position: absolute;
@@ -127,7 +127,7 @@ body:not([class*=block-theme]) .editor-styles-wrapper div.wp-block-columns.is-st
     top: 0;
   }
   .wp-block-columns.is-style-borders > [data-type="core/column"]:nth-child(odd)::after {
-    border-color: #e0e0e0;
+    border-color: var(--bnm-border-color);
   }
   .wp-block-columns.is-style-borders > [data-type="core/column"]:last-child::after,
 .wp-block-columns.is-style-borders > [data-type="core/column"] [data-type="core/column"]::after {
@@ -136,7 +136,7 @@ body:not([class*=block-theme]) .editor-styles-wrapper div.wp-block-columns.is-st
 }
 @media only screen and (min-width: 782px) {
   .wp-block-columns.is-style-borders > [data-type="core/column"]::after {
-    border-color: #e0e0e0;
+    border-color: var(--bnm-border-color);
   }
 }
 @media only screen and (min-width: 782px) {
@@ -158,6 +158,33 @@ body:not([class*=block-theme]) .editor-styles-wrapper div.wp-block-columns.is-st
 /*!****************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/shared/sass/styles.scss ***!
   \****************************************************************************************************************************************************************************************************************************************************/
+:root {
+  --bnm-border-color: #e0e0e0;
+}
+
+.bnm-block-title-wrap {
+  position: relative;
+  width: 100%;
+  margin: var(--bnm-header-margin);
+  padding: var(--bnm-header-padding);
+}
+
+.article-section-title {
+  color: var(--bnm-header-color);
+  font-size: var(--bnm-header-font-size);
+  line-height: var(--bnm-header-line-height);
+  letter-spacing: var(--bnm-header-letter-spacing);
+  border-bottom: 2px solid #000000;
+  margin: 0;
+  padding: 0;
+}
+
+.bnm-bhs-2 .article-section-title {
+  border-bottom: none;
+  border-left: 6px solid #000000;
+  padding-left: 10px;
+}
+
 .bnmfpovrlay,
 .bnmslovrlay,
 .bnmlnkovrlay {

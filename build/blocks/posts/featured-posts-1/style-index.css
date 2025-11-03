@@ -30,20 +30,6 @@
   --bnm-excerpt-margin-small: 0 0 20px;
   margin: 0 0 50px 0;
 }
-.wpbnmfpb1 .bnm-block-title-wrap {
-  position: relative;
-  margin: var(--bnm-header-margin);
-  padding: var(--bnm-header-padding);
-}
-.wpbnmfpb1 .article-section-title {
-  color: var(--bnm-header-color);
-  font-size: var(--bnm-header-font-size);
-  line-height: var(--bnm-header-line-height);
-  letter-spacing: var(--bnm-header-letter-spacing);
-  border-bottom: 2px solid #000000;
-  margin: 0;
-  padding: 0;
-}
 .wpbnmfpb1 article {
   word-break: break-word;
   overflow-wrap: break-word;

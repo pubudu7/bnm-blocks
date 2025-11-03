@@ -216,6 +216,10 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 		$classes[] = 'bnm-box-cat';
 	}
 
+	if ( $attributes['sectionHeaderStyle'] ) {
+		$classes[] = 'bnm-bhs-' . $attributes['sectionHeaderStyle'];
+	}	
+
 	$css = new Post_Slider_1_CSS();
 	$styles = $css->render_css( $attributes );
 
