@@ -70,8 +70,8 @@
             flex-basis: calc( 33.33% - ( var( --bnm-col-gap ) / 3 * 2 ) );
         }
 
-        &.is-style-borders.columns-3 article,
-		&.is-style-borders.columns-6 article {
+        &.is-style-bnm-borders.columns-3 article,
+		&.is-style-bnm-borders.columns-6 article {
 			flex-basis: calc(33.33% - ( 2 * var(--bnm-col-gap) / 3 * 2 ) - 1.1px);
 		}
 
@@ -81,14 +81,14 @@
             flex-basis: calc( 50% - ( var( --bnm-col-gap ) / 2 ) );
         }
 
-        &.is-style-borders.columns-2 article,
-		&.is-style-borders.columns-4 article,
-		&.is-style-borders.columns-5 article {
+        &.is-style-bnm-borders.columns-2 article,
+		&.is-style-bnm-borders.columns-4 article,
+		&.is-style-bnm-borders.columns-5 article {
 			flex-basis: calc(50% - ( 2 * var(--bnm-col-gap) / 2 ) - 1.1px);
 		}
 
         &.columns-5 article:last-of-type,
-        &.is-style-borders.columns-5 article:last-of-type {
+        &.is-style-bnm-borders.columns-5 article:last-of-type {
 			flex-basis: 100%;
 		}
     }
@@ -98,7 +98,7 @@
             flex-basis: calc( 25% - ( var( --bnm-col-gap ) / 4 * 3 ) );
         }
 
-		&.is-style-borders.columns-4 article {
+		&.is-style-bnm-borders.columns-4 article {
 			flex-basis: calc(25% - ( 2 * var(--bnm-col-gap) / 4 * 3 ) - 1.1px);
 		}    
 
@@ -107,8 +107,8 @@
 			flex-basis: calc( 20% - ( var( --bnm-col-gap ) / 5 * 4 ) );
 		}
 
-        &.is-style-borders.columns-5 article,
-		&.is-style-borders.columns-5 article:last-of-type {
+        &.is-style-bnm-borders.columns-5 article,
+		&.is-style-bnm-borders.columns-5 article:last-of-type {
 			flex-basis: calc(20% - ( 2 * var(--bnm-col-gap) / 5 * 4 ) - 1.1px);
 		}
 
@@ -116,7 +116,7 @@
             flex-basis: calc( 16.6666% - ( var( --bnm-col-gap ) / 6 * 5 ) );
         }
 
-        &.is-style-borders.columns-6 article {
+        &.is-style-bnm-borders.columns-6 article {
 			flex-basis: calc(16.6666% - ( 2 * var(--bnm-col-gap) / 6 * 5 ) - 1.1px);
 		}
     }
@@ -361,14 +361,14 @@
         }
     }
 
-   /* &.is-style-borders:not(&.is-grid) article:not(:last-child) {
+   /* &.is-style-bnm-borders:not(&.is-grid) article:not(:last-child) {
         border-bottom: 1px solid var(--bnm-border-color);
         padding-bottom: 1em;
     }*/
 
 }
 
-.wpbnmspp.is-style-borders {
+.wpbnmspp.is-style-bnm-borders {
 	article {
 		border: solid var(--bnm-border-color);
 		border-width: 0 0 1px;

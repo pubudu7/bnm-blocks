@@ -2,332 +2,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/blocks/posts/slider/create-swiper.js":
-/*!**************************************************!*\
-  !*** ./src/blocks/posts/slider/create-swiper.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createSwiper)
-/* harmony export */ });
-/* harmony import */ var _wordpress_a11y__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/a11y */ "@wordpress/a11y");
-/* harmony import */ var _wordpress_a11y__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_a11y__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/escape-html */ "@wordpress/escape-html");
-/* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var swiper_bundle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! swiper/bundle */ "./node_modules/swiper/swiper-bundle.mjs");
-/* harmony import */ var swiper_css_bundle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! swiper/css/bundle */ "./node_modules/swiper/swiper-bundle.css");
-
-
- // eslint-disable-next-line import/no-unresolved
-
- // eslint-disable-next-line import/no-unresolved
-
-
-/**
- * A helper for IE11-compatible iteration over NodeList elements.
- *
- * @param {Object}   nodeList List of nodes to be iterated over.
- * @param {Function} cb       Invoked for each iteratee.
- */
-
-function forEachNode(nodeList, cb) {
-  /**
-   * Calls Array.prototype.forEach for IE11 compatibility.
-   *
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/NodeList
-   */
-  Array.prototype.forEach.call(nodeList, cb);
-}
-/**
- * Modifies attributes on slide HTML to make it accessible.
- *
- * @param {HTMLElement} slide Slide DOM element
- */
-
-
-function activateSlide(slide) {
-  if (slide) {
-    slide.setAttribute('aria-hidden', 'false');
-    forEachNode(slide.querySelectorAll('a'), el => el.removeAttribute('tabindex'));
-  }
-}
-/**
- * Modifies attributes on slide HTML to make it accessible.
- *
- * @param {HTMLElement} slide Slide DOM element
- */
-
-
-function deactivateSlide(slide) {
-  if (slide) {
-    slide.setAttribute('aria-hidden', 'true');
-    forEachNode(slide.querySelectorAll('a'), el => el.setAttribute('tabindex', '-1'));
-  }
-}
-
-function createSwiper(element) {
-  let config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  const slides = element.container.querySelectorAll('.swiper-slide');
-  const sliderStyle = config.sliderStyle;
-  let slidesPerView;
-
-  if ('style-1' === sliderStyle || 'style-4' === sliderStyle) {
-    slidesPerView = 1;
-  } else {
-    slidesPerView = config.slidesPerView;
-  } // Parent Wrapper
-
-
-  const parentWrapper = element.container.closest('.wp-block-bnm-blocks-posts-slider'); // Find thumbswiper
-
-  const thumbEl = parentWrapper ? parentWrapper.querySelector('.bnm-thumbnail-swiper') : null;
-  let thumbSwiper = "";
-
-  if ('style-4' === sliderStyle && thumbEl) {
-    let thumbSlidesPerView = config.thumbSlidesPerView ? config.thumbSlidesPerView : 5;
-    thumbSwiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_3__["default"](thumbEl, {
-      slidesPerView: thumbSlidesPerView,
-      freeMode: true,
-      watchSlidesProgress: true,
-      spaceBetween: 10
-    });
-  }
-
-  const swiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_3__["default"](element.container, {
-    grabCursor: true,
-    observer: true,
-    observeParents: true,
-    a11y: false,
-    init: false,
-    speed: 400,
-    autoplay: !!config.autoplay && {
-      delay: config.delay,
-      disableOnInteraction: true
-    },
-    // Optional parameters
-    direction: 'horizontal',
-    loop: slides.length > 1,
-    initialSlide: config.initialSlide,
-    spaceBetween: config.spaceBetweenSlides || 0,
-    // Slides per view.
-    slidesPerView: 1,
-    breakpoints: {
-      480: {
-        slidesPerView: slidesPerView > 1 ? 2 : 1
-      },
-      768: {
-        slidesPerView: slidesPerView
-      }
-    },
-    // If we need pagination
-    pagination: {
-      el: element.pagination,
-      clickable: true
-    },
-    // If we need scrollbar.
-    // scrollbar: {
-    // 	el: ".swiper-scrollbar",
-    // 	hide: true,
-    // },
-    // Navigation arrows
-    navigation: {
-      nextEl: element.next,
-      prevEl: element.prev
-    },
-    thumbs: {
-      swiper: sliderStyle === "style-4" ? thumbSwiper : null
-    },
-    preventClicksPropagation: false,
-    // Necessary for normal block interactions.
-    touchStartPreventDefault: false,
-    // Necessary for normal block interactions.
-    releaseFormElements: false,
-    setWrapperSize: true,
-    on: {
-      init() {
-        forEachNode(this.wrapperEl.querySelectorAll('.swiper-slide'), slide => deactivateSlide(slide));
-        activateSlide(this.slides[this.activeIndex]); // Set-up our active slide.
-      },
-
-      slideChange() {
-        var _this$autoplay;
-
-        const currentSlide = this.slides[this.activeIndex];
-        deactivateSlide(this.slides[this.previousIndex]);
-        activateSlide(currentSlide);
-        /**
-         * If we're autoplaying, don't announce the slide change, as that would
-         * be supremely annoying.
-         */
-
-        if (!((_this$autoplay = this.autoplay) !== null && _this$autoplay !== void 0 && _this$autoplay.running)) {
-          var _this$pagination, _this$pagination$bull;
-
-          // Announce the contents of the slide.
-          const currentImage = currentSlide.querySelector('img');
-          const alt = currentImage ? currentImage === null || currentImage === void 0 ? void 0 : currentImage.alt : false;
-          const slideInfo = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)(
-          /* translators: 1: current slide number and 2: total number of slides */
-          (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Slide %1$s of %2$s', 'bnm-blocks'), this.realIndex + 1, ((_this$pagination = this.pagination) === null || _this$pagination === void 0 ? void 0 : (_this$pagination$bull = _this$pagination.bullets) === null || _this$pagination$bull === void 0 ? void 0 : _this$pagination$bull.length) || 0);
-          (0,_wordpress_a11y__WEBPACK_IMPORTED_MODULE_0__.speak)((0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(`${currentSlide.innerText},
-								${alt ?
-          /* translators: the title of the image. */
-          (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Image: %s, ', 'bnm-blocks'), alt) : ''}
-								${slideInfo}`), 'assertive');
-        }
-      }
-
-    }
-  });
-  /**
-   * Forces an aspect ratio for each slide.
-   */
-
-  function setAspectRatio() {
-    const {
-      aspectRatio
-    } = config;
-    const slides = Array.from(this.slides);
-    slides.forEach(slide => {
-      if (config.sliderStyle === 'style-3') {
-        const slideImage = slide.querySelector('img');
-
-        if (slideImage) {
-          slideImage.style.height = `${slide.clientWidth * aspectRatio}px`;
-        }
-      } else {
-        //console.log(slide.clientWidth * aspectRatio);
-        slide.style.height = `${slide.clientWidth * aspectRatio}px`;
-      }
-    });
-  }
-
-  swiper.on('beforeSlideChangeStart', setAspectRatio);
-  swiper.on('resize', setAspectRatio);
-  swiper.init();
-  return swiper;
-}
-
-/***/ }),
-
-/***/ "./src/blocks/posts/slider/view.js":
-/*!*****************************************!*\
-  !*** ./src/blocks/posts/slider/view.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/dom-ready */ "@wordpress/dom-ready");
-/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _create_swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-swiper */ "./src/blocks/posts/slider/create-swiper.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/posts/slider/style.scss");
-/**
- * WordPress dependencies
- */
-
-/**
- * Internal dependencies
- */
-
-
-
-
-if (typeof window !== 'undefined') {
-  _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(() => {
-    const blocksArray = Array.from(document.querySelectorAll('.wp-block-bnm-blocks-posts-slider'));
-    blocksArray.forEach(block => {
-      (0,_create_swiper__WEBPACK_IMPORTED_MODULE_1__["default"])({
-        block,
-        container: block.querySelector('.thbnm-swiper'),
-        prev: block.querySelector('.bnm-swiper-button-prev'),
-        next: block.querySelector('.bnm-swiper-button-next'),
-        pagination: block.querySelector('.swiper-pagination'),
-        pause: block.querySelector('.swiper-button-pause'),
-        play: block.querySelector('.swiper-button-play')
-      }, {
-        sliderStyle: block.dataset.sliderStyle,
-        aspectRatio: parseFloat(block.dataset.aspectRatio),
-        autoplay: !!parseInt(block.dataset.autoplay),
-        delay: parseInt(block.dataset.autoplay_delay) * 1000,
-        initialSlide: 0,
-        slidesPerView: parseInt(block.dataset.slidesPerView),
-        spaceBetweenSlides: parseInt(block.dataset.spaceBetweenSlides),
-        thumbSlidesPerView: parseInt(block.dataset.thumbSlidesPerView)
-      });
-    });
-  });
-}
-
-/***/ }),
-
-/***/ "./node_modules/swiper/swiper-bundle.css":
-/*!***********************************************!*\
-  !*** ./node_modules/swiper/swiper-bundle.css ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/blocks/posts/slider/style.scss":
-/*!********************************************!*\
-  !*** ./src/blocks/posts/slider/style.scss ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "@wordpress/a11y":
-/*!******************************!*\
-  !*** external ["wp","a11y"] ***!
-  \******************************/
-/***/ ((module) => {
-
-module.exports = window["wp"]["a11y"];
-
-/***/ }),
-
-/***/ "@wordpress/dom-ready":
-/*!**********************************!*\
-  !*** external ["wp","domReady"] ***!
-  \**********************************/
-/***/ ((module) => {
-
-module.exports = window["wp"]["domReady"];
-
-/***/ }),
-
-/***/ "@wordpress/escape-html":
-/*!************************************!*\
-  !*** external ["wp","escapeHtml"] ***!
-  \************************************/
-/***/ ((module) => {
-
-module.exports = window["wp"]["escapeHtml"];
-
-/***/ }),
-
-/***/ "@wordpress/i18n":
-/*!******************************!*\
-  !*** external ["wp","i18n"] ***!
-  \******************************/
-/***/ ((module) => {
-
-module.exports = window["wp"]["i18n"];
-
-/***/ }),
-
 /***/ "./node_modules/swiper/modules/a11y.mjs":
 /*!**********************************************!*\
   !*** ./node_modules/swiper/modules/a11y.mjs ***!
@@ -6041,7 +5715,7 @@ function Zoom({
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "c": () => (/* binding */ classesToSelector)
+/* harmony export */   c: () => (/* binding */ classesToSelector)
 /* harmony export */ });
 function classesToSelector(classes = '') {
   return `.${classes.trim().replace(/([\.:!+\/()[\]])/g, '\\$1') // eslint-disable-line
@@ -6061,7 +5735,7 @@ function classesToSelector(classes = '') {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "c": () => (/* binding */ createElementIfNotDefined)
+/* harmony export */   c: () => (/* binding */ createElementIfNotDefined)
 /* harmony export */ });
 /* harmony import */ var _utils_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.mjs */ "./node_modules/swiper/shared/utils.mjs");
 
@@ -6097,7 +5771,7 @@ function createElementIfNotDefined(swiper, originalParams, params, checkProps) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "c": () => (/* binding */ createShadow)
+/* harmony export */   c: () => (/* binding */ createShadow)
 /* harmony export */ });
 /* harmony import */ var _utils_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.mjs */ "./node_modules/swiper/shared/utils.mjs");
 
@@ -6126,7 +5800,7 @@ function createShadow(suffix, slideEl, side) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "e": () => (/* binding */ effectInit)
+/* harmony export */   e: () => (/* binding */ effectInit)
 /* harmony export */ });
 function effectInit(params) {
   const {
@@ -6198,7 +5872,7 @@ function effectInit(params) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "e": () => (/* binding */ effectTarget)
+/* harmony export */   e: () => (/* binding */ effectTarget)
 /* harmony export */ });
 /* harmony import */ var _utils_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.mjs */ "./node_modules/swiper/shared/utils.mjs");
 
@@ -6225,7 +5899,7 @@ function effectTarget(effectParams, slideEl) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "e": () => (/* binding */ effectVirtualTransitionEnd)
+/* harmony export */   e: () => (/* binding */ effectVirtualTransitionEnd)
 /* harmony export */ });
 /* harmony import */ var _utils_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.mjs */ "./node_modules/swiper/shared/utils.mjs");
 
@@ -6287,8 +5961,8 @@ function effectVirtualTransitionEnd({
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "a": () => (/* binding */ getWindow),
-/* harmony export */   "g": () => (/* binding */ getDocument)
+/* harmony export */   a: () => (/* binding */ getWindow),
+/* harmony export */   g: () => (/* binding */ getDocument)
 /* harmony export */ });
 /**
  * SSR Window 5.0.1
@@ -6442,8 +6116,8 @@ function getWindow() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "S": () => (/* binding */ Swiper),
-/* harmony export */   "d": () => (/* binding */ defaults)
+/* harmony export */   S: () => (/* binding */ Swiper),
+/* harmony export */   d: () => (/* binding */ defaults)
 /* harmony export */ });
 /* harmony import */ var _ssr_window_esm_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ssr-window.esm.mjs */ "./node_modules/swiper/shared/ssr-window.esm.mjs");
 /* harmony import */ var _utils_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.mjs */ "./node_modules/swiper/shared/utils.mjs");
@@ -10331,31 +10005,31 @@ Swiper.use([Resize, Observer]);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "a": () => (/* binding */ getRotateFix),
-/* harmony export */   "b": () => (/* binding */ setCSSProperty),
-/* harmony export */   "c": () => (/* binding */ createElement),
-/* harmony export */   "d": () => (/* binding */ elementParents),
-/* harmony export */   "e": () => (/* binding */ elementChildren),
-/* harmony export */   "f": () => (/* binding */ elementOffset),
-/* harmony export */   "g": () => (/* binding */ getSlideTransformEl),
-/* harmony export */   "h": () => (/* binding */ now),
-/* harmony export */   "i": () => (/* binding */ elementOuterSize),
-/* harmony export */   "j": () => (/* binding */ elementIndex),
-/* harmony export */   "k": () => (/* binding */ classesToTokens),
-/* harmony export */   "l": () => (/* binding */ getTranslate),
-/* harmony export */   "m": () => (/* binding */ makeElementsArray),
-/* harmony export */   "n": () => (/* binding */ nextTick),
-/* harmony export */   "o": () => (/* binding */ elementTransitionEnd),
-/* harmony export */   "p": () => (/* binding */ isObject),
-/* harmony export */   "q": () => (/* binding */ elementStyle),
-/* harmony export */   "r": () => (/* binding */ elementNextAll),
-/* harmony export */   "s": () => (/* binding */ setInnerHTML),
-/* harmony export */   "t": () => (/* binding */ elementPrevAll),
-/* harmony export */   "u": () => (/* binding */ animateCSSModeScroll),
-/* harmony export */   "v": () => (/* binding */ showWarning),
-/* harmony export */   "w": () => (/* binding */ elementIsChildOf),
-/* harmony export */   "x": () => (/* binding */ extend),
-/* harmony export */   "y": () => (/* binding */ deleteProps)
+/* harmony export */   a: () => (/* binding */ getRotateFix),
+/* harmony export */   b: () => (/* binding */ setCSSProperty),
+/* harmony export */   c: () => (/* binding */ createElement),
+/* harmony export */   d: () => (/* binding */ elementParents),
+/* harmony export */   e: () => (/* binding */ elementChildren),
+/* harmony export */   f: () => (/* binding */ elementOffset),
+/* harmony export */   g: () => (/* binding */ getSlideTransformEl),
+/* harmony export */   h: () => (/* binding */ now),
+/* harmony export */   i: () => (/* binding */ elementOuterSize),
+/* harmony export */   j: () => (/* binding */ elementIndex),
+/* harmony export */   k: () => (/* binding */ classesToTokens),
+/* harmony export */   l: () => (/* binding */ getTranslate),
+/* harmony export */   m: () => (/* binding */ makeElementsArray),
+/* harmony export */   n: () => (/* binding */ nextTick),
+/* harmony export */   o: () => (/* binding */ elementTransitionEnd),
+/* harmony export */   p: () => (/* binding */ isObject),
+/* harmony export */   q: () => (/* binding */ elementStyle),
+/* harmony export */   r: () => (/* binding */ elementNextAll),
+/* harmony export */   s: () => (/* binding */ setInnerHTML),
+/* harmony export */   t: () => (/* binding */ elementPrevAll),
+/* harmony export */   u: () => (/* binding */ animateCSSModeScroll),
+/* harmony export */   v: () => (/* binding */ showWarning),
+/* harmony export */   w: () => (/* binding */ elementIsChildOf),
+/* harmony export */   x: () => (/* binding */ extend),
+/* harmony export */   y: () => (/* binding */ deleteProps)
 /* harmony export */ });
 /* harmony import */ var _ssr_window_esm_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ssr-window.esm.mjs */ "./node_modules/swiper/shared/ssr-window.esm.mjs");
 
@@ -10686,6 +10360,18 @@ function setInnerHTML(el, html = '') {
 
 /***/ }),
 
+/***/ "./node_modules/swiper/swiper-bundle.css":
+/*!***********************************************!*\
+  !*** ./node_modules/swiper/swiper-bundle.css ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/swiper/swiper-bundle.mjs":
 /*!***********************************************!*\
   !*** ./node_modules/swiper/swiper-bundle.mjs ***!
@@ -10694,7 +10380,7 @@ function setInnerHTML(el, html = '') {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Swiper": () => (/* reexport safe */ _shared_swiper_core_mjs__WEBPACK_IMPORTED_MODULE_0__.S),
+/* harmony export */   Swiper: () => (/* reexport safe */ _shared_swiper_core_mjs__WEBPACK_IMPORTED_MODULE_0__.S),
 /* harmony export */   "default": () => (/* reexport safe */ _shared_swiper_core_mjs__WEBPACK_IMPORTED_MODULE_0__.S)
 /* harmony export */ });
 /* harmony import */ var _shared_swiper_core_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shared/swiper-core.mjs */ "./node_modules/swiper/shared/swiper-core.mjs");
@@ -10765,6 +10451,242 @@ _shared_swiper_core_mjs__WEBPACK_IMPORTED_MODULE_0__.S.use(modules);
 
 
 
+/***/ }),
+
+/***/ "./src/blocks/posts/slider/create-swiper.js":
+/*!**************************************************!*\
+  !*** ./src/blocks/posts/slider/create-swiper.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ createSwiper)
+/* harmony export */ });
+/* harmony import */ var _wordpress_a11y__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/a11y */ "@wordpress/a11y");
+/* harmony import */ var _wordpress_a11y__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_a11y__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/escape-html */ "@wordpress/escape-html");
+/* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var swiper_bundle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! swiper/bundle */ "./node_modules/swiper/swiper-bundle.mjs");
+/* harmony import */ var swiper_css_bundle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! swiper/css/bundle */ "./node_modules/swiper/swiper-bundle.css");
+
+
+
+// eslint-disable-next-line import/no-unresolved
+
+// eslint-disable-next-line import/no-unresolved
+
+
+/**
+ * A helper for IE11-compatible iteration over NodeList elements.
+ *
+ * @param {Object}   nodeList List of nodes to be iterated over.
+ * @param {Function} cb       Invoked for each iteratee.
+ */
+function forEachNode(nodeList, cb) {
+  /**
+   * Calls Array.prototype.forEach for IE11 compatibility.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/NodeList
+   */
+  Array.prototype.forEach.call(nodeList, cb);
+}
+
+/**
+ * Modifies attributes on slide HTML to make it accessible.
+ *
+ * @param {HTMLElement} slide Slide DOM element
+ */
+function activateSlide(slide) {
+  if (slide) {
+    slide.setAttribute('aria-hidden', 'false');
+    forEachNode(slide.querySelectorAll('a'), el => el.removeAttribute('tabindex'));
+  }
+}
+
+/**
+ * Modifies attributes on slide HTML to make it accessible.
+ *
+ * @param {HTMLElement} slide Slide DOM element
+ */
+function deactivateSlide(slide) {
+  if (slide) {
+    slide.setAttribute('aria-hidden', 'true');
+    forEachNode(slide.querySelectorAll('a'), el => el.setAttribute('tabindex', '-1'));
+  }
+}
+function createSwiper(element, config = {}) {
+  const slides = element.container.querySelectorAll('.swiper-slide');
+  const sliderStyle = config.sliderStyle;
+  let slidesPerView;
+  if ('style-1' === sliderStyle || 'style-4' === sliderStyle) {
+    slidesPerView = 1;
+  } else {
+    slidesPerView = config.slidesPerView;
+  }
+
+  // Parent Wrapper
+  const parentWrapper = element.container.closest('.wp-block-bnm-blocks-posts-slider');
+
+  // Find thumbswiper
+  const thumbEl = parentWrapper ? parentWrapper.querySelector('.bnm-thumbnail-swiper') : null;
+  let thumbSwiper = "";
+  if ('style-4' === sliderStyle && thumbEl) {
+    let thumbSlidesPerView = config.thumbSlidesPerView ? config.thumbSlidesPerView : 5;
+    thumbSwiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_3__["default"](thumbEl, {
+      slidesPerView: thumbSlidesPerView,
+      freeMode: true,
+      watchSlidesProgress: true,
+      spaceBetween: 10
+    });
+  }
+  const swiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_3__["default"](element.container, {
+    grabCursor: true,
+    observer: true,
+    observeParents: true,
+    a11y: false,
+    init: false,
+    speed: 400,
+    autoplay: !!config.autoplay && {
+      delay: config.delay,
+      disableOnInteraction: true
+    },
+    // Optional parameters
+    direction: 'horizontal',
+    loop: slides.length > 1,
+    initialSlide: config.initialSlide,
+    spaceBetween: config.spaceBetweenSlides || 0,
+    // Slides per view.
+    slidesPerView: 1,
+    breakpoints: {
+      480: {
+        slidesPerView: slidesPerView > 1 ? 2 : 1
+      },
+      768: {
+        slidesPerView: slidesPerView
+      }
+    },
+    // If we need pagination
+    pagination: {
+      el: element.pagination,
+      clickable: true
+    },
+    // If we need scrollbar.
+    // scrollbar: {
+    // 	el: ".swiper-scrollbar",
+    // 	hide: true,
+    // },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: element.next,
+      prevEl: element.prev
+    },
+    thumbs: {
+      swiper: sliderStyle === "style-4" ? thumbSwiper : null
+    },
+    preventClicksPropagation: false,
+    // Necessary for normal block interactions.
+    touchStartPreventDefault: false,
+    // Necessary for normal block interactions.
+    releaseFormElements: false,
+    setWrapperSize: true,
+    on: {
+      init() {
+        forEachNode(this.wrapperEl.querySelectorAll('.swiper-slide'), slide => deactivateSlide(slide));
+        activateSlide(this.slides[this.activeIndex]); // Set-up our active slide.
+      },
+      slideChange() {
+        const currentSlide = this.slides[this.activeIndex];
+        deactivateSlide(this.slides[this.previousIndex]);
+        activateSlide(currentSlide);
+
+        /**
+         * If we're autoplaying, don't announce the slide change, as that would
+         * be supremely annoying.
+         */
+        if (!this.autoplay?.running) {
+          // Announce the contents of the slide.
+          const currentImage = currentSlide.querySelector('img');
+          const alt = currentImage ? currentImage?.alt : false;
+          const slideInfo = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)(/* translators: 1: current slide number and 2: total number of slides */
+          (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Slide %1$s of %2$s', 'bnm-blocks'), this.realIndex + 1, this.pagination?.bullets?.length || 0);
+          (0,_wordpress_a11y__WEBPACK_IMPORTED_MODULE_0__.speak)((0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(`${currentSlide.innerText},
+								${alt ? /* translators: the title of the image. */(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Image: %s, ', 'bnm-blocks'), alt) : ''}
+								${slideInfo}`), 'assertive');
+        }
+      }
+    }
+  });
+
+  /**
+   * Forces an aspect ratio for each slide.
+   */
+  function setAspectRatio() {
+    const {
+      aspectRatio
+    } = config;
+    const slides = Array.from(this.slides);
+    slides.forEach(slide => {
+      if (config.sliderStyle === 'style-3') {
+        const slideImage = slide.querySelector('img');
+        if (slideImage) {
+          slideImage.style.height = `${slide.clientWidth * aspectRatio}px`;
+        }
+      } else {
+        //console.log(slide.clientWidth * aspectRatio);
+        slide.style.height = `${slide.clientWidth * aspectRatio}px`;
+      }
+    });
+  }
+  swiper.on('beforeSlideChangeStart', setAspectRatio);
+  swiper.on('resize', setAspectRatio);
+  swiper.init();
+  return swiper;
+}
+
+/***/ }),
+
+/***/ "@wordpress/a11y":
+/*!******************************!*\
+  !*** external ["wp","a11y"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["a11y"];
+
+/***/ }),
+
+/***/ "@wordpress/dom-ready":
+/*!**********************************!*\
+  !*** external ["wp","domReady"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["domReady"];
+
+/***/ }),
+
+/***/ "@wordpress/escape-html":
+/*!************************************!*\
+  !*** external ["wp","escapeHtml"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["escapeHtml"];
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["i18n"];
+
 /***/ })
 
 /******/ 	});
@@ -10793,42 +10715,7 @@ _shared_swiper_core_mjs__WEBPACK_IMPORTED_MODULE_0__.S.use(modules);
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/chunk loaded */
-/******/ 	(() => {
-/******/ 		var deferred = [];
-/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
-/******/ 			if(chunkIds) {
-/******/ 				priority = priority || 0;
-/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
-/******/ 				deferred[i] = [chunkIds, fn, priority];
-/******/ 				return;
-/******/ 			}
-/******/ 			var notFulfilled = Infinity;
-/******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var [chunkIds, fn, priority] = deferred[i];
-/******/ 				var fulfilled = true;
-/******/ 				for (var j = 0; j < chunkIds.length; j++) {
-/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
-/******/ 						chunkIds.splice(j--, 1);
-/******/ 					} else {
-/******/ 						fulfilled = false;
-/******/ 						if(priority < notFulfilled) notFulfilled = priority;
-/******/ 					}
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferred.splice(i--, 1)
-/******/ 					var r = fn();
-/******/ 					if (r !== undefined) result = r;
-/******/ 				}
-/******/ 			}
-/******/ 			return result;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -10869,68 +10756,55 @@ _shared_swiper_core_mjs__WEBPACK_IMPORTED_MODULE_0__.S.use(modules);
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"blocks/posts/slider/view": 0,
-/******/ 			"blocks/posts/slider/style-index": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			return __webpack_require__.O(result);
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkbnm_blocks"] = globalThis["webpackChunkbnm_blocks"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	})();
-/******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["blocks/posts/slider/style-index"], () => (__webpack_require__("./src/blocks/posts/slider/view.js")))
-/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
+var __webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!*****************************************!*\
+  !*** ./src/blocks/posts/slider/view.js ***!
+  \*****************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/dom-ready */ "@wordpress/dom-ready");
+/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _create_swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-swiper */ "./src/blocks/posts/slider/create-swiper.js");
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+//import './style.scss';
+
+if (typeof window !== 'undefined') {
+  _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(() => {
+    const blocksArray = Array.from(document.querySelectorAll('.wp-block-bnm-blocks-posts-slider'));
+    blocksArray.forEach(block => {
+      (0,_create_swiper__WEBPACK_IMPORTED_MODULE_1__["default"])({
+        block,
+        container: block.querySelector('.thbnm-swiper'),
+        prev: block.querySelector('.bnm-swiper-button-prev'),
+        next: block.querySelector('.bnm-swiper-button-next'),
+        pagination: block.querySelector('.swiper-pagination'),
+        pause: block.querySelector('.swiper-button-pause'),
+        play: block.querySelector('.swiper-button-play')
+      }, {
+        sliderStyle: block.dataset.sliderStyle,
+        aspectRatio: parseFloat(block.dataset.aspectRatio),
+        autoplay: !!parseInt(block.dataset.autoplay),
+        delay: parseInt(block.dataset.autoplay_delay) * 1000,
+        initialSlide: 0,
+        slidesPerView: parseInt(block.dataset.slidesPerView),
+        spaceBetweenSlides: parseInt(block.dataset.spaceBetweenSlides),
+        thumbSlidesPerView: parseInt(block.dataset.thumbSlidesPerView)
+      });
+    });
+  });
+}
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=view.js.map

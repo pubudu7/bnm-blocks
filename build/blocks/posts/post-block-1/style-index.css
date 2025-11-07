@@ -1,5 +1,5 @@
 /*!*****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/posts/post-block-1/style.scss ***!
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/posts/post-block-1/style.scss ***!
   \*****************************************************************************************************************************************************************************************************************************************************************/
 .wpbnmpb1 {
   --bnm-header-font-size: 21px;
@@ -163,7 +163,6 @@
   max-width: 100%;
   height: auto;
 }
-
 .pb1-container {
   width: 100%;
   overflow-wrap: break-word;
@@ -179,30 +178,29 @@
     list-style: none;
   }
   .pb1-container .bnm-left-block,
-.pb1-container .bnm-right-block {
+  .pb1-container .bnm-right-block {
     flex-basis: calc(50% - var(--bnm-col-gap) / 2);
   }
 }
-
-.wpbnmpb1.is-style-borders .bnm-left-block {
+.wpbnmpb1.is-style-bnm-borders .bnm-left-block {
   border: solid var(--bnm-border-color);
   border-width: 0 0 1px;
   padding-right: 0;
   margin-bottom: 1.6em;
 }
 @media (min-width: 768px) {
-  .wpbnmpb1.is-style-borders .bnm-left-block {
+  .wpbnmpb1.is-style-bnm-borders .bnm-left-block {
     flex-basis: calc(50% - 2 * var(--bnm-col-gap) / 2 - 1.1px);
     box-sizing: content-box;
     border-width: 0 1px 0 0;
     padding-right: var(--bnm-col-gap);
     margin-bottom: 0;
   }
-  .wpbnmpb1.is-style-borders .bnm-right-block {
+  .wpbnmpb1.is-style-bnm-borders .bnm-right-block {
     flex-basis: calc(50% - 2 * var(--bnm-col-gap) / 2 - 1.1px);
   }
 }
-.wpbnmpb1.is-style-borders .bnm-pb1-small:not(:last-child) {
+.wpbnmpb1.is-style-bnm-borders .bnm-pb1-small:not(:last-child) {
   border: solid var(--bnm-border-color);
   border-width: 0 0 1px;
   padding-bottom: 1.6em;

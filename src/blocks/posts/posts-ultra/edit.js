@@ -293,7 +293,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			[`has-text-align-${ textAlign }`]: textAlign,
 			'custom-image-width': ( featuredImageWidth !== "33%" ) || ( entryContentWidth !== "67%" ),
 			'custom-image-margin': hasCustomImageMargin,
-			'is-style-borders': hasPostBorder
+			'is-style-bnm-borders': hasPostBorder
 		},
 		sectionHeaderStyle ? `bnm-bhs-${sectionHeaderStyle}` : null
 		),

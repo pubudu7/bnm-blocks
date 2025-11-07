@@ -1,5 +1,5 @@
 /*!*********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/posts/featured-posts-1/style.scss ***!
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/posts/featured-posts-1/style.scss ***!
   \*********************************************************************************************************************************************************************************************************************************************************************/
 .wpbnmfpb1 {
   --bnm-header-font-size: 21px;
@@ -176,7 +176,6 @@
 .wpbnmfpb1 .bnm-comment-count a:hover {
   color: var(--bnm-meta-hover-color);
 }
-
 .bnm-fp1-post-content::before {
   position: absolute;
   content: "";
@@ -189,12 +188,10 @@
   transition: opacity 0.2s linear;
   z-index: -1;
 }
-
 .bnm-fp1-large:hover .bnm-fp1-post-content::before,
 .bnm-fp1-small:hover .bnm-fp1-post-content::before {
   opacity: 0.7;
 }
-
 .bnm-fp1-small,
 .bnm-fp1-large {
   width: 100%;
@@ -214,20 +211,16 @@
 .bnm-fp1-large:hover img.bnm-fp-img {
   transform: scale(1.1);
 }
-
 .bnm-fp1-large:before {
   padding-top: 58.9569160998%;
 }
-
 .bnm-fp1-small:before {
   padding-top: 59.3607305936%;
 }
-
 .bnm-fp1-left-side,
 .bnm-fp1-right-side {
   width: 100%;
 }
-
 @media (min-width: 480px) {
   .bnm-fp1-small {
     width: 50%;

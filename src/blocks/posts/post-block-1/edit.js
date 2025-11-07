@@ -310,7 +310,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps({
 		className: classnames( 'wpbnmpb1', 'bnmbcs', {
 			'bnm-box-cat': hasCategoryClass,
-			'is-style-borders': hasPostBorder
+			'is-style-bnm-borders': hasPostBorder
 		},
 		sectionHeaderStyle ? `bnm-bhs-${sectionHeaderStyle}` : null
 		),

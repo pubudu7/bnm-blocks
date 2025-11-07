@@ -229,7 +229,7 @@ function bnmbt_post_block_1_render_callback( $attributes ) {
 	}
 
 	if ( $attributes['hasPostBorder'] ) {
-		$classes[] = 'is-style-borders';
+		$classes[] = 'is-style-bnm-borders';
 	}
 
 	if ( $attributes['sectionHeaderStyle'] ) {

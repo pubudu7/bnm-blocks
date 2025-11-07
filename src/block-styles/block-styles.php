@@ -4,29 +4,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-function bnmbt_editor_block_styles() {
-    wp_enqueue_script(
-        'bnm-blocks-block-styles',
-        BNMBT_URL . 'build/block-styles.js',
-        array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ),
-        filemtime( BNMBT__PLUGIN_DIR . 'build/block-styles.js' ),
-        true
-    ); 
-    wp_enqueue_style(
-        'bnm-blocks-block-styles',
-        BNMBT_URL . 'build/block-styles.css',
-        array(),
-        BNMBT__VERSION
-    );  
-}
-add_action( 'enqueue_block_editor_assets', 'bnmbt_editor_block_styles' );
+/**
+ * Register block styles.
+ */
+if ( function_exists( 'register_block_style' ) ) {
 
-function bnmbt_frontend_block_styles() {
-    wp_enqueue_style(
-        'bnm-blocks-block-styles',
-        BNMBT_URL . 'build/block-styles.css',
-        array(),
-        BNMBT__VERSION
-    );   
+    function bnmbt_register_block_styles() {
+        wp_register_style( 'bnm-blocks-block-styles', BNMBT_URL . 'public/css/block-styles.css' );
+        register_block_style(
+            'core/columns',
+            array(
+                'name'         => 'bnm-borders',
+                'label'        => __( 'Borders', 'bnm-blocks' ),
+                'style_handle' => 'bnm-blocks-block-styles',
+            )
+        );
+    }
+    add_action( 'init', 'bnmbt_register_block_styles' );
+
 }
-add_action( 'wp_enqueue_scripts', 'bnmbt_frontend_block_styles' );

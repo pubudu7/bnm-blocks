@@ -36,7 +36,6 @@ require_once $inc_directory . 'css/blocks/class-post-block-1-css.php';
 require_once $inc_directory . 'css/blocks/class-post-block-2-css.php';
 require_once $inc_directory . 'css/blocks/class-post-block-sp-css.php';
 require_once $inc_directory . 'css/blocks/class-post-slider-1-css.php';
-include_once $inc_directory . 'demo-import/bnmbt-demo-main.php';
 
 include_once $inc_directory . 'template-functions.php';
 include_once $src_directory . 'blocks/posts/slider/view.php';
@@ -47,3 +46,5 @@ include_once $src_directory . 'blocks/posts/featured-posts-1/view.php';
 include_once $src_directory . 'blocks/posts/featured-posts-2/view.php';
 include_once $src_directory . 'blocks/posts/featured-posts-2/view.php';
 include_once $src_directory . 'block-styles/block-styles.php';
+
+include_once $inc_directory . 'demo-import/bnmbt-demo-main.php';

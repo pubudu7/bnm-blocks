@@ -27,7 +27,6 @@ import {
 /**
  * Internal Dependencies.
  */
-import './editor.scss';
 import QueryControls from '../../../components/query-controls/index.js';
 import createSwiper from './create-swiper.js';
 import { SliderSettings } from './slider-controls.js'; 

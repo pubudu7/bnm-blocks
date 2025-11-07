@@ -121,13 +121,13 @@
   flex-basis: var(--bnm-content-width);
 }
 .wpbnmspp.image-alignleft .post-thumbnail {
-  margin-right: 1em;
+  margin-left: 1em;
 }
 .wpbnmspp.image-alignleft.custom-image-margin .post-thumbnail {
   margin: var(--bnm-image-margin);
 }
 .wpbnmspp.image-alignright .post-thumbnail {
-  margin-left: 1em;
+  margin-right: 1em;
 }
 .wpbnmspp.image-alignright .bnm-entry-wrapper {
   order: -1;
@@ -144,8 +144,8 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
   right: 0;
+  left: 0;
   margin: 0;
   overflow: hidden;
 }
@@ -232,7 +232,7 @@
 .wpbnmspp .byline,
 .wpbnmspp .posted-on,
 .wpbnmspp .bnm-comment-count {
-  margin-right: var(--bnm-meta-spacing);
+  margin-left: var(--bnm-meta-spacing);
 }
 .wpbnmspp .byline a,
 .wpbnmspp .posted-on a,
@@ -283,7 +283,7 @@
 }
 .wpbnmspp.has-text-align-right .entry-meta {
   justify-content: flex-end;
-  text-align: right;
+  text-align: left;
 }
 .wpbnmspp {
   /* &.is-style-bnm-borders:not(&.is-grid) article:not(:last-child) {
@@ -299,31 +299,29 @@
 }
 .wpbnmspp.is-style-bnm-borders article:last-of-type:not(:first-of-type) {
   border-bottom: 0;
-  padding-right: 0;
+  padding-left: 0;
 }
 @media only screen and (min-width: 600px) {
   .wpbnmspp.is-style-bnm-borders.is-grid article {
     border-width: 0;
-    padding-right: 0;
+    padding-left: 0;
   }
   .wpbnmspp.is-style-bnm-borders.columns-2 article:nth-of-type(odd):not(:last-of-type), .wpbnmspp.is-style-bnm-borders.columns-4 article:nth-of-type(odd):not(:last-of-type), .wpbnmspp.is-style-bnm-borders.columns-5 article:nth-of-type(odd):not(:last-of-type) {
-    border-width: 0 1px 0 0;
-    padding-right: var(--bnm-col-gap);
+    border-width: 0 0 0 1px;
+    padding-left: var(--bnm-col-gap);
   }
   .wpbnmspp.is-style-bnm-borders.columns-3 article:nth-of-type(3n + 1):not(:last-of-type), .wpbnmspp.is-style-bnm-borders.columns-3 article:nth-of-type(3n + 2):not(:last-of-type), .wpbnmspp.is-style-bnm-borders.columns-6 article:nth-of-type(3n + 1):not(:last-of-type), .wpbnmspp.is-style-bnm-borders.columns-6 article:nth-of-type(3n + 2):not(:last-of-type) {
-    border-width: 0 1px 0 0;
-    padding-right: var(--bnm-col-gap);
+    border-width: 0 0 0 1px;
+    padding-left: var(--bnm-col-gap);
   }
 }
 @media only screen and (min-width: 782px) {
   .wpbnmspp.is-style-bnm-borders.is-grid article {
-    border-width: 0 1px 0 0;
-    padding-right: var(--bnm-col-gap);
+    border-width: 0 0 0 1px;
+    padding-left: var(--bnm-col-gap);
   }
   .wpbnmspp.is-style-bnm-borders.is-grid article:last-of-type, .wpbnmspp.is-style-bnm-borders.columns-1 article, .wpbnmspp.is-style-bnm-borders.columns-2 article:nth-of-type(2n), .wpbnmspp.is-style-bnm-borders.columns-3 article:nth-of-type(3n), .wpbnmspp.is-style-bnm-borders.columns-4 article:nth-of-type(4n), .wpbnmspp.is-style-bnm-borders.columns-5 article:nth-of-type(5n), .wpbnmspp.is-style-bnm-borders.columns-6 article:nth-of-type(6n) {
     border: 0;
-    padding-right: 0;
+    padding-left: 0;
   }
 }
-
-/*# sourceMappingURL=style-index.css.map*/

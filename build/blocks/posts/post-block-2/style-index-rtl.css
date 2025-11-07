@@ -134,7 +134,7 @@
 .wpbnmpb2 .entry-meta .byline,
 .wpbnmpb2 .entry-meta .posted-on,
 .wpbnmpb2 .entry-meta .bnm-comment-count {
-  margin-right: var(--bnm-meta-spacing);
+  margin-left: var(--bnm-meta-spacing);
 }
 .wpbnmpb2 .entry-meta .byline a,
 .wpbnmpb2 .entry-meta .posted-on a,
@@ -180,13 +180,13 @@
 .wpbnmpb2.is-style-bnm-borders .bnm-pb2-posts-grid article::before, .wpbnmpb2.is-style-bnm-borders .bnm-pb2-posts-grid article::after {
   content: "";
   position: absolute;
-  left: calc(var(--bnm-col-gap) / -2);
+  right: calc(var(--bnm-col-gap) / -2);
   background-color: var(--bnm-border-color);
 }
 .wpbnmpb2.is-style-bnm-borders .bnm-pb2-posts-grid article::before {
   height: 1px;
-  right: 0;
   left: 0;
+  right: 0;
   top: calc(var(--bnm-row-gap) / -2);
 }
 .wpbnmpb2.is-style-bnm-borders .bnm-pb2-posts-grid article::after {
@@ -194,5 +194,3 @@
   top: 0;
   width: 1px;
 }
-
-/*# sourceMappingURL=style-index.css.map*/
