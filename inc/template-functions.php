@@ -43,16 +43,11 @@ function bnmbt_comments_link() {
 
 		$num_comments = esc_attr( get_comments_number() );
 
-		if ( $num_comments == 0 ) {
-			$comments_txt = esc_html__( '0', 'bnm-blocks' );
-		} elseif ( $num_comments > 1 ) {
-			/* translators: %d: number of comments */
-			$comments_txt = sprintf( esc_html__( '%d', 'bnm-blocks' ), $num_comments );
-		} else {
-			$comments_txt = esc_html__( '1', 'bnm-blocks' );
-		}
-
-		return '<span class="comments-link bnm-comment-count"><a href="' . esc_url( get_comments_link() ).'">' . $comments_txt . '</a></span>';
+		return sprintf(
+			'<span class="comments-link bnm-comment-count"><a href="%s">%s</a></span>',
+			esc_url( get_comments_link() ),
+			number_format_i18n( $num_comments )
+		);
 	}	
 
 	return '';
@@ -123,12 +118,12 @@ function bnmbt_entry_meta( $meta_array = array() ) {
 /**
  * Displays cateogories list
  */
-function bnm_blocks_categories_list() {
+function bnmbt_post_categories_list() {
 	if ( 'post' === get_post_type() ) {
 
-		add_filter( 'the_category', 'bnm_blocks_custom_class_to_category', 10, 3 );
+		add_filter( 'the_category', 'bnmbt_custom_class_to_category', 10, 3 );
 		$categories_list = get_the_category_list();
-		remove_filter( 'the_category', 'bnm_blocks_custom_class_to_category', 10, 3 );
+		remove_filter( 'the_category', 'bnmbt_custom_class_to_category', 10, 3 );
 
 		if ( $categories_list ) {
 			/* translators: 1: posted in label 2: list of categories. */
@@ -142,7 +137,7 @@ function bnm_blocks_categories_list() {
 
 }
 
-function bnm_blocks_custom_class_to_category( $thelist, $separator, $parents ) {
+function bnmbt_custom_class_to_category( $thelist, $separator, $parents ) {
     // Use regex to find and replace the category links with the added class
     $thelist = preg_replace_callback(
         '/<a href="([^"]+)"(.*?)>(.*?)<\/a>/',
@@ -154,4 +149,13 @@ function bnm_blocks_custom_class_to_category( $thelist, $separator, $parents ) {
         $thelist
     );
     return $thelist;
+}
+
+/**
+ * Get list of allowed HTML tags for headings.
+ *
+ * @return array
+ */
+function bnmbt_get_allowed_header_tags() {
+    return array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'p' );
 }

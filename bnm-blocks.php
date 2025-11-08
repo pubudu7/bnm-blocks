@@ -25,26 +25,26 @@ define( 'BNMBT__ADMIN_DIRECTORY_URL', plugins_url( BNMBT__ADMIN_DIRECTORY, BNMBT
 define( 'BNMBT__PLUGIN_DIR', plugin_dir_path( BNMBT__PLUGIN_FILE ) );
 define( 'BNMBT__VERSION', '1.2.3' );
 
-$src_directory = BNMBT__PLUGIN_DIR . 'src/';
-$inc_directory = BNMBT__PLUGIN_DIR . 'inc/';
+$bnmbt_src_directory = BNMBT__PLUGIN_DIR . 'src/';
+$bnmbt_inc_directory = BNMBT__PLUGIN_DIR . 'inc/';
 
 require BNMBT__PLUGIN_DIR . 'vendor/autoload.php';
 
-require_once $inc_directory . 'class-main.php';
-require_once $inc_directory . 'css/class-css-utility.php';
-require_once $inc_directory . 'css/blocks/class-post-block-1-css.php';
-require_once $inc_directory . 'css/blocks/class-post-block-2-css.php';
-require_once $inc_directory . 'css/blocks/class-post-block-sp-css.php';
-require_once $inc_directory . 'css/blocks/class-post-slider-1-css.php';
+require_once $bnmbt_inc_directory . 'class-main.php';
+require_once $bnmbt_inc_directory . 'css/class-css-utility.php';
+require_once $bnmbt_inc_directory . 'css/blocks/class-post-block-1-css.php';
+require_once $bnmbt_inc_directory . 'css/blocks/class-post-block-2-css.php';
+require_once $bnmbt_inc_directory . 'css/blocks/class-post-block-sp-css.php';
+require_once $bnmbt_inc_directory . 'css/blocks/class-post-slider-1-css.php';
 
-include_once $inc_directory . 'template-functions.php';
-include_once $src_directory . 'blocks/posts/slider/view.php';
-include_once $src_directory . 'blocks/posts/post-block-1/view.php';
-include_once $src_directory . 'blocks/posts/post-block-2/view.php';
-include_once $src_directory . 'blocks/posts/posts-ultra/view.php';
-include_once $src_directory . 'blocks/posts/featured-posts-1/view.php';
-include_once $src_directory . 'blocks/posts/featured-posts-2/view.php';
-include_once $src_directory . 'blocks/posts/featured-posts-2/view.php';
-include_once $src_directory . 'block-styles/block-styles.php';
+include_once $bnmbt_inc_directory . 'template-functions.php';
+include_once $bnmbt_src_directory . 'blocks/posts/slider/view.php';
+include_once $bnmbt_src_directory . 'blocks/posts/post-block-1/view.php';
+include_once $bnmbt_src_directory . 'blocks/posts/post-block-2/view.php';
+include_once $bnmbt_src_directory . 'blocks/posts/posts-ultra/view.php';
+include_once $bnmbt_src_directory . 'blocks/posts/featured-posts-1/view.php';
+include_once $bnmbt_src_directory . 'blocks/posts/featured-posts-2/view.php';
+include_once $bnmbt_src_directory . 'blocks/posts/featured-posts-2/view.php';
+include_once $bnmbt_src_directory . 'block-styles/block-styles.php';
 
-include_once $inc_directory . 'demo-import/bnmbt-demo-main.php';
+include_once $bnmbt_inc_directory . 'demo-import/bnmbt-demo-main.php';

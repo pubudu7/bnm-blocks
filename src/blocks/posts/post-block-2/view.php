@@ -34,7 +34,8 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 	<?php
 		if ( '' !== $attributes['sectionHeader'] && true === $attributes['showSectionHeader'] ) {
 			echo "<div class=\"bnm-block-title-wrap\">";
-				$tag = ( isset ( $attributes['headerHtmlTag'] ) && ! empty( $attributes['headerHtmlTag'] ) ) ? $attributes['headerHtmlTag'] : 'h2';									
+				$allowed_tags = bnmbt_get_allowed_header_tags();
+				$tag = isset( $attributes['headerHtmlTag'] ) && in_array( strtolower( $attributes['headerHtmlTag'] ), $allowed_tags, true ) ? strtolower( $attributes['headerHtmlTag'] ) : 'h2';									
 				echo "<". esc_attr($tag) ." class=\"article-section-title\">";
 					echo "<span>";
 						echo wp_kses_post( $attributes['sectionHeader'] ); 
@@ -69,7 +70,7 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 
 							<?php if ( $attributes['showCategory'] ) { ?>
 								<div class="bnm-category-list">
-									<?php bnm_blocks_categories_list(); ?>
+									<?php bnmbt_post_categories_list(); ?>
 								</div>
 							<?php } ?>
 
@@ -130,7 +131,7 @@ function bnmbt_post_block_2_render_callback( $attributes ) {
 						<div class="entry-details">
 							<?php if ( $attributes['showCategorySmall'] ) { ?>
 								<div class="bnm-category-list">
-									<?php bnm_blocks_categories_list(); ?>
+									<?php bnmbt_post_categories_list(); ?>
 								</div>
 							<?php } ?>
 

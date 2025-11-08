@@ -26,11 +26,12 @@ A collection of blocks developed for WordPress Gutenberg editor. All of these bl
 
 == Changelog ==
 
-= 1.3.0 =
+= 1.2.4 =
+* Fixed an authenticated stored XSS vulnerability in the headerHtmlTag and titleHtmlTag attributes by validating tag names.
 * Added 3 different layouts for slider.
 * Updated swiper library to 12.0.3
 * Added block style "Borders" for the core "Columns" block.
-* TODO - Update wordpress scripts & check.
+* Updated wordpress scripts from 24.0.0 to 30.27
 
 = 1.2.3 =
 * Added a control to select specific posts for a block.
