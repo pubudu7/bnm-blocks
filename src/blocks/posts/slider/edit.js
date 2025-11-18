@@ -46,6 +46,9 @@ import {
 	boxValues,
 	hasValueOnBox
 } from '../../../shared/js/utils.js';
+import fallbackSliderImage from '../../../shared/images/default.jpg';
+import fallbackSliderThumb from '../../../shared/images/sm-img.png';
+
 
 /**
  * Module Constants.
@@ -386,7 +389,11 @@ export default function PostsSliderEdit( {
 													alt={ featuredImageAlt }
 												/>
 											) : (
-												<img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" />
+												<img
+													src={ fallbackSliderImage }
+													alt=""
+													className={ `image-fit-${ imageFit }` }
+												/>
 											) }
 										</figure>
 
@@ -479,7 +486,11 @@ export default function PostsSliderEdit( {
 													alt={ featuredImageAlt }
 												/>
 											) : (
-												<div className="bnm-thumb-img-placeholder"></div>
+												<img
+													src={ fallbackSliderThumb }
+													alt=""
+													className={ `image-fit-${ imageFit }` }
+												/>
 											) }
 										</div>
 									</div>

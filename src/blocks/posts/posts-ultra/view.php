@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function bnmbt_posts_ultra_init() {
 
 	register_block_type( BNMBT__PLUGIN_DIR . 'build/blocks/posts/posts-ultra', array(
-		'api_version'		=> 2,
+		'api_version'		=> 3,
 		'render_callback'	=> 'bnmbt_posts_ultra_render_callback'
 	) );
 
@@ -192,6 +192,10 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 
 	if ( $attributes['sectionHeaderStyle'] ) {
 		$classes[] = 'bnm-bhs-' . $attributes['sectionHeaderStyle'];
+	}
+
+	if ( ! empty( $attributes['featuredImageMargin'] ) ) {
+		$classes[] = 'custom-image-margin';
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes( array( 

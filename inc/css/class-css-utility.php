@@ -56,18 +56,48 @@ class CSS_Utility {
 
     /**
      * Format value according to the type.
+     *
+     * @param mixed  $value      The raw value.
+     * @param string $value_type The type of the value (e.g. font-size, box-control).
+     * @return string Escaped formatted value ready for CSS output.
      */
     private function format_value_for_type( $value, $value_type ) {
+
         if ( 'font-size' === $value_type ) {
-            return $value . 'px';
-        } elseif ( 'box-control' === $value_type ) {
-            $top = ( isset($value['top'] ) && ! empty( $value['top'] ) ) ? $value['top'] : 0;
-            $right = ( isset($value['right'] ) && ! empty( $value['right'] ) ) ? $value['right'] : 0;
-            $bottom = ( isset($value['bottom'] ) && ! empty( $value['bottom'] ) ) ? $value['bottom'] : 0;
-            $left = ( isset($value['left'] ) && ! empty( $value['left'] ) ) ? $value['left'] : 0;
-            
-            return $top . ' ' . $right . ' ' . $bottom . ' ' . $left;
+
+            // Ensure value is numeric and append px if missing.
+            $value = is_numeric( $value ) ? $value . 'px' : $value;
+            return $value;
+
+        } elseif ( 'box-control' === $value_type && is_array( $value ) ) {
+
+            // Helper to normalize each side.
+            $normalize = function( $val ) {
+                $val = trim( (string) $val );
+
+                // Default to 0px if empty.
+                if ( $val === '' ) {
+                    return '0px';
+                }
+
+                // If value has a unit already, keep it.
+                if ( preg_match( '/[a-z%]+$/i', $val ) ) {
+                    return $val;
+                }
+
+                // Otherwise append px.
+                return $val . 'px';
+            };
+
+            $top    = $normalize( $value['top'] ?? '0' );
+            $right  = $normalize( $value['right'] ?? '0' );
+            $bottom = $normalize( $value['bottom'] ?? '0' );
+            $left   = $normalize( $value['left'] ?? '0' );
+
+            return "{$top} {$right} {$bottom} {$left}";
         }
+
+        return '';
     }
 
     public function generate_css() {

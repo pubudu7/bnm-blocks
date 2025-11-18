@@ -3,13 +3,13 @@
  * Display details before import.
  */
 
-$predefined_demos = $this->import_files;
-$selected_demo = isset( $_GET[ 'import' ] ) ? (int) $_GET[ 'import' ] : null;
-$selected_demo_arr =  ! empty( $predefined_demos[ $selected_demo ] ) ? $predefined_demos[ $selected_demo ] : false;
-$selected_demo_image_url = '';
+$bnmbt_predefined_demos = $this->import_files;
+$bnmbt_selected_demo = isset( $_GET[ 'import' ] ) ? (int) $_GET[ 'import' ] : null;
+$bnmbt_selected_demo_arr =  ! empty( $bnmbt_predefined_demos[ $bnmbt_selected_demo ] ) ? $bnmbt_predefined_demos[ $bnmbt_selected_demo ] : false;
+$bnmbt_selected_demo_image_url = '';
 
-if ( $selected_demo_arr ) {
-    $selected_demo_image_url = ! empty ( $selected_demo_arr[ 'import_preview_image_url' ] ) ? $selected_demo_arr[ 'import_preview_image_url' ] : '';
+if ( $bnmbt_selected_demo_arr ) {
+    $bnmbt_selected_demo_image_url = ! empty ( $bnmbt_selected_demo_arr[ 'import_preview_image_url' ] ) ? $bnmbt_selected_demo_arr[ 'import_preview_image_url' ] : '';
 }
  
 ?>
@@ -25,9 +25,9 @@ if ( $selected_demo_arr ) {
             <a class="js-bnmbti-import-demo button button-primary button-hero"><?php esc_html_e( 'Import', 'bnm-blocks' ); ?></a>
         </div>
         <div class="bnmbti-selected-demo">
-            <img width="1200" height="900" src="<?php echo esc_url( $selected_demo_image_url ); ?>" />
+            <img width="1200" height="900" src="<?php echo esc_url( $bnmbt_selected_demo_image_url ); ?>" />
         </div>
-        <div class="bnmbti-go-back"><a href="<?php echo esc_url( $this->get_demo_settings_url() ); ?>"><?php esc_html_e( 'Go Back' ); ?></a></div>
+        <div class="bnmbti-go-back"><a href="<?php echo esc_url( $this->get_demo_settings_url() ); ?>"><?php esc_html_e( 'Go Back', 'bnm-blocks' ); ?></a></div>
     </div>
     
     <div class="bnmbti-importing js-bnmbti-importing">

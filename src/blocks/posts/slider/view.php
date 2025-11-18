@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function bnmbt_posts_slider_block_1_init() {
 
 	register_block_type( BNMBT__PLUGIN_DIR . 'build/blocks/posts/slider', array(
-		'api_version'		=> 2,
+		'api_version'		=> 3,
 		'render_callback'	=> 'bnmbt_posts_slider_block_1_render_callback'
 	) );
 
@@ -82,9 +82,9 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 									if ( has_post_thumbnail() ) {
 										the_post_thumbnail( $featured_image_slug, [ 'class' => $slide_image_class ] );
 									} else {
-										//echo '<div class="bnm-img-placeholder"></div>'; 
+										$fallback_image = BNMBT_URL . 'src/shared/images/default.jpg'; 
 										?>
-										<img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="">
+										<img src="<?php echo esc_url( $fallback_image ); ?>" alt="">
 										<?php
 									}
 								?>
@@ -182,7 +182,10 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 									if ( has_post_thumbnail() ) {
 										the_post_thumbnail( $slider_thumb_size );
 									} else {
-										echo '<div class="bnm-img-thumb-placeholder"></div>';
+										$fallback_thumbnail = BNMBT_URL . 'src/shared/images/sm-img.png'; 
+										?>
+										<img src="<?php echo esc_url( $fallback_thumbnail ); ?>" alt="">
+										<?php
 									}
 								?>
 							</div>

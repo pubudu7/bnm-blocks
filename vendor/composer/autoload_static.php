@@ -17,11 +17,11 @@ class ComposerStaticInitda3c2749f6eea3faaee50beb5869d071
         'ThemezHut\\DemoImporter\\Importer' => __DIR__ . '/../..' . '/inc/demo-import/class-importer.php',
         'ThemezHut\\DemoImporter\\Logger' => __DIR__ . '/../..' . '/inc/demo-import/class-logger.php',
         'ThemezHut\\DemoImporter\\Resetter' => __DIR__ . '/../..' . '/inc/demo-import/class-resetter.php',
-        'ThemezHut\\DemoImporter\\WP_Importer_Logger' => __DIR__ . '/../..' . '/inc/demo-import/class-wp-importer-logger.php',
-        'ThemezHut\\DemoImporter\\WP_Importer_Logger_CLI' => __DIR__ . '/../..' . '/inc/demo-import/class-logger-cli.php',
-        'ThemezHut\\DemoImporter\\WXRImporter' => __DIR__ . '/../..' . '/inc/demo-import/class-wxr-importer.php',
+        'ThemezHut\\DemoImporter\\WP_Importer_Logger' => __DIR__ . '/../..' . '/inc/demo-import/vendor/themezhut/wp-content-importer-v2/src/class-wp-importer-logger.php',
+        'ThemezHut\\DemoImporter\\WP_Importer_Logger_CLI' => __DIR__ . '/../..' . '/inc/demo-import/vendor/themezhut/wp-content-importer-v2/src/class-logger-cli.php',
+        'ThemezHut\\DemoImporter\\WXRImporter' => __DIR__ . '/../..' . '/inc/demo-import/vendor/themezhut/wp-content-importer-v2/src/class-wxr-importer.php',
         'ThemezHut\\DemoImporter\\WXRImporter2' => __DIR__ . '/../..' . '/inc/demo-import/class-wxr-importer2.php',
-        'ThemezHut\\DemoImporter\\WXR_Import_Info' => __DIR__ . '/../..' . '/inc/demo-import/class-wxr-import-info.php',
+        'ThemezHut\\DemoImporter\\WXR_Import_Info' => __DIR__ . '/../..' . '/inc/demo-import/vendor/themezhut/wp-content-importer-v2/src/class-wxr-import-info.php',
         'ThemezHut\\DemoImporter\\WidgetImporter' => __DIR__ . '/../..' . '/inc/demo-import/class-widget-importer.php',
     );
 

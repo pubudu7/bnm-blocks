@@ -2,7 +2,7 @@
 Contributors:      pubudu-malalasekara
 Tags:              page builder, Gutenberg blocks, WordPress blocks, gutenberg, blocks
 Tested up to:      6.8
-Stable tag:        1.2.3
+Stable tag:        1.2.4
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,10 @@ A collection of blocks developed for WordPress Gutenberg editor. All of these bl
 == Screenshots ==
 
 == Changelog ==
+
+= 1.2.5 =
+* Updated block apiVersion from 2 to 3.
+* Fixed margin and padding control issues.
 
 = 1.2.4 =
 * Fixed an authenticated stored XSS vulnerability in the headerHtmlTag and titleHtmlTag attributes by validating tag names.

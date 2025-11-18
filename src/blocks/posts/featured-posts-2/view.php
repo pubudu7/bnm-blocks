@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function bnmbt_featured_posts_block_2_init() {
 
 	register_block_type( BNMBT__PLUGIN_DIR . 'build/blocks/posts/featured-posts-2', array(
-		'api_version'		=> 2,
+		'api_version'		=> 3,
 		'render_callback'	=> 'bnmbt_featured_posts_block_2_render_callback'
 	) );
 
