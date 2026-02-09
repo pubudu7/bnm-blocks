@@ -1,16 +1,52 @@
-=== Magazine Companion ===
+=== Post Blocks & Tools ===
 Contributors:      pubudu-malalasekara
-Tags:              page builder, Gutenberg blocks, WordPress blocks, gutenberg, blocks
-Tested up to:      6.8
-Stable tag:        1.2.4
+Tags:              post grid, post list, post slider, post blocks, gutenberg blocks
+Tested up to:      6.9
+Stable tag:        1.2.5
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-A Collection of Post Blocks and tools for Blogs, Newspapers and Magazine websites.
+Post grid, post list, and post slider Gutenberg blocks to design blog and magazine layouts easily.
 
 == Description ==
 
-A collection of blocks developed for WordPress Gutenberg editor. All of these blocks are specially for all kinds of publishing websites like Blogs, Newspapers and Magazines. Organize and display your posts on your frontpage using blocks provided in Magazine Companion. Currently there are six blocks available.  
+Post Blocks & Tools is a collection of powerful Gutenberg blocks designed to help you create clean, professional post layouts for blogs, news, and magazine websites.
+
+Build beautiful post grids, lists, sliders, and featured sections to organize and showcase your content on the homepage or any page — without writing code. The blocks are lightweight, flexible, and easy to customize, making it simple to create modern publishing layouts that improve readability and user engagement.
+
+Whether you run a personal blog, an online magazine, or a news site, Post Blocks & Tools helps you display your latest, popular, or category posts in visually appealing layouts. The plugin currently includes six essential post blocks, with more features and advanced blocks planned for future updates.
+
+**Professional Post Layout Blocks**
+
+Create clean and modern post layouts using a collection of purpose-built Gutenberg blocks designed specifically for blogs, news, and magazine websites.
+
+**Multiple Post Display Styles**
+
+Show your content in different formats including post grids, lists, sliders, and featured sections to highlight important or recent articles.
+
+**Designed for Publishing Websites**
+
+Built with publishers in mind, the blocks help you organize posts by category, latest posts, or selected content to create structured and readable layouts.
+
+**Lightweight and Performance Focused**
+
+The plugin is developed with clean, optimized code to ensure fast loading pages and smooth performance without adding unnecessary bloat.
+
+**Easy to Use and Customize**
+
+Adjust layout settings, spacing, typography, and post display options directly inside the Gutenberg editor without writing any code.
+
+**Flexible Placement Anywhere**
+
+Insert post blocks on your homepage, inner pages, posts or widget areas to create custom content sections wherever you need them.
+
+**Works with Any Well-Coded Theme**
+
+Compatible with most properly coded WordPress themes and fully suitable for blog, news, and magazine designs.
+
+**Future-Ready and Actively Developed**
+
+New blocks, layout options, and advanced features are planned as part of ongoing improvements and future Pro enhancements.
 
 == Installation ==
 
@@ -18,13 +54,16 @@ A collection of blocks developed for WordPress Gutenberg editor. All of these bl
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Go to Dashboard > Pages > Add New.
 4. Click the + icon to add Blocks to the page.
-5. Search for the word "Magazine Companion" and it will list all the blocks included in the Magazine Companion Plugin.
-6. Add your preferred Magazine Companion Blocks to the page.
+5. Search for the keyword "Post Blocks & Tools" and it will list all the blocks included in the Post Blocks & Tools Plugin.
+6. Add your preferred Blocks to the page.
 
 
 == Screenshots ==
 
 == Changelog ==
+
+= 1.3.0 =
+* Renamed the plugin from "Magazine Companion" to "Post Blocks & Tools".
 
 = 1.2.5 =
 * Updated block apiVersion from 2 to 3.

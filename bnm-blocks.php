@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name:       Magazine Companion
- * Description:       A Collection of Post Blocks and tools for Blogs, Newspapers and Magazine websites.
+ * Plugin Name:       Post Blocks & Tools
+ * Description:       Post grid, post list, and post slider Gutenberg blocks to design blog and magazine layouts easily.
  * Requires at least: 6.0
  * Requires PHP:      7.0
- * Version:           1.2.5
+ * Version:           1.3.0
  * Author:            ThemezHut
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -23,7 +23,7 @@ define( 'BNMBT__BLOCKS_DIRECTORY', 'build/' );
 define( 'BNMBT__ADMIN_DIRECTORY', 'admin/' );
 define( 'BNMBT__ADMIN_DIRECTORY_URL', plugins_url( BNMBT__ADMIN_DIRECTORY, BNMBT__PLUGIN_FILE ) );
 define( 'BNMBT__PLUGIN_DIR', plugin_dir_path( BNMBT__PLUGIN_FILE ) );
-define( 'BNMBT__VERSION', '1.2.5' );
+define( 'BNMBT__VERSION', '1.3.0' );
 
 $bnmbt_src_directory = BNMBT__PLUGIN_DIR . 'src/';
 $bnmbt_inc_directory = BNMBT__PLUGIN_DIR . 'inc/';

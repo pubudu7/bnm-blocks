@@ -28,7 +28,7 @@ class Main {
         
         $bnm_blocks_category = array(
             'slug'  => 'bnm-blocks',
-            'title' => __( 'Magazine Companion', 'bnm-blocks' )
+            'title' => __( 'Post Blocks & Tools', 'bnm-blocks' )
         );
         
         // Add this category at the end of the categories list.
