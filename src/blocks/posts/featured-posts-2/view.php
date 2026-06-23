@@ -217,7 +217,7 @@ function bnmbt_featured_posts_block_2_render_callback( $attributes ) {
 	}
 
 	if ( $attributes['sectionHeaderStyle'] ) {
-		$classes[] = 'bnm-bhs-' . $attributes['sectionHeaderStyle'];
+		$classes[] = sanitize_html_class( 'bnm-bhs-' . $attributes['sectionHeaderStyle'] );
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes( array( 

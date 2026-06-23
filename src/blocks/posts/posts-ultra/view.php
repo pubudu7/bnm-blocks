@@ -23,6 +23,14 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 
 	$article_query = new WP_Query( $post_query_args );
 
+	$show_featured_image = $attributes[ 'showFeaturedImage' ];
+	$image_position = $attributes[ 'imagePosition' ];
+	$image_min_height = isset( $attributes[ 'imageMinHeight' ] ) ? (float) $attributes[ 'imageMinHeight' ] : 0;
+	
+	$allowed_tags = bnmbt_get_allowed_header_tags();
+	$title_html_tag = isset( $attributes['titleHtmlTag'] ) && in_array( strtolower( $attributes['titleHtmlTag'] ), $allowed_tags, true ) ? strtolower( $attributes['titleHtmlTag'] ) : 'h3';
+	$header_html_tag = isset( $attributes['headerHtmlTag'] ) && in_array( strtolower( $attributes['headerHtmlTag'] ), $allowed_tags, true ) ? strtolower( $attributes['headerHtmlTag'] ) : 'h2';
+	
 	ob_start();
 	?>
 
@@ -30,14 +38,12 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 
 	<?php 
 		if ( '' !== $attributes['sectionHeader'] && true === $attributes['showSectionHeader'] ) {
-			echo "<div class=\"bnm-block-title-wrap\">";
-				$allowed_tags = bnmbt_get_allowed_header_tags();
-				$tag = isset( $attributes['headerHtmlTag'] ) && in_array( strtolower( $attributes['headerHtmlTag'] ), $allowed_tags, true ) ? strtolower( $attributes['headerHtmlTag'] ) : 'h2';								
-				echo "<". esc_attr($tag) ." class=\"article-section-title\">";
+			echo "<div class=\"bnm-block-title-wrap\">";								
+				echo "<". esc_attr($header_html_tag) ." class=\"article-section-title\">";
 					echo "<span>";
 						echo wp_kses_post( $attributes['sectionHeader'] ); 
 					echo "</span>";
-				echo "</".esc_attr($tag).">";
+				echo "</".esc_attr($header_html_tag).">";
 			echo "</div>";
 		}
 
@@ -50,7 +56,6 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 				$post_classes = 'bnmsp-post';
 
 				$has_post_thumbnail = has_post_thumbnail();
-				$show_featured_image = $attributes[ 'showFeaturedImage' ];
 				
 				if ( $show_featured_image && $has_post_thumbnail ) {
 					$post_classes .= ' post-has-image';
@@ -58,13 +63,9 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 
 				$article_styles = '';
 
-				if ( "behind" === $attributes[ 'imagePosition' ] && $show_featured_image && $has_post_thumbnail ) {
-					$article_styles .= "min-height: ". $attributes[ 'imageMinHeight' ] ."vh;";
-				}
-
-				if ( "behind" === $attributes[ 'imagePosition' ] && $show_featured_image && $has_post_thumbnail ) {
-					$padding_top = $attributes[ 'imageMinHeight' ] / 5;
-					$article_styles .= " padding-top: ". $padding_top ."vh;";
+				if ( "behind" === $image_position && $show_featured_image && $has_post_thumbnail ) {
+					$article_styles .= "min-height: {$image_min_height}vh;";
+					$article_styles .= "padding-top: " . ( $image_min_height / 5 ) . "vh;";
 				}
 				
 				?>
@@ -87,17 +88,15 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 						<?php } ?>
 
 						<?php 
-							if ( $attributes['showTitle'] ) { 
-								$allowed_tags = bnmbt_get_allowed_header_tags();
-								$tag = isset( $attributes['titleHtmlTag'] ) && in_array( strtolower( $attributes['titleHtmlTag'] ), $allowed_tags, true ) ? strtolower( $attributes['titleHtmlTag'] ) : 'h3';									
-								echo "<". esc_attr($tag) ." class=\"entry-title\">";
+							if ( $attributes['showTitle'] ) {								
+								echo "<". esc_attr($title_html_tag) ." class=\"entry-title\">";
 								?>
 									<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
 										<?php the_title(); ?>
 									</a>
 								
 							<?php 
-								echo "</".esc_attr($tag).">";
+								echo "</".esc_attr($title_html_tag).">";
 							} 
 						?>
 
@@ -171,15 +170,15 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 	}
 
 	if ( isset( $attributes['columns'] ) && 'grid' === $attributes['postLayout'] ) {
-		$classes[] = 'columns-' . $attributes['columns'];
+		$classes[] = sanitize_html_class( 'columns-' . $attributes['columns'] );
 	}
 
-	if ( $attributes['showFeaturedImage'] && isset( $attributes['imagePosition'] ) ) {
-		$classes[] = 'image-align' . $attributes['imagePosition'];
+	if ( $show_featured_image && isset( $image_position ) ) {
+		$classes[] = sanitize_html_class( 'image-align' . $image_position );
 	}
 
 	if ( $attributes['textAlign'] ) {
-		$classes[] = 'has-text-align' . $attributes['textAlign'];
+		$classes[] = sanitize_html_class( 'has-text-align' . $attributes['textAlign'] );
 	}
 
 	if ( "33%" !== $attributes['featuredImageWidth'] || "67%" !== $attributes['entryContentWidth'] ) {
@@ -191,7 +190,7 @@ function bnmbt_posts_ultra_render_callback( $attributes ) {
 	}
 
 	if ( $attributes['sectionHeaderStyle'] ) {
-		$classes[] = 'bnm-bhs-' . $attributes['sectionHeaderStyle'];
+		$classes[] = sanitize_html_class( 'bnm-bhs-' . $attributes['sectionHeaderStyle'] );
 	}
 
 	if ( ! empty( $attributes['featuredImageMargin'] ) ) {

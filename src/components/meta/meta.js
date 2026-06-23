@@ -54,7 +54,8 @@ export const PostExcerpt = ({
 };
 
 export const PostTitle = ({ attributes, post }) => {
-    const Tag = attributes.titleHtmlTag || 'h3';
+    const allowedTags = ['h1','h2','h3','h4','h5','h6','p','div','span'];
+    const Tag = allowedTags.includes(attributes.titleHtmlTag) ? attributes.titleHtmlTag : 'h3';
     return (
         <Tag className="entry-title">
             <a 

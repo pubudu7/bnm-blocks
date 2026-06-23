@@ -26,17 +26,18 @@ function bnmbt_featured_posts_block_1_render_callback( $attributes ) {
 	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : '';
 	$featured_image_slug_small = ! empty( $attributes['featuredImageSizeSlugSmall'] ) ? $attributes['featuredImageSizeSlugSmall'] : '';
 
+	$allowed_tags = bnmbt_get_allowed_header_tags();
+	$header_html_tag = isset( $attributes['headerHtmlTag'] ) && in_array( strtolower( $attributes['headerHtmlTag'] ), $allowed_tags, true ) ? strtolower( $attributes['headerHtmlTag'] ) : 'h2';
+
 	ob_start();
 
 	if ( '' !== $attributes['sectionHeader'] && true === $attributes['showSectionHeader'] ) {
-		echo "<div class=\"bnm-block-title-wrap\">";
-			$allowed_tags = bnmbt_get_allowed_header_tags();
-			$tag = isset( $attributes['headerHtmlTag'] ) && in_array( strtolower( $attributes['headerHtmlTag'] ), $allowed_tags, true ) ? strtolower( $attributes['headerHtmlTag'] ) : 'h2';							
-			echo "<". esc_attr($tag) ." class=\"article-section-title\">";
+		echo "<div class=\"bnm-block-title-wrap\">";							
+			echo "<". esc_attr($header_html_tag) ." class=\"article-section-title\">";
 				echo "<span>";
 					echo wp_kses_post( $attributes['sectionHeader'] ); 
 				echo "</span>";
-			echo "</".esc_attr($tag).">";
+			echo "</".esc_attr($header_html_tag).">";
 		echo "</div>";
 	}
 
@@ -220,7 +221,7 @@ function bnmbt_featured_posts_block_1_render_callback( $attributes ) {
 	}
 
 	if ( $attributes['sectionHeaderStyle'] ) {
-		$classes[] = 'bnm-bhs-' . $attributes['sectionHeaderStyle'];
+		$classes[] = sanitize_html_class( 'bnm-bhs-' . $attributes['sectionHeaderStyle'] );
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes( array( 

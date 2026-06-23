@@ -1,8 +1,8 @@
 === Post Blocks & Tools ===
 Contributors:      pubudu-malalasekara
 Tags:              post grid, post list, post slider, post blocks, gutenberg blocks
-Tested up to:      6.9
-Stable tag:        1.2.5
+Tested up to:      7.0
+Stable tag:        1.3.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,9 @@ New blocks, layout options, and advanced features are planned as part of ongoing
 == Screenshots ==
 
 == Changelog ==
+
+= 1.3.1 =
+* Improved security by fixing potential XSS vulnerabilities.
 
 = 1.3.0 =
 * Renamed the plugin from "Magazine Companion" to "Post Blocks & Tools".

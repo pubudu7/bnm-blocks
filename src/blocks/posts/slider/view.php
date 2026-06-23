@@ -34,28 +34,30 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 	$article_query = new WP_Query( $post_query_args );
 
 	$slider_style = isset( $attributes['sliderStyle'] ) ? $attributes['sliderStyle'] : 'style-1';
-	$slides_per_view = isset( $attributes['slidesPerView'] ) ? $attributes['slidesPerView'] : 1;
-	$asepec_ratio = isset( $attributes['aspectRatio'] ) ? $attributes['aspectRatio'] : 0.5625;
-	$space_between_slides = isset( $attributes['spaceBetweenSlides'] ) ? $attributes['spaceBetweenSlides'] : 20;
-	$autoplay = isset( $attributes['autoplay'] ) ? $attributes['autoplay'] : false;
+	$slides_per_view = isset( $attributes['slidesPerView'] ) ? (int) $attributes['slidesPerView'] : 1;
+	$asepect_ratio = isset( $attributes['aspectRatio'] ) ? (float) $attributes['aspectRatio'] : 0.5625;
+	$space_between_slides = isset( $attributes['spaceBetweenSlides'] ) ? (int) $attributes['spaceBetweenSlides'] : 20;
+	$autoplay = isset( $attributes['autoplay'] ) ? (bool) $attributes['autoplay'] : false;
 	$delay    = isset( $attributes['delay'] ) ? absint( $attributes['delay'] ) : 5;
 	$featured_image_slug = ! empty( $attributes['featuredImageSizeSlug'] ) ? $attributes['featuredImageSizeSlug'] : '';
 	$slider_thumb_size = ! empty( $attributes['slideThumbSize'] ) ? $attributes['slideThumbSize'] : '';
 	$image_fit = ! empty( $attributes['imageFit'] ) ? $attributes['imageFit'] : 'cover';
-	$thumbSlidesPerView = isset( $attributes['thumbSlidesPerView'] ) ? $attributes['thumbSlidesPerView'] : 5;
-	$slide_image_class = "image-fit-{$image_fit}";
+	$thumbSlidesPerView = isset( $attributes['thumbSlidesPerView'] ) ? (int) $attributes['thumbSlidesPerView'] : 5;
+	$slide_image_class = sanitize_html_class( 'image-fit-'. $image_fit );
+
+	$allowed_tags = bnmbt_get_allowed_header_tags();
+	$header_html_tag = isset( $attributes['headerHtmlTag'] ) && in_array( strtolower( $attributes['headerHtmlTag'] ), $allowed_tags, true ) ? strtolower( $attributes['headerHtmlTag'] ) : 'h2';
+	$title_html_tag = isset( $attributes['titleHtmlTag'] ) && in_array( strtolower( $attributes['titleHtmlTag'] ), $allowed_tags, true ) ? strtolower( $attributes['titleHtmlTag'] ) : 'h3';
 
 	ob_start(); 
 
 	if ( '' !== $attributes['sectionHeader'] && true === $attributes['showSectionHeader'] ) {
-		echo "<div class=\"bnm-block-title-wrap\">";
-			$allowed_tags = bnmbt_get_allowed_header_tags();
-			$tag = isset( $attributes['headerHtmlTag'] ) && in_array( strtolower( $attributes['headerHtmlTag'] ), $allowed_tags, true ) ? strtolower( $attributes['headerHtmlTag'] ) : 'h2';								
-			echo "<". esc_attr($tag) ." class=\"article-section-title\">";
+		echo "<div class=\"bnm-block-title-wrap\">";								
+			echo "<". esc_attr($header_html_tag) ." class=\"article-section-title\">";
 				echo "<span>";
 					echo wp_kses_post( $attributes['sectionHeader'] ); 
 				echo "</span>";
-			echo "</".esc_attr($tag).">";
+			echo "</".esc_attr($header_html_tag).">";
 		echo "</div>";
 	}	
 	
@@ -101,17 +103,15 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 									</div>
 								<?php endif; ?>
 								
-								<?php  if ( $attributes['showTitle'] ) { 
-									$allowed_tags = bnmbt_get_allowed_header_tags();
-									$tag = isset( $attributes['titleHtmlTag'] ) && in_array( strtolower( $attributes['titleHtmlTag'] ), $allowed_tags, true ) ? strtolower( $attributes['titleHtmlTag'] ) : 'h3';									
-									echo "<". esc_attr($tag) ." class=\"entry-title\">";
+								<?php  if ( $attributes['showTitle'] ) { 									
+									echo "<". esc_attr($title_html_tag) ." class=\"entry-title\">";
 									?>
 										<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
 											<?php the_title(); ?>
 										</a>
 									
 								<?php 
-									echo "</".esc_attr($tag).">";
+									echo "</".esc_attr($title_html_tag).">";
 								} 
 								?>
 
@@ -165,7 +165,7 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 
 	</div><!-- .bnm-slider-wrapper -->
 
-	<?php if ( $attributes['sliderStyle'] === 'style-4' ) : ?>
+	<?php if ( $slider_style === 'style-4' ) : ?>
 		<div thumbsSlider="" class="bnm-thumbnail-swiper swiper">
 			<div class="swiper-wrapper">
 			<?php
@@ -213,7 +213,7 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 	$slider_block = ob_get_clean();
 
 	// Slider style class name.
-	$slider_style_class = 'bnm-sw-' . $attributes['sliderStyle'];
+	$slider_style_class = sanitize_html_class( 'bnm-sw-' . $slider_style );
 
 	$classes = array( 'wpbnmposw', 'bnmbcs', $slider_style_class );
 
@@ -222,7 +222,7 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 	}
 
 	if ( $attributes['sectionHeaderStyle'] ) {
-		$classes[] = 'bnm-bhs-' . $attributes['sectionHeaderStyle'];
+		$classes[] = sanitize_html_class( 'bnm-bhs-' . $attributes['sectionHeaderStyle'] );
 	}	
 
 	$css = new Post_Slider_1_CSS();
@@ -235,21 +235,24 @@ function bnmbt_posts_slider_block_1_render_callback( $attributes ) {
 
 	$data_attributes = [
 		//'data-current-post-id=' . $post_id,
-		'data-slider-style=' . $slider_style,
-		'data-aspect-ratio=' . $asepec_ratio,
-		'data-slides-per-view=' . $slides_per_view,
-		'data-space-between-slides=' . $space_between_slides,
-		'data-thumb-slides-per-view=' . $thumbSlidesPerView
+		'data-slider-style="' . esc_attr( $slider_style ) . '"',
+		'data-aspect-ratio="' . esc_attr( $asepect_ratio ) . '"',
+		'data-slides-per-view="' . esc_attr( $slides_per_view ) . '"',
+		'data-space-between-slides="' . esc_attr( $space_between_slides ) . '"',
+		'data-thumb-slides-per-view="' . esc_attr( $thumbSlidesPerView ) . '"'
 	];
 
 	if ( $autoplay ) {
-		$data_attributes[] = 'data-autoplay=1';
-		$data_attributes[] = sprintf( 'data-autoplay_delay=%s', esc_attr( $delay ) );
+		$data_attributes[] = 'data-autoplay="1"';
+		$data_attributes[] = sprintf(
+			'data-autoplay_delay="%s"',
+			esc_attr( $delay )
+		);
 	}
 
 	return sprintf( '<div %1$s %2$s>%3$s</div>', 
 		$wrapper_attributes,
-		esc_attr( implode( ' ', $data_attributes ) ),
+		implode( ' ', $data_attributes ),
 		$slider_block
 	);
 }
